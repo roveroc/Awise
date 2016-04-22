@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MoreController.h
 //  AwiseController
 //
 //  Created by rover on 16/4/20.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MoreController : UIViewController
 
 @end
-

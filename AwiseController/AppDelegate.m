@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "RootController.h"
+#import "MoreController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    UITabBarController *tabCon = [[UITabBarController alloc] init];
+    
+    RootController *rootCon = [[RootController alloc] init];
+//    rootCon.tabBarItem.image = [UIImage imageNamed:@"single.png"];
+    rootCon.title= @"我的设备";
+    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:rootCon];
+    
+    MoreController *moreCon = [[MoreController alloc] init];
+//    moreCon.tabBarItem.image = [UIImage imageNamed:@"more.png"];
+    moreCon.title= @"更多操作";
+    UINavigationController *setNav = [[UINavigationController alloc] initWithRootViewController:moreCon];
+    
+    NSArray *navArray = [[NSArray alloc] initWithObjects:mainNav,setNav, nil];
+    tabCon.viewControllers = navArray;
+    self.window.rootViewController = tabCon;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

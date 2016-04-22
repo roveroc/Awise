@@ -1,0 +1,37 @@
+PODS:
+  - CocoaAsyncSocket (7.4.3):
+    - CocoaAsyncSocket/All (= 7.4.3)
+  - CocoaAsyncSocket/All (7.4.3):
+    - CocoaAsyncSocket/GCD
+    - CocoaAsyncSocket/RunLoop
+  - CocoaAsyncSocket/GCD (7.4.3)
+  - CocoaAsyncSocket/RunLoop (7.4.3)
+  - EFCircularSlider (0.1.0)
+  - MBProgressHUD (0.9.2)
+  - QRCodeReaderViewController (4.0.1)
+  - XHRadarView (0.5.0)
+
+DEPENDENCIES:
+  - CocoaAsyncSocket
+  - EFCircularSlider (~> 0.1.0)
+  - MBProgressHUD (~> 0.9.2)
+  - QRCodeReaderViewController (~> 4.0.1)
+  - XHRadarView (from `https://github.com/0x51/XHRadarView.git`)
+
+EXTERNAL SOURCES:
+  XHRadarView:
+    :git: https://github.com/0x51/XHRadarView.git
+
+CHECKOUT OPTIONS:
+  XHRadarView:
+    :commit: ef84b8fb5027697cf5c4a886cf2966ca3b901a1b
+    :git: https://github.com/0x51/XHRadarView.git
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
+  EFCircularSlider: 5a4baa272264e845577945c86e23d5d3996d3c37
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  QRCodeReaderViewController: 6538745c8f4ffa9407a26bd7f9489ea01739e7b0
+  XHRadarView: 5700ceec75a729669d1ffbedf8f8af61330504e0
+
+COCOAPODS: 0.39.0

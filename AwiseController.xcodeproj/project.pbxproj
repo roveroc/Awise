@@ -7,27 +7,94 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7E804D40B1F66607D80B60 /* libPods.a */; };
+		97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */; };
+		97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BE01CCA1E4600082ACB /* TCPCommunication.m */; };
 		9735C02D1CC7832A000B0727 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02C1CC7832A000B0727 /* main.m */; };
 		9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02F1CC7832A000B0727 /* AppDelegate.m */; };
-		9735C0331CC7832A000B0727 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0321CC7832A000B0727 /* ViewController.m */; };
-		9735C0361CC7832A000B0727 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9735C0341CC7832A000B0727 /* Main.storyboard */; };
 		9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0371CC7832A000B0727 /* AwiseController.xcdatamodeld */; };
 		9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9735C03A1CC7832A000B0727 /* Assets.xcassets */; };
 		9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9735C03C1CC7832A000B0727 /* LaunchScreen.storyboard */; };
+		9735C0461CC7839F000B0727 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9735C0451CC7839F000B0727 /* Podfile */; };
+		9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0491CC78877000B0727 /* TBCircularSlider.m */; };
+		9735C0511CC78998000B0727 /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C04F1CC78998000B0727 /* RootController.m */; };
+		9735C0521CC78998000B0727 /* RootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C0501CC78998000B0727 /* RootController.xib */; };
+		9735C0571CC78A40000B0727 /* MoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0551CC78A40000B0727 /* MoreController.m */; };
+		9735C0581CC78A40000B0727 /* MoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C0561CC78A40000B0727 /* MoreController.xib */; };
+		9735C0641CC78FF0000B0727 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C05D1CC78FF0000B0727 /* Utils.m */; };
+		9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C05F1CC78FF0000B0727 /* ScanLAN.m */; };
+		9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0611CC78FF0000B0727 /* SimplePing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0631CC78FF0000B0727 /* SimplePingHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C06D1CC78FF8000B0727 /* RoverARP.m */; };
+		9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0711CC86CC3000B0727 /* RoverQRCode.m */; };
+		9735C0741CC87E91000B0727 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9735C0731CC87E91000B0727 /* libsqlite3.0.tbd */; };
+		9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0781CC87EDB000B0727 /* AwiseGlobal.m */; };
+		9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C07C1CC87F88000B0727 /* Default-960h@2x.png */; };
+		9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C07D1CC87F88000B0727 /* Default-568h@2x.png */; };
+		9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C07E1CC87F88000B0727 /* Default-667h@2x.png */; };
+		9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0831CC8A08B000B0727 /* RoverSqlite.m */; };
+		9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0891CC9C1A8000B0727 /* SingleTouchController.m */; };
+		9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */; };
+		9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */; };
+		9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		97291BDC1CCA1E2C00082ACB /* UDPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPCommunication.h; sourceTree = "<group>"; };
+		97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPCommunication.m; sourceTree = "<group>"; };
+		97291BDF1CCA1E4600082ACB /* TCPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommunication.h; sourceTree = "<group>"; };
+		97291BE01CCA1E4600082ACB /* TCPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPCommunication.m; sourceTree = "<group>"; };
 		9735C0281CC7832A000B0727 /* AwiseController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwiseController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9735C02C1CC7832A000B0727 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9735C02E1CC7832A000B0727 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9735C02F1CC7832A000B0727 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9735C0311CC7832A000B0727 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9735C0321CC7832A000B0727 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9735C0351CC7832A000B0727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9735C0381CC7832A000B0727 /* AwiseController.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AwiseController.xcdatamodel; sourceTree = "<group>"; };
 		9735C03A1CC7832A000B0727 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9735C03D1CC7832A000B0727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9735C03F1CC7832A000B0727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9735C0451CC7839F000B0727 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9735C0481CC78877000B0727 /* TBCircularSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBCircularSlider.h; sourceTree = "<group>"; };
+		9735C0491CC78877000B0727 /* TBCircularSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBCircularSlider.m; sourceTree = "<group>"; };
+		9735C04A1CC78877000B0727 /* Commons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commons.h; sourceTree = "<group>"; };
+		9735C04E1CC78998000B0727 /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
+		9735C04F1CC78998000B0727 /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
+		9735C0501CC78998000B0727 /* RootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootController.xib; sourceTree = "<group>"; };
+		9735C0541CC78A40000B0727 /* MoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreController.h; sourceTree = "<group>"; };
+		9735C0551CC78A40000B0727 /* MoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreController.m; sourceTree = "<group>"; };
+		9735C0561CC78A40000B0727 /* MoreController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreController.xib; sourceTree = "<group>"; };
+		9735C05C1CC78FF0000B0727 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		9735C05D1CC78FF0000B0727 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		9735C05E1CC78FF0000B0727 /* ScanLAN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanLAN.h; sourceTree = "<group>"; };
+		9735C05F1CC78FF0000B0727 /* ScanLAN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanLAN.m; sourceTree = "<group>"; };
+		9735C0601CC78FF0000B0727 /* SimplePing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePing.h; sourceTree = "<group>"; };
+		9735C0611CC78FF0000B0727 /* SimplePing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePing.m; sourceTree = "<group>"; };
+		9735C0621CC78FF0000B0727 /* SimplePingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePingHelper.h; sourceTree = "<group>"; };
+		9735C0631CC78FF0000B0727 /* SimplePingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePingHelper.m; sourceTree = "<group>"; };
+		9735C0681CC78FF8000B0727 /* if_arp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_arp.h; sourceTree = "<group>"; };
+		9735C0691CC78FF8000B0727 /* if_ether.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_ether.h; sourceTree = "<group>"; };
+		9735C06A1CC78FF8000B0727 /* if_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_types.h; sourceTree = "<group>"; };
+		9735C06B1CC78FF8000B0727 /* route.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
+		9735C06C1CC78FF8000B0727 /* RoverARP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverARP.h; sourceTree = "<group>"; };
+		9735C06D1CC78FF8000B0727 /* RoverARP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoverARP.m; sourceTree = "<group>"; };
+		9735C0701CC86CC3000B0727 /* RoverQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverQRCode.h; sourceTree = "<group>"; };
+		9735C0711CC86CC3000B0727 /* RoverQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoverQRCode.m; sourceTree = "<group>"; };
+		9735C0731CC87E91000B0727 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		9735C0771CC87EDB000B0727 /* AwiseGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwiseGlobal.h; sourceTree = "<group>"; };
+		9735C0781CC87EDB000B0727 /* AwiseGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwiseGlobal.m; sourceTree = "<group>"; };
+		9735C07C1CC87F88000B0727 /* Default-960h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-960h@2x.png"; sourceTree = "<group>"; };
+		9735C07D1CC87F88000B0727 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		9735C07E1CC87F88000B0727 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
+		9735C0821CC8A08B000B0727 /* RoverSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoverSqlite.h; sourceTree = "<group>"; };
+		9735C0831CC8A08B000B0727 /* RoverSqlite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoverSqlite.m; sourceTree = "<group>"; };
+		9735C0851CC8A2D9000B0727 /* tempFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempFile.h; sourceTree = "<group>"; };
+		9735C0881CC9C1A8000B0727 /* SingleTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchController.h; sourceTree = "<group>"; };
+		9735C0891CC9C1A8000B0727 /* SingleTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchController.m; sourceTree = "<group>"; };
+		9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchController.xib; sourceTree = "<group>"; };
+		9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_close@3x.png"; sourceTree = "<group>"; };
+		9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_open@3x.png"; sourceTree = "<group>"; };
+		C346679FA763E728C90F202C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		EA7E804D40B1F66607D80B60 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +102,63 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9735C0741CC87E91000B0727 /* libsqlite3.0.tbd in Frameworks */,
+				02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1ED75220AA5C6765316F59F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */,
+				C346679FA763E728C90F202C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6E996ED8F2B46A5945BB78C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0731CC87E91000B0727 /* libsqlite3.0.tbd */,
+				EA7E804D40B1F66607D80B60 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97291BDA1CCA1DA900082ACB /* UDP */ = {
+			isa = PBXGroup;
+			children = (
+				97291BDC1CCA1E2C00082ACB /* UDPCommunication.h */,
+				97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */,
+			);
+			name = UDP;
+			sourceTree = "<group>";
+		};
+		97291BDB1CCA1DB900082ACB /* TCP */ = {
+			isa = PBXGroup;
+			children = (
+				97291BDF1CCA1E4600082ACB /* TCPCommunication.h */,
+				97291BE01CCA1E4600082ACB /* TCPCommunication.m */,
+			);
+			name = TCP;
+			sourceTree = "<group>";
+		};
 		9735C01F1CC7832A000B0727 = {
 			isa = PBXGroup;
 			children = (
+				9735C0851CC8A2D9000B0727 /* tempFile.h */,
+				9735C0451CC7839F000B0727 /* Podfile */,
+				9735C04C1CC7894B000B0727 /* ViewController */,
+				9735C0761CC87EC0000B0727 /* AwiseGlobal */,
 				9735C02A1CC7832A000B0727 /* AwiseController */,
+				9735C07A1CC87F37000B0727 /* ImageSource */,
 				9735C0291CC7832A000B0727 /* Products */,
+				1ED75220AA5C6765316F59F6 /* Pods */,
+				6E996ED8F2B46A5945BB78C2 /* Frameworks */,
+				9735C0471CC78825000B0727 /* OtherFrameWork */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,9 +175,6 @@
 			children = (
 				9735C02E1CC7832A000B0727 /* AppDelegate.h */,
 				9735C02F1CC7832A000B0727 /* AppDelegate.m */,
-				9735C0311CC7832A000B0727 /* ViewController.h */,
-				9735C0321CC7832A000B0727 /* ViewController.m */,
-				9735C0341CC7832A000B0727 /* Main.storyboard */,
 				9735C03A1CC7832A000B0727 /* Assets.xcassets */,
 				9735C03C1CC7832A000B0727 /* LaunchScreen.storyboard */,
 				9735C03F1CC7832A000B0727 /* Info.plist */,
@@ -82,6 +192,161 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0751CC87EA2000B0727 /* Sqlite */,
+				9735C06F1CC86BFC000B0727 /* QRCode */,
+				9735C05B1CC78F76000B0727 /* ARPTable */,
+				9735C05A1CC78F65000B0727 /* Ping */,
+				9735C0591CC78EE0000B0727 /* CircleSlider */,
+			);
+			name = OtherFrameWork;
+			sourceTree = "<group>";
+		};
+		9735C04C1CC7894B000B0727 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0861CC9C134000B0727 /* Device */,
+				9735C04D1CC7895D000B0727 /* RootController */,
+				9735C0531CC78A2B000B0727 /* MoreController */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		9735C04D1CC7895D000B0727 /* RootController */ = {
+			isa = PBXGroup;
+			children = (
+				9735C04E1CC78998000B0727 /* RootController.h */,
+				9735C04F1CC78998000B0727 /* RootController.m */,
+				9735C0501CC78998000B0727 /* RootController.xib */,
+			);
+			name = RootController;
+			sourceTree = "<group>";
+		};
+		9735C0531CC78A2B000B0727 /* MoreController */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0541CC78A40000B0727 /* MoreController.h */,
+				9735C0551CC78A40000B0727 /* MoreController.m */,
+				9735C0561CC78A40000B0727 /* MoreController.xib */,
+			);
+			name = MoreController;
+			sourceTree = "<group>";
+		};
+		9735C0591CC78EE0000B0727 /* CircleSlider */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0481CC78877000B0727 /* TBCircularSlider.h */,
+				9735C0491CC78877000B0727 /* TBCircularSlider.m */,
+				9735C04A1CC78877000B0727 /* Commons.h */,
+			);
+			name = CircleSlider;
+			sourceTree = "<group>";
+		};
+		9735C05A1CC78F65000B0727 /* Ping */ = {
+			isa = PBXGroup;
+			children = (
+				9735C05C1CC78FF0000B0727 /* Utils.h */,
+				9735C05D1CC78FF0000B0727 /* Utils.m */,
+				9735C05E1CC78FF0000B0727 /* ScanLAN.h */,
+				9735C05F1CC78FF0000B0727 /* ScanLAN.m */,
+				9735C0601CC78FF0000B0727 /* SimplePing.h */,
+				9735C0611CC78FF0000B0727 /* SimplePing.m */,
+				9735C0621CC78FF0000B0727 /* SimplePingHelper.h */,
+				9735C0631CC78FF0000B0727 /* SimplePingHelper.m */,
+			);
+			name = Ping;
+			sourceTree = "<group>";
+		};
+		9735C05B1CC78F76000B0727 /* ARPTable */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0681CC78FF8000B0727 /* if_arp.h */,
+				9735C0691CC78FF8000B0727 /* if_ether.h */,
+				9735C06A1CC78FF8000B0727 /* if_types.h */,
+				9735C06B1CC78FF8000B0727 /* route.h */,
+				9735C06C1CC78FF8000B0727 /* RoverARP.h */,
+				9735C06D1CC78FF8000B0727 /* RoverARP.m */,
+			);
+			name = ARPTable;
+			sourceTree = "<group>";
+		};
+		9735C06F1CC86BFC000B0727 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0701CC86CC3000B0727 /* RoverQRCode.h */,
+				9735C0711CC86CC3000B0727 /* RoverQRCode.m */,
+			);
+			name = QRCode;
+			sourceTree = "<group>";
+		};
+		9735C0751CC87EA2000B0727 /* Sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0821CC8A08B000B0727 /* RoverSqlite.h */,
+				9735C0831CC8A08B000B0727 /* RoverSqlite.m */,
+			);
+			name = Sqlite;
+			sourceTree = "<group>";
+		};
+		9735C0761CC87EC0000B0727 /* AwiseGlobal */ = {
+			isa = PBXGroup;
+			children = (
+				97291BDB1CCA1DB900082ACB /* TCP */,
+				97291BDA1CCA1DA900082ACB /* UDP */,
+				9735C0771CC87EDB000B0727 /* AwiseGlobal.h */,
+				9735C0781CC87EDB000B0727 /* AwiseGlobal.m */,
+			);
+			name = AwiseGlobal;
+			sourceTree = "<group>";
+		};
+		9735C07A1CC87F37000B0727 /* ImageSource */ = {
+			isa = PBXGroup;
+			children = (
+				9735C08D1CC9C49D000B0727 /* SingleTouchImg */,
+				9735C07B1CC87F48000B0727 /* Screen */,
+			);
+			name = ImageSource;
+			sourceTree = "<group>";
+		};
+		9735C07B1CC87F48000B0727 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				9735C07C1CC87F88000B0727 /* Default-960h@2x.png */,
+				9735C07D1CC87F88000B0727 /* Default-568h@2x.png */,
+				9735C07E1CC87F88000B0727 /* Default-667h@2x.png */,
+			);
+			name = Screen;
+			sourceTree = "<group>";
+		};
+		9735C0861CC9C134000B0727 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0871CC9C13B000B0727 /* SingleTouch */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		9735C0871CC9C13B000B0727 /* SingleTouch */ = {
+			isa = PBXGroup;
+			children = (
+				9735C0881CC9C1A8000B0727 /* SingleTouchController.h */,
+				9735C0891CC9C1A8000B0727 /* SingleTouchController.m */,
+				9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */,
+			);
+			name = SingleTouch;
+			sourceTree = "<group>";
+		};
+		9735C08D1CC9C49D000B0727 /* SingleTouchImg */ = {
+			isa = PBXGroup;
+			children = (
+				9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */,
+				9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */,
+			);
+			name = SingleTouchImg;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +354,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9735C0421CC7832A000B0727 /* Build configuration list for PBXNativeTarget "AwiseController" */;
 			buildPhases = (
+				03C119C98F8F92824EE094D6 /* Check Pods Manifest.lock */,
 				9735C0241CC7832A000B0727 /* Sources */,
 				9735C0251CC7832A000B0727 /* Frameworks */,
 				9735C0261CC7832A000B0727 /* Resources */,
+				FD168BD0EAAFE6EEDFB2F24F /* Embed Pods Frameworks */,
+				789390646C7D9AB48E614AE3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -140,36 +408,97 @@
 			buildActionMask = 2147483647;
 			files = (
 				9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */,
+				9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
-				9735C0361CC7832A000B0727 /* Main.storyboard in Resources */,
+				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
+				9735C0461CC7839F000B0727 /* Podfile in Resources */,
+				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
+				9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */,
+				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
+				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
+				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
+				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03C119C98F8F92824EE094D6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		789390646C7D9AB48E614AE3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD168BD0EAAFE6EEDFB2F24F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9735C0241CC7832A000B0727 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9735C0331CC7832A000B0727 /* ViewController.m in Sources */,
+				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
+				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
 				9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */,
+				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
+				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
+				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
+				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
+				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
+				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
+				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
+				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
+				9735C0511CC78998000B0727 /* RootController.m in Sources */,
+				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
+				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
+				97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9735C0341CC7832A000B0727 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9735C0351CC7832A000B0727 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9735C03C1CC7832A000B0727 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -263,9 +592,13 @@
 		};
 		9735C0431CC7832A000B0727 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer: WeiZhong Zheng (P8Q933R2RK)";
 				INFOPLIST_FILE = AwiseController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -274,9 +607,13 @@
 		};
 		9735C0441CC7832A000B0727 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C346679FA763E728C90F202C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer: WeiZhong Zheng (P8Q933R2RK)";
 				INFOPLIST_FILE = AwiseController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -302,6 +639,7 @@
 				9735C0441CC7832A000B0727 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
