@@ -8,16 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "TBCircularSlider.h"
+#import "TCPCommunication.h"
 
 @interface SingleTouchController : UIViewController{
     TBCircularSlider *tbSlider;
     UIButton         *switchButton;
     UIView           *tempView;
     BOOL             switchState;
+    TCPCommunication *tcpSocket;
 }
 @property (nonatomic, retain) TBCircularSlider *tbSlider;            //调光圆环
 @property (nonatomic, retain) UIButton         *switchButton;        //开关按钮
 @property (nonatomic, retain) UIView           *tempView;            //调光圆环背景
 @property (assign)            BOOL             switchState;          //开关状态
+@property (nonatomic, retain) TCPCommunication *tcpSocket;           //TCPSocket套接字
+
+
 
 @end

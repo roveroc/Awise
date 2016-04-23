@@ -236,8 +236,7 @@
     int angleInt = floor(currentAngle);
     
     //Store the new angle
-    NSLog(@"value xx = %f yy = %f angle = %d",lastPoint.x,lastPoint.y,self.angle);
-    self.angle = 360 - angleInt;
+    self.angle = 360 - angleInt;   //edit by rover
     if(self.angle<90)
         return;
     if(self.angle == 360)

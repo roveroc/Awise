@@ -17,12 +17,13 @@
 @synthesize switchButton;
 @synthesize tempView;
 @synthesize switchState;
+@synthesize tcpSocket;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    
+
+    tcpSocket = [[TCPCommunication alloc] init];
+//    tcpSocket connectToDevice:<#(NSString *)#> port:<#(int)#>
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -50,6 +51,7 @@
 }
 
 
+#pragma mark ------------------------------------------------ 开关
 - (void)switchFunction:(id)sender{
     if(switchState == YES){
         [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
@@ -61,15 +63,21 @@
     }
 }
 
+#pragma mark ------------------------------------------------ 圆环代理,值发生改变触发
+- (void)sliderValueChange:(TBCircularSlider *)slider{
+    if(slider.angle < 90)
+        return;
+    int value = (100/270.)*(360-slider.angle);
+    NSLog(@"slider.value = %d",value);
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark ------------------------------------------------ 圆环代理
-- (void)sliderValueChange:(TBCircularSlider *)slider{
-    
-}
+
 
 @end
