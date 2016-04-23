@@ -15,15 +15,12 @@
 
 @implementation RootController
 @synthesize sqlite;
+@synthesize tcpSocket;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-
-    
-    sqlite = [[RoverSqlite alloc] init];
-    [sqlite openDataBase];
 }
 
 
@@ -52,11 +49,30 @@
 }
 
 - (IBAction)searchFun:(id)sender {
-    NSMutableArray *arr = [sqlite getAllDeviceInfomation];
-    NSLog(@"所有的设备信息 ---> %@",arr);
+//    NSMutableArray *arr = [sqlite getAllDeviceInfomation];
+//    NSLog(@"所有的设备信息 ---> %@",arr);
+    
+    tcpSocket = [[TCPCommunication alloc] init];
+    
+    [tcpSocket connectToDevice:@"192.168.3.26" port:333];
+    
 }
 
 - (IBAction)changeFun:(id)sender {
-    [sqlite modifyDeviceName:@"adbachdff" newName:@"Rover"];
+
+    Byte b3[20];
+    for(int k=0;k<20;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x4d;
+    b3[1] = 0x41;
+    b3[2] = 0x01;
+    b3[3] = 0x05;
+    b3[4] = 0x01;
+    
+    b3[18]= 0x0d;
+    b3[19]= 0x0a;
+    
+    [tcpSocket sendMeesageToDevice:b3 length:20];
 }
 @end

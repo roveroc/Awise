@@ -45,10 +45,15 @@
 - (void)sendMeesageToDevice:(Byte [])data length:(int)length{
     NSLog(@"发送的数据 === :%s", data);
     NSData *da = [[NSData alloc] initWithBytes:data length:length];
-    [socket readDataWithTimeout:3.0 tag:1];
+    [socket readDataWithTimeout:-1 tag:1];
     [socket writeData:da withTimeout:3.0 tag:1];
 }
 
+
+#pragma mark ---------------------------------------------------- 发送数据完成功后，设备返回数据调用该函数
+-(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+    NSLog(@"设备返回的数据 === :%@", data);
+}
 
 #pragma mark ---------------------------------------------------- 发送数据完成功后调用该函数
 -(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag{

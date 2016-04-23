@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <QRCodeReaderViewController.h>
 #import "RoverSqlite.h"
+#import "TCPCommunication.h"
 
 @interface RootController : UIViewController <QRCodeReaderDelegate>{
     RoverSqlite *sqlite;
+    TCPCommunication *tcpSocket;
 }
 @property (nonatomic, retain) RoverSqlite *sqlite;
+@property (nonatomic, retain) TCPCommunication *tcpSocket;
 
 
 - (IBAction)VIPClicked:(id)sender;

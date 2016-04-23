@@ -37,6 +37,14 @@
 		9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */; };
 		9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */; };
 		9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */; };
+		97F55A561CCB262F00E92957 /* button_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A551CCB262F00E92957 /* button_nomal.png */; };
+		97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */; };
+		97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */; };
+		97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A5C1CCB4CC300E92957 /* TimerCell.xib */; };
+		97F55A651CCB52DE00E92957 /* EditSingleTouchTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A631CCB52DE00E92957 /* EditSingleTouchTimerController.m */; };
+		97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A641CCB52DE00E92957 /* EditSingleTouchTimerController.xib */; };
+		97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A6A1CCB5AD900E92957 /* SingleTouchScene.m */; };
+		97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A6C1CCB5B7600E92957 /* SingleTouchScene.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +101,17 @@
 		9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchController.xib; sourceTree = "<group>"; };
 		9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_close@3x.png"; sourceTree = "<group>"; };
 		9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_open@3x.png"; sourceTree = "<group>"; };
+		97F55A551CCB262F00E92957 /* button_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nomal.png; sourceTree = "<group>"; };
+		97F55A571CCB29DF00E92957 /* SingleTouchTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchTimerView.h; sourceTree = "<group>"; };
+		97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchTimerView.m; sourceTree = "<group>"; };
+		97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchTimerView.xib; sourceTree = "<group>"; };
+		97F55A5C1CCB4CC300E92957 /* TimerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerCell.xib; sourceTree = "<group>"; };
+		97F55A621CCB52DE00E92957 /* EditSingleTouchTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSingleTouchTimerController.h; sourceTree = "<group>"; };
+		97F55A631CCB52DE00E92957 /* EditSingleTouchTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSingleTouchTimerController.m; sourceTree = "<group>"; };
+		97F55A641CCB52DE00E92957 /* EditSingleTouchTimerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSingleTouchTimerController.xib; sourceTree = "<group>"; };
+		97F55A691CCB5AD900E92957 /* SingleTouchScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchScene.h; sourceTree = "<group>"; };
+		97F55A6A1CCB5AD900E92957 /* SingleTouchScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchScene.m; sourceTree = "<group>"; };
+		97F55A6C1CCB5B7600E92957 /* SingleTouchScene.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchScene.xib; sourceTree = "<group>"; };
 		C346679FA763E728C90F202C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		EA7E804D40B1F66607D80B60 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -331,6 +350,9 @@
 		9735C0871CC9C13B000B0727 /* SingleTouch */ = {
 			isa = PBXGroup;
 			children = (
+				97F55A681CCB5A9B00E92957 /* Scene */,
+				97F55A671CCB5A2B00E92957 /* TimerTable */,
+				97F55A5E1CCB528900E92957 /* EditTimer */,
 				9735C0881CC9C1A8000B0727 /* SingleTouchController.h */,
 				9735C0891CC9C1A8000B0727 /* SingleTouchController.m */,
 				9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */,
@@ -341,10 +363,42 @@
 		9735C08D1CC9C49D000B0727 /* SingleTouchImg */ = {
 			isa = PBXGroup;
 			children = (
+				97F55A551CCB262F00E92957 /* button_nomal.png */,
 				9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */,
 				9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */,
 			);
 			name = SingleTouchImg;
+			sourceTree = "<group>";
+		};
+		97F55A5E1CCB528900E92957 /* EditTimer */ = {
+			isa = PBXGroup;
+			children = (
+				97F55A621CCB52DE00E92957 /* EditSingleTouchTimerController.h */,
+				97F55A631CCB52DE00E92957 /* EditSingleTouchTimerController.m */,
+				97F55A641CCB52DE00E92957 /* EditSingleTouchTimerController.xib */,
+			);
+			name = EditTimer;
+			sourceTree = "<group>";
+		};
+		97F55A671CCB5A2B00E92957 /* TimerTable */ = {
+			isa = PBXGroup;
+			children = (
+				97F55A571CCB29DF00E92957 /* SingleTouchTimerView.h */,
+				97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */,
+				97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */,
+				97F55A5C1CCB4CC300E92957 /* TimerCell.xib */,
+			);
+			name = TimerTable;
+			sourceTree = "<group>";
+		};
+		97F55A681CCB5A9B00E92957 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				97F55A691CCB5AD900E92957 /* SingleTouchScene.h */,
+				97F55A6A1CCB5AD900E92957 /* SingleTouchScene.m */,
+				97F55A6C1CCB5B7600E92957 /* SingleTouchScene.xib */,
+			);
+			name = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,10 +462,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */,
+				97F55A561CCB262F00E92957 /* button_nomal.png in Resources */,
+				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,
 				9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
+				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
+				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
+				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
 				9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */,
 				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
@@ -476,10 +535,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
 				9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */,
+				97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */,
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
 				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
 				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
@@ -492,6 +553,7 @@
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
+				97F55A651CCB52DE00E92957 /* EditSingleTouchTimerController.m in Sources */,
 				97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

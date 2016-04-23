@@ -63,7 +63,7 @@
         _textField.text = [NSString stringWithFormat:@"%d",self.angle];
         _textField.enabled = NO;
         
-        [self addSubview:_textField];
+//        [self addSubview:_textField];
     }
     
     return self;

@@ -18,6 +18,8 @@
 @synthesize tempView;
 @synthesize switchState;
 @synthesize tcpSocket;
+@synthesize timerTable;
+@synthesize sceneView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,10 +29,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    if(tempView != nil)
+        return;
     tempView = [[UIView alloc] initWithFrame:self.view.bounds];
     tempView.center = CGPointMake(self.view.center.x, self.view.center.y);
     tempView.transform = CGAffineTransformMakeRotation(M_PI_4*3);
-    [self.view addSubview:tempView];
     
     tbSlider = [[TBCircularSlider alloc]initWithFrame:CGRectMake(0, 0, TB_SLIDER_SIZE, TB_SLIDER_SIZE)];
     [tbSlider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
@@ -47,7 +50,22 @@
     [switchButton addTarget:self action:@selector(switchFunction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:switchButton];
     
+    NSArray *nibView01 = [[NSBundle mainBundle] loadNibNamed:@"SingleTouchTimerView" owner:nil options:nil];
+    timerTable = [nibView01 firstObject];
+    timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+    
+    NSArray *nibView02 = [[NSBundle mainBundle] loadNibNamed:@"SingleTouchScene" owner:nil options:nil];
+    sceneView = [nibView02 firstObject];
+    sceneView.frame = CGRectMake(SCREEN_WIDHT*2, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+    
+    [self.view addSubview:tempView];
+    [self.view addSubview:timerTable];
+    [self.view addSubview:sceneView];
+    
     switchState = YES;
+    centerPoint = self.view.center;
+    [self.view bringSubviewToFront:self.controlSegment];
+    [self.view bringSubviewToFront:switchButton];
 }
 
 
@@ -68,8 +86,6 @@
     if(slider.angle < 90)
         return;
     int value = (100/270.)*(360-slider.angle);
-    NSLog(@"slider.value = %d",value);
-    
 }
 
 
@@ -80,4 +96,35 @@
 
 
 
+#pragma mark ------------------------------------------------ 点击切换界面
+- (IBAction)SwitchControlMode:(id)sender {
+    UISegmentedControl *seg = (UISegmentedControl *)sender;
+    if(seg.selectedSegmentIndex == 0){
+        [UIView beginAnimations:nil context:nil];   //开始动画
+        [UIView setAnimationDuration:0.3];          //动画时长
+        timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        sceneView.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        tempView.center = centerPoint;
+        switchButton.center = centerPoint;
+        [UIView commitAnimations];
+        
+    }
+    else if (seg.selectedSegmentIndex == 1){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        sceneView.frame = CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        tempView.center = CGPointMake(-500, tempView.center.y);
+        switchButton.center = CGPointMake(-500, switchButton.center.y);
+        [UIView commitAnimations];
+    }
+    else if (seg.selectedSegmentIndex == 2){
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        timerTable.frame = CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        sceneView.frame = CGRectMake(-SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+        tempView.center = CGPointMake(-500, tempView.center.y);
+        switchButton.center = CGPointMake(-500, switchButton.center.y);
+    }
+}
 @end
