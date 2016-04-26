@@ -42,7 +42,7 @@
         radius = self.frame.size.width/2 - TB_SAFEAREA_PADDING;
         
         //Initialize the Angle at 0
-        self.angle = 0;
+//        self.angle = 0;
         
         
         //Define the Font

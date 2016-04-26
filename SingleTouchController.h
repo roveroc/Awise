@@ -22,6 +22,9 @@
     SingleTouchTimerView    *timerTable;
     SingleTouchScene        *sceneView;
     CGPoint                 centerPoint;
+    CGPoint                 defaultCenter1;
+    CGPoint                 defaultCenter2;
+    CGPoint                 defaultCenter3;
 }
 @property (nonatomic, retain) TBCircularSlider      *tbSlider;            //调光圆环
 @property (nonatomic, retain) UIButton              *switchButton;        //开关按钮
@@ -33,8 +36,13 @@
 
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *controlSegment;
+@property (weak, nonatomic) IBOutlet UIButton *defaultBtn1;
+@property (weak, nonatomic) IBOutlet UIButton *defaultBtn2;
+@property (weak, nonatomic) IBOutlet UIButton *defaultBtn3;
+
 
 - (IBAction)SwitchControlMode:(id)sender;
+- (IBAction)defauleValueClicked:(id)sender;
 
 
 

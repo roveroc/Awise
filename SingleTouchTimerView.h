@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AwiseGlobal.h"
 #import "EditSingleTouchTimerController.h"
 
 @interface SingleTouchTimerView : UIView <UITableViewDataSource,UITableViewDelegate>{

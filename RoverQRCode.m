@@ -36,7 +36,7 @@
     
     AVCaptureVideoPreviewLayer * layer = [AVCaptureVideoPreviewLayer layerWithSession:session];
     layer.videoGravity=AVLayerVideoGravityResizeAspectFill;
-    layer.frame=controller.view.layer.bounds;
+    layer.frame = controller.view.layer.bounds;
     [controller.view.layer insertSublayer:layer atIndex:0];
     //开始捕获
     [session startRunning];

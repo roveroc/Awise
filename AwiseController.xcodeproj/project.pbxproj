@@ -37,6 +37,7 @@
 		9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */; };
 		9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */; };
 		9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */; };
+		975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975030521CCE02E00041861B /* SingleTouchTimer.plist */; };
 		97F55A561CCB262F00E92957 /* button_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A551CCB262F00E92957 /* button_nomal.png */; };
 		97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */; };
 		97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */; };
@@ -101,6 +102,7 @@
 		9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchController.xib; sourceTree = "<group>"; };
 		9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_close@3x.png"; sourceTree = "<group>"; };
 		9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_open@3x.png"; sourceTree = "<group>"; };
+		975030521CCE02E00041861B /* SingleTouchTimer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SingleTouchTimer.plist; sourceTree = "<group>"; };
 		97F55A551CCB262F00E92957 /* button_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nomal.png; sourceTree = "<group>"; };
 		97F55A571CCB29DF00E92957 /* SingleTouchTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchTimerView.h; sourceTree = "<group>"; };
 		97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchTimerView.m; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 		9735C0871CC9C13B000B0727 /* SingleTouch */ = {
 			isa = PBXGroup;
 			children = (
+				975030511CCE02250041861B /* TimerData */,
 				97F55A681CCB5A9B00E92957 /* Scene */,
 				97F55A671CCB5A2B00E92957 /* TimerTable */,
 				97F55A5E1CCB528900E92957 /* EditTimer */,
@@ -368,6 +371,14 @@
 				9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */,
 			);
 			name = SingleTouchImg;
+			sourceTree = "<group>";
+		};
+		975030511CCE02250041861B /* TimerData */ = {
+			isa = PBXGroup;
+			children = (
+				975030521CCE02E00041861B /* SingleTouchTimer.plist */,
+			);
+			name = TimerData;
 			sourceTree = "<group>";
 		};
 		97F55A5E1CCB528900E92957 /* EditTimer */ = {
@@ -474,6 +485,7 @@
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
 				9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */,
 				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
+				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,

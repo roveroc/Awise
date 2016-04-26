@@ -26,10 +26,18 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDHT [[UIScreen mainScreen] bounds].size.width
 
-@interface AwiseGlobal : NSObject
+@interface AwiseGlobal : NSObject{
+    NSMutableArray              *singleTouchTimerArray;
+}
+@property (nonatomic, retain) NSMutableArray            *singleTouchTimerArray;         //单色触摸面板定时器数据
+
+
 
 
 + (AwiseGlobal *)sharedInstance;
+
+- (NSString *)getFilePath:(NSString *)fileName;                                         //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】）
+- (NSString *)convertWeekDayToString:(NSString *)str;
 
 
 @end

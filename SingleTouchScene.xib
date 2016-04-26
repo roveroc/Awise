@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,30 +13,63 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlP-Ty-nXQ">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlP-Ty-nXQ">
                     <rect key="frame" x="0.0" y="125" width="160" height="160"/>
                     <color key="backgroundColor" red="0.25880715167433666" green="1" blue="0.63366453395238176" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="VlP-Ty-nXQ" secondAttribute="height" multiplier="1:1" id="JKy-1I-aZB"/>
+                        <constraint firstAttribute="width" secondItem="VlP-Ty-nXQ" secondAttribute="height" multiplier="1:1" id="eXi-hp-XZT"/>
+                    </constraints>
+                    <state key="normal" title="Scene 1"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-dj-QIz">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-dj-QIz">
                     <rect key="frame" x="160" y="125" width="160" height="160"/>
                     <color key="backgroundColor" red="1" green="0.93359118816605591" blue="0.40718046641457095" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="GT4-dj-QIz" secondAttribute="height" multiplier="1:1" id="bbT-O6-hXh"/>
+                    </constraints>
+                    <state key="normal" title="Scene 2"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-7i-ZSt">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-7i-ZSt">
                     <rect key="frame" x="0.0" y="285" width="160" height="160"/>
                     <color key="backgroundColor" red="1" green="0.73453771394754686" blue="0.93329408703528749" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="dNT-7i-ZSt" secondAttribute="height" multiplier="1:1" id="fVy-Qj-iK0"/>
+                    </constraints>
+                    <state key="normal" title="Scene 3"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLm-Yb-Bhl">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLm-Yb-Bhl">
                     <rect key="frame" x="160" y="285" width="160" height="160"/>
                     <color key="backgroundColor" red="0.34002959068423955" green="0.81702728304200301" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="hLm-Yb-Bhl" secondAttribute="height" multiplier="1:1" id="o6e-H2-Zc7"/>
+                    </constraints>
+                    <state key="normal" title="Scene 4"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hLm-Yb-Bhl" firstAttribute="width" secondItem="DiC-2F-LiL" secondAttribute="width" multiplier="0.5" id="1al-yK-8Lv"/>
+                <constraint firstItem="hLm-Yb-Bhl" firstAttribute="leading" secondItem="dNT-7i-ZSt" secondAttribute="trailing" id="JeW-Vu-Q11"/>
+                <constraint firstItem="GT4-dj-QIz" firstAttribute="width" secondItem="DiC-2F-LiL" secondAttribute="width" multiplier="0.5" id="RrX-la-OlQ"/>
+                <constraint firstItem="GT4-dj-QIz" firstAttribute="leading" secondItem="VlP-Ty-nXQ" secondAttribute="trailing" id="WmD-9F-Z09"/>
+                <constraint firstItem="hLm-Yb-Bhl" firstAttribute="top" secondItem="GT4-dj-QIz" secondAttribute="bottom" id="X7u-Ty-Si8"/>
+                <constraint firstItem="dNT-7i-ZSt" firstAttribute="top" secondItem="VlP-Ty-nXQ" secondAttribute="bottom" id="ZKg-qv-MOx"/>
+                <constraint firstItem="VlP-Ty-nXQ" firstAttribute="leading" secondItem="DiC-2F-LiL" secondAttribute="leading" id="awK-0T-LKd"/>
+                <constraint firstItem="VlP-Ty-nXQ" firstAttribute="top" secondItem="DiC-2F-LiL" secondAttribute="top" multiplier="1.5" constant="125" id="c6W-xm-UfE"/>
+                <constraint firstItem="dNT-7i-ZSt" firstAttribute="top" secondItem="VlP-Ty-nXQ" secondAttribute="bottom" id="hC0-up-K6P"/>
+                <constraint firstItem="VlP-Ty-nXQ" firstAttribute="width" secondItem="DiC-2F-LiL" secondAttribute="width" multiplier="0.5" id="kiv-tS-Meu"/>
+                <constraint firstItem="dNT-7i-ZSt" firstAttribute="leading" secondItem="DiC-2F-LiL" secondAttribute="leading" id="mJZ-Ko-Kkc"/>
+                <constraint firstItem="hLm-Yb-Bhl" firstAttribute="leading" secondItem="dNT-7i-ZSt" secondAttribute="trailing" id="nLl-Lp-LMs"/>
+                <constraint firstItem="dNT-7i-ZSt" firstAttribute="width" secondItem="DiC-2F-LiL" secondAttribute="width" multiplier="0.5" id="rRW-qI-Fvx"/>
+                <constraint firstItem="GT4-dj-QIz" firstAttribute="leading" secondItem="VlP-Ty-nXQ" secondAttribute="trailing" id="rhQ-s2-tO2"/>
+                <constraint firstAttribute="trailing" secondItem="GT4-dj-QIz" secondAttribute="trailing" id="sSN-GH-qqe"/>
+                <constraint firstItem="hLm-Yb-Bhl" firstAttribute="top" secondItem="GT4-dj-QIz" secondAttribute="bottom" id="uoJ-Lr-mIA"/>
+                <constraint firstItem="GT4-dj-QIz" firstAttribute="top" secondItem="DiC-2F-LiL" secondAttribute="top" constant="125" id="xys-ce-bfO"/>
+                <constraint firstAttribute="trailing" secondItem="hLm-Yb-Bhl" secondAttribute="trailing" id="ycQ-MY-Ry7"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="359" y="229"/>
+            <point key="canvasLocation" x="-601" y="370"/>
         </view>
     </objects>
 </document>
