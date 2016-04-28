@@ -10,8 +10,9 @@
 #import <QRCodeReaderViewController.h>
 #import "RoverSqlite.h"
 #import "TCPCommunication.h"
+#import "AwiseGlobal.h"
 
-@interface RootController : UIViewController <QRCodeReaderDelegate>{
+@interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate>{
     RoverSqlite *sqlite;
     TCPCommunication *tcpSocket;
 }

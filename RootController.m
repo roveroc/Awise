@@ -52,14 +52,24 @@
 //    NSMutableArray *arr = [sqlite getAllDeviceInfomation];
 //    NSLog(@"所有的设备信息 ---> %@",arr);
     
-    tcpSocket = [[TCPCommunication alloc] init];
+//    tcpSocket = [[TCPCommunication alloc] init];
+//    [tcpSocket connectToDevice:@"192.168.129.15" port:333];
     
-    [tcpSocket connectToDevice:@"192.168.3.26" port:333];
     
+    [AwiseGlobal sharedInstance].delegate = self;
+    
+//    [[AwiseGlobal sharedInstance] getARPTable];
+    
+    [[AwiseGlobal sharedInstance] pingIPisOnline:@"192.168.128.162"];
+}
+
+
+#pragma mark - ping IP 返回的结果
+- (void)ipIsOnline:(BOOL)result{
+    NSLog(@"result = %d",result);
 }
 
 - (IBAction)changeFun:(id)sender {
-
     Byte b3[20];
     for(int k=0;k<20;k++){
         b3[k] = 0x00;

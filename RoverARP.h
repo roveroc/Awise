@@ -41,9 +41,11 @@
 @interface RoverARP : NSObject{
     
     int nflag;
+    NSMutableDictionary *macDic;
 }
+@property (nonatomic, retain) NSMutableDictionary *macDic;
 
--(NSString*) ip2mac: (char*)ip;
+-(NSString*) ip2mac;
 
 
 @end

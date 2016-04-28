@@ -10,6 +10,9 @@
 
 @implementation AwiseGlobal
 @synthesize singleTouchTimerArray;
+@synthesize delegate;
+@synthesize scan;
+@synthesize arp;
 
 + (AwiseGlobal *)sharedInstance{
     static AwiseGlobal *gInstance = NULL;
@@ -71,5 +74,37 @@
     return weekStr;
 }
 
+#pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
+- (void)pingIPisOnline:(NSString *)ip{
+    [SimplePingHelper ping:ip target:self sel:@selector(pingResult:)];
+}
+
+#pragma mark -------------------------------------------------------- Ping指定IP返回结果
+- (void)pingResult:(NSNumber*)success{
+    int value = [success boolValue];
+    [delegate ipIsOnline:(value)];
+}
+
+#pragma mark -------------------------------------------------------- 遍历局域网 <当设备Ping不通需要重新扫描局域网，获取设备的新IP>
+- (void)scanNetwork{
+    if(self.scan == nil){
+        self.scan = [[ScanLAN alloc] initWithDelegate:self];
+    }
+    [self.scan startScan];
+}
+
+#pragma mark -------------------------------------------------------- 遍历局域网完成
+- (void)scanLANDidFinishScanning{
+    NSLog(@"扫描局域网完毕");
+}
+
+#pragma mark -------------------------------------------------------- 获取手机ARP表
+- (NSMutableArray *)getARPTable{
+    if(self.arp == nil){
+        self.arp = [[RoverARP alloc] init];
+    }
+    [self.arp ip2mac];
+    return nil;
+}
 
 @end

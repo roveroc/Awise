@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SimplePingHelper.h"
+#import "ScanLAN.h"
+#import "RoverARP.h"
 
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
@@ -28,19 +31,35 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDHT [[UIScreen mainScreen] bounds].size.width
 
-@interface AwiseGlobal : NSObject{
+@protocol PingDelegate <NSObject>
+
+- (void)ipIsOnline:(BOOL)result;         //目标IP是否在线
+- (void)scanNetworkFinish;               //扫码局域网完成
+
+@end
+
+
+@interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate>{
     NSMutableArray              *singleTouchTimerArray;
+    id<PingDelegate>            delegate;
+    ScanLAN                     *scan;
+    RoverARP                    *arp;
 }
+
+
+
 @property (nonatomic, retain) NSMutableArray            *singleTouchTimerArray;         //单色触摸面板定时器数据
-
-
+@property (nonatomic, retain) id<PingDelegate>          delegate;                       //delegate
+@property (nonatomic, retain) ScanLAN                   *scan;                          //扫描局域网IP对象
+@property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
 
 
 + (AwiseGlobal *)sharedInstance;
 
 - (NSString *)getFilePath:(NSString *)fileName;                        //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】）
 - (NSString *)convertWeekDayToString:(NSString *)str;                  //将0/1代表星期的字符串转化成周一、周二等字符串
-- (BOOL)pingIPisOnline:(NSString *)ip;                                 //判断一个IP是否能否
-
+- (void)pingIPisOnline:(NSString *)ip;                                 //判断一个IP是否能Ping通
+- (void)scanNetwork;                                                   //遍历局域网I
+- (NSMutableArray *)getARPTable;                                       //获取ARP表
 
 @end

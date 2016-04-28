@@ -9,13 +9,13 @@
 #import "RoverARP.h"
 
 @implementation RoverARP
+@synthesize macDic;
 
 
 
-
--(NSString*) ip2mac: (char*)ip
+-(NSString*) ip2mac
 {
-
+    macDic = [[NSMutableDictionary alloc] init];
     dump(0);
     return nil;
 }
@@ -28,6 +28,7 @@ void
 ether_print(cp)
 u_char *cp;
 {
+
     printf("%x:%x:%x:%x:%x:%x", cp[0], cp[1], cp[2], cp[3], cp[4], cp[5]);
 }
 
@@ -83,9 +84,21 @@ u_long addr;
             if (h_errno == TRY_AGAIN)
                 nflag = 1;
         }
-        printf("%s (%s) at ", host, inet_ntoa(sin->sin_addr));
-        if (sdl->sdl_alen)
+//        printf("%s (%s) at ", host, inet_ntoa(sin->sin_addr));
+        
+        
+        
+        if (sdl->sdl_alen){
             ether_print((u_char *)LLADDR(sdl));
+            
+            //by rover
+            NSString *ip = [NSString stringWithFormat:@"%s",inet_ntoa(sin->sin_addr)];
+            u_char *cp = (u_char *)LLADDR(sdl);
+            NSString *mac = [NSString stringWithFormat:@"%x:%x:%x:%x:%x:%x",cp[0], cp[1], cp[2], cp[3], cp[4], cp[5]];
+            
+            NSLog(@"ip == %@  mac == %@",ip,mac);
+        
+        }
         else
             printf("(incomplete)");
         if (rtm->rtm_rmx.rmx_expire == 0)

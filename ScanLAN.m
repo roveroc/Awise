@@ -27,7 +27,6 @@
 @implementation ScanLAN
 
 - (id)initWithDelegate:(id<ScanLANDelegate>)delegate {
-    NSLog(@"init scanner");
     self = [super init];
     if(self)
     {
@@ -56,7 +55,7 @@
                 self.baseAddressEnd = and;
             }
         }
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(pingAddress) userInfo:nil repeats:YES];
     }
 }
 
