@@ -13,7 +13,7 @@
 #import "SingleTouchScene.h"
 #import "AwiseGlobal.h"
 
-@interface SingleTouchController : UIViewController{
+@interface SingleTouchController : UIViewController<saveSingleTouchTimerDelegate>{
     TBCircularSlider        *tbSlider;
     UIButton                *switchButton;
     UIView                  *tempView;

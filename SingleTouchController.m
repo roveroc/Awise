@@ -28,7 +28,7 @@
 //    tcpSocket connectToDevice:<#(NSString *)#> port:<#(int)#>
     
     //初始化定时器数据
-    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:@"SingleTouchTimer.plist"];
+    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer];
     [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
     //如果无数据则初始化默认数据
     if([AwiseGlobal sharedInstance].singleTouchTimerArray == nil){
@@ -45,9 +45,6 @@
         [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
         [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
     }
-    
-    NSString *week = @"1&1&1&0&1&1&1&0";
-    NSString *temp = [[AwiseGlobal sharedInstance] convertWeekDayToString:week];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -105,6 +102,10 @@
     [self.view bringSubviewToFront:self.defaultBtn3];
 }
 
+#pragma mark ------------------------------------------------ 保存修改定时器，触发该代理
+- (void)singleTouchTimerSaved{
+    [timerTable.timerTable reloadData];
+}
 
 #pragma mark ------------------------------------------------ 开关
 - (void)switchFunction:(id)sender{

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define AwiseDataBase @"AwiseDeivce.sqlite"
+#define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
+#define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
+
 //******************* ******************* *******************
 //判断iPhone4/iPhone4S
 #define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -36,8 +38,9 @@
 
 + (AwiseGlobal *)sharedInstance;
 
-- (NSString *)getFilePath:(NSString *)fileName;                                         //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】）
-- (NSString *)convertWeekDayToString:(NSString *)str;
+- (NSString *)getFilePath:(NSString *)fileName;                        //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】）
+- (NSString *)convertWeekDayToString:(NSString *)str;                  //将0/1代表星期的字符串转化成周一、周二等字符串
+- (BOOL)pingIPisOnline:(NSString *)ip;                                 //判断一个IP是否能否
 
 
 @end

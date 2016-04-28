@@ -11,3 +11,5 @@ pod 'CocoaAsyncSocket'                                                #TCP/UDP�
 pod 'QRCodeReaderViewController', '~> 4.0.1'                          #二维码扫描库
 
 pod "EFCircularSlider", "~> 0.1.0"                                    #圆弧slider
+
+pod 'AudioKit', '~> 3.1'                                              #音频解析库

@@ -44,7 +44,7 @@
     return docPath;
 }
 
-#pragma mark -------------------------------------------------------- 将星期转化成字符串
+#pragma mark -------------------------------------------------------- 将0/1代表星期的字符串转化成周一、周二等字符串
 - (NSString *)convertWeekDayToString:(NSString *)str{
     NSMutableArray *arr = (NSMutableArray *)[str componentsSeparatedByString:@"&"];
     NSString *weekStr = @"";
@@ -61,35 +61,14 @@
         int value = [[arr objectAtIndex:i] intValue];
         if(value == 1){
             NSString *key = [NSString stringWithFormat:@"%d",i+1];
+            if(weekStr.length > 1)
+                weekStr = [weekStr stringByAppendingString:@" "];
             weekStr = [weekStr stringByAppendingString:[dict objectForKey:key]];
         }
         if(value== 1 && i==arr.count-1)
             weekStr = @"每天";
     }
     return weekStr;
-}
-
-#pragma mark - 将中文星期转化成数字数组
-- (NSMutableArray *)convertWeekDayToArray:(NSArray *)arr{
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:@"一" forKey:@"1"];
-    [dict setObject:@"二" forKey:@"2"];
-    [dict setObject:@"三" forKey:@"3"];
-    [dict setObject:@"四" forKey:@"4"];
-    [dict setObject:@"五" forKey:@"5"];
-    [dict setObject:@"六" forKey:@"6"];
-    [dict setObject:@"日" forKey:@"7"];
-    
-    NSMutableArray *tempArr = [[NSMutableArray alloc] init];
-    NSArray *values=[dict allValues];
-    for(int i = 0;i<arr.count;i++){
-        for(int j = 0;j<values.count;j++){
-            if([[arr objectAtIndex:i] isEqualToString:[values objectAtIndex:j]]){
-                [tempArr addObject:[dict allKeys][j]];
-            }
-        }
-    }
-    return tempArr;
 }
 
 

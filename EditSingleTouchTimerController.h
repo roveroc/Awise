@@ -9,12 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface EditSingleTouchTimerController : UIViewController{
+@protocol saveSingleTouchTimerDelegate <NSObject>
+
+- (void)singleTouchTimerSaved;      //保存成功后调用
+
+@end
+
+@interface EditSingleTouchTimerController : UIViewController<saveSingleTouchTimerDelegate>{
     int                        timerIndex;
-    NSMutableArray             *weekStatusArray;
+    NSMutableArray             *timerStatusArray;
+    NSMutableArray             *weekArray;
+    NSString                   *date;
+    NSString                   *percent;
+    BOOL                       _switch;
+    id<saveSingleTouchTimerDelegate>    delegate;
 }
-@property (assign) int                              timerIndex;              //记录编辑哪一个定时器
-@property (nonatomic, retain) NSMutableArray        *weekStatusArray;        //记录星期的点击状态
+@property (assign) int                              timerIndex;               //记录编辑哪一个定时器
+@property (nonatomic, retain) NSMutableArray        *timerStatusArray;        //当前定时器的所有属性
+@property (nonatomic, retain) NSMutableArray        *weekArray;               //星期
+@property (nonatomic, retain) NSString              *date;                    //时间
+@property (nonatomic, retain) NSString              *percent;                 //亮度百分比
+@property (assign) BOOL                             _switch;                  //开关状态
+@property (nonatomic, retain) id<saveSingleTouchTimerDelegate>  delegate;
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *monday;
