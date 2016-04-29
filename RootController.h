@@ -12,12 +12,19 @@
 #import "TCPCommunication.h"
 #import "AwiseGlobal.h"
 
-@interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate>{
+#import "GBPing.h"
+
+@interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate,GBPingDelegate>{
     RoverSqlite *sqlite;
     TCPCommunication *tcpSocket;
+    
+    
+    GBPing *gb;
 }
 @property (nonatomic, retain) RoverSqlite *sqlite;
 @property (nonatomic, retain) TCPCommunication *tcpSocket;
+
+@property (nonatomic, retain) GBPing *gb;
 
 
 - (IBAction)VIPClicked:(id)sender;

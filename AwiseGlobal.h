@@ -10,9 +10,12 @@
 #import "SimplePingHelper.h"
 #import "ScanLAN.h"
 #import "RoverARP.h"
+#import <MBProgressHUD.h>
 
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
+
+#define HudDismissTime           1.5                                //提示框消失的时间
 
 //******************* ******************* *******************
 //判断iPhone4/iPhone4S
@@ -44,6 +47,7 @@
     id<PingDelegate>            delegate;
     ScanLAN                     *scan;
     RoverARP                    *arp;
+    MBProgressHUD               *hud;
 }
 
 
@@ -52,6 +56,7 @@
 @property (nonatomic, retain) id<PingDelegate>          delegate;                       //delegate
 @property (nonatomic, retain) ScanLAN                   *scan;                          //扫描局域网IP对象
 @property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
+@property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
 
 
 + (AwiseGlobal *)sharedInstance;
@@ -60,6 +65,8 @@
 - (NSString *)convertWeekDayToString:(NSString *)str;                  //将0/1代表星期的字符串转化成周一、周二等字符串
 - (void)pingIPisOnline:(NSString *)ip;                                 //判断一个IP是否能Ping通
 - (void)scanNetwork;                                                   //遍历局域网I
-- (NSMutableArray *)getARPTable;                                       //获取ARP表
+- (NSMutableDictionary *)getARPTable;                                  //获取ARP表
+- (void)showWaitingView;                                               //展示提示用户等待
+- (void)showWaitingViewWithMsg:(NSString *)msg;                        //展示提示用户等待，带文字提示
 
 @end

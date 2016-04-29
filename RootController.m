@@ -16,6 +16,7 @@
 @implementation RootController
 @synthesize sqlite;
 @synthesize tcpSocket;
+@synthesize gb;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,14 +55,18 @@
     
 //    tcpSocket = [[TCPCommunication alloc] init];
 //    [tcpSocket connectToDevice:@"192.168.129.15" port:333];
+
     
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"Waiting"];
     
-    [AwiseGlobal sharedInstance].delegate = self;
-    
-//    [[AwiseGlobal sharedInstance] getARPTable];
-    
-    [[AwiseGlobal sharedInstance] pingIPisOnline:@"192.168.128.162"];
 }
+
+- (void)scanNetworkFinish{
+    NSLog(@"扫码完毕，开始获取ARP表");
+    NSMutableDictionary *dic = [[AwiseGlobal sharedInstance] getARPTable];
+    NSLog(@"ARP表获取成功 = %@",dic);
+}
+
 
 
 #pragma mark - ping IP 返回的结果
@@ -79,10 +84,9 @@
     b3[2] = 0x01;
     b3[3] = 0x05;
     b3[4] = 0x01;
-    
     b3[18]= 0x0d;
     b3[19]= 0x0a;
-    
     [tcpSocket sendMeesageToDevice:b3 length:20];
+    
 }
 @end

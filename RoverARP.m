@@ -12,12 +12,11 @@
 @synthesize macDic;
 
 
-
--(NSString*) ip2mac
-{
+#pragma mark - 获取ARP表单
+- (NSMutableDictionary*) arpTable{
     macDic = [[NSMutableDictionary alloc] init];
-    dump(0);
-    return nil;
+    [self dump:0];
+    return macDic;
 }
 
 
@@ -36,9 +35,10 @@ u_char *cp;
 /*
  * Dump the entire arp table
  */
-int
-dump(addr)
-u_long addr;
+//int
+//dump(addr)
+//u_long addr;
+- (int)dump:(u_long)addr
 {
     int mib[6];
     size_t needed;
@@ -89,31 +89,32 @@ u_long addr;
         
         
         if (sdl->sdl_alen){
-            ether_print((u_char *)LLADDR(sdl));
+//            ether_print((u_char *)LLADDR(sdl));
             
             //by rover
             NSString *ip = [NSString stringWithFormat:@"%s",inet_ntoa(sin->sin_addr)];
             u_char *cp = (u_char *)LLADDR(sdl);
             NSString *mac = [NSString stringWithFormat:@"%x:%x:%x:%x:%x:%x",cp[0], cp[1], cp[2], cp[3], cp[4], cp[5]];
             
-            NSLog(@"ip == %@  mac == %@",ip,mac);
+//            NSLog(@"ip == %@  mac == %@",ip,mac);
+            [macDic setObject:ip forKey:mac];
         
         }
-        else
-            printf("(incomplete)");
-        if (rtm->rtm_rmx.rmx_expire == 0)
-            printf(" permanent");
-        if (sin->sin_other & SIN_PROXY)
-            printf(" published (proxy only)");
+        else{}
+//            printf("(incomplete)");
+        if (rtm->rtm_rmx.rmx_expire == 0){}
+//            printf(" permanent");
+        if (sin->sin_other & SIN_PROXY){}
+//            printf(" published (proxy only)");
         if (rtm->rtm_addrs & RTA_NETMASK) {
             sin = (struct sockaddr_inarp *)
             (sdl->sdl_len + (char *)sdl);
-            if (sin->sin_addr.s_addr == 0xffffffff)
-                printf(" published");
-            if (sin->sin_len != 8)
-                printf("(weird)");
+            if (sin->sin_addr.s_addr == 0xffffffff){}
+//                printf(" published");
+            if (sin->sin_len != 8){}
+//                printf("(weird)");
         }
-        printf("\n");
+//        printf("\n");
     }
     return (found_entry);
 }

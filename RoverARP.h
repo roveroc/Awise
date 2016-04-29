@@ -45,7 +45,7 @@
 }
 @property (nonatomic, retain) NSMutableDictionary *macDic;
 
--(NSString*) ip2mac;
+- (NSMutableDictionary *) arpTable;
 
 
 @end

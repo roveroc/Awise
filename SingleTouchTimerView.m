@@ -9,7 +9,6 @@
 #import "SingleTouchTimerView.h"
 
 @implementation SingleTouchTimerView
-@synthesize switchArray;
 
 
 - (void)drawRect:(CGRect)rect {
@@ -35,24 +34,25 @@
     else{
         [_switch setOn:YES];
     }
-    if(switchArray == nil){
-        switchArray = [[NSMutableArray alloc] init];
-    }
-    if(![switchArray containsObject:_switch]){
-        [switchArray addObject:_switch];
-    }
     [_switch addTarget:self action:@selector(operateSwitch:) forControlEvents:UIControlEventValueChanged];
 }
 
 #pragma mark ------------------------------------------------ 操作开关
 - (void)operateSwitch:(id)sender{
-    UISwitch *swi = (UISwitch *)sender;
-    int index = [switchArray indexOfObject:swi];
-    NSString *value = [NSString stringWithFormat:@"%d",swi.on];
-    NSMutableArray *temp = [[AwiseGlobal sharedInstance].singleTouchTimerArray objectAtIndex:index];
-    [temp replaceObjectAtIndex:3 withObject:value];
-    [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:[[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer]
-                                                         atomically:YES];
+    CGRect buttonRect = ((UISwitch *)sender).frame;
+    for (UITableViewCell *cell in [self.timerTable visibleCells]){
+        if (CGRectIntersectsRect(buttonRect, cell.frame)){
+            //cell就是所要获得的
+            int index = (int)cell.tag-10;
+            UISwitch *swi = (UISwitch *)[cell viewWithTag:4];
+            NSString *value = [NSString stringWithFormat:@"%d",swi.on];
+            NSMutableArray *temp = [[AwiseGlobal sharedInstance].singleTouchTimerArray objectAtIndex:index];
+            [temp replaceObjectAtIndex:3 withObject:value];
+            [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:[[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer]
+                                                                 atomically:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark ------------------------------------------------ 返回分组数
@@ -94,6 +94,7 @@
         else if(iPhone6P)
             cell = (UITableViewCell *)[array  objectAtIndex:2];
     }
+    cell.tag = indexPath.row+10;    //+10,避免和cell上的Switch冲突
     [self parseTimerDataToCell:cell indexPath:indexPath];
     return cell;
 }

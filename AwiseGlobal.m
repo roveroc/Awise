@@ -13,6 +13,7 @@
 @synthesize delegate;
 @synthesize scan;
 @synthesize arp;
+@synthesize hud;
 
 + (AwiseGlobal *)sharedInstance{
     static AwiseGlobal *gInstance = NULL;
@@ -74,6 +75,23 @@
     return weekStr;
 }
 
+#pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待
+- (void)showWaitingView{
+    self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    self.hud.dimBackground = YES;
+    [self.hud hide:YES afterDelay:HudDismissTime];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
+}
+
+#pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待,带文字提示
+- (void)showWaitingViewWithMsg:(NSString *)msg{
+    self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    self.hud.dimBackground = YES;
+    self.hud.labelText = msg;
+    [self.hud hide:YES afterDelay:HudDismissTime];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
+}
+
 #pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 - (void)pingIPisOnline:(NSString *)ip{
     [SimplePingHelper ping:ip target:self sel:@selector(pingResult:)];
@@ -87,24 +105,28 @@
 
 #pragma mark -------------------------------------------------------- 遍历局域网 <当设备Ping不通需要重新扫描局域网，获取设备的新IP>
 - (void)scanNetwork{
-    if(self.scan == nil){
-        self.scan = [[ScanLAN alloc] initWithDelegate:self];
+    if(self.scan != nil){
+        [self.scan stopScan];
+        self.scan.delegate = nil;
+        self.scan = nil;
     }
+    self.scan = [[ScanLAN alloc] initWithDelegate:self];
     [self.scan startScan];
 }
 
 #pragma mark -------------------------------------------------------- 遍历局域网完成
 - (void)scanLANDidFinishScanning{
     NSLog(@"扫描局域网完毕");
+    [delegate scanNetworkFinish];
 }
 
 #pragma mark -------------------------------------------------------- 获取手机ARP表
-- (NSMutableArray *)getARPTable{
+- (NSMutableDictionary *)getARPTable{
     if(self.arp == nil){
         self.arp = [[RoverARP alloc] init];
     }
-    [self.arp ip2mac];
-    return nil;
+    NSMutableDictionary *arpDic = [self.arp arpTable];
+    return arpDic;
 }
 
 @end

@@ -11,9 +11,8 @@
 #import "EditSingleTouchTimerController.h"
 
 @interface SingleTouchTimerView : UIView <UITableViewDataSource,UITableViewDelegate>{
-    NSMutableArray             *switchArray;
+ 
 }
-@property (nonatomic, retain) NSMutableArray            *switchArray;      //暂存Switch，用来区分点击事件
 
 @property (weak, nonatomic) IBOutlet UITableView *timerTable;
 

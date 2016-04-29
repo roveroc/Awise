@@ -38,6 +38,8 @@
 		9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */; };
 		9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */; };
 		975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975030521CCE02E00041861B /* SingleTouchTimer.plist */; };
+		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
+		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97F55A561CCB262F00E92957 /* button_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A551CCB262F00E92957 /* button_nomal.png */; };
 		97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */; };
 		97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */; };
@@ -103,6 +105,11 @@
 		9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_close@3x.png"; sourceTree = "<group>"; };
 		9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_open@3x.png"; sourceTree = "<group>"; };
 		975030521CCE02E00041861B /* SingleTouchTimer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SingleTouchTimer.plist; sourceTree = "<group>"; };
+		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
+		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
+		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
+		97A2AB7C1CD21B6800734E61 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
+		97A2AB7D1CD21B6800734E61 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
 		97F55A551CCB262F00E92957 /* button_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nomal.png; sourceTree = "<group>"; };
 		97F55A571CCB29DF00E92957 /* SingleTouchTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchTimerView.h; sourceTree = "<group>"; };
 		97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchTimerView.m; sourceTree = "<group>"; };
@@ -268,6 +275,7 @@
 		9735C05A1CC78F65000B0727 /* Ping */ = {
 			isa = PBXGroup;
 			children = (
+				97A2AB801CD2F57700734E61 /* GBPing */,
 				9735C05C1CC78FF0000B0727 /* Utils.h */,
 				9735C05D1CC78FF0000B0727 /* Utils.m */,
 				9735C05E1CC78FF0000B0727 /* ScanLAN.h */,
@@ -379,6 +387,18 @@
 				975030521CCE02E00041861B /* SingleTouchTimer.plist */,
 			);
 			name = TimerData;
+			sourceTree = "<group>";
+		};
+		97A2AB801CD2F57700734E61 /* GBPing */ = {
+			isa = PBXGroup;
+			children = (
+				97A2AB791CD21B6800734E61 /* GBPingSummary.h */,
+				97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */,
+				97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */,
+				97A2AB7C1CD21B6800734E61 /* GBPing.h */,
+				97A2AB7D1CD21B6800734E61 /* GBPing.m */,
+			);
+			name = GBPing;
 			sourceTree = "<group>";
 		};
 		97F55A5E1CCB528900E92957 /* EditTimer */ = {
@@ -551,6 +571,7 @@
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
+				97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */,
 				9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */,
 				97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */,
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
@@ -562,6 +583,7 @@
 				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
 				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
+				97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
