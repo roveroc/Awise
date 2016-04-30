@@ -10,7 +10,7 @@
 
 @implementation TCPCommunication
 @synthesize socket;
-
+@synthesize delegate;
 
 - (id)init{
     self = [super init];
@@ -22,6 +22,9 @@
 
 #pragma mark ---------------------------------------------------- 连接设备
 - (void)connectToDevice:(NSString *)host port:(int)port{
+    if([socket isConnected]){
+        [socket disconnect];
+    }
     socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
     //TODO 这里需要在退出局域网模式下断开
     [socket disconnect];    //断开tcp连接
@@ -34,10 +37,16 @@
     }
 }
 
+#pragma mark ---------------------------------------------------- 断开连接
+- (void)breakConnect:(AsyncSocket *)soc{
+    [soc disconnect];
+    soc = nil;
+}
 
 #pragma mark ---------------------------------------------------- 连接设备成功后的回调
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port{
     NSLog(@"连接设备成功 ip =  %@ 端口 = %d", host, port);
+    [delegate TCPSocketConnectSuccess];
 }
 
 

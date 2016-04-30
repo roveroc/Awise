@@ -11,6 +11,8 @@
 #import "ScanLAN.h"
 #import "RoverARP.h"
 #import <MBProgressHUD.h>
+#import "AwiseUserDefault.h"
+#import "TCPCommunication.h"
 
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
@@ -48,6 +50,7 @@
     ScanLAN                     *scan;
     RoverARP                    *arp;
     MBProgressHUD               *hud;
+    TCPCommunication            *tcpSocket;
 }
 
 
@@ -57,7 +60,7 @@
 @property (nonatomic, retain) ScanLAN                   *scan;                          //扫描局域网IP对象
 @property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
 @property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
-
+@property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
 
 + (AwiseGlobal *)sharedInstance;
 

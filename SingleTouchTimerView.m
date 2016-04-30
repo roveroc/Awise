@@ -37,22 +37,48 @@
     [_switch addTarget:self action:@selector(operateSwitch:) forControlEvents:UIControlEventValueChanged];
 }
 
-#pragma mark ------------------------------------------------ 操作开关
+#pragma mark ------------------------------------------------ 操作开关,发送指令
 - (void)operateSwitch:(id)sender{
-    CGRect buttonRect = ((UISwitch *)sender).frame;
-    for (UITableViewCell *cell in [self.timerTable visibleCells]){
-        if (CGRectIntersectsRect(buttonRect, cell.frame)){
-            //cell就是所要获得的
-            int index = (int)cell.tag-10;
-            UISwitch *swi = (UISwitch *)[cell viewWithTag:4];
-            NSString *value = [NSString stringWithFormat:@"%d",swi.on];
-            NSMutableArray *temp = [[AwiseGlobal sharedInstance].singleTouchTimerArray objectAtIndex:index];
-            [temp replaceObjectAtIndex:3 withObject:value];
-            [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:[[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer]
-                                                                 atomically:YES];
-            break;
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    UITableViewCell *cell;
+    if([phoneVersion intValue] > 8){
+        UIView *v = [sender superview];             //获取父类view
+        cell = (UITableViewCell *)[v superview];    //获取cell
+    }
+    int index = (int)cell.tag-10;
+    UISwitch *swi = (UISwitch *)[cell viewWithTag:4];
+    NSString *value = [NSString stringWithFormat:@"%d",swi.on];
+    NSMutableArray *temp = [[AwiseGlobal sharedInstance].singleTouchTimerArray objectAtIndex:index];
+    [temp replaceObjectAtIndex:3 withObject:value];
+    [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:[[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer]
+                                                         atomically:YES];
+    Byte bt[20];
+    for(int k=0;k<20;k++){
+        bt[k] = 0x00;
+    }
+    bt[0]   = 0x4d;
+    bt[1]   = 0x41;
+    bt[2]   = 0x03;
+    bt[3]   = 0x01;
+    bt[10]  = 0x01;       //数据长度
+    bt[18]  = 0x0d;       //结束符
+    bt[19]  = 0x0a;
+    
+    bt[11] = index;
+    bt[12] = [[temp lastObject] intValue];
+    bt[13] = [[temp objectAtIndex:1] intValue];
+    NSArray *weekArr = [[temp objectAtIndex:2] componentsSeparatedByString:@"&"];
+    Byte tt = 0b00000000;                           //八位二进制表示：周一到每天，1表示使能
+    for(int i=(int)(weekArr.count-1);i>-1;i--){
+        if([[weekArr objectAtIndex:i] intValue] == 1){
+            tt += (1<<((weekArr.count-1)-i));
         }
     }
+    bt[14] = tt;
+    NSArray *timeArr = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
+    bt[15] = [[timeArr objectAtIndex:0] intValue];
+    bt[16] = [[timeArr objectAtIndex:1] intValue];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
 #pragma mark ------------------------------------------------ 返回分组数

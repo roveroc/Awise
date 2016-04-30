@@ -14,6 +14,7 @@
 @synthesize scan;
 @synthesize arp;
 @synthesize hud;
+@synthesize tcpSocket;
 
 + (AwiseGlobal *)sharedInstance{
     static AwiseGlobal *gInstance = NULL;
@@ -91,6 +92,8 @@
     [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
+
+#pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 
 #pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 - (void)pingIPisOnline:(NSString *)ip{

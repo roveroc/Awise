@@ -36,6 +36,9 @@
     NSArray *navArray = [[NSArray alloc] initWithObjects:mainNav,setNav, nil];
     tabCon.viewControllers = navArray;
     self.window.rootViewController = tabCon;
+//给单色触摸存储默认场景值
+    NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100&100&100&100", @"singleTouchSceneValue",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
     
     [self.window makeKeyAndVisible];
     

@@ -17,14 +17,14 @@
 @synthesize switchButton;
 @synthesize tempView;
 @synthesize switchState;
-@synthesize tcpSocket;
 @synthesize timerTable;
 @synthesize sceneView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
 //    tcpSocket connectToDevice:<#(NSString *)#> port:<#(int)#>
     
     //初始化定时器数据
@@ -45,6 +45,14 @@
         [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
         [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
     }
+    [self syncSingleTouchTime];
+}
+
+
+#pragma mark ------------------------------------------------ 连接设备成功
+- (void)TCPSocketConnectSuccess{
+    NSLog(@"连接设备成功，发送同步时间指令");
+    [self syncSingleTouchTime];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -102,6 +110,29 @@
     [self.view bringSubviewToFront:self.defaultBtn3];
 }
 
+#pragma mark ------------------------------------------------ 修改完场景值后，重新装载场景界面,并发送设置场景指令
+- (void)needUpdateSceneView:(int)index value:(int)v{
+    [self.sceneView setNeedsDisplay];
+    self.defaultBtn1.hidden = YES;
+    self.defaultBtn2.hidden = YES;
+    self.defaultBtn3.hidden = YES;
+    Byte bt[20];
+    for(int k=0;k<20;k++){
+        bt[k] = 0x00;
+    }
+    bt[0]   = 0x4d;
+    bt[1]   = 0x41;
+    bt[2]   = 0x06;
+    bt[3]   = 0x01;
+    bt[10]  = 0x02;
+    bt[11]  = index;
+    bt[12]  = v;
+    bt[18]  = 0x0d;
+    bt[19]  = 0x0a;
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+}
+
+
 #pragma mark ------------------------------------------------ 保存修改定时器，触发该代理
 - (void)singleTouchTimerSaved{
     [timerTable.timerTable reloadData];
@@ -109,14 +140,29 @@
 
 #pragma mark ------------------------------------------------ 开关
 - (void)switchFunction:(id)sender{
-    if(switchState == YES){
+    Byte bt[20];
+    for(int k=0;k<20;k++){
+        bt[k] = 0x00;
+    }
+    bt[0]   = 0x4d;
+    bt[1]   = 0x41;
+    bt[2]   = 0x02;
+    bt[3]   = 0x01;
+    bt[10]  = 0x01;
+    
+    bt[18]  = 0x0d;
+    bt[19]  = 0x0a;
+    if(switchState == NO){              //开
         [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
-        switchState = NO;
-    }
-    else{
-        [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
         switchState = YES;
+        bt[11] = 0x01;
     }
+    else{                               //关
+        [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
+        switchState = NO;
+        bt[11] = 0x00;
+    }
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
 #pragma mark ------------------------------------------------ 圆环代理,值发生改变触发
@@ -136,7 +182,7 @@
     bt[11]  = value;      //数据值
     bt[18]  = 0x0d;       //结束符
     bt[19]  = 0x0a;
-    [tcpSocket sendMeesageToDevice:bt length:20];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
 #pragma mark ------------------------------------------------ 点击切换界面
@@ -218,9 +264,80 @@
         default:
             break;
     }
-    [tcpSocket sendMeesageToDevice:bt length:20];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
+
+- (NSString *)hexStringFromString:(NSString *)string{
+    NSData *myD = [string dataUsingEncoding:NSUTF8StringEncoding];
+    Byte *bytes = (Byte *)[myD bytes];
+    //下面是Byte 转换为16进制。
+    NSString *hexStr=@"";
+    for(int i=0;i<[myD length];i++){
+        NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
+        if([newHexStr length]==1)
+            hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
+        else
+            hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr]; 
+    } 
+    return hexStr; 
+}
+
+
+- (void)syncSingleTouchTime{
+    NSDateFormatter *dateFormatter1 =[[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"YYYY"];
+    int yearstr = [[dateFormatter1 stringFromDate:[NSDate date]] intValue];
+    Byte bb[2] = {0,0};
+    int i = 0;
+    while (yearstr>15) {
+        bb[i] = yearstr%16;
+        yearstr = yearstr/16;
+        i++;
+    }
+    
+    
+    bb[0] = 0x07;
+    bb[1] = 0xe0;
+    
+    
+    [self hexStringFromString:@"20160501155260"];
+    
+    NSDateFormatter *dateFormatter4 =[[NSDateFormatter alloc] init];
+    [dateFormatter4 setDateFormat:@"HH"];
+    int hhstr = [[dateFormatter4 stringFromDate:[NSDate date]] intValue];
+    Byte hhbb = hhstr;
+    
+    NSDateFormatter *dateFormatter5 =[[NSDateFormatter alloc] init];
+    [dateFormatter5 setDateFormat:@"mm"];
+    int mmstr = [[dateFormatter5 stringFromDate:[NSDate date]] intValue];
+    Byte mmbb = mmstr;
+    
+    NSDateFormatter *dateFormatter6 =[[NSDateFormatter alloc] init];
+    [dateFormatter6 setDateFormat:@"ss"];
+    int ssstr = [[dateFormatter6 stringFromDate:[NSDate date]] intValue];
+    Byte ssbb = ssstr;
+    Byte bt[20];
+    for(int k=0;k<20;k++){
+        bt[k] = 0x00;
+    }
+    bt[0]   = 0x4d;
+    bt[1]   = 0x41;
+    bt[2]   = 0x03;
+    bt[3]   = 0x01;
+    bt[10]  = 0x06;       //数据长度
+    bt[11]  = bb[0];
+    bt[12]  = bb[0];
+    bt[13]  = 0x05;
+    bt[14]  = 0x01;
+    bt[15]  = hhbb;
+    bt[16]  = mmbb;
+    bt[17]  = ssbb;
+    
+    bt[18]  = 0x0d;       //结束符
+    bt[19]  = 0x0a;
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
 

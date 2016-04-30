@@ -40,6 +40,9 @@
 		975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975030521CCE02E00041861B /* SingleTouchTimer.plist */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
+		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
+		97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */; };
+		97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */; };
 		97F55A561CCB262F00E92957 /* button_nomal.png in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A551CCB262F00E92957 /* button_nomal.png */; };
 		97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */; };
 		97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F55A5A1CCB2B4600E92957 /* SingleTouchTimerView.xib */; };
@@ -110,6 +113,11 @@
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
 		97A2AB7C1CD21B6800734E61 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
 		97A2AB7D1CD21B6800734E61 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
+		97D9EF281CD448BE0096F517 /* EditSingleTouchSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSingleTouchSceneController.h; sourceTree = "<group>"; };
+		97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSingleTouchSceneController.m; sourceTree = "<group>"; };
+		97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSingleTouchSceneController.xib; sourceTree = "<group>"; };
+		97D9EF2D1CD466FE0096F517 /* AwiseUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AwiseUserDefault.h; sourceTree = "<group>"; };
+		97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AwiseUserDefault.m; sourceTree = "<group>"; };
 		97F55A551CCB262F00E92957 /* button_nomal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_nomal.png; sourceTree = "<group>"; };
 		97F55A571CCB29DF00E92957 /* SingleTouchTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchTimerView.h; sourceTree = "<group>"; };
 		97F55A581CCB29DF00E92957 /* SingleTouchTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchTimerView.m; sourceTree = "<group>"; };
@@ -326,6 +334,8 @@
 				97291BDA1CCA1DA900082ACB /* UDP */,
 				9735C0771CC87EDB000B0727 /* AwiseGlobal.h */,
 				9735C0781CC87EDB000B0727 /* AwiseGlobal.m */,
+				97D9EF2D1CD466FE0096F517 /* AwiseUserDefault.h */,
+				97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */,
 			);
 			name = AwiseGlobal;
 			sourceTree = "<group>";
@@ -362,6 +372,7 @@
 			children = (
 				975030511CCE02250041861B /* TimerData */,
 				97F55A681CCB5A9B00E92957 /* Scene */,
+				97D9EF271CD448930096F517 /* EditScene */,
 				97F55A671CCB5A2B00E92957 /* TimerTable */,
 				97F55A5E1CCB528900E92957 /* EditTimer */,
 				9735C0881CC9C1A8000B0727 /* SingleTouchController.h */,
@@ -399,6 +410,16 @@
 				97A2AB7D1CD21B6800734E61 /* GBPing.m */,
 			);
 			name = GBPing;
+			sourceTree = "<group>";
+		};
+		97D9EF271CD448930096F517 /* EditScene */ = {
+			isa = PBXGroup;
+			children = (
+				97D9EF281CD448BE0096F517 /* EditSingleTouchSceneController.h */,
+				97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */,
+				97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */,
+			);
+			name = EditScene;
 			sourceTree = "<group>";
 		};
 		97F55A5E1CCB528900E92957 /* EditTimer */ = {
@@ -502,6 +523,7 @@
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
+				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
 				9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */,
 				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
@@ -577,6 +599,7 @@
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
 				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
 				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
+				97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
@@ -584,6 +607,7 @@
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
 				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
 				97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */,
+				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
