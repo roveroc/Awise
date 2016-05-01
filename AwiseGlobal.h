@@ -44,6 +44,7 @@
 @end
 
 
+
 @interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate>{
     NSMutableArray              *singleTouchTimerArray;
     id<PingDelegate>            delegate;
@@ -61,6 +62,7 @@
 @property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
 @property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
 @property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
+
 
 + (AwiseGlobal *)sharedInstance;
 

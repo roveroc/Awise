@@ -54,10 +54,10 @@
 //    NSLog(@"所有的设备信息 ---> %@",arr);
     
     tcpSocket = [[TCPCommunication alloc] init];
-    [tcpSocket connectToDevice:@"192.168.3.26" port:333];
+    [tcpSocket connectToDevice:@"192.168.3.26" port:5050];
 
     
-//    [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].delegate = self;
 //    [[AwiseGlobal sharedInstance] scanNetwork];
 //    NSMutableDictionary *dic = [[AwiseGlobal sharedInstance] getARPTable];
 //    NSLog(@"ARP表获取成功 = %@",dic);
@@ -125,17 +125,17 @@
 //    b3[18]= 0x0d;
 //    b3[19]= 0x0a;
 //    
-    b3[0] = 0x4d;
+    b3[0] = 0xff;
     b3[1] = 0x41;
-    b3[2] = 0x06;
-    b3[3] = 0x01;
+    b3[2] = 0xff;
+    b3[3] = 0xff;
     b3[4] = 0x01;
     b3[10] = 0x02;
     b3[11] = 0x04;
     b3[12] = 0x04;
     
-    b3[18]= 0x0d;
-    b3[19]= 0x0a;
+    b3[18]= 0xff;
+    b3[19]= 0xff;
     
     
     [tcpSocket sendMeesageToDevice:b3 length:20];

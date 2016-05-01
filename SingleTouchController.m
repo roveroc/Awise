@@ -23,9 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+    }
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//    tcpSocket connectToDevice:<#(NSString *)#> port:<#(int)#>
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
+    
     
     //初始化定时器数据
     NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer];
@@ -51,9 +58,26 @@
 
 #pragma mark ------------------------------------------------ 连接设备成功
 - (void)TCPSocketConnectSuccess{
-    NSLog(@"连接设备成功，发送同步时间指令");
+    NSLog(@"连接设备成功，读取设备状态，两秒后，发送同步时间指令");
+    [self performSelector:@selector(syncTime) withObject:nil afterDelay:2.0];
+    //读取状态
+    Byte bt[20];
+    for(int k=0;k<20;k++){
+        bt[k] = 0x00;
+    }
+    bt[0]   = 0x4d;
+    bt[1]   = 0x41;
+    bt[2]   = 0x03;
+    bt[3]   = 0x01;
+    bt[18]  = 0x0d;       //结束符
+    bt[19]  = 0x0a;
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+}
+
+- (void)syncTime{
     [self syncSingleTouchTime];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated{
     if(self.controlSegment.selectedSegmentIndex == 2){

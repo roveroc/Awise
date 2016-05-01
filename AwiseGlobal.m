@@ -16,6 +16,7 @@
 @synthesize hud;
 @synthesize tcpSocket;
 
+
 + (AwiseGlobal *)sharedInstance{
     static AwiseGlobal *gInstance = NULL;
     @synchronized(self){
@@ -106,7 +107,7 @@
     [delegate ipIsOnline:(value)];
 }
 
-#pragma mark -------------------------------------------------------- 遍历局域网 <当设备Ping不通需要重新扫描局域网，获取设备的新IP>
+#pragma mark ----------------------------------------- 遍历局域网 <当设备Ping不通需要重新扫描局域网，获取设备的新IP>
 - (void)scanNetwork{
     if(self.scan != nil){
         [self.scan stopScan];
