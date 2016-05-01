@@ -40,6 +40,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *defaultBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *defaultBtn3;
 
+@property (weak, nonatomic) IBOutlet UILabel *percentLabel;
+
+
+
 
 - (IBAction)SwitchControlMode:(id)sender;
 - (IBAction)defauleValueClicked:(id)sender;

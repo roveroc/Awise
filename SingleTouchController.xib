@@ -11,6 +11,7 @@
                 <outlet property="defaultBtn1" destination="6fD-fn-B9r" id="h3O-3S-RS9"/>
                 <outlet property="defaultBtn2" destination="WIO-l1-ktx" id="aU5-SI-1bZ"/>
                 <outlet property="defaultBtn3" destination="LoC-Gc-CHR" id="zNT-wR-AcU"/>
+                <outlet property="percentLabel" destination="dSh-Ko-tFb" id="8pu-ap-a5d"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -51,21 +52,34 @@
                         <action selector="defauleValueClicked:" destination="-1" eventType="touchUpInside" id="vhG-vJ-pqT"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSh-Ko-tFb">
+                    <rect key="frame" x="124" y="381" width="73" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="73" id="6CP-GI-TZP"/>
+                        <constraint firstAttribute="height" constant="36" id="yPN-zw-9Pg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="gr8-w6-S3s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="1Lc-Yv-qPg"/>
                 <constraint firstAttribute="bottom" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="100" id="4ef-d2-c6L"/>
+                <constraint firstItem="dSh-Ko-tFb" firstAttribute="top" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="1" id="7VG-Ak-0fP"/>
                 <constraint firstAttribute="trailing" secondItem="gr8-w6-S3s" secondAttribute="trailing" constant="38" id="HOf-bo-Ipf"/>
+                <constraint firstItem="dSh-Ko-tFb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T9V-ky-w7d"/>
                 <constraint firstItem="WIO-l1-ktx" firstAttribute="leading" secondItem="6fD-fn-B9r" secondAttribute="trailing" constant="73" id="aYa-TV-cxc"/>
                 <constraint firstAttribute="bottom" secondItem="LoC-Gc-CHR" secondAttribute="bottom" constant="100" id="bbC-qS-ojZ"/>
+                <constraint firstItem="dSh-Ko-tFb" firstAttribute="top" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="1" id="jnh-jo-Phy"/>
                 <constraint firstItem="gr8-w6-S3s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="lbi-sP-j8L"/>
                 <constraint firstAttribute="bottom" secondItem="6fD-fn-B9r" secondAttribute="bottom" constant="100" id="rdY-3F-wx9"/>
                 <constraint firstItem="LoC-Gc-CHR" firstAttribute="leading" secondItem="WIO-l1-ktx" secondAttribute="trailing" constant="73" id="tFa-y3-67l"/>
                 <constraint firstItem="WIO-l1-ktx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="y5d-yC-S5z"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1703" y="586"/>
+            <point key="canvasLocation" x="-2230" y="701"/>
         </view>
     </objects>
 </document>

@@ -207,6 +207,7 @@
     bt[18]  = 0x0d;       //结束符
     bt[19]  = 0x0a;
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+    self.percentLabel.text = [NSString stringWithFormat:@"%d%%",value];
 }
 
 #pragma mark ------------------------------------------------ 点击切换界面
@@ -288,6 +289,7 @@
         default:
             break;
     }
+    self.percentLabel.text = [NSString stringWithFormat:@"%d%%",bt[11]];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 

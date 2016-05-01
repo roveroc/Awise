@@ -57,7 +57,7 @@
                                                                   fontSize.width,
                                                                   fontSize.height)];
         _textField.backgroundColor = [UIColor clearColor];
-        _textField.textColor = [UIColor colorWithWhite:1 alpha:0.8];
+        _textField.textColor = [UIColor orangeColor]; //[UIColor colorWithWhite:1 alpha:0.8];
         _textField.textAlignment = NSTextAlignmentCenter;
         _textField.font = font;
         _textField.text = [NSString stringWithFormat:@"%d",self.angle];
