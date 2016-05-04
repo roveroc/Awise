@@ -23,9 +23,6 @@
     SingleTouchTimerView    *timerTable;
     SingleTouchScene        *sceneView;
     CGPoint                 centerPoint;
-    CGPoint                 defaultCenter1;
-    CGPoint                 defaultCenter2;
-    CGPoint                 defaultCenter3;
 }
 @property (nonatomic, retain) TBCircularSlider      *tbSlider;            //调光圆环
 @property (nonatomic, retain) UIButton              *switchButton;        //开关按钮

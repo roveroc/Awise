@@ -133,4 +133,17 @@
     return arpDic;
 }
 
+#pragma mark -------------------------------------------------------- 隐藏界面下方TabBar
+- (void)hideTabBar:(UIViewController *)con{
+    if (con.tabBarController.tabBar.hidden == YES) {
+        return;
+    }
+    UIView *contentView;
+    if ( [[con.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]] )
+        contentView = [con.tabBarController.view.subviews objectAtIndex:1];
+    else
+        contentView = [con.tabBarController.view.subviews objectAtIndex:0];
+    contentView.frame = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + con.tabBarController.tabBar.frame.size.height);
+    con.tabBarController.tabBar.hidden = YES;
+}
 @end

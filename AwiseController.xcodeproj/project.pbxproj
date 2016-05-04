@@ -45,6 +45,8 @@
 		97651F781CD8B07C00EEEE01 /* 750x1334.png in Resources */ = {isa = PBXBuildFile; fileRef = 97651F741CD8B07C00EEEE01 /* 750x1334.png */; };
 		97651F791CD8B07C00EEEE01 /* 1242x2208.png in Resources */ = {isa = PBXBuildFile; fileRef = 97651F751CD8B07C00EEEE01 /* 1242x2208.png */; };
 		97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */ = {isa = PBXBuildFile; fileRef = 97651F7A1CD98B3600EEEE01 /* area_school.png */; };
+		976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976520F71CD9F0F200EEEE01 /* RouterView.m */; };
+		976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976520F91CD9F10C00EEEE01 /* RouterView.xib */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -123,6 +125,9 @@
 		97651F741CD8B07C00EEEE01 /* 750x1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750x1334.png; sourceTree = "<group>"; };
 		97651F751CD8B07C00EEEE01 /* 1242x2208.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1242x2208.png; sourceTree = "<group>"; };
 		97651F7A1CD98B3600EEEE01 /* area_school.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = area_school.png; sourceTree = "<group>"; };
+		976520F61CD9F0F200EEEE01 /* RouterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouterView.h; sourceTree = "<group>"; };
+		976520F71CD9F0F200EEEE01 /* RouterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouterView.m; sourceTree = "<group>"; };
+		976520F91CD9F10C00EEEE01 /* RouterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouterView.xib; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -424,11 +429,22 @@
 		97651EC91CD84FB400EEEE01 /* AddDeviceController */ = {
 			isa = PBXGroup;
 			children = (
+				976520F51CD9F0AC00EEEE01 /* Router */,
 				97651ECA1CD8500200EEEE01 /* AddDeviceController.h */,
 				97651ECB1CD8500200EEEE01 /* AddDeviceController.m */,
 				97651ECC1CD8500200EEEE01 /* AddDeviceController.xib */,
 			);
 			name = AddDeviceController;
+			sourceTree = "<group>";
+		};
+		976520F51CD9F0AC00EEEE01 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				976520F61CD9F0F200EEEE01 /* RouterView.h */,
+				976520F71CD9F0F200EEEE01 /* RouterView.m */,
+				976520F91CD9F10C00EEEE01 /* RouterView.xib */,
+			);
+			name = Router;
 			sourceTree = "<group>";
 		};
 		97A2AB801CD2F57700734E61 /* GBPing */ = {
@@ -559,6 +575,7 @@
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
 				97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */,
+				976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */,
 				97651F771CD8B07C00EEEE01 /* 640x1136.png in Resources */,
 				97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */,
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
@@ -637,6 +654,7 @@
 				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
 				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
 				97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */,
+				976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,

@@ -66,12 +66,20 @@
 
 + (AwiseGlobal *)sharedInstance;
 
-- (NSString *)getFilePath:(NSString *)fileName;                        //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】）
+- (NSString *)getFilePath:(NSString *)fileName;                        //获取文件路径 （将【沙盒的.app】复制到【沙盒的document】)
+
 - (NSString *)convertWeekDayToString:(NSString *)str;                  //将0/1代表星期的字符串转化成周一、周二等字符串
+
 - (void)pingIPisOnline:(NSString *)ip;                                 //判断一个IP是否能Ping通
-- (void)scanNetwork;                                                   //遍历局域网I
+
+- (void)scanNetwork;                                                   //遍历局域网
+
 - (NSMutableDictionary *)getARPTable;                                  //获取ARP表
+
 - (void)showWaitingView;                                               //展示提示用户等待
+
 - (void)showWaitingViewWithMsg:(NSString *)msg;                        //展示提示用户等待，带文字提示
+
+- (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
 
 @end

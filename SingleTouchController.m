@@ -87,7 +87,7 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillLayoutSubviews{
     if(tempView != nil)
         return;
     tempView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -112,21 +112,19 @@
     
     NSArray *nibView01 = [[NSBundle mainBundle] loadNibNamed:@"SingleTouchTimerView" owner:nil options:nil];
     timerTable = [nibView01 firstObject];
-    timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+    timerTable.frame = CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
     
     NSArray *nibView02 = [[NSBundle mainBundle] loadNibNamed:@"SingleTouchScene" owner:nil options:nil];
     sceneView = [nibView02 firstObject];
-    sceneView.frame = CGRectMake(SCREEN_WIDHT*2, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
+    sceneView.frame = CGRectMake(0*2, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
     
     [self.view addSubview:tempView];
     [self.view addSubview:timerTable];
     [self.view addSubview:sceneView];
+    timerTable.hidden = YES;
+    sceneView.hidden  = YES;
     
     switchState = YES;
-    centerPoint = self.view.center;
-    defaultCenter1 = self.defaultBtn1.center;
-    defaultCenter2 = self.defaultBtn2.center;
-    defaultCenter3 = self.defaultBtn3.center;
     [self.view bringSubviewToFront:self.controlSegment];
     [self.view bringSubviewToFront:switchButton];
     [self.view bringSubviewToFront:self.defaultBtn1];
@@ -214,44 +212,64 @@
 - (IBAction)SwitchControlMode:(id)sender {
     UISegmentedControl *seg = (UISegmentedControl *)sender;
     if(seg.selectedSegmentIndex == 0){
+        CATransition *animation = [CATransition animation];
+        animation.type = kCATransitionFade;
+        animation.duration = 0.3;
+        [self.defaultBtn1.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn2.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn3.layer addAnimation:animation forKey:nil];
+        [self.timerTable.layer  addAnimation:animation forKey:nil];
+        [switchButton.layer     addAnimation:animation forKey:nil];
+        [sceneView.layer        addAnimation:animation forKey:nil];
+        [tempView.layer         addAnimation:animation forKey:nil];
+        
         self.defaultBtn1.hidden = NO;
         self.defaultBtn2.hidden = NO;
         self.defaultBtn3.hidden = NO;
-        [UIView beginAnimations:nil context:nil];   //开始动画
-        [UIView setAnimationDuration:0.3];          //动画时长
-        timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        sceneView.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        tempView.center = centerPoint;
-        switchButton.center = centerPoint;
-        self.defaultBtn1.center = defaultCenter1;
-        self.defaultBtn2.center = defaultCenter2;
-        self.defaultBtn3.center = defaultCenter3;
-        [UIView commitAnimations];
-        
+        self.timerTable.hidden = YES;
+        sceneView.hidden = YES;
+        tempView.hidden = NO;
+        switchButton.hidden = NO;
     }
     else if (seg.selectedSegmentIndex == 1){
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        timerTable.frame = CGRectMake(SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        sceneView.frame = CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        tempView.center = CGPointMake(-500, tempView.center.y);
-        switchButton.center = CGPointMake(-500, switchButton.center.y);
-        self.defaultBtn1.center = CGPointMake(-500, self.defaultBtn1.center.y);
-        self.defaultBtn2.center = CGPointMake(-500, self.defaultBtn2.center.y);
-        self.defaultBtn3.center = CGPointMake(-500, self.defaultBtn3.center.y);
-        [UIView commitAnimations];
+        CATransition *animation = [CATransition animation];
+        animation.type = kCATransitionFade;
+        animation.duration = 0.3;
+        [self.defaultBtn1.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn2.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn3.layer addAnimation:animation forKey:nil];
+        [self.timerTable.layer  addAnimation:animation forKey:nil];
+        [switchButton.layer     addAnimation:animation forKey:nil];
+        [sceneView.layer        addAnimation:animation forKey:nil];
+        [tempView.layer         addAnimation:animation forKey:nil];
+        
+        self.defaultBtn1.hidden = YES;
+        self.defaultBtn2.hidden = YES;
+        self.defaultBtn3.hidden = YES;
+        self.timerTable.hidden = YES;
+        sceneView.hidden = NO;
+        tempView.hidden = YES;
+        switchButton.hidden = YES;
     }
     else if (seg.selectedSegmentIndex == 2){
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        timerTable.frame = CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        sceneView.frame = CGRectMake(-SCREEN_WIDHT, 0, SCREEN_WIDHT, SCREEN_HEIGHT);
-        tempView.center = CGPointMake(-500, tempView.center.y);
-        switchButton.center = CGPointMake(-500, switchButton.center.y);
-        self.defaultBtn1.center = CGPointMake(-500, self.defaultBtn1.center.y);
-        self.defaultBtn2.center = CGPointMake(-500, self.defaultBtn2.center.y);
-        self.defaultBtn3.center = CGPointMake(-500, self.defaultBtn3.center.y);
-        [UIView commitAnimations];
+        CATransition *animation = [CATransition animation];
+        animation.type = kCATransitionFade;
+        animation.duration = 0.3;
+        [self.defaultBtn1.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn2.layer addAnimation:animation forKey:nil];
+        [self.defaultBtn3.layer addAnimation:animation forKey:nil];
+        [self.timerTable.layer  addAnimation:animation forKey:nil];
+        [switchButton.layer     addAnimation:animation forKey:nil];
+        [sceneView.layer        addAnimation:animation forKey:nil];
+        [tempView.layer         addAnimation:animation forKey:nil];
+        
+        self.defaultBtn1.hidden = YES;
+        self.defaultBtn2.hidden = YES;
+        self.defaultBtn3.hidden = YES;
+        self.timerTable.hidden = NO;
+        sceneView.hidden = YES;
+        tempView.hidden = YES;
+        switchButton.hidden = YES;
     }
 }
 

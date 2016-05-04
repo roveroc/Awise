@@ -7,6 +7,7 @@
 //
 
 #import "AddDeviceController.h"
+#import "RouterView.h"
 
 @interface AddDeviceController ()
 
@@ -50,6 +51,7 @@
     // Or use blocks
     [reader setCompletionWithBlock:^(NSString *resultAsString) {
         NSLog(@"扫描结果--->%@", resultAsString);
+        [vc stopScanning];
         vc.delegate = nil;
         [self dismissViewControllerAnimated:YES completion:NULL];
     }];
@@ -57,6 +59,17 @@
     [self presentViewController:vc animated:YES completion:NULL];
 }
 
+- (IBAction)showBtnClicked:(id)sender {
+    NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"RouterView" owner:nil options:nil];
+    UIView *routeView = [nibView objectAtIndex:0];
+    routeView.frame = self.view.frame;
+    [self.view addSubview:routeView];
+    
+}
 
+#pragma mark - 扫描二维码代理
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end

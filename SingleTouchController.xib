@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SingleTouchController">
@@ -11,7 +12,6 @@
                 <outlet property="defaultBtn1" destination="6fD-fn-B9r" id="h3O-3S-RS9"/>
                 <outlet property="defaultBtn2" destination="WIO-l1-ktx" id="aU5-SI-1bZ"/>
                 <outlet property="defaultBtn3" destination="LoC-Gc-CHR" id="zNT-wR-AcU"/>
-                <outlet property="percentLabel" destination="dSh-Ko-tFb" id="8pu-ap-a5d"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -32,54 +32,53 @@
                     </connections>
                 </segmentedControl>
                 <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIO-l1-ktx">
-                    <rect key="frame" x="137" y="350" width="46" height="30"/>
-                    <state key="normal" title="50%"/>
+                    <rect key="frame" x="137" y="372" width="46" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="tintColor" red="0.94397118321456486" green="0.12223052604943274" blue="1" alpha="0.44" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="50%">
+                        <color key="titleColor" red="0.44405149996478621" green="0.24308328544896796" blue="1" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="defauleValueClicked:" destination="-1" eventType="touchUpInside" id="AVV-wo-CGF"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoC-Gc-CHR">
-                    <rect key="frame" x="256" y="350" width="46" height="30"/>
-                    <state key="normal" title="100%"/>
+                    <rect key="frame" x="256" y="372" width="46" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="tintColor" red="0.94397118321456486" green="0.12223052604943274" blue="1" alpha="0.44" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="100%">
+                        <color key="titleColor" red="0.44405149996478621" green="0.24308328544896796" blue="1" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="defauleValueClicked:" destination="-1" eventType="touchUpInside" id="vBO-Ou-BX0"/>
                     </connections>
                 </button>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fD-fn-B9r">
-                    <rect key="frame" x="18" y="350" width="46" height="30"/>
-                    <state key="normal" title="0%"/>
+                    <rect key="frame" x="18" y="372" width="46" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="tintColor" red="0.94397118321456486" green="0.12223052604943274" blue="1" alpha="0.44" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="0%">
+                        <color key="titleColor" red="0.44405149996478621" green="0.24308328544896796" blue="1" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="defauleValueClicked:" destination="-1" eventType="touchUpInside" id="vhG-vJ-pqT"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSh-Ko-tFb">
-                    <rect key="frame" x="124" y="381" width="73" height="36"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="73" id="6CP-GI-TZP"/>
-                        <constraint firstAttribute="height" constant="36" id="yPN-zw-9Pg"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="gr8-w6-S3s" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="1Lc-Yv-qPg"/>
-                <constraint firstAttribute="bottom" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="100" id="4ef-d2-c6L"/>
-                <constraint firstItem="dSh-Ko-tFb" firstAttribute="top" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="1" id="7VG-Ak-0fP"/>
+                <constraint firstItem="6fD-fn-B9r" firstAttribute="centerY" secondItem="WIO-l1-ktx" secondAttribute="centerY" id="2Fx-nn-MLY"/>
+                <constraint firstAttribute="trailing" secondItem="LoC-Gc-CHR" secondAttribute="trailing" constant="18" id="Bow-ck-0dn"/>
                 <constraint firstAttribute="trailing" secondItem="gr8-w6-S3s" secondAttribute="trailing" constant="38" id="HOf-bo-Ipf"/>
-                <constraint firstItem="dSh-Ko-tFb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T9V-ky-w7d"/>
-                <constraint firstItem="WIO-l1-ktx" firstAttribute="leading" secondItem="6fD-fn-B9r" secondAttribute="trailing" constant="73" id="aYa-TV-cxc"/>
-                <constraint firstAttribute="bottom" secondItem="LoC-Gc-CHR" secondAttribute="bottom" constant="100" id="bbC-qS-ojZ"/>
-                <constraint firstItem="dSh-Ko-tFb" firstAttribute="top" secondItem="WIO-l1-ktx" secondAttribute="bottom" constant="1" id="jnh-jo-Phy"/>
+                <constraint firstItem="WIO-l1-ktx" firstAttribute="centerY" secondItem="LoC-Gc-CHR" secondAttribute="centerY" id="IAq-Mv-ff4"/>
+                <constraint firstItem="WIO-l1-ktx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z5n-bf-COu"/>
+                <constraint firstItem="WIO-l1-ktx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.61" id="e8Y-4f-kHN"/>
+                <constraint firstItem="6fD-fn-B9r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="jGN-iX-UxN"/>
                 <constraint firstItem="gr8-w6-S3s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="lbi-sP-j8L"/>
-                <constraint firstAttribute="bottom" secondItem="6fD-fn-B9r" secondAttribute="bottom" constant="100" id="rdY-3F-wx9"/>
-                <constraint firstItem="LoC-Gc-CHR" firstAttribute="leading" secondItem="WIO-l1-ktx" secondAttribute="trailing" constant="73" id="tFa-y3-67l"/>
-                <constraint firstItem="WIO-l1-ktx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="y5d-yC-S5z"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-2230" y="701"/>
+            <point key="canvasLocation" x="-1937" y="533"/>
         </view>
     </objects>
 </document>

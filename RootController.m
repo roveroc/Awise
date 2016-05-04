@@ -25,6 +25,7 @@
 }
 
 
+
 #pragma mark - 扫描二维码代理
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader{
     [self dismissViewControllerAnimated:YES completion:NULL];
@@ -45,6 +46,7 @@
 
 - (IBAction)VIPClicked:(id)sender {
     SingleTouchController *touchCon = [[SingleTouchController alloc] init];
+    touchCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
     [self.navigationController pushViewController:touchCon animated:YES];
 
 }

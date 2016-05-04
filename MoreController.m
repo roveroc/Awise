@@ -51,6 +51,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row == 0){
         AddDeviceController *addCon = [[AddDeviceController alloc] init];
+        addCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
         [self.navigationController pushViewController:addCon animated:YES];
     }
 }

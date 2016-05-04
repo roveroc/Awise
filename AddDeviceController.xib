@@ -18,6 +18,7 @@
                 <outlet property="label2" destination="xIn-lE-W1B" id="XUq-w8-xUU"/>
                 <outlet property="label3" destination="yRI-Gr-iXZ" id="Q3U-aF-3Go"/>
                 <outlet property="label4" destination="vGA-8z-K4e" id="rIC-SS-Tcz"/>
+                <outlet property="showBtn" destination="Jup-Gr-cy5" id="5N7-2g-R0r"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,13 +26,10 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <userGuides>
-                <userLayoutGuide location="140" affinity="minY"/>
-            </userGuides>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEy-bi-xlA">
                     <rect key="frame" x="60" y="75" width="200" height="120"/>
-                    <color key="backgroundColor" red="0.078328285330792169" green="0.8660604622044501" blue="1" alpha="0.44" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.50196078431372548" green="0.7803921568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="一二三四五">
                         <color key="titleColor" red="0.077243433212935919" green="0.68762215299150142" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -91,6 +89,17 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jup-Gr-cy5">
+                    <rect key="frame" x="0.0" y="422" width="320" height="58"/>
+                    <color key="backgroundColor" red="0.48714451690285465" green="0.78770293851153839" blue="1" alpha="0.83999999999999997" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="58" id="3Yo-Dj-5SO"/>
+                    </constraints>
+                    <state key="normal" title="弹出框"/>
+                    <connections>
+                        <action selector="showBtnClicked:" destination="-1" eventType="touchUpInside" id="aeW-oO-kxG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -107,11 +116,14 @@
                 <constraint firstItem="yRI-Gr-iXZ" firstAttribute="centerX" secondItem="wHV-5g-gXm" secondAttribute="centerX" id="MOB-cj-MCL"/>
                 <constraint firstItem="fEy-bi-xlA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MQt-bb-nBR"/>
                 <constraint firstItem="wHV-5g-gXm" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.19" id="Nbf-uL-RCZ"/>
+                <constraint firstAttribute="bottom" secondItem="Jup-Gr-cy5" secondAttribute="bottom" id="O8X-Sv-Ajk"/>
                 <constraint firstItem="wHV-5g-gXm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.46" id="RjV-hN-t0T"/>
                 <constraint firstAttribute="trailing" secondItem="Gf5-EF-52h" secondAttribute="trailing" constant="56" id="VvX-Rd-5Ca"/>
+                <constraint firstAttribute="trailing" secondItem="Jup-Gr-cy5" secondAttribute="trailing" id="Xh3-XZ-L2x"/>
                 <constraint firstItem="fEy-bi-xlA" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.56" id="Yfs-7x-ASs"/>
                 <constraint firstItem="vGA-8z-K4e" firstAttribute="top" secondItem="TWI-wd-swa" secondAttribute="bottom" constant="8" id="bFf-2d-qMq"/>
                 <constraint firstItem="wHV-5g-gXm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="55" id="h1P-4o-wI9"/>
+                <constraint firstItem="Jup-Gr-cy5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iyK-yv-jr8"/>
                 <constraint firstItem="fEy-bi-xlA" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.625" id="jQy-7a-ZXA"/>
                 <constraint firstItem="H4Y-HI-8ks" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.19" id="jj1-vB-xNd"/>
                 <constraint firstItem="wHV-5g-gXm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.53" id="kyi-3V-Tch"/>
@@ -122,7 +134,7 @@
                 <constraint firstItem="yRI-Gr-iXZ" firstAttribute="top" secondItem="wHV-5g-gXm" secondAttribute="bottom" constant="8" id="tAS-82-pBe"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1351" y="516"/>
+            <point key="canvasLocation" x="-1417" y="554"/>
         </view>
     </objects>
     <resources>

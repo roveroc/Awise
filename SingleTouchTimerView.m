@@ -14,6 +14,7 @@
 - (void)drawRect:(CGRect)rect {
     self.timerTable.delegate = self;
     self.timerTable.dataSource = self;
+    self.timerTable.tableFooterView = [[UIView alloc] init];
     [self.timerTable reloadData];
 }
 
@@ -99,6 +100,7 @@
 
 #pragma mark ------------------------------------------------ 点击行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     EditSingleTouchTimerController *timerCon = [[EditSingleTouchTimerController alloc] init];
     timerCon.timerIndex = (int)indexPath.row;       //记录当前编辑的定时器
     timerCon.timerStatusArray = [[NSMutableArray alloc] initWithArray:(NSArray *)[[AwiseGlobal sharedInstance].singleTouchTimerArray
