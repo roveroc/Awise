@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddDeviceController.h"
 
 @interface MoreController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
     NSArray                 *tableViewItems;

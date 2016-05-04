@@ -19,10 +19,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    self.tableViewItems = [[NSArray alloc] initWithObjects:@"1",@"2",@"3",@"2",@"3",@"2",@"3",@"2",@"333", nil];
+    self.tableViewItems = [[NSArray alloc] initWithObjects:@"添加设备",@"设备管理",@"关于我们", nil];
     self.moreTable.delegate = self;
     self.moreTable.dataSource = self;
-    [self.moreTable setBackgroundColor:[UIColor cyanColor]];
+    self.moreTable.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +48,11 @@
 
 #pragma mark ------------------------------------------------ 点击行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.row == 0){
+        AddDeviceController *addCon = [[AddDeviceController alloc] init];
+        [self.navigationController pushViewController:addCon animated:YES];
+    }
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格
@@ -56,6 +61,7 @@
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell){
         cell = [[UITableViewCell alloc] init];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     cell.textLabel.text = [self.tableViewItems objectAtIndex:indexPath.row];
     return cell;

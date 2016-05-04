@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoreController">
@@ -17,19 +17,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Sn4-fW-vSn">
-                    <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Sn4-fW-vSn" secondAttribute="bottom" constant="49" id="NCl-bM-3zi"/>
-                <constraint firstItem="Sn4-fW-vSn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Ntp-PV-pvG"/>
-                <constraint firstAttribute="trailing" secondItem="Sn4-fW-vSn" secondAttribute="trailing" id="eR8-Ts-Yi8"/>
-                <constraint firstItem="Sn4-fW-vSn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rFs-I0-KzP"/>
+                <constraint firstItem="Sn4-fW-vSn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4Xx-7P-rkz"/>
+                <constraint firstItem="Sn4-fW-vSn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ARg-6k-34Z"/>
+                <constraint firstAttribute="bottom" secondItem="Sn4-fW-vSn" secondAttribute="bottom" id="FLO-RM-viy"/>
+                <constraint firstAttribute="trailing" secondItem="Sn4-fW-vSn" secondAttribute="trailing" id="LFR-eF-Evr"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="157" y="300"/>
+            <point key="canvasLocation" x="384" y="361"/>
         </view>
     </objects>
 </document>
