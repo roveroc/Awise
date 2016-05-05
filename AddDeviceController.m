@@ -44,10 +44,8 @@
     
     // Set the presentation style
     vc.modalPresentationStyle = UIModalPresentationFormSheet;
-    
     // Define the delegate receiver
     vc.delegate = self;
-    
     // Or use blocks
     [reader setCompletionWithBlock:^(NSString *resultAsString) {
         NSLog(@"扫描结果--->%@", resultAsString);
@@ -63,6 +61,13 @@
     NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"RouterView" owner:nil options:nil];
     UIView *routeView = [nibView objectAtIndex:0];
     routeView.frame = self.view.frame;
+    routeView.alpha = 0.0;
+    [UIView beginAnimations:@"animation" context:nil];
+    //动画时长
+    [UIView setAnimationDuration:0.3];
+    routeView.alpha = 1.0;
+    //动画结束
+    [UIView commitAnimations];
     [self.view addSubview:routeView];
     
 }

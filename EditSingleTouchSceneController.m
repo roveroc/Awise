@@ -20,9 +20,8 @@
     [super viewDidLoad];
     
     NSArray *arr = [[AwiseUserDefault sharedInstance].singleTouchSceneValue componentsSeparatedByString:@"&"];
-    int value = (int)[arr objectAtIndex:index];
     self.valueLabel.text = [[arr objectAtIndex:index] stringByAppendingString:@"%"];
-    self.slider.value = value;
+    self.slider.value = [[arr objectAtIndex:index] intValue];
 }
 
 

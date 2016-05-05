@@ -57,7 +57,6 @@
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <action selector="ssidFieldBeginEdit:" destination="iN0-l3-epB" eventType="editingDidBegin" id="8Mz-hQ-Nkq"/>
-                                <action selector="ssidFieldEndEdit:" destination="iN0-l3-epB" eventType="editingDidEnd" id="Es9-1A-C9e"/>
                             </connections>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V1m-Le-OjK">
@@ -70,7 +69,6 @@
                             <textInputTraits key="textInputTraits"/>
                             <connections>
                                 <action selector="pwdFieldBeginEdit:" destination="iN0-l3-epB" eventType="editingDidBegin" id="ajt-yh-aed"/>
-                                <action selector="pwdFieldEndEdit:" destination="iN0-l3-epB" eventType="editingDidEnd" id="4G4-hJ-53M"/>
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJU-st-DFl">
