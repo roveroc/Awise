@@ -15,6 +15,22 @@
 @synthesize arp;
 @synthesize hud;
 @synthesize tcpSocket;
+/*******水族等部分********/
+@synthesize wifiSSID;
+@synthesize lineArray;
+@synthesize freshFlag;
+@synthesize timerNumber;
+@synthesize pipeValue1,pipeValue2,pipeValue3;
+@synthesize switchStatus,hourStatus,minuteStatus,modelStatus;
+@synthesize isSuccess;
+@synthesize enterBackgroundFlag;
+@synthesize isClosed;
+@synthesize deviceSSIDArray;
+@synthesize deviceMACArray;
+@synthesize currentControllDevice;
+@synthesize IphoneIP;
+@synthesize mode;
+/*******水族等部分********/
 
 
 + (AwiseGlobal *)sharedInstance{
@@ -146,4 +162,96 @@
     contentView.frame = CGRectMake(contentView.bounds.origin.x,  contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height + con.tabBarController.tabBar.frame.size.height);
     con.tabBarController.tabBar.hidden = YES;
 }
+
+
+/*********************水族灯部分*************************/
+- (NSString *)currentWifiSSID {
+    // Does not work on the simulator.
+    NSString *wifiName = nil;
+    NSArray *interFaceNames = (__bridge_transfer id)CNCopySupportedInterfaces();
+    
+    for (NSString *name in interFaceNames) {
+        NSDictionary *info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)name);
+        
+        if (info[@"SSID"]) {
+            wifiName = info[@"SSID"];
+        } 
+    }
+    return wifiName;
+}
+
+@class getSelfIPAddr;
+
+#pragma mark - 获取手机IP
+- (NSString *)getiPhoneIP{
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                    
+                }
+                
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
+}
+
+
+#pragma mark -------------------------- 获取数据存储路径
+- (NSString *)getPlistPath{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"deviceInfo"];
+    return path;
+}
+
+#pragma mark - 获取本机WIFI的SSID
+-(NSString *)getCurrentWifiSSID{
+    NSString *ssid = [self currentWifiSSID];
+    if(ssid.length < 1){
+        [deviceSSIDArray removeAllObjects];
+        return @"";
+    }
+    if([ssid rangeOfString:WIFISSID].location != NSNotFound){
+        self.currentControllDevice = @"";         //空字符串，表示当前为点对点模式
+        [self.deviceSSIDArray removeAllObjects];
+        [self.deviceSSIDArray addObject:ssid];
+    }
+    else{
+        [self.deviceSSIDArray removeAllObjects];
+        self.deviceSSIDArray = [[NSMutableArray alloc] initWithContentsOfFile:[self getPlistPath]];
+        self.currentControllDevice = [AwiseUserDefault sharedInstance].activeMAC;
+    }
+    NSLog(@"当前受控的设备MAC -------> %@",self.currentControllDevice);
+    return ssid;
+}
+
+#pragma mark - 计算校验和
+-(Byte)getChecksum:(Byte *)byte{
+    Byte bb = 0x00;
+    for(int i = 0;i<64;i++)
+        bb+=byte[i];
+    return bb;
+}
+
+/*********************水族灯部分*************************/
+
+
+
+
 @end

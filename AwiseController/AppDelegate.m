@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RootController.h"
 #import "MoreController.h"
+#import "AwiseGlobal.h"
 
 @interface AppDelegate ()
 
@@ -37,8 +38,38 @@
     tabCon.viewControllers = navArray;
     self.window.rootViewController = tabCon;
 //给单色触摸存储默认场景值
-    NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100&100&100&100", @"singleTouchSceneValue",nil];
+    NSDictionary *singleScenedefaultValue = [NSDictionary dictionaryWithObjectsAndKeys:@"100&100&100&100", @"singleTouchSceneValue",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:singleScenedefaultValue];
+    
+/*********************水族灯部分**********************/
+    NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"light_precent",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
+    
+    NSDictionary *defaultValues1 = [NSDictionary dictionaryWithObjectsAndKeys:@"00:00", @"light_sTime",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues1];
+    
+    NSDictionary *defaultValues2 = [NSDictionary dictionaryWithObjectsAndKeys:@"12:00", @"light_eTime",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues2];
+    
+    NSDictionary *defaultValues3 = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"light_switch",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues3];
+    
+    NSDictionary *defaultValues_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"cloudy_precent",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues_1];
+    
+    NSDictionary *defaultValues1_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"00:00", @"cloudy_sTime",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues1_1];
+    
+    NSDictionary *defaultValues2_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"12:00", @"cloudy_eTime",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues2_1];
+    
+    NSDictionary *defaultValues3_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"cloudy_switch",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues3_1];
+    
+    [AwiseGlobal sharedInstance].enterBackgroundFlag = NO;
+    [AwiseGlobal sharedInstance].deviceSSIDArray = [[NSMutableArray alloc] init];
+    [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
+/*********************水族灯部分**********************/
     
     [self.window makeKeyAndVisible];
     

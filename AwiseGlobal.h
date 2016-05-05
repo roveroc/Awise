@@ -14,6 +14,11 @@
 #import "AwiseUserDefault.h"
 #import "TCPCommunication.h"
 
+#import <SystemConfiguration/CaptiveNetwork.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+
+
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
 
@@ -36,6 +41,25 @@
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDHT [[UIScreen mainScreen] bounds].size.width
 
+/*******水族等部分********/
+#define SENDPORT    5000                   //发送数据端口
+#define BroadCast   @"255.255.255.255"     //广播地址
+#define WAITTIME    2.0
+#define DISMISS_TIME 1.5
+#define WIFISSID    @"Awise-"
+
+typedef enum{
+    Manual_Model = 0,
+    Lighting_Model,
+    Cloudy_Model,
+    Timer1_Model,
+    Timer2_Model,
+    Timer3_Model
+}DeviceMode;
+/*******水族等部分********/
+
+
+
 @protocol PingDelegate <NSObject>
 
 - (void)ipIsOnline:(BOOL)result;         //目标IP是否在线
@@ -52,8 +76,37 @@
     RoverARP                    *arp;
     MBProgressHUD               *hud;
     TCPCommunication            *tcpSocket;
+    
+/*******水族等部分********/
+    NSString       *wifiSSID;
+    NSMutableArray *lineArray;
+    BOOL           freshFlag;       //当保存返回后，需要刷新界面
+    int            timerNumer;      //记录第几个定时器
+    
+    //设备状态值
+    BOOL           isSuccess;       //判断读取状态是否成功
+    
+    BOOL           switchStatus;
+    int            hourStatus;
+    int            minuteStatus;
+    int            modelStatus;     //0x01 手动  0x02 闪电 0x03 多云 0x04 定时器1  0x05 定时器2 0x06 定时器3
+    
+    int            pipeValue1;      //三个通道值
+    int            pipeValue2;
+    int            pipeValue3;
+    
+    BOOL           enterBackgroundFlag;    //进入后台标示
+    
+    BOOL           isClosed;        //设备是否关闭
+    DeviceMode     mode;            //设备运行模式
+    
+    NSMutableArray *deviceSSIDArray;
+    NSMutableArray *deviceMACArray;
+    
+    NSString       *currentControllDevice;     //当前正在受控的设备
+    NSString       *IphoneIP;
+/*******水族等部分********/
 }
-
 
 
 @property (nonatomic, retain) NSMutableArray            *singleTouchTimerArray;         //单色触摸面板定时器数据
@@ -62,6 +115,33 @@
 @property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
 @property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
 @property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
+
+/*******水族等部分********/
+@property (nonatomic, retain) NSString       *wifiSSID;
+@property (nonatomic, retain) NSMutableArray *lineArray;
+@property (assign)            BOOL           freshFlag;
+@property (assign)            int            timerNumber;
+
+@property (assign)            BOOL           isSuccess;
+@property (assign)            BOOL           switchStatus;
+@property (assign)            int            hourStatus;
+@property (assign)            int            minuteStatus;
+@property (assign)            int            modelStatus;
+
+@property (assign)            int            pipeValue1;
+@property (assign)            int            pipeValue2;
+@property (assign)            int            pipeValue3;
+
+@property (assign)            BOOL           enterBackgroundFlag;
+@property (assign)            BOOL           isClosed;
+@property (assign)            DeviceMode     mode;
+@property (nonatomic, retain) NSString       *currentControllDevice;
+@property (nonatomic, retain) NSString       *IphoneIP;
+
+
+@property (nonatomic, retain) NSMutableArray *deviceSSIDArray;
+@property (nonatomic, retain) NSMutableArray *deviceMACArray;
+/*******水族等部分********/
 
 
 + (AwiseGlobal *)sharedInstance;
@@ -81,5 +161,12 @@
 - (void)showWaitingViewWithMsg:(NSString *)msg;                        //展示提示用户等待，带文字提示
 
 - (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
+
+/*******水族等部分********/
+- (NSString *)getCurrentWifiSSID;       //获取连接WIFI的账号
+- (NSString *)getiPhoneIP;              //获取手机设备的IP地址
+- (Byte)getChecksum:(Byte *)byte;       //计算要发送数据的bv 校验和
+/*******水族等部分********/
+
 
 @end
