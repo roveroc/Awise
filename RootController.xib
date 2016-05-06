@@ -16,8 +16,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koP-89-vdw">
-                    <rect key="frame" x="157" y="301" width="61" height="30"/>
-                    <state key="normal" title="连接WIFI"/>
+                    <rect key="frame" x="153" y="301" width="70" height="30"/>
+                    <state key="normal" title="LightFish"/>
                     <connections>
                         <action selector="searchFun:" destination="-1" eventType="touchUpInside" id="rTs-fb-2lN"/>
                     </connections>
@@ -31,7 +31,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygj-lN-DMZ">
                     <rect key="frame" x="142" y="197" width="92" height="30"/>
-                    <state key="normal" title="TouchDevice"/>
+                    <state key="normal" title="SingleTouch"/>
                     <connections>
                         <action selector="VIPClicked:" destination="-1" eventType="touchUpInside" id="e1Z-Wz-V1J"/>
                     </connections>

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface MainController : UIViewController{
+@interface LightFishController : UIViewController{
     BOOL            onoffFlag;
     MBProgressHUD   *hud;
     MBProgressHUD   *hud1;

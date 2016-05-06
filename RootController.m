@@ -16,7 +16,7 @@
 @implementation RootController
 @synthesize sqlite;
 @synthesize tcpSocket;
-@synthesize gb;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,17 +52,13 @@
 }
 
 - (IBAction)searchFun:(id)sender {
-//    NSMutableArray *arr = [sqlite getAllDeviceInfomation];
-//    NSLog(@"所有的设备信息 ---> %@",arr);
-    
-    tcpSocket = [[TCPCommunication alloc] init];
-    [tcpSocket connectToDevice:@"192.168.3.26" port:5050];
+//    tcpSocket = [[TCPCommunication alloc] init];
+//    [tcpSocket connectToDevice:@"192.168.3.26" port:5050];
+//    [AwiseGlobal sharedInstance].delegate = self;
 
-    
-    [AwiseGlobal sharedInstance].delegate = self;
-//    [[AwiseGlobal sharedInstance] scanNetwork];
-//    NSMutableDictionary *dic = [[AwiseGlobal sharedInstance] getARPTable];
-//    NSLog(@"ARP表获取成功 = %@",dic);
+    LightFishController *lightCon = [[LightFishController alloc] init];
+    lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+    [self.navigationController pushViewController:lightCon animated:YES];
     
 }
 

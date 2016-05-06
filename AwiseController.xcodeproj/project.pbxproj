@@ -47,8 +47,30 @@
 		97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */ = {isa = PBXBuildFile; fileRef = 97651F7A1CD98B3600EEEE01 /* area_school.png */; };
 		976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976520F71CD9F0F200EEEE01 /* RouterView.m */; };
 		976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976520F91CD9F10C00EEEE01 /* RouterView.xib */; };
-		976521021CDB51A900EEEE01 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521001CDB51A900EEEE01 /* MainController.m */; };
-		976521031CDB51A900EEEE01 /* MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521011CDB51A900EEEE01 /* MainController.xib */; };
+		976521021CDB51A900EEEE01 /* LightFishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521001CDB51A900EEEE01 /* LightFishController.m */; };
+		976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521011CDB51A900EEEE01 /* LightFishController.xib */; };
+		9765210C1CDC2F0500EEEE01 /* SettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765210A1CDC2F0500EEEE01 /* SettingController.m */; };
+		9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9765210B1CDC2F0500EEEE01 /* SettingController.xib */; };
+		976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765210F1CDC2F1A00EEEE01 /* EditTimerController.m */; };
+		976521121CDC2F1A00EEEE01 /* EditTimerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521101CDC2F1A00EEEE01 /* EditTimerController.xib */; };
+		976521181CDC2F5500EEEE01 /* lineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521171CDC2F5500EEEE01 /* lineView.m */; };
+		9765211A1CDC2F9500EEEE01 /* RoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521191CDC2F9500EEEE01 /* RoverCell.xib */; };
+		9765211E1CDC2FA400EEEE01 /* DetailEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765211C1CDC2FA400EEEE01 /* DetailEditController.m */; };
+		9765211F1CDC2FA400EEEE01 /* DetailEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9765211D1CDC2FA400EEEE01 /* DetailEditController.xib */; };
+		976521241CDC2FDC00EEEE01 /* ManualController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521221CDC2FDC00EEEE01 /* ManualController.m */; };
+		976521251CDC2FDC00EEEE01 /* ManualController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521231CDC2FDC00EEEE01 /* ManualController.xib */; };
+		976521291CDC2FE600EEEE01 /* LightingModeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521271CDC2FE600EEEE01 /* LightingModeController.m */; };
+		9765212A1CDC2FE600EEEE01 /* LightingModeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521281CDC2FE600EEEE01 /* LightingModeController.xib */; };
+		9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765212C1CDC302200EEEE01 /* DeviceMannagerController.m */; };
+		9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9765212D1CDC302200EEEE01 /* DeviceMannagerController.xib */; };
+		976521331CDC302E00EEEE01 /* MannagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521311CDC302E00EEEE01 /* MannagerController.m */; };
+		976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521321CDC302E00EEEE01 /* MannagerController.xib */; };
+		9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521361CDC3E3300EEEE01 /* 200811613485950_2.png */; };
+		9765213C1CDC3E3300EEEE01 /* btnBackimg.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521371CDC3E3300EEEE01 /* btnBackimg.png */; };
+		9765213D1CDC3E3300EEEE01 /* single.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521381CDC3E3300EEEE01 /* single.png */; };
+		9765213E1CDC3E3300EEEE01 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521391CDC3E3300EEEE01 /* more.png */; };
+		9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765213A1CDC3E3300EEEE01 /* orgbtn.png */; };
+		976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521401CDC3E9700EEEE01 /* 05-time-Line.png */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -131,9 +153,39 @@
 		976520F71CD9F0F200EEEE01 /* RouterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouterView.m; sourceTree = "<group>"; };
 		976520F91CD9F10C00EEEE01 /* RouterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouterView.xib; sourceTree = "<group>"; };
 		976520FB1CDB457900EEEE01 /* getSelfIPAddr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getSelfIPAddr.h; sourceTree = "<group>"; };
-		976520FF1CDB51A900EEEE01 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
-		976521001CDB51A900EEEE01 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
-		976521011CDB51A900EEEE01 /* MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainController.xib; sourceTree = "<group>"; };
+		976520FF1CDB51A900EEEE01 /* LightFishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightFishController.h; sourceTree = "<group>"; };
+		976521001CDB51A900EEEE01 /* LightFishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightFishController.m; sourceTree = "<group>"; };
+		976521011CDB51A900EEEE01 /* LightFishController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightFishController.xib; sourceTree = "<group>"; };
+		976521091CDC2F0500EEEE01 /* SettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingController.h; sourceTree = "<group>"; };
+		9765210A1CDC2F0500EEEE01 /* SettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingController.m; sourceTree = "<group>"; };
+		9765210B1CDC2F0500EEEE01 /* SettingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingController.xib; sourceTree = "<group>"; };
+		9765210E1CDC2F1A00EEEE01 /* EditTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTimerController.h; sourceTree = "<group>"; };
+		9765210F1CDC2F1A00EEEE01 /* EditTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTimerController.m; sourceTree = "<group>"; };
+		976521101CDC2F1A00EEEE01 /* EditTimerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTimerController.xib; sourceTree = "<group>"; };
+		976521161CDC2F5500EEEE01 /* lineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lineView.h; sourceTree = "<group>"; };
+		976521171CDC2F5500EEEE01 /* lineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lineView.m; sourceTree = "<group>"; };
+		976521191CDC2F9500EEEE01 /* RoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoverCell.xib; sourceTree = "<group>"; };
+		9765211B1CDC2FA400EEEE01 /* DetailEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEditController.h; sourceTree = "<group>"; };
+		9765211C1CDC2FA400EEEE01 /* DetailEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailEditController.m; sourceTree = "<group>"; };
+		9765211D1CDC2FA400EEEE01 /* DetailEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailEditController.xib; sourceTree = "<group>"; };
+		976521211CDC2FDC00EEEE01 /* ManualController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManualController.h; sourceTree = "<group>"; };
+		976521221CDC2FDC00EEEE01 /* ManualController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManualController.m; sourceTree = "<group>"; };
+		976521231CDC2FDC00EEEE01 /* ManualController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManualController.xib; sourceTree = "<group>"; };
+		976521261CDC2FE600EEEE01 /* LightingModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightingModeController.h; sourceTree = "<group>"; };
+		976521271CDC2FE600EEEE01 /* LightingModeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightingModeController.m; sourceTree = "<group>"; };
+		976521281CDC2FE600EEEE01 /* LightingModeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightingModeController.xib; sourceTree = "<group>"; };
+		9765212B1CDC302200EEEE01 /* DeviceMannagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceMannagerController.h; sourceTree = "<group>"; };
+		9765212C1CDC302200EEEE01 /* DeviceMannagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceMannagerController.m; sourceTree = "<group>"; };
+		9765212D1CDC302200EEEE01 /* DeviceMannagerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceMannagerController.xib; sourceTree = "<group>"; };
+		976521301CDC302E00EEEE01 /* MannagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MannagerController.h; sourceTree = "<group>"; };
+		976521311CDC302E00EEEE01 /* MannagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MannagerController.m; sourceTree = "<group>"; };
+		976521321CDC302E00EEEE01 /* MannagerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MannagerController.xib; sourceTree = "<group>"; };
+		976521361CDC3E3300EEEE01 /* 200811613485950_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 200811613485950_2.png; sourceTree = "<group>"; };
+		976521371CDC3E3300EEEE01 /* btnBackimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBackimg.png; sourceTree = "<group>"; };
+		976521381CDC3E3300EEEE01 /* single.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = single.png; sourceTree = "<group>"; };
+		976521391CDC3E3300EEEE01 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		9765213A1CDC3E3300EEEE01 /* orgbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgbtn.png; sourceTree = "<group>"; };
+		976521401CDC3E9700EEEE01 /* 05-time-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-time-Line.png"; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -371,6 +423,7 @@
 		9735C07A1CC87F37000B0727 /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				976521351CDC3DE300EEEE01 /* LightFishImg */,
 				9735C08D1CC9C49D000B0727 /* SingleTouchImg */,
 				9735C07B1CC87F48000B0727 /* Screen */,
 			);
@@ -456,6 +509,12 @@
 		976520FC1CDB512200EEEE01 /* LightFish */ = {
 			isa = PBXGroup;
 			children = (
+				976521201CDC2FB300EEEE01 /* ManualController */,
+				976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect */,
+				976521071CDC2DFB00EEEE01 /* DeviceMannagerController */,
+				976521061CDC2DEB00EEEE01 /* LightingModeController */,
+				976521051CDC2DD500EEEE01 /* EditTimerSetting */,
+				976521041CDC2DC000EEEE01 /* SettingController */,
 				976520FE1CDB518D00EEEE01 /* MainController */,
 			);
 			name = LightFish;
@@ -474,11 +533,114 @@
 		976520FE1CDB518D00EEEE01 /* MainController */ = {
 			isa = PBXGroup;
 			children = (
-				976520FF1CDB51A900EEEE01 /* MainController.h */,
-				976521001CDB51A900EEEE01 /* MainController.m */,
-				976521011CDB51A900EEEE01 /* MainController.xib */,
+				976520FF1CDB51A900EEEE01 /* LightFishController.h */,
+				976521001CDB51A900EEEE01 /* LightFishController.m */,
+				976521011CDB51A900EEEE01 /* LightFishController.xib */,
 			);
 			name = MainController;
+			sourceTree = "<group>";
+		};
+		976521041CDC2DC000EEEE01 /* SettingController */ = {
+			isa = PBXGroup;
+			children = (
+				976521091CDC2F0500EEEE01 /* SettingController.h */,
+				9765210A1CDC2F0500EEEE01 /* SettingController.m */,
+				9765210B1CDC2F0500EEEE01 /* SettingController.xib */,
+			);
+			name = SettingController;
+			sourceTree = "<group>";
+		};
+		976521051CDC2DD500EEEE01 /* EditTimerSetting */ = {
+			isa = PBXGroup;
+			children = (
+				976521151CDC2F3F00EEEE01 /* DetailEdit */,
+				976521141CDC2F3400EEEE01 /* RoverCell */,
+				976521131CDC2F2600EEEE01 /* DrawLine */,
+				9765210E1CDC2F1A00EEEE01 /* EditTimerController.h */,
+				9765210F1CDC2F1A00EEEE01 /* EditTimerController.m */,
+				976521101CDC2F1A00EEEE01 /* EditTimerController.xib */,
+			);
+			name = EditTimerSetting;
+			sourceTree = "<group>";
+		};
+		976521061CDC2DEB00EEEE01 /* LightingModeController */ = {
+			isa = PBXGroup;
+			children = (
+				976521261CDC2FE600EEEE01 /* LightingModeController.h */,
+				976521271CDC2FE600EEEE01 /* LightingModeController.m */,
+				976521281CDC2FE600EEEE01 /* LightingModeController.xib */,
+			);
+			name = LightingModeController;
+			sourceTree = "<group>";
+		};
+		976521071CDC2DFB00EEEE01 /* DeviceMannagerController */ = {
+			isa = PBXGroup;
+			children = (
+				9765212B1CDC302200EEEE01 /* DeviceMannagerController.h */,
+				9765212C1CDC302200EEEE01 /* DeviceMannagerController.m */,
+				9765212D1CDC302200EEEE01 /* DeviceMannagerController.xib */,
+			);
+			name = DeviceMannagerController;
+			sourceTree = "<group>";
+		};
+		976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect */ = {
+			isa = PBXGroup;
+			children = (
+				976521301CDC302E00EEEE01 /* MannagerController.h */,
+				976521311CDC302E00EEEE01 /* MannagerController.m */,
+				976521321CDC302E00EEEE01 /* MannagerController.xib */,
+			);
+			name = "MannagerTimer&Effect";
+			sourceTree = "<group>";
+		};
+		976521131CDC2F2600EEEE01 /* DrawLine */ = {
+			isa = PBXGroup;
+			children = (
+				976521161CDC2F5500EEEE01 /* lineView.h */,
+				976521171CDC2F5500EEEE01 /* lineView.m */,
+			);
+			name = DrawLine;
+			sourceTree = "<group>";
+		};
+		976521141CDC2F3400EEEE01 /* RoverCell */ = {
+			isa = PBXGroup;
+			children = (
+				976521191CDC2F9500EEEE01 /* RoverCell.xib */,
+			);
+			name = RoverCell;
+			sourceTree = "<group>";
+		};
+		976521151CDC2F3F00EEEE01 /* DetailEdit */ = {
+			isa = PBXGroup;
+			children = (
+				9765211B1CDC2FA400EEEE01 /* DetailEditController.h */,
+				9765211C1CDC2FA400EEEE01 /* DetailEditController.m */,
+				9765211D1CDC2FA400EEEE01 /* DetailEditController.xib */,
+			);
+			name = DetailEdit;
+			sourceTree = "<group>";
+		};
+		976521201CDC2FB300EEEE01 /* ManualController */ = {
+			isa = PBXGroup;
+			children = (
+				976521211CDC2FDC00EEEE01 /* ManualController.h */,
+				976521221CDC2FDC00EEEE01 /* ManualController.m */,
+				976521231CDC2FDC00EEEE01 /* ManualController.xib */,
+			);
+			name = ManualController;
+			sourceTree = "<group>";
+		};
+		976521351CDC3DE300EEEE01 /* LightFishImg */ = {
+			isa = PBXGroup;
+			children = (
+				976521401CDC3E9700EEEE01 /* 05-time-Line.png */,
+				976521361CDC3E3300EEEE01 /* 200811613485950_2.png */,
+				976521371CDC3E3300EEEE01 /* btnBackimg.png */,
+				976521381CDC3E3300EEEE01 /* single.png */,
+				976521391CDC3E3300EEEE01 /* more.png */,
+				9765213A1CDC3E3300EEEE01 /* orgbtn.png */,
+			);
+			name = LightFishImg;
 			sourceTree = "<group>";
 		};
 		97A2AB801CD2F57700734E61 /* GBPing */ = {
@@ -601,15 +763,25 @@
 				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,
 				97651F791CD8B07C00EEEE01 /* 1242x2208.png in Resources */,
 				9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */,
+				976521121CDC2F1A00EEEE01 /* EditTimerController.xib in Resources */,
+				9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
-				976521031CDB51A900EEEE01 /* MainController.xib in Resources */,
+				976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */,
+				9765213C1CDC3E3300EEEE01 /* btnBackimg.png in Resources */,
+				9765213E1CDC3E3300EEEE01 /* more.png in Resources */,
+				9765212A1CDC2FE600EEEE01 /* LightingModeController.xib in Resources */,
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
 				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
+				9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */,
+				976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
+				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
 				97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */,
+				9765211A1CDC2F9500EEEE01 /* RoverCell.xib in Resources */,
+				9765213D1CDC3E3300EEEE01 /* single.png in Resources */,
 				976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */,
 				97651F771CD8B07C00EEEE01 /* 640x1136.png in Resources */,
 				97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */,
@@ -618,7 +790,11 @@
 				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
 				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
+				976521251CDC2FDC00EEEE01 /* ManualController.xib in Resources */,
+				9765211F1CDC2FA400EEEE01 /* DetailEditController.xib in Resources */,
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
+				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
+				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,7 +855,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
-				976521021CDB51A900EEEE01 /* MainController.m in Sources */,
+				976521021CDB51A900EEEE01 /* LightFishController.m in Sources */,
+				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
@@ -687,23 +864,30 @@
 				9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */,
 				97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */,
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
+				976521181CDC2F5500EEEE01 /* lineView.m in Sources */,
 				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
+				976521331CDC302E00EEEE01 /* MannagerController.m in Sources */,
 				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
 				97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */,
 				976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */,
+				976521241CDC2FDC00EEEE01 /* ManualController.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
+				9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
 				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
 				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
 				97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */,
+				9765210C1CDC2F0500EEEE01 /* SettingController.m in Sources */,
 				97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */,
+				9765211E1CDC2FA400EEEE01 /* DetailEditController.m in Sources */,
 				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
 				97F55A651CCB52DE00E92957 /* EditSingleTouchTimerController.m in Sources */,
+				976521291CDC2FE600EEEE01 /* LightingModeController.m in Sources */,
 				97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
