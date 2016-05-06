@@ -127,7 +127,7 @@
     
     
     self.backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
-    self.backImg.image = [UIImage imageNamed:@"200811613485950_2.png"];
+    self.backImg.image = [UIImage imageNamed:@"lightFishBackImg.png"];
     [self.view addSubview:self.backImg];
     
     [self layOutView];
@@ -181,7 +181,7 @@
     self.switchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.timeLabel.frame.origin.y + height+30, 100, 100)];
     self.switchBtn.center = CGPointMake(SCREEN_WIDHT/2, self.switchBtn.center.y);
     self.switchBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
-    [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
+    [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
     [self.switchBtn addTarget:self action:@selector(switchBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.switchBtn];
     
@@ -212,12 +212,12 @@
         if([AwiseGlobal sharedInstance].switchStatus == 0x00){
             self.onoffFlag = NO;
             [AwiseGlobal sharedInstance].isClosed = YES;
-            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
+            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
         }
         else{
             [AwiseGlobal sharedInstance].isClosed = NO;
             self.onoffFlag = YES;
-            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
+            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
         }
         NSString *hStr;
         if([AwiseGlobal sharedInstance].hourStatus < 10){
@@ -476,14 +476,14 @@
 
 - (void)roverTurnOn{
     if([AwiseGlobal sharedInstance].isSuccess == YES){
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
         self.onoffFlag = YES;
     }
 }
 
 - (void)roverTurnOff{
     if([AwiseGlobal sharedInstance].isSuccess == YES){
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
         self.onoffFlag = NO;
 
     }
