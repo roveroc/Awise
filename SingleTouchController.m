@@ -113,7 +113,7 @@
     [switchButton setContentMode:UIViewContentModeScaleAspectFill];
     [switchButton setClipsToBounds:YES];
     switchButton.center = self.view.center;
-    [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
+    [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
     [switchButton addTarget:self action:@selector(switchFunction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:switchButton];
     
@@ -182,12 +182,12 @@
     bt[18]  = 0x0d;
     bt[19]  = 0x0a;
     if(switchState == NO){              //开
-        [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_open@3x.png"] forState:UIControlStateNormal];
+        [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
         switchState = YES;
         bt[11] = 0x01;
     }
     else{                               //关
-        [switchButton setBackgroundImage:[UIImage imageNamed:@"air_purifier_light_close@3x.png"] forState:UIControlStateNormal];
+        [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
         switchState = NO;
         bt[11] = 0x00;
     }

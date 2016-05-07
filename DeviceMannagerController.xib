@@ -31,7 +31,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ae-2o-Pol">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="200811613485950_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="gda-pT-l9B">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="gda-pT-l9B">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         </imageView>
                         <tableView clipsSubviews="YES" alpha="0.69999999999999996" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vWN-zF-qgX">
@@ -228,7 +228,7 @@
         </view>
     </objects>
     <resources>
-        <image name="200811613485950_2.png" width="320" height="568"/>
+        <image name="lightFishBackImg.png" width="320" height="568"/>
         <image name="orgbtn.png" width="220" height="46"/>
     </resources>
 </document>

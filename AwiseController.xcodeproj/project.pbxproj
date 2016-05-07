@@ -35,8 +35,6 @@
 		9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0831CC8A08B000B0727 /* RoverSqlite.m */; };
 		9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0891CC9C1A8000B0727 /* SingleTouchController.m */; };
 		9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */; };
-		9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */; };
-		9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */; };
 		975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975030521CCE02E00041861B /* SingleTouchTimer.plist */; };
 		97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97651ECB1CD8500200EEEE01 /* AddDeviceController.m */; };
 		97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97651ECC1CD8500200EEEE01 /* AddDeviceController.xib */; };
@@ -65,12 +63,14 @@
 		9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9765212D1CDC302200EEEE01 /* DeviceMannagerController.xib */; };
 		976521331CDC302E00EEEE01 /* MannagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976521311CDC302E00EEEE01 /* MannagerController.m */; };
 		976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976521321CDC302E00EEEE01 /* MannagerController.xib */; };
-		9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521361CDC3E3300EEEE01 /* 200811613485950_2.png */; };
 		9765213C1CDC3E3300EEEE01 /* btnBackimg.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521371CDC3E3300EEEE01 /* btnBackimg.png */; };
 		9765213D1CDC3E3300EEEE01 /* single.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521381CDC3E3300EEEE01 /* single.png */; };
 		9765213E1CDC3E3300EEEE01 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521391CDC3E3300EEEE01 /* more.png */; };
 		9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765213A1CDC3E3300EEEE01 /* orgbtn.png */; };
-		976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521401CDC3E9700EEEE01 /* 05-time-Line.png */; };
+		976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521421CDC43F100EEEE01 /* turnOffLight@3x.png */; };
+		976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521461CDC443800EEEE01 /* turnOnLight@3x.png */; };
+		976521491CDC68E600EEEE01 /* timeLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521481CDC68E600EEEE01 /* timeLine.png */; };
+		9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765214A1CDC698700EEEE01 /* lightFishBackImg.png */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -138,8 +138,6 @@
 		9735C0881CC9C1A8000B0727 /* SingleTouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleTouchController.h; sourceTree = "<group>"; };
 		9735C0891CC9C1A8000B0727 /* SingleTouchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleTouchController.m; sourceTree = "<group>"; };
 		9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SingleTouchController.xib; sourceTree = "<group>"; };
-		9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_close@3x.png"; sourceTree = "<group>"; };
-		9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "air_purifier_light_open@3x.png"; sourceTree = "<group>"; };
 		975030521CCE02E00041861B /* SingleTouchTimer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SingleTouchTimer.plist; sourceTree = "<group>"; };
 		97651ECA1CD8500200EEEE01 /* AddDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceController.h; sourceTree = "<group>"; };
 		97651ECB1CD8500200EEEE01 /* AddDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceController.m; sourceTree = "<group>"; };
@@ -180,12 +178,14 @@
 		976521301CDC302E00EEEE01 /* MannagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MannagerController.h; sourceTree = "<group>"; };
 		976521311CDC302E00EEEE01 /* MannagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MannagerController.m; sourceTree = "<group>"; };
 		976521321CDC302E00EEEE01 /* MannagerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MannagerController.xib; sourceTree = "<group>"; };
-		976521361CDC3E3300EEEE01 /* 200811613485950_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 200811613485950_2.png; sourceTree = "<group>"; };
 		976521371CDC3E3300EEEE01 /* btnBackimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btnBackimg.png; sourceTree = "<group>"; };
 		976521381CDC3E3300EEEE01 /* single.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = single.png; sourceTree = "<group>"; };
 		976521391CDC3E3300EEEE01 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		9765213A1CDC3E3300EEEE01 /* orgbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgbtn.png; sourceTree = "<group>"; };
-		976521401CDC3E9700EEEE01 /* 05-time-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-time-Line.png"; sourceTree = "<group>"; };
+		976521421CDC43F100EEEE01 /* turnOffLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOffLight@3x.png"; sourceTree = "<group>"; };
+		976521461CDC443800EEEE01 /* turnOnLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOnLight@3x.png"; sourceTree = "<group>"; };
+		976521481CDC68E600EEEE01 /* timeLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeLine.png; sourceTree = "<group>"; };
+		9765214A1CDC698700EEEE01 /* lightFishBackImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightFishBackImg.png; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -471,8 +471,8 @@
 			children = (
 				97651F7A1CD98B3600EEEE01 /* area_school.png */,
 				97F55A551CCB262F00E92957 /* button_nomal.png */,
-				9735C08E1CC9C4C5000B0727 /* air_purifier_light_close@3x.png */,
-				9735C08F1CC9C4C5000B0727 /* air_purifier_light_open@3x.png */,
+				976521421CDC43F100EEEE01 /* turnOffLight@3x.png */,
+				976521461CDC443800EEEE01 /* turnOnLight@3x.png */,
 			);
 			name = SingleTouchImg;
 			sourceTree = "<group>";
@@ -633,8 +633,8 @@
 		976521351CDC3DE300EEEE01 /* LightFishImg */ = {
 			isa = PBXGroup;
 			children = (
-				976521401CDC3E9700EEEE01 /* 05-time-Line.png */,
-				976521361CDC3E3300EEEE01 /* 200811613485950_2.png */,
+				976521481CDC68E600EEEE01 /* timeLine.png */,
+				9765214A1CDC698700EEEE01 /* lightFishBackImg.png */,
 				976521371CDC3E3300EEEE01 /* btnBackimg.png */,
 				976521381CDC3E3300EEEE01 /* single.png */,
 				976521391CDC3E3300EEEE01 /* more.png */,
@@ -771,9 +771,8 @@
 				9765213E1CDC3E3300EEEE01 /* more.png in Resources */,
 				9765212A1CDC2FE600EEEE01 /* LightingModeController.xib in Resources */,
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
+				9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */,
 				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
-				9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */,
-				976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
@@ -786,8 +785,8 @@
 				97651F771CD8B07C00EEEE01 /* 640x1136.png in Resources */,
 				97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */,
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
-				9735C0901CC9C4C5000B0727 /* air_purifier_light_close@3x.png in Resources */,
-				9735C0911CC9C4C5000B0727 /* air_purifier_light_open@3x.png in Resources */,
+				976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */,
+				976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */,
 				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
 				976521251CDC2FDC00EEEE01 /* ManualController.xib in Resources */,
@@ -795,6 +794,7 @@
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
+				976521491CDC68E600EEEE01 /* timeLine.png in Resources */,
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
