@@ -18,7 +18,8 @@
 
 //设备类型
 typedef enum{
-    SingleTouchDevice = 0
+    SingleTouchDevice = 0,
+    LightFishDevice   = 1,
 }DeviceType;
 
 

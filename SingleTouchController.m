@@ -20,6 +20,8 @@
 @synthesize timerTable;
 @synthesize sceneView;
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -27,9 +29,10 @@
        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
         [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
         [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     }
-    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
     [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
     
@@ -52,14 +55,23 @@
         [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
         [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
     }
-    [self syncSingleTouchTime];
 }
 
 
 #pragma mark ------------------------------------------------ 连接设备成功
 - (void)TCPSocketConnectSuccess{
-    NSLog(@"连接设备成功，读取设备状态，两秒后，发送同步时间指令");
-    [self performSelector:@selector(syncTime) withObject:nil afterDelay:2.0];
+//    [self performSelector:@selector(syncTime) withObject:nil afterDelay:.1];
+//    [self performSelector:@selector(readStatus) withObject:nil afterDelay:.3];
+    
+}
+
+#pragma mark ------------------- 调用同步时间
+- (void)syncTime{
+    [self syncSingleTouchTime];
+}
+
+#pragma mark ------------------- 去读状态
+- (void)readStatus{
     //读取状态
     Byte bt[20];
     for(int k=0;k<20;k++){
@@ -67,17 +79,12 @@
     }
     bt[0]   = 0x4d;
     bt[1]   = 0x41;
-    bt[2]   = 0x03;
+    bt[2]   = 0x01;
     bt[3]   = 0x01;
     bt[18]  = 0x0d;       //结束符
     bt[19]  = 0x0a;
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
-
-- (void)syncTime{
-    [self syncSingleTouchTime];
-}
-
 
 - (void)viewWillAppear:(BOOL)animated{
     if(self.controlSegment.selectedSegmentIndex == 2){
@@ -291,12 +298,14 @@
     switch (btn.tag) {
         case 1:{
             bt[11]  = 0;        //数据值
-            tbSlider.angle = 0;
+//            tbSlider.angle = 0;
+            [self performSelector:@selector(syncTime) withObject:nil afterDelay:.1];
         }
             break;
         case 2:{
             bt[11]  = 50;       //数据值
-            tbSlider.angle = 225;
+//            tbSlider.angle = 225;
+            [self performSelector:@selector(readStatus) withObject:nil afterDelay:.3];
         }
             break;
         case 3:{
@@ -331,21 +340,15 @@
 - (void)syncSingleTouchTime{
     NSDateFormatter *dateFormatter1 =[[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:@"YYYY"];
-    int yearstr = [[dateFormatter1 stringFromDate:[NSDate date]] intValue];
-    Byte bb[2] = {0,0};
-    int i = 0;
-    while (yearstr>15) {
-        bb[i] = yearstr%16;
-        yearstr = yearstr/16;
-        i++;
-    }
+    int year = ([[dateFormatter1 stringFromDate:[NSDate date]] intValue])%100;
     
+    NSDateFormatter *dateFormatter2 =[[NSDateFormatter alloc] init];
+    [dateFormatter2 setDateFormat:@"MM"];
+    int month = [[dateFormatter2 stringFromDate:[NSDate date]] intValue];
     
-    bb[0] = 0x07;
-    bb[1] = 0xe0;
-    
-    
-    [self hexStringFromString:@"20160501155260"];
+    NSDateFormatter *dateFormatter3 =[[NSDateFormatter alloc] init];
+    [dateFormatter3 setDateFormat:@"dd"];
+    int day = [[dateFormatter3 stringFromDate:[NSDate date]] intValue];
     
     NSDateFormatter *dateFormatter4 =[[NSDateFormatter alloc] init];
     [dateFormatter4 setDateFormat:@"HH"];
@@ -367,16 +370,15 @@
     }
     bt[0]   = 0x4d;
     bt[1]   = 0x41;
-    bt[2]   = 0x03;
+    bt[2]   = 0x04;
     bt[3]   = 0x01;
     bt[10]  = 0x06;       //数据长度
-    bt[11]  = bb[0];
-    bt[12]  = bb[0];
-    bt[13]  = 0x05;
-    bt[14]  = 0x01;
-    bt[15]  = hhbb;
-    bt[16]  = mmbb;
-    bt[17]  = ssbb;
+    bt[11]  = year;
+    bt[12]  = month;
+    bt[13]  = day;
+    bt[14]  = hhbb;
+    bt[15]  = mmbb;
+    bt[16]  = ssbb;
     
     bt[18]  = 0x0d;       //结束符
     bt[19]  = 0x0a;

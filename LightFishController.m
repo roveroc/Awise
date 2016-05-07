@@ -116,6 +116,7 @@
     
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].isSuccess = NO;
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
     
 //    [self addMessageLabel];
 //每次软件启动时，自动同步时间至设备

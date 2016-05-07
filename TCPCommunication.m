@@ -23,8 +23,11 @@
 
 #pragma mark ---------------------------------------------------- 连接设备
 - (void)connectToDevice:(NSString *)host port:(int)port{
+    
     if([socket isConnected]){
-        [socket disconnect];
+//        [socket disconnect];
+        NSLog(@"设备已连接 ");
+        return;
     }
     socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
     //TODO 这里需要在退出局域网模式下断开
@@ -53,8 +56,8 @@
 
 #pragma mark ---------------------------------------------------- 发送数据给设备
 - (void)sendMeesageToDevice:(Byte [])data length:(int)length{
-    NSLog(@"发送的数据 === :%s", data);
     NSData *da = [[NSData alloc] initWithBytes:data length:length];
+    NSLog(@"============ 发送的数据 = :%@",da);
     [socket readDataWithTimeout:-1 tag:1];
     [socket writeData:da withTimeout:-1 tag:1];
 }
@@ -62,11 +65,11 @@
 
 #pragma mark ---------------------------------------------------- 发送数据完成功后，设备返回数据调用该函数
 -(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
-    NSLog(@"设备返回的数据 === :%@", data);
+    NSLog(@"===================== 设备返回的数据 =====================  :%@", data);
     switch (controlDeviceType) {
         case SingleTouchDevice:                 //单色触摸面板
         {
-            NSLog(@"该数据从单色触摸面板返回");
+//            NSLog(@"该数据从单色触摸面板返回");
             Byte *by = (Byte *)[data bytes];
             [self parseSingleTouchDeviceData:by];
         }
@@ -81,7 +84,7 @@
 }
 
 #pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
-- (void)parseSingleTouchDeviceData:(Byte *)byte{
+- (void)parseSingleTouchDeviceData:(Byte *)byte{            //第五个字节判断成败
     switch (byte[2]) {
         case 0x01:              //读取状态返回值
         {
@@ -127,7 +130,7 @@
 
 #pragma mark ---------------------------------------------------- 发送数据完成功后调用该函数
 -(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag{
-    NSLog(@"didWriteDataWithTag tag:%ld",tag);
+//    NSLog(@"didWriteDataWithTag tag:%ld",tag);
 }
 
 
