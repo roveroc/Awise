@@ -14,6 +14,7 @@
 
 @implementation KZUnitSlider
 @synthesize sliderKnobView;
+@synthesize value;
 
 - (id)initWithFrame:(CGRect)frame
 {

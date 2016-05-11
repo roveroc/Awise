@@ -6,6 +6,8 @@
 //  All rights reserved.
 //
 
+#import "AwiseGlobal.h"
+
 #import <QuartzCore/QuartzCore.h>
 #import "KZColorPicker.h"
 #import "KZColorPickerHSWheel.h"
@@ -20,8 +22,8 @@
 
 @interface KZColorPicker()
 @property (nonatomic, retain) KZColorPickerHSWheel *colorWheel;
-@property (nonatomic, retain) KZColorPickerBrightnessSlider *brightnessSlider;
-@property (nonatomic, retain) KZColorPickerAlphaSlider *alphaSlider;
+//@property (nonatomic, retain) KZColorPickerBrightnessSlider *brightnessSlider;
+//@property (nonatomic, retain) KZColorPickerAlphaSlider *alphaSlider;
 @property (nonatomic, retain) KZColorCompareView *currentColorView;
 @property (nonatomic, retain) NSMutableArray *swatches;
 - (void) fixLocations;
@@ -43,9 +45,23 @@
 	//self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 300, 280);
 	self.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor colorWithRed:0.225 green:0.225 blue:0.225 alpha:1.000];
     
+    //by rover
+    CGPoint point;
+    if(iPhone4){
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+    }else if (iPhone5){
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+    }else if (iPhone6){
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+    }else if (iPhone6P){
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+    }else{
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+    }
     
 	// HS wheel
-	KZColorPickerHSWheel *wheel = [[KZColorPickerHSWheel alloc] initAtOrigin:CGPointMake(40, 15)];
+//	KZColorPickerHSWheel *wheel = [[KZColorPickerHSWheel alloc] initAtOrigin:CGPointMake(40, 15)];
+    KZColorPickerHSWheel *wheel = [[KZColorPickerHSWheel alloc] initAtOrigin:point];
 	[wheel addTarget:self action:@selector(colorWheelColorChanged:) forControlEvents:UIControlEventValueChanged];
 	[self addSubview:wheel];
 	self.colorWheel = wheel;
@@ -57,8 +73,9 @@
 																											272,
 																											38)];
 	[slider addTarget:self action:@selector(brightnessChanged:) forControlEvents:UIControlEventValueChanged];
-	[self addSubview:slider];
+//	[self addSubview:slider];
 	self.brightnessSlider = slider;
+    self.brightnessSlider.value = 1.0;
 	[slider release];
     
     // alpha slider
@@ -67,15 +84,16 @@
                                                                                                  272,
                                                                                                  38)];
     [alpha addTarget:self action:@selector(alphaChanged:) forControlEvents:UIControlEventValueChanged];
-	[self addSubview:alpha];
+//	[self addSubview:alpha];
     self.alphaSlider = alpha;
+    self.alphaSlider.value = 1.0;
 	[alpha release];
     
     // current color indicator hier.
     KZColorCompareView *colorView = [[KZColorCompareView alloc] initWithFrame:CGRectMake(10, 10, 44, 44)];
     [colorView addTarget:self action:@selector(oldColor:) forControlEvents:UIControlEventTouchUpInside];
     colorView.oldColor = self.oldColor;
-    self.currentColorView = colorView;    
+//    self.currentColorView = colorView;    
     [self addSubview:colorView];
     [colorView release];
     
@@ -109,6 +127,13 @@
 	
 	self.selectedColor = [UIColor whiteColor];//[UIColor colorWithRed:0.349 green:0.613 blue:0.378 alpha:1.000];
     [self fixLocations];
+    //by rover
+    [self performSelector:@selector(changeValue) withObject:nil afterDelay:0.01];
+}
+
+- (void)changeValue{
+    self.brightnessSlider.value = 1.0;
+    self.alphaSlider.value = 1.0;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -236,6 +261,9 @@ RGBType rgbWithUIColor(UIColor *color)
 									saturation:hsv.s
 									brightness:self.brightnessSlider.value
 										 alpha:self.alphaSlider.value];
+    
+    NSLog(@"self.brightnessSlider.value = %f",self.brightnessSlider.value);
+    NSLog(@"self.alphaSlider.value      = %f",self.alphaSlider.value);
 	
 	//[self sendActionsForControlEvents:UIControlEventValueChanged];
 }

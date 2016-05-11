@@ -12,7 +12,7 @@
 #import "TCPCommunication.h"
 #import "AwiseGlobal.h"
 #import "LightFishController.h"
-
+#import "BlueRGBController.h"
 
 @interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate>{
     RoverSqlite *sqlite;

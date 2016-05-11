@@ -18,7 +18,8 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-
+#define BLE_SERVICE_NAME         @"AwiseBuleRGB"
+#define UUIDSTR_ISSC_PROPRIETARY_SERVICE    @"FFFF"
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
 
@@ -35,7 +36,7 @@
 #define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 
 //判断iPhone6Plus
-#define iPhone6P ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1472), [[UIScreen mainScreen] currentMode].size) : NO)
+#define iPhone6P ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size) : NO)
 //******************* ******************* *******************
 
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height

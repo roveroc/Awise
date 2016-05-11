@@ -76,67 +76,7 @@
 }
 
 - (IBAction)changeFun:(id)sender {
-    Byte b3[20];
-    for(int k=0;k<20;k++){
-        b3[k] = 0x00;
-    }
-//    b3[0] = 0x4d;
-//    b3[1] = 0x41;
-//    b3[2] = 0x01;
-//    b3[3] = 0x05;
-//    b3[4] = 0x01;
-//    b3[18]= 0x0d;
-//    b3[19]= 0x0a;
-    
-    
-//    b3[0] = 0x4d;
-//    b3[1] = 0x41;
-//    b3[2] = 0x02;
-//    b3[3] = 0x01;
-//    b3[4] = 0x01;
-//    b3[10] = 0x01;
-//    b3[18]= 0x0d;
-//    b3[19]= 0x0a;
-    
-    
-//    b3[0] = 0x4d;
-//    b3[1] = 0x41;
-//    b3[2] = 0x03;
-//    b3[3] = 0x01;
-//    b3[4] = 0x01;
-//    b3[10] = 0x01;
-//    b3[18]= 0x0d;
-//    b3[19]= 0x0a;
-//
-//    b3[0] = 0x4d;
-//    b3[1] = 0x41;
-//    b3[2] = 0x04;
-//    b3[3] = 0x01;
-//    b3[4] = 0x01;
-//    b3[10] = 0x06;
-//    b3[11] = 0x10;
-//    b3[12] = 0x04;
-//    b3[13] = 0x15;
-//    b3[14] = 0x12;
-//    b3[15] = 0x01;
-//    
-//    b3[18]= 0x0d;
-//    b3[19]= 0x0a;
-//    
-    b3[0] = 0xff;
-    b3[1] = 0x41;
-    b3[2] = 0xff;
-    b3[3] = 0xff;
-    b3[4] = 0x01;
-    b3[10] = 0x02;
-    b3[11] = 0x04;
-    b3[12] = 0x04;
-    
-    b3[18]= 0xff;
-    b3[19]= 0xff;
-    
-    
-    [tcpSocket sendMeesageToDevice:b3 length:20];
-    
+    BlueRGBController *blueCon = [[BlueRGBController alloc] init];
+    [self.navigationController pushViewController:blueCon animated:YES];
 }
 @end

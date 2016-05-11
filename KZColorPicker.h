@@ -25,7 +25,8 @@
 	UIColor *selectedColor;
     BOOL displaySwatches;
 }
-
+@property (nonatomic, retain) KZColorPickerBrightnessSlider *brightnessSlider;
+@property (nonatomic, retain) KZColorPickerAlphaSlider *alphaSlider;
 @property (nonatomic, retain) UIColor *selectedColor;
 @property (nonatomic, retain) UIColor *oldColor;
 - (void) setSelectedColor:(UIColor *)color animated:(BOOL)animated;
