@@ -15,7 +15,8 @@
 #import "EditSingleTouchSceneController.h"
 
 @interface SingleTouchController : UIViewController<saveSingleTouchTimerDelegate,
-                                                    EditSceneDelegate,TCPSocketDelegate>{
+                                                    EditSceneDelegate,
+                                                    TCPSocketDelegate>{
     TBCircularSlider        *tbSlider;
     UIButton                *switchButton;
     UIView                  *tempView;

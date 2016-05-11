@@ -383,6 +383,51 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
+#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    switch (byte[2]) {
+        case 0x01:              //读取状态返回值
+        {
+            
+        }
+            break;
+        case 0x02:              //开关状态返回值
+        {
+            
+        }
+            break;
+        case 0x03:              //亮度控制返回值
+        {
+            
+        }
+            break;
+        case 0x04:              //同步时间返回值
+        {
+            
+        }
+            break;
+        case 0x05:              //设置定时器返回值
+        {
+            
+        }
+            break;
+        case 0x06:              //设置场景返回值
+        {
+            
+        }
+            break;
+        case 0x07:              //开关场景返回值
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
 - (void)viewWillDisappear:(BOOL)animated{
 
 }
