@@ -15,6 +15,7 @@
 @synthesize arp;
 @synthesize hud;
 @synthesize tcpSocket;
+@synthesize deviceArray;
 /*******水族等部分********/
 @synthesize wifiSSID;
 @synthesize lineArray;
@@ -110,7 +111,6 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
 
-#pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 
 #pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 - (void)pingIPisOnline:(NSString *)ip{

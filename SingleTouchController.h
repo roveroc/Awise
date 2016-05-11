@@ -16,7 +16,8 @@
 
 @interface SingleTouchController : UIViewController<saveSingleTouchTimerDelegate,
                                                     EditSceneDelegate,
-                                                    TCPSocketDelegate>{
+                                                    TCPSocketDelegate,
+                                                    PingDelegate>{
     TBCircularSlider        *tbSlider;
     UIButton                *switchButton;
     UIView                  *tempView;
@@ -24,6 +25,8 @@
     SingleTouchTimerView    *timerTable;
     SingleTouchScene        *sceneView;
     CGPoint                 centerPoint;
+    NSMutableArray          *deviceInfo;
+    NSString                *deviceIP;
 }
 @property (nonatomic, retain) TBCircularSlider      *tbSlider;            //调光圆环
 @property (nonatomic, retain) UIButton              *switchButton;        //开关按钮
@@ -31,7 +34,8 @@
 @property (assign)            BOOL                  switchState;          //开关状态
 @property (nonatomic, retain) SingleTouchTimerView  *timerTable;          //定时器Table
 @property (nonatomic, retain) SingleTouchScene      *sceneView;           //场景View
-
+@property (nonatomic, retain) NSMutableArray        *deviceInfo;          //当前设备的所有信息
+@property (nonatomic, retain) NSString              *deviceIP;            //当前设备的IP地址
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *controlSegment;
 @property (weak, nonatomic) IBOutlet UIButton *defaultBtn1;

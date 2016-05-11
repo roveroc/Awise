@@ -19,9 +19,23 @@
 @synthesize switchState;
 @synthesize timerTable;
 @synthesize sceneView;
+@synthesize deviceInfo;
+@synthesize deviceIP;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /*
+     *如果是路由模式（STA）,判断上次保存的设备IP能否Ping通，如果能则直接控制,还要加一条指令，
+     *如果不能，则需重新扫描局域网，获取设备MAC对应新的IP，更新数据库
+     *
+     *六个字段：name,mac,AP_ip,STA_ip,model,description
+     */
+    if(self.deviceInfo.count > 0){
+        self.deviceIP = [self.deviceInfo objectAtIndex:1];
+        [AwiseGlobal sharedInstance].delegate = self;
+        [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
+    }
 
     if([AwiseGlobal sharedInstance].tcpSocket == nil ||
        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
@@ -55,6 +69,12 @@
     [self syncSingleTouchTime];
 }
 
+#pragma mark ------------------------------------------------ Ping IP 地址的回调
+- (void)ipIsOnline:(BOOL)result{
+    if(result == YES){
+        
+    }
+}
 
 #pragma mark ------------------------------------------------ 连接设备成功
 - (void)TCPSocketConnectSuccess{

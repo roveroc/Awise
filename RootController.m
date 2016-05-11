@@ -21,9 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    /*
+     *根据当前设备的数量和种类布局界面
+     */
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+}
 
 
 #pragma mark - 扫描二维码代理

@@ -41,6 +41,16 @@
     NSDictionary *singleScenedefaultValue = [NSDictionary dictionaryWithObjectsAndKeys:@"100&100&100&100", @"singleTouchSceneValue",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:singleScenedefaultValue];
     
+//获取已添加的设备信息
+    RoverSqlite *sql = [[RoverSqlite alloc] init];
+    [AwiseGlobal sharedInstance].deviceArray = [sql getAllDeviceInfomation];
+    NSLog(@" ----- 所有已添加的设备信息为 ----- ");
+    NSLog(@"       所有已添加的设备信息为 ----- %@",[AwiseGlobal sharedInstance].deviceArray);
+    NSLog(@" ----- 所有已添加的设备信息为 ----- ");
+//获取当前连接的WIFI名
+    [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
+    NSLog(@" ----- 手机连接的WIFI为 ----- %@",[AwiseGlobal sharedInstance].wifiSSID);
+    
 /*********************水族灯部分**********************/
     NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"light_precent",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues];
@@ -92,6 +102,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
+    NSLog(@" ----- 手机连接的WIFI为 ----- %@",[AwiseGlobal sharedInstance].wifiSSID);
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
