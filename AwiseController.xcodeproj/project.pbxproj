@@ -71,6 +71,24 @@
 		9765213E1CDC3E3300EEEE01 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521391CDC3E3300EEEE01 /* more.png */; };
 		9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765213A1CDC3E3300EEEE01 /* orgbtn.png */; };
 		976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521401CDC3E9700EEEE01 /* 05-time-Line.png */; };
+		976521891CE0371100EEEE01 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976521881CE0371100EEEE01 /* CoreBluetooth.framework */; };
+		976522151CE076A700EEEE01 /* checkerboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521FD1CE076A700EEEE01 /* checkerboard.png */; };
+		976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521FE1CE076A700EEEE01 /* checkerboard@2x.png */; };
+		976522171CE076A700EEEE01 /* colorPickerKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521FF1CE076A700EEEE01 /* colorPickerKnob.png */; };
+		976522181CE076A700EEEE01 /* colorPickerKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976522001CE076A700EEEE01 /* colorPickerKnob@2x.png */; };
+		976522191CE076A700EEEE01 /* HSV.c in Sources */ = {isa = PBXBuildFile; fileRef = 976522011CE076A700EEEE01 /* HSV.c */; };
+		9765221A1CE076A700EEEE01 /* KZColorCompareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522041CE076A700EEEE01 /* KZColorCompareView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9765221B1CE076A700EEEE01 /* KZColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522061CE076A700EEEE01 /* KZColorPicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9765221C1CE076A700EEEE01 /* KZColorPickerAlphaSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522081CE076A700EEEE01 /* KZColorPickerAlphaSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9765221D1CE076A700EEEE01 /* KZColorPickerBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765220A1CE076A700EEEE01 /* KZColorPickerBrightnessSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9765221E1CE076A700EEEE01 /* KZColorPickerHSWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765220C1CE076A700EEEE01 /* KZColorPickerHSWheel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9765221F1CE076A700EEEE01 /* KZColorPickerSwatchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765220E1CE076A700EEEE01 /* KZColorPickerSwatchView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		976522201CE076A700EEEE01 /* KZUnitSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522101CE076A700EEEE01 /* KZUnitSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		976522211CE076A700EEEE01 /* pickerColorWheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 976522111CE076A700EEEE01 /* pickerColorWheel.png */; };
+		976522221CE076A700EEEE01 /* pickerColorWheel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976522121CE076A700EEEE01 /* pickerColorWheel@2x.png */; };
+		976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522141CE076A700EEEE01 /* UIColor-Expanded.m */; };
+		976522271CE0793400EEEE01 /* BlueRGBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522251CE0793400EEEE01 /* BlueRGBController.m */; };
+		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -186,6 +204,34 @@
 		976521391CDC3E3300EEEE01 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		9765213A1CDC3E3300EEEE01 /* orgbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgbtn.png; sourceTree = "<group>"; };
 		976521401CDC3E9700EEEE01 /* 05-time-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-time-Line.png"; sourceTree = "<group>"; };
+		976521881CE0371100EEEE01 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		976521FD1CE076A700EEEE01 /* checkerboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerboard.png; sourceTree = "<group>"; };
+		976521FE1CE076A700EEEE01 /* checkerboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkerboard@2x.png"; sourceTree = "<group>"; };
+		976521FF1CE076A700EEEE01 /* colorPickerKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = colorPickerKnob.png; sourceTree = "<group>"; };
+		976522001CE076A700EEEE01 /* colorPickerKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colorPickerKnob@2x.png"; sourceTree = "<group>"; };
+		976522011CE076A700EEEE01 /* HSV.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HSV.c; sourceTree = "<group>"; };
+		976522021CE076A700EEEE01 /* HSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSV.h; sourceTree = "<group>"; };
+		976522031CE076A700EEEE01 /* KZColorCompareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorCompareView.h; sourceTree = "<group>"; };
+		976522041CE076A700EEEE01 /* KZColorCompareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorCompareView.m; sourceTree = "<group>"; };
+		976522051CE076A700EEEE01 /* KZColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorPicker.h; sourceTree = "<group>"; };
+		976522061CE076A700EEEE01 /* KZColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorPicker.m; sourceTree = "<group>"; };
+		976522071CE076A700EEEE01 /* KZColorPickerAlphaSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorPickerAlphaSlider.h; sourceTree = "<group>"; };
+		976522081CE076A700EEEE01 /* KZColorPickerAlphaSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorPickerAlphaSlider.m; sourceTree = "<group>"; };
+		976522091CE076A700EEEE01 /* KZColorPickerBrightnessSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorPickerBrightnessSlider.h; sourceTree = "<group>"; };
+		9765220A1CE076A700EEEE01 /* KZColorPickerBrightnessSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorPickerBrightnessSlider.m; sourceTree = "<group>"; };
+		9765220B1CE076A700EEEE01 /* KZColorPickerHSWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorPickerHSWheel.h; sourceTree = "<group>"; };
+		9765220C1CE076A700EEEE01 /* KZColorPickerHSWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorPickerHSWheel.m; sourceTree = "<group>"; };
+		9765220D1CE076A700EEEE01 /* KZColorPickerSwatchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZColorPickerSwatchView.h; sourceTree = "<group>"; };
+		9765220E1CE076A700EEEE01 /* KZColorPickerSwatchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZColorPickerSwatchView.m; sourceTree = "<group>"; };
+		9765220F1CE076A700EEEE01 /* KZUnitSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KZUnitSlider.h; sourceTree = "<group>"; };
+		976522101CE076A700EEEE01 /* KZUnitSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KZUnitSlider.m; sourceTree = "<group>"; };
+		976522111CE076A700EEEE01 /* pickerColorWheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickerColorWheel.png; sourceTree = "<group>"; };
+		976522121CE076A700EEEE01 /* pickerColorWheel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pickerColorWheel@2x.png"; sourceTree = "<group>"; };
+		976522131CE076A700EEEE01 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		976522141CE076A700EEEE01 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
+		976522241CE0793400EEEE01 /* BlueRGBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueRGBController.h; sourceTree = "<group>"; };
+		976522251CE0793400EEEE01 /* BlueRGBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueRGBController.m; sourceTree = "<group>"; };
+		976522261CE0793400EEEE01 /* BlueRGBController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlueRGBController.xib; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -216,6 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				976521891CE0371100EEEE01 /* CoreBluetooth.framework in Frameworks */,
 				9735C0741CC87E91000B0727 /* libsqlite3.0.tbd in Frameworks */,
 				02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */,
 			);
@@ -236,6 +283,7 @@
 		6E996ED8F2B46A5945BB78C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				976521881CE0371100EEEE01 /* CoreBluetooth.framework */,
 				9735C0731CC87E91000B0727 /* libsqlite3.0.tbd */,
 				EA7E804D40B1F66607D80B60 /* libPods.a */,
 			);
@@ -310,6 +358,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				976521FC1CE0765E00EEEE01 /* ColorPciker */,
 				9735C0751CC87EA2000B0727 /* Sqlite */,
 				9735C06F1CC86BFC000B0727 /* QRCode */,
 				9735C05B1CC78F76000B0727 /* ARPTable */,
@@ -447,6 +496,7 @@
 		9735C0861CC9C134000B0727 /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				976521871CE035E000EEEE01 /* BlueRGB */,
 				976520FC1CDB512200EEEE01 /* LightFish */,
 				9735C0871CC9C13B000B0727 /* SingleTouch */,
 			);
@@ -643,6 +693,47 @@
 			name = LightFishImg;
 			sourceTree = "<group>";
 		};
+		976521871CE035E000EEEE01 /* BlueRGB */ = {
+			isa = PBXGroup;
+			children = (
+				976522241CE0793400EEEE01 /* BlueRGBController.h */,
+				976522251CE0793400EEEE01 /* BlueRGBController.m */,
+				976522261CE0793400EEEE01 /* BlueRGBController.xib */,
+			);
+			name = BlueRGB;
+			sourceTree = "<group>";
+		};
+		976521FC1CE0765E00EEEE01 /* ColorPciker */ = {
+			isa = PBXGroup;
+			children = (
+				976521FD1CE076A700EEEE01 /* checkerboard.png */,
+				976521FE1CE076A700EEEE01 /* checkerboard@2x.png */,
+				976521FF1CE076A700EEEE01 /* colorPickerKnob.png */,
+				976522001CE076A700EEEE01 /* colorPickerKnob@2x.png */,
+				976522011CE076A700EEEE01 /* HSV.c */,
+				976522021CE076A700EEEE01 /* HSV.h */,
+				976522031CE076A700EEEE01 /* KZColorCompareView.h */,
+				976522041CE076A700EEEE01 /* KZColorCompareView.m */,
+				976522051CE076A700EEEE01 /* KZColorPicker.h */,
+				976522061CE076A700EEEE01 /* KZColorPicker.m */,
+				976522071CE076A700EEEE01 /* KZColorPickerAlphaSlider.h */,
+				976522081CE076A700EEEE01 /* KZColorPickerAlphaSlider.m */,
+				976522091CE076A700EEEE01 /* KZColorPickerBrightnessSlider.h */,
+				9765220A1CE076A700EEEE01 /* KZColorPickerBrightnessSlider.m */,
+				9765220B1CE076A700EEEE01 /* KZColorPickerHSWheel.h */,
+				9765220C1CE076A700EEEE01 /* KZColorPickerHSWheel.m */,
+				9765220D1CE076A700EEEE01 /* KZColorPickerSwatchView.h */,
+				9765220E1CE076A700EEEE01 /* KZColorPickerSwatchView.m */,
+				9765220F1CE076A700EEEE01 /* KZUnitSlider.h */,
+				976522101CE076A700EEEE01 /* KZUnitSlider.m */,
+				976522111CE076A700EEEE01 /* pickerColorWheel.png */,
+				976522121CE076A700EEEE01 /* pickerColorWheel@2x.png */,
+				976522131CE076A700EEEE01 /* UIColor-Expanded.h */,
+				976522141CE076A700EEEE01 /* UIColor-Expanded.m */,
+			);
+			name = ColorPciker;
+			sourceTree = "<group>";
+		};
 		97A2AB801CD2F57700734E61 /* GBPing */ = {
 			isa = PBXGroup;
 			children = (
@@ -760,6 +851,7 @@
 				9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */,
 				97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */,
 				97F55A561CCB262F00E92957 /* button_nomal.png in Resources */,
+				976522211CE076A700EEEE01 /* pickerColorWheel.png in Resources */,
 				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,
 				97651F791CD8B07C00EEEE01 /* 1242x2208.png in Resources */,
 				9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */,
@@ -774,12 +866,17 @@
 				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
 				9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */,
 				976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */,
+				976522171CE076A700EEEE01 /* colorPickerKnob.png in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
+				976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
+				976522151CE076A700EEEE01 /* checkerboard.png in Resources */,
+				976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */,
 				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
 				97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */,
+				976522221CE076A700EEEE01 /* pickerColorWheel@2x.png in Resources */,
 				9765211A1CDC2F9500EEEE01 /* RoverCell.xib in Resources */,
 				9765213D1CDC3E3300EEEE01 /* single.png in Resources */,
 				976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */,
@@ -795,6 +892,7 @@
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
+				976522181CE076A700EEEE01 /* colorPickerKnob@2x.png in Resources */,
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -857,6 +955,7 @@
 				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
 				976521021CDB51A900EEEE01 /* LightFishController.m in Sources */,
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
+				976522191CE076A700EEEE01 /* HSV.c in Sources */,
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
@@ -865,28 +964,37 @@
 				97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */,
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
 				976521181CDC2F5500EEEE01 /* lineView.m in Sources */,
+				976522271CE0793400EEEE01 /* BlueRGBController.m in Sources */,
+				9765221E1CE076A700EEEE01 /* KZColorPickerHSWheel.m in Sources */,
 				9735C04B1CC78877000B0727 /* TBCircularSlider.m in Sources */,
 				976521331CDC302E00EEEE01 /* MannagerController.m in Sources */,
 				9735C0661CC78FF0000B0727 /* SimplePing.m in Sources */,
 				97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */,
+				9765221D1CE076A700EEEE01 /* KZColorPickerBrightnessSlider.m in Sources */,
 				976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */,
 				976521241CDC2FDC00EEEE01 /* ManualController.m in Sources */,
+				976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */,
+				9765221A1CE076A700EEEE01 /* KZColorCompareView.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
 				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
+				9765221C1CE076A700EEEE01 /* KZColorPickerAlphaSlider.m in Sources */,
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
 				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
+				9765221F1CE076A700EEEE01 /* KZColorPickerSwatchView.m in Sources */,
 				97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */,
 				9765210C1CDC2F0500EEEE01 /* SettingController.m in Sources */,
 				97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */,
 				9765211E1CDC2FA400EEEE01 /* DetailEditController.m in Sources */,
+				9765221B1CE076A700EEEE01 /* KZColorPicker.m in Sources */,
 				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
 				97F55A651CCB52DE00E92957 /* EditSingleTouchTimerController.m in Sources */,
+				976522201CE076A700EEEE01 /* KZUnitSlider.m in Sources */,
 				976521291CDC2FE600EEEE01 /* LightingModeController.m in Sources */,
 				97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */,
 			);
