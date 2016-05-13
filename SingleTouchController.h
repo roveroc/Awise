@@ -13,6 +13,7 @@
 #import "SingleTouchScene.h"
 #import "AwiseGlobal.h"
 #import "EditSingleTouchSceneController.h"
+#import "RoverSqlite.h"
 
 @interface SingleTouchController : UIViewController<saveSingleTouchTimerDelegate,
                                                     EditSceneDelegate,
@@ -27,6 +28,7 @@
     CGPoint                 centerPoint;
     NSMutableArray          *deviceInfo;
     NSString                *deviceIP;
+    RoverSqlite             *sql;
 }
 @property (nonatomic, retain) TBCircularSlider      *tbSlider;            //调光圆环
 @property (nonatomic, retain) UIButton              *switchButton;        //开关按钮
@@ -36,6 +38,7 @@
 @property (nonatomic, retain) SingleTouchScene      *sceneView;           //场景View
 @property (nonatomic, retain) NSMutableArray        *deviceInfo;          //当前设备的所有信息
 @property (nonatomic, retain) NSString              *deviceIP;            //当前设备的IP地址
+@property (nonatomic, retain) RoverSqlite           *sql;                 //操作数据库的对象
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *controlSegment;
 @property (weak, nonatomic) IBOutlet UIButton *defaultBtn1;
