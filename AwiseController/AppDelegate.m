@@ -47,9 +47,15 @@
     NSLog(@" ----- 所有已添加的设备信息为 ----- ");
     NSLog(@"       所有已添加的设备信息为 ----- %@",[AwiseGlobal sharedInstance].deviceArray);
     NSLog(@" ----- 所有已添加的设备信息为 ----- ");
-//获取当前连接的WIFI名
-    [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
-    NSLog(@" ----- 手机连接的WIFI为 ----- %@",[AwiseGlobal sharedInstance].wifiSSID);
+    
+    float i = 0.1;
+    if(i == 0){
+        NSLog(@"iiii == ");
+    }
+    else{
+        NSLog(@"iiii == 111111");
+    }
+
     
 /*********************水族灯部分**********************/
     NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"light_precent",nil];
@@ -81,10 +87,49 @@
     [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
 /*********************水族灯部分**********************/
     
+    //监测网络状态
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name: kReachabilityChangedNotification
+                                               object: nil];
+    Reachability* hostReach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
+    [hostReach startNotifier];
+    
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
+//网络环境改变回调函数
+- (void)reachabilityChanged:(NSNotification *)note
+{
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    
+    switch (status){
+        case NotReachable:
+            [AwiseGlobal sharedInstance].cMode = Other;
+            NSLog(@"====当前网络状态不可达=======");
+            //其他处理
+            break;
+        case ReachableViaWiFi:
+            NSLog(@"====当前网络状态为Wifi=======");
+            //其他处理
+            break;
+        case ReachableViaWWAN:
+            [AwiseGlobal sharedInstance].cMode = Other;
+            NSLog(@"====当前网络状态为WWAN=======");
+            //其他处理
+            break;
+        default:
+            [AwiseGlobal sharedInstance].cMode = Other;
+            NSLog(@"你是外星来的吗？");
+            //其他处理
+            break;
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -103,7 +148,19 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
-    NSLog(@" ----- 手机连接的WIFI为 ----- %@",[AwiseGlobal sharedInstance].wifiSSID);
+    if([AwiseGlobal sharedInstance].wifiSSID.length == 0){
+        [AwiseGlobal sharedInstance].cMode = Other;
+        NSLog(@" ----- 手机WIFI断开连接,设备不可控 ----- ");
+    }
+    else if([[AwiseGlobal sharedInstance].wifiSSID rangeOfString:WIFISSID].location != NSNotFound){
+        [AwiseGlobal sharedInstance].cMode = AP;
+        NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:点对点AP模式",[AwiseGlobal sharedInstance].wifiSSID);
+    }
+    else{
+        [AwiseGlobal sharedInstance].cMode = STA;
+        NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:路由STA模式",[AwiseGlobal sharedInstance].wifiSSID);
+    }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -16,6 +16,7 @@
 @synthesize hud;
 @synthesize tcpSocket;
 @synthesize deviceArray;
+@synthesize cMode;
 /*******水族等部分********/
 @synthesize wifiSSID;
 @synthesize lineArray;
@@ -95,7 +96,7 @@
 }
 
 #pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待
-- (void)showWaitingView{
+- (void)showWaitingView:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
     [self.hud hide:YES afterDelay:HudDismissTime];
@@ -103,7 +104,7 @@
 }
 
 #pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待,带文字提示
-- (void)showWaitingViewWithMsg:(NSString *)msg{
+- (void)showWaitingViewWithMsg:(NSString *)msg withTime:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
     self.hud.labelText = msg;

@@ -60,6 +60,11 @@ typedef enum{
 /*******水族等部分********/
 
 
+typedef enum {                          //设备控制方式  <AP：点对点模式> <STA：路由模式>
+    AP =0,
+    STA,
+    Other                               //Other 表示无网络连接
+}ControlMode;
 
 @protocol PingDelegate <NSObject>
 
@@ -78,6 +83,7 @@ typedef enum{
     MBProgressHUD               *hud;
     TCPCommunication            *tcpSocket;
     NSMutableArray              *deviceArray;
+    ControlMode                 cMode;
     
 /*******水族等部分********/
     NSString       *wifiSSID;
@@ -118,6 +124,7 @@ typedef enum{
 @property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
 @property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
 @property (nonatomic, retain) NSMutableArray            *deviceArray;                   //所有已添加的设备
+@property (assign)            ControlMode               cMode;                          //用来区分当前的控制模式
 
 /*******水族等部分********/
 @property (nonatomic, retain) NSString       *wifiSSID;
@@ -159,9 +166,9 @@ typedef enum{
 
 - (NSMutableDictionary *)getARPTable;                                  //获取ARP表
 
-- (void)showWaitingView;                                               //展示提示用户等待
+- (void)showWaitingView:(float)time;                                   //展示提示用户等待
 
-- (void)showWaitingViewWithMsg:(NSString *)msg;                        //展示提示用户等待，带文字提示
+- (void)showWaitingViewWithMsg:(NSString *)msg withTime:(float)time;   //展示提示用户等待，带文字提示,如果参数time为0，则使用默认时间
 
 - (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
 

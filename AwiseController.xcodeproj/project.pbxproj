@@ -68,6 +68,10 @@
 		9765213E1CDC3E3300EEEE01 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521391CDC3E3300EEEE01 /* more.png */; };
 		9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765213A1CDC3E3300EEEE01 /* orgbtn.png */; };
 		976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521401CDC3E9700EEEE01 /* 05-time-Line.png */; };
+		976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521421CDC43F100EEEE01 /* turnOffLight@3x.png */; };
+		976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521461CDC443800EEEE01 /* turnOnLight@3x.png */; };
+		976521491CDC68E600EEEE01 /* timeLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521481CDC68E600EEEE01 /* timeLine.png */; };
+		9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765214A1CDC698700EEEE01 /* lightFishBackImg.png */; };
 		976521891CE0371100EEEE01 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976521881CE0371100EEEE01 /* CoreBluetooth.framework */; };
 		976522151CE076A700EEEE01 /* checkerboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521FD1CE076A700EEEE01 /* checkerboard.png */; };
 		976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521FE1CE076A700EEEE01 /* checkerboard@2x.png */; };
@@ -86,12 +90,7 @@
 		976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522141CE076A700EEEE01 /* UIColor-Expanded.m */; };
 		976522271CE0793400EEEE01 /* BlueRGBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522251CE0793400EEEE01 /* BlueRGBController.m */; };
 		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
-
-		976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521421CDC43F100EEEE01 /* turnOffLight@3x.png */; };
-		976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521461CDC443800EEEE01 /* turnOnLight@3x.png */; };
-		976521491CDC68E600EEEE01 /* timeLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 976521481CDC68E600EEEE01 /* timeLine.png */; };
-		9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9765214A1CDC698700EEEE01 /* lightFishBackImg.png */; };
-
+		97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97930FC61CE5BC7C006601D8 /* Reachability.m */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -203,8 +202,11 @@
 		976521381CDC3E3300EEEE01 /* single.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = single.png; sourceTree = "<group>"; };
 		976521391CDC3E3300EEEE01 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		9765213A1CDC3E3300EEEE01 /* orgbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orgbtn.png; sourceTree = "<group>"; };
-
 		976521401CDC3E9700EEEE01 /* 05-time-Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "05-time-Line.png"; sourceTree = "<group>"; };
+		976521421CDC43F100EEEE01 /* turnOffLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOffLight@3x.png"; sourceTree = "<group>"; };
+		976521461CDC443800EEEE01 /* turnOnLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOnLight@3x.png"; sourceTree = "<group>"; };
+		976521481CDC68E600EEEE01 /* timeLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeLine.png; sourceTree = "<group>"; };
+		9765214A1CDC698700EEEE01 /* lightFishBackImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightFishBackImg.png; sourceTree = "<group>"; };
 		976521881CE0371100EEEE01 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		976521FD1CE076A700EEEE01 /* checkerboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerboard.png; sourceTree = "<group>"; };
 		976521FE1CE076A700EEEE01 /* checkerboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkerboard@2x.png"; sourceTree = "<group>"; };
@@ -233,14 +235,8 @@
 		976522241CE0793400EEEE01 /* BlueRGBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueRGBController.h; sourceTree = "<group>"; };
 		976522251CE0793400EEEE01 /* BlueRGBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueRGBController.m; sourceTree = "<group>"; };
 		976522261CE0793400EEEE01 /* BlueRGBController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlueRGBController.xib; sourceTree = "<group>"; };
-
-
-		976521421CDC43F100EEEE01 /* turnOffLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOffLight@3x.png"; sourceTree = "<group>"; };
-		976521461CDC443800EEEE01 /* turnOnLight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "turnOnLight@3x.png"; sourceTree = "<group>"; };
-		976521481CDC68E600EEEE01 /* timeLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timeLine.png; sourceTree = "<group>"; };
-		9765214A1CDC698700EEEE01 /* lightFishBackImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightFishBackImg.png; sourceTree = "<group>"; };
-
-
+		97930FC51CE5BC7C006601D8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		97930FC61CE5BC7C006601D8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -367,6 +363,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				97930FC41CE5BC69006601D8 /* Reachability */,
 				976521FC1CE0765E00EEEE01 /* ColorPciker */,
 				9735C0751CC87EA2000B0727 /* Sqlite */,
 				9735C06F1CC86BFC000B0727 /* QRCode */,
@@ -743,6 +740,15 @@
 			name = ColorPciker;
 			sourceTree = "<group>";
 		};
+		97930FC41CE5BC69006601D8 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				97930FC51CE5BC7C006601D8 /* Reachability.h */,
+				97930FC61CE5BC7C006601D8 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		97A2AB801CD2F57700734E61 /* GBPing */ = {
 			isa = PBXGroup;
 			children = (
@@ -874,13 +880,8 @@
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
 				9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */,
 				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
-
-
-				9765213B1CDC3E3300EEEE01 /* 200811613485950_2.png in Resources */,
 				976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */,
 				976522171CE076A700EEEE01 /* colorPickerKnob.png in Resources */,
-
-
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
@@ -906,11 +907,8 @@
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
-
 				976522181CE076A700EEEE01 /* colorPickerKnob@2x.png in Resources */,
-
 				976521491CDC68E600EEEE01 /* timeLine.png in Resources */,
-
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1010,6 +1008,7 @@
 				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
+				97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */,
 				9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */,
 				97F55A651CCB52DE00E92957 /* EditSingleTouchTimerController.m in Sources */,
 				976522201CE076A700EEEE01 /* KZUnitSlider.m in Sources */,

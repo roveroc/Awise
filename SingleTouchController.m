@@ -36,7 +36,7 @@
         self.deviceIP = [self.deviceInfo objectAtIndex:3];
         [AwiseGlobal sharedInstance].delegate = self;
         [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
-        [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接设备中..."];
+        [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接设备中..." withTime:1.0];
     }
     
     //初始化定时器数据
@@ -57,7 +57,7 @@
         [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
         [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
     }
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接设备中..."];
+//    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接设备中..."];
 }
 
 #pragma mark ------------------------------------------------ Ping IP 地址的回调
