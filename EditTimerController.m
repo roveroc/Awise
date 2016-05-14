@@ -186,7 +186,8 @@
 
 
 - (void)sendTimerData:(NSData *)dd{
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:dd tag:0];
+    Byte *by = (Byte *)[dd bytes];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:by length:64];
 }
 
 #pragma mark - 获取数据存储路径

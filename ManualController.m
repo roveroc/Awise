@@ -29,8 +29,7 @@
     b3[2] = 0x06;
     b3[3] = 0x02;
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 
@@ -154,7 +153,8 @@
 - (void)timerSendData{
     if(self.dataArray.count > 0){
         NSData *data = [self.dataArray objectAtIndex:0];
-//        [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+        Byte *by = (Byte *)[data bytes];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:by length:64];
         [self.dataArray removeObjectAtIndex:0];
     }
 }
@@ -228,8 +228,7 @@
         [AwiseGlobal sharedInstance].mode = Cloudy_Model;
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 

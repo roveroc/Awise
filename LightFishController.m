@@ -91,8 +91,7 @@
     b3[2] = 0x06;
     b3[3] = 0x01;
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 - (void)viewDidLoad {
@@ -132,6 +131,23 @@
     [self.view addSubview:self.backImg];
     
     [self layOutView];
+    
+    
+//连接设备 TCP 测试
+    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+    }
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;  //受控设备为触摸面板
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
+}
+
+#pragma mark - 连接设备成功
+-(void)TCPSocketConnectSuccess{
+    
 }
 
 - (void)addMessageLabel{
@@ -317,12 +333,10 @@
     
     b3[5] = hhbb;
     b3[6] = mmbb;
-    b3[7] = ssbb;
-    
+    b3[7] = ssbb; 
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 
@@ -347,103 +361,6 @@
     LightingModeController *light = [[LightingModeController alloc] init];
     light.modeFlag = 2;
     [self.navigationController pushViewController:light animated:YES];
-}
-
-- (void)btn4Clicked:(id)sender {
-//    [self.view.window  showPopWithButtonTitles:@[@"Change to Timer1",@"Edit Timer1"] styles:@[YUDangerStyle,YUDefaultStyle] whenButtonTouchUpInSideCallBack:^(int index  ) {
-//        if(index == 0){
-//            [AwiseGlobal sharedInstance].isSuccess = NO;
-//            [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:1.0];
-//            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//            self.hud.dimBackground = YES;
-//            [self.hud hide:YES afterDelay:WAITTIME];
-//            Byte b3[64];
-//            for(int k=0;k<64;k++){
-//                b3[k] = 0x00;
-//            }
-//            b3[0] = 0x55;
-//            b3[1] = 0xAA;
-//            b3[2] = 0x08;
-//            b3[3] = 0x01;
-//            b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-//            NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//            [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
-//            
-//            [self addRunningImageview:CGRectMake(87, 357, 15, 27)];
-//            
-//        }
-//        else if(index == 1){
-//            EditTimerController *editCon = [[EditTimerController alloc] init];
-//            editCon.fileName = @"timerData1";
-//            editCon.navTitle = @"Edit Timer1";
-//            [AwiseGlobal sharedInstance].timerNumber = 1;
-//            [self.navigationController pushViewController:editCon animated:YES];
-//        }
-//    }];
-}
-
-- (void)btn5Clicked:(id)sender {
-//    [self.view.window  showPopWithButtonTitles:@[@"Change to Timer2",@"Edit Timer2"] styles:@[YUDangerStyle,YUDefaultStyle] whenButtonTouchUpInSideCallBack:^(int index  ) {
-//        if(index == 0){
-//            [AwiseGlobal sharedInstance].isSuccess = NO;
-//            [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:1.0];
-//            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//            self.hud.dimBackground = YES;
-//            [self.hud hide:YES afterDelay:WAITTIME];
-//            Byte b3[64];
-//            for(int k=0;k<64;k++){
-//                b3[k] = 0x00;
-//            }
-//            b3[0] = 0x55;
-//            b3[1] = 0xAA;
-//            b3[2] = 0x08;
-//            b3[3] = 0x02;
-//            b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-//            NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//            [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
-//            
-//            [self addRunningImageview:CGRectMake(193, 357, 15, 27)];
-//        }
-//        else if(index == 1){
-//            EditTimerController *editCon = [[EditTimerController alloc] init];
-//            editCon.navTitle = @"Edit Timer2";
-//            editCon.fileName = @"timerData2";
-//            [AwiseGlobal sharedInstance].timerNumber = 2;
-//            [self.navigationController pushViewController:editCon animated:YES];
-//        }
-//    }];
-}
-
-- (void)btn6Clicked:(id)sender {
-//    [self.view.window  showPopWithButtonTitles:@[@"Change to Timer3",@"Edit Timer3"] styles:@[YUDangerStyle,YUDefaultStyle] whenButtonTouchUpInSideCallBack:^(int index  ) {
-//        if(index == 0){
-//            [AwiseGlobal sharedInstance].isSuccess = NO;
-//            [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:1.0];
-//            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//            self.hud.dimBackground = YES;
-//            [self.hud hide:YES afterDelay:WAITTIME];
-//            Byte b3[64];
-//            for(int k=0;k<64;k++){
-//                b3[k] = 0x00;
-//            }
-//            b3[0] = 0x55;
-//            b3[1] = 0xAA;
-//            b3[2] = 0x08;
-//            b3[3] = 0x03;
-//            b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-//            NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//            [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
-//            
-//            [self addRunningImageview:CGRectMake(303, 357, 15, 27)];
-//        }
-//        else if(index == 1){
-//            EditTimerController *editCon = [[EditTimerController alloc] init];
-//            editCon.navTitle = @"Edit Timer3";
-//            editCon.fileName = @"timerData3";
-//            [AwiseGlobal sharedInstance].timerNumber = 3;
-//            [self.navigationController pushViewController:editCon animated:YES];
-//        }
-//    }];
 }
 
 - (void)switchBtnClicked:(id)sender {
@@ -471,8 +388,7 @@
         b3[5] = 0x00;
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 - (void)roverTurnOn{
@@ -500,5 +416,48 @@
     }
 }
 
+#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    switch (byte[2]) {
+        case 0x01:              //读取状态返回值
+        {
+            
+        }
+            break;
+        case 0x02:              //开关状态返回值
+        {
+            
+        }
+            break;
+        case 0x03:              //亮度控制返回值
+        {
+            
+        }
+            break;
+        case 0x04:              //同步时间返回值
+        {
+            
+        }
+            break;
+        case 0x05:              //设置定时器返回值
+        {
+            
+        }
+            break;
+        case 0x06:              //设置场景返回值
+        {
+            
+        }
+            break;
+        case 0x07:              //开关场景返回值
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end

@@ -12,6 +12,7 @@
 @protocol TCPSocketDelegate <NSObject>
 
 - (void)TCPSocketConnectSuccess;
+- (void)dataBackFormDevice:(Byte *)byte;
 
 @end
 

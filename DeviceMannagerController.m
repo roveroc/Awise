@@ -199,8 +199,7 @@
     b3[3] = 0x00;
     b3[4] = 0x00;
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -270,8 +269,7 @@
         b3[37] = self.attest;
         b3[38] = self.encrypt;
         b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-        NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//        [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
     }
 }
 
@@ -301,8 +299,7 @@
         b3[i+5] = ssidBtye[i];
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
     [self performSelector:@selector(reloadTableData) withObject:nil afterDelay:3.0];
 }
 

@@ -297,8 +297,7 @@
         b3[11] = openbb;
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-//    [[AwiseGlobal sharedInstance] sendDataToDevice:BroadCast order:data tag:0];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 

@@ -30,9 +30,9 @@
 }
 
 #pragma mark ------------------------------------------------ 创建表
-#pragma mark ----五个字段：name,mac,ip,model,description
+#pragma mark ---- 六个字段：name,mac,AP_ip,STA_ip,model,description
 - (BOOL)createTable{
-    NSString *deviceTable = @"CREATE TABLE IF NOT EXISTS AwiseDevice(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mac TEXT, ip TEXT, model TEXT, description TEXT)";
+    NSString *deviceTable = @"CREATE TABLE IF NOT EXISTS AwiseDevice(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mac TEXT, AP_ip TEXT,STA_ip, model TEXT, description TEXT)";
     char *ERROR;
     if (sqlite3_exec(database, [deviceTable UTF8String], NULL, NULL, &ERROR)!=SQLITE_OK){
         sqlite3_close(database);
@@ -74,7 +74,7 @@
 
 #pragma mark ------------------------------------------------ 插入设备信息
 - (BOOL)insertDeivceInfo:(NSMutableArray *)info{
-    NSString *sql = @"INSERT INTO AwiseDevice(name,mac,ip,model,description) VALUES(?,?,?,?,?);";
+    NSString *sql = @"INSERT INTO AwiseDevice(name,mac,AP_ip,STA_ip,model,description) VALUES(?,?,?,?,?,?);";
     sqlite3_stmt *stmt;
     [self openDataBase];
     if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK) {
@@ -94,7 +94,7 @@
 
 #pragma mark ------------------------------------------------ 修改设备IP
 - (BOOL)modifyDeviceIP:(NSString *)mac newIP:(NSString *)newip{
-    NSString *sql = [NSString stringWithFormat:@"update AwiseDevice set ip='%@' where mac='%@';",newip,mac];
+    NSString *sql = [NSString stringWithFormat:@"update AwiseDevice set STA_ip='%@' where mac='%@';",newip,mac];
     char *ERROR;
     [self openDataBase];
     if (sqlite3_exec(database, [sql UTF8String], NULL, NULL, &ERROR)!=SQLITE_OK){
