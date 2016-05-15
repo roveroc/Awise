@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddDeviceController.h"
 
-@interface MoreController : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+@interface MoreController : UIViewController<UITableViewDataSource,UITableViewDelegate,TCPSocketDelegate>{
     NSArray                 *tableViewItems;
     
 }

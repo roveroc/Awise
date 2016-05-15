@@ -125,7 +125,6 @@
     [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:1.0];
     [self performSelector:@selector(getDeviceStatusFinished) withObject:nil afterDelay:WAITTIME];
     
-    
     self.backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
     self.backImg.image = [UIImage imageNamed:@"lightFishBackImg.png"];
     [self.view addSubview:self.backImg];
@@ -333,7 +332,8 @@
     
     b3[5] = hhbb;
     b3[6] = mmbb;
-    b3[7] = ssbb; 
+    b3[7] = ssbb;
+ 
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];

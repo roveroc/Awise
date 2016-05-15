@@ -12,7 +12,7 @@
 #import "RoverSqlite.h"
 #import "AwiseGlobal.h"
 
-@interface AddDeviceController : UIViewController<QRCodeReaderDelegate>{
+@interface AddDeviceController : UIViewController<QRCodeReaderDelegate,TCPSocketDelegate>{
     RoverSqlite                 *sql;
 }
 @property (nonatomic, retain) RoverSqlite                   *sql;                   //数据库对象

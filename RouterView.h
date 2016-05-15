@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AwiseGlobal.h"
 
 @interface RouterView : UIView <UITextFieldDelegate>
 

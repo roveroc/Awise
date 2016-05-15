@@ -89,7 +89,7 @@ u_char *cp;
         
         
         if (sdl->sdl_alen){
-//            ether_print((u_char *)LLADDR(sdl));
+            ether_print((u_char *)LLADDR(sdl));
             
             //by rover
             NSString *ip = [NSString stringWithFormat:@"%s",inet_ntoa(sin->sin_addr)];
@@ -100,12 +100,12 @@ u_char *cp;
             [macDic setObject:ip forKey:mac];
         
         }
-        else{}
-//            printf("(incomplete)");
-        if (rtm->rtm_rmx.rmx_expire == 0){}
-//            printf(" permanent");
-        if (sin->sin_other & SIN_PROXY){}
-//            printf(" published (proxy only)");
+        else//{}
+            printf("(incomplete)");
+        if (rtm->rtm_rmx.rmx_expire == 0)//{}
+            printf(" permanent");
+        if (sin->sin_other & SIN_PROXY)//{}
+            printf(" published (proxy only)");
         if (rtm->rtm_addrs & RTA_NETMASK) {
             sin = (struct sockaddr_inarp *)
             (sdl->sdl_len + (char *)sdl);

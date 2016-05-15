@@ -54,7 +54,52 @@
     }
     NSString *ssid = self.ssidField.text;
     NSString *pwd  = self.pwdField.text;
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x18;
+    b3[3] = 0x01;
+    b3[4] = 0x00;
+    
+    NSLog(@"加入路由器的 账号 为：---> %@",ssid);
+    NSLog(@"加入路由器的 密码 为：---> %@",pwd);
+    NSData * ssidData = [ssid dataUsingEncoding:NSASCIIStringEncoding];
+    Byte *ssidBtye = (Byte *)[ssidData bytes];
+    
+    for(int i=0;i<ssidData.length ;i++){
+        b3[i+5] = ssidBtye[i];
+    }
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    [self performSelector:@selector(sendPwdToDevice) withObject:nil afterDelay:0.5];
 }
+
+- (void)sendPwdToDevice{
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x18;
+    b3[3] = 0x02;
+    b3[4] = 0x00;
+    
+    NSString * password = self.pwdField.text;//@"Awise2015@";
+    NSData * passwordData = [password dataUsingEncoding:NSASCIIStringEncoding];
+    Byte *ssidBtye = (Byte *)[passwordData bytes];
+    
+    for(int i=0;i<passwordData.length ;i++){
+        b3[i+5] = ssidBtye[i];
+    }
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+
 
 #pragma mark ------------------------------------------------ 点击Done，即完成按钮
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -95,6 +140,50 @@
     self.inputView.center = CGPointMake(self.inputView.center.x, self.inputView.center.y-110);
     //动画结束
     [UIView commitAnimations];
+}
+
+#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    switch (byte[2]) {
+        case 0x01:              //读取状态返回值
+        {
+            
+        }
+            break;
+        case 0x02:              //开关状态返回值
+        {
+            
+        }
+            break;
+        case 0x03:              //亮度控制返回值
+        {
+            
+        }
+            break;
+        case 0x04:              //同步时间返回值
+        {
+            
+        }
+            break;
+        case 0x05:              //设置定时器返回值
+        {
+            
+        }
+            break;
+        case 0x06:              //设置场景返回值
+        {
+            
+        }
+            break;
+        case 0x07:              //开关场景返回值
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 

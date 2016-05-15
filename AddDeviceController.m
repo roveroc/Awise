@@ -21,6 +21,21 @@
     // Do any additional setup after loading the view from its nib.
     self.sql = [[RoverSqlite alloc] init];
     [self.sql openDataBase];
+    //连接设备 TCP 测试
+    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+    }
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;  //受控设备为触摸面板
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
+}
+
+#pragma mark --------------------- 连接设备成功
+- (void)TCPSocketConnectSuccess{
+    
 }
 
 - (void)viewDidLayoutSubviews{

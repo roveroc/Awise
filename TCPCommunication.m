@@ -71,7 +71,7 @@
         {
 //            NSLog(@"该数据从单色触摸面板返回");
             Byte *by = (Byte *)[data bytes];
-            [self.delegate dataBackFormDevice:by];
+//            [self.delegate dataBackFormDevice:by];
         }
             break;
         {
