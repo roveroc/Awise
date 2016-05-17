@@ -20,9 +20,9 @@
                         <constraint firstAttribute="width" secondItem="VlP-Ty-nXQ" secondAttribute="height" multiplier="1:1" id="JKy-1I-aZB"/>
                         <constraint firstAttribute="width" secondItem="VlP-Ty-nXQ" secondAttribute="height" multiplier="1:1" id="eXi-hp-XZT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                     <state key="normal" title="Scene 1">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="sceneClicked:" destination="DiC-2F-LiL" eventType="touchUpInside" id="Nap-n9-h5J"/>
@@ -34,9 +34,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="GT4-dj-QIz" secondAttribute="height" multiplier="1:1" id="bbT-O6-hXh"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                     <state key="normal" title="Scene 2">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="sceneClicked:" destination="DiC-2F-LiL" eventType="touchUpInside" id="nv4-Jl-Ht1"/>
@@ -61,9 +61,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="dNT-7i-ZSt" secondAttribute="height" multiplier="1:1" id="fVy-Qj-iK0"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                     <state key="normal" title="Scene 3">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="sceneClicked:" destination="DiC-2F-LiL" eventType="touchUpInside" id="d73-o8-SbX"/>
@@ -75,9 +75,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="hLm-Yb-Bhl" secondAttribute="height" multiplier="1:1" id="o6e-H2-Zc7"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                     <state key="normal" title="Scene 4">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="sceneClicked:" destination="DiC-2F-LiL" eventType="touchUpInside" id="rgs-fD-DFl"/>
@@ -163,7 +163,7 @@
                 <outlet property="sceneBtn3" destination="dNT-7i-ZSt" id="QYD-Hb-kbs"/>
                 <outlet property="sceneBtn4" destination="hLm-Yb-Bhl" id="QNZ-IP-b9m"/>
             </connections>
-            <point key="canvasLocation" x="-1103" y="335"/>
+            <point key="canvasLocation" x="-1280" y="307"/>
         </view>
     </objects>
 </document>

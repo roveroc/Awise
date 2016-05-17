@@ -91,7 +91,7 @@
 #pragma mark ---------------------------------------------------- 设备断开连接调用函数
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock{
     NSLog(@"设备IP = %@ 的设备断开连接",sock);
-    
+    [delegate TCPSocketBroken];
 }
 
 @end

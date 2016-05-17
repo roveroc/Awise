@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <AsyncSocket.h>
 
+
 @protocol TCPSocketDelegate <NSObject>
 
-- (void)TCPSocketConnectSuccess;
-- (void)dataBackFormDevice:(Byte *)byte;
+- (void)TCPSocketConnectSuccess;            //设备连接成功
+- (void)TCPSocketBroken;                    //设备断开连接
+- (void)dataBackFormDevice:(Byte *)byte;    //发送数据到控制器
 
 @end
 

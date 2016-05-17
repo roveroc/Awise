@@ -9,6 +9,7 @@
 #import "RootController.h"
 #import "SingleTouchController.h"
 
+
 @interface RootController ()
 
 @end
@@ -66,14 +67,8 @@
     lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
     [self.navigationController pushViewController:lightCon animated:YES];
     
+    
 }
-
-- (void)scanNetworkFinish{
-    NSLog(@"扫码完毕，开始获取ARP表");
-    NSMutableDictionary *dic = [[AwiseGlobal sharedInstance] getARPTable];
-    NSLog(@"ARP表获取成功 = %@",dic);
-}
-
 
 
 #pragma mark - ping IP 返回的结果

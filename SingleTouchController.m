@@ -34,11 +34,20 @@
      *
      *六个字段：name,mac,AP_ip,STA_ip,model,description
      */
-    if(self.deviceInfo.count > 0){
-        self.deviceIP = [self.deviceInfo objectAtIndex:3];
-        [AwiseGlobal sharedInstance].delegate = self;
-        [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
-        [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接设备中..." withTime:1.0];
+    [AwiseGlobal sharedInstance].delegate = self;
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        if(self.deviceInfo.count > 0){
+            self.deviceIP = [self.deviceInfo objectAtIndex:2];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
+        }
+    }
+    else if([AwiseGlobal sharedInstance].cMode == STA){
+        if(self.deviceInfo.count > 0){
+            self.deviceIP = [self.deviceInfo objectAtIndex:3];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
+        }
+    }else{
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
     }
     
     //初始化定时器数据
@@ -60,17 +69,57 @@
         [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
     }
     
-    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-    }
-    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
+    //真正逻辑，不需要这块代码
+//    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+//       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+//        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+//        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+//    }
+//    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+//    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
+
 }
 
+
+#pragma mark ------------------------------------------------ Ping IP 地址的回调
+- (void)ipIsOnline:(BOOL)result{
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        if(result == YES){
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
+        }
+        else{
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:2.0];
+        }
+    }
+    else{
+        if(result == YES){                 //Ping得通，直接连接
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
+        }
+        else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
+            [[AwiseGlobal sharedInstance] scanNetwork];
+        }
+    }
+}
+
+#pragma mark ------------------------------------------------ 扫描局域网完成
 - (void)scanNetworkFinish{
     NSLog(@" ------- 扫描到的ARP表 ------- ");
     NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
@@ -80,6 +129,7 @@
     self.sql = [[RoverSqlite alloc] init];
     if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
         NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+        self.deviceIP = newIp;
         if([AwiseGlobal sharedInstance].tcpSocket == nil ||
            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
             [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
@@ -92,44 +142,15 @@
     }
 }
 
-#pragma mark ------------------------------------------------ Ping IP 地址的回调
-- (void)ipIsOnline:(BOOL)result{
-    if(result == YES){                 //Ping得通，直接连接
-        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-        }
-        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
-    }
-    else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
-        NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
-        NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpDic);
-        NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
-        //更新数据库
-        self.sql = [[RoverSqlite alloc] init];
-        if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
-            NSLog(@"更新设备IP成功 ----------%@ ",newIp);
-            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-            }
-            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp port:333];
-        }
-    }
-}
-
 #pragma mark ------------------------------------------------ 连接设备成功
 - (void)TCPSocketConnectSuccess{
-//    [self performSelector:@selector(syncTime) withObject:nil afterDelay:.1];
-//    [self performSelector:@selector(readStatus) withObject:nil afterDelay:.3];
+
+}
+
+#pragma mark ------------------------------------------------ 设备断开连接，需重连
+- (void)TCPSocketBroken{
+    NSLog(@"------------- 断开连接，重新连接 -------------");
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
 }
 
 #pragma mark ------------------- 调用同步时间
@@ -248,14 +269,12 @@
     
     bt[18]  = 0x0d;
     bt[19]  = 0x0a;
-    if(switchState == NO){              //开
-        [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
-        switchState = YES;
+    if(switchState == NO){                                     //开
+        [[AwiseGlobal sharedInstance] showWaitingView:0];
         bt[11] = 0x01;
     }
-    else{                               //关
-        [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
-        switchState = NO;
+    else if(switchState == YES){                               //关
+        [[AwiseGlobal sharedInstance] showWaitingView:0];
         bt[11] = 0x00;
     }
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
@@ -405,7 +424,7 @@
     return hexStr; 
 }
 
-
+#pragma mark ------------------------------------------------ 同步时间
 - (void)syncSingleTouchTime{
     NSDateFormatter *dateFormatter1 =[[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:@"YYYY"];
@@ -459,12 +478,32 @@
     switch (byte[2]) {
         case 0x01:              //读取状态返回值
         {
-            
+            if(byte[6] == 0x01){            //开状态
+                switchState = NO;
+                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+            }else{                          //关状态
+                switchState = YES;
+                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+            }
+            [tbSlider setNeedsDisplay];     //亮度值
+            tbSlider.angle = byte[6];
         }
             break;
         case 0x02:              //开关状态返回值
         {
-            
+            if(byte[6] == 0x00){
+                [[AwiseGlobal sharedInstance] showRemindMsg:@"操作失败" withTime:1.5];
+            }
+            else if(byte[6] == 0x01){
+                if(switchState == NO){
+                    [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+                    switchState = YES;
+                }
+                else if (switchState == YES){
+                    [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+                    switchState = NO;
+                }
+            }
         }
             break;
         case 0x03:              //亮度控制返回值
@@ -479,17 +518,23 @@
             break;
         case 0x05:              //设置定时器返回值
         {
-            
+            if(byte[6] == 0x00){
+                [[AwiseGlobal sharedInstance] showRemindMsg:@"设置定时器失败" withTime:1.5];
+            }
         }
             break;
         case 0x06:              //设置场景返回值
         {
-            
+            if(byte[6] == 0x00){
+                [[AwiseGlobal sharedInstance] showRemindMsg:@"场景保存失败" withTime:1.5];
+            }
         }
             break;
         case 0x07:              //开关场景返回值
         {
-            
+            if(byte[6] == 0x00){
+                [[AwiseGlobal sharedInstance] showRemindMsg:@"调用场景失败" withTime:1.5];
+            }
         }
             break;
             
