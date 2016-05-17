@@ -11,8 +11,9 @@
 #import "EditSingleTouchTimerController.h"
 
 @interface SingleTouchTimerView : UIView <UITableViewDataSource,UITableViewDelegate>{
- 
+    UISwitch            *selectSwitch;
 }
+@property (nonatomic, retain) UISwitch           *selectSwitch;         //选中的Switch
 
 @property (weak, nonatomic) IBOutlet UITableView *timerTable;
 

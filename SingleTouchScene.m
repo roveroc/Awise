@@ -9,20 +9,16 @@
 #import "SingleTouchScene.h"
 
 @implementation SingleTouchScene
-
+@synthesize selectLabel;
 
 - (void)drawRect:(CGRect)rect {
 #pragma mark - 显示场景值
     NSArray *sceneArray = [[AwiseUserDefault sharedInstance].singleTouchSceneValue componentsSeparatedByString:@"&"];
-    [self.sceneBtn1 setTitle:[[sceneArray objectAtIndex:0] stringByAppendingString:@"%"]
-                    forState:UIControlStateNormal];
-    [self.sceneBtn2 setTitle:[[sceneArray objectAtIndex:1] stringByAppendingString:@"%"]
-                    forState:UIControlStateNormal];
-    [self.sceneBtn3 setTitle:[[sceneArray objectAtIndex:2] stringByAppendingString:@"%"]
-                    forState:UIControlStateNormal];
-    [self.sceneBtn4 setTitle:[[sceneArray objectAtIndex:3] stringByAppendingString:@"%"]
-                    forState:UIControlStateNormal];
-
+    
+    self.label1.text = [[sceneArray objectAtIndex:0] stringByAppendingString:@"%"];
+    self.label2.text = [[sceneArray objectAtIndex:1] stringByAppendingString:@"%"];
+    self.label3.text = [[sceneArray objectAtIndex:2] stringByAppendingString:@"%"];
+    self.label4.text = [[sceneArray objectAtIndex:3] stringByAppendingString:@"%"];
 }
 
 #pragma mark ------------------------------------------------ 运行某个场景值
@@ -42,21 +38,44 @@
     UIButton *sceneBtn = (UIButton *)sender;
     switch (sceneBtn.tag) {
         case 1:
+//            [self setLabelEffect:self.label1];
+            self.selectLabel = self.label1;
             bt[11] = 0x01;
             break;
         case 2:
+//            [self setLabelEffect:self.label2];
+            self.selectLabel = self.label2;
             bt[11] = 0x02;
             break;
         case 3:
+//            [self setLabelEffect:self.label3];
+            self.selectLabel = self.label3;
             bt[11] = 0x03;
             break;
         case 4:
+//            [self setLabelEffect:self.label4];
+            self.selectLabel = self.label4;
             bt[11] = 0x04;
             break;
         default:
             break;
     }
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+}
+
+#pragma mark ------------------------------------------------ 设置Label的效果
+- (void)setLabelEffect:(UILabel *)label{
+    self.label1.textColor = [UIColor grayColor];
+    self.label2.textColor = [UIColor grayColor];
+    self.label3.textColor = [UIColor grayColor];
+    self.label4.textColor = [UIColor grayColor];
+    self.label1.shadowColor = [UIColor clearColor];
+    self.label2.shadowColor = [UIColor clearColor];
+    self.label3.shadowColor = [UIColor clearColor];
+    self.label4.shadowColor = [UIColor clearColor];
+    label.textColor = [UIColor blackColor];
+    label.shadowColor = [UIColor colorWithWhite:1.0f alpha:0.8f];
+    label.shadowOffset = CGSizeMake(2.0f, 2.0f);
 }
 
 #pragma mark ------------------------------------------------ 编辑场景值

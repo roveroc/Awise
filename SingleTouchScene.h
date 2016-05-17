@@ -10,8 +10,10 @@
 #import "AwiseGlobal.h"
 #import "EditSingleTouchSceneController.h"
 
-@interface SingleTouchScene : UIView
-
+@interface SingleTouchScene : UIView{
+    UILabel         *selectLabel;           //选中的Label
+}
+@property (nonatomic, retain) UILabel       *selectLabel;
 
 
 - (IBAction)sceneClicked:(id)sender;
@@ -28,7 +30,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *editBtn3;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn4;
 
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label4;
 
 
+- (void)setLabelEffect:(UILabel *)label;
 
 @end

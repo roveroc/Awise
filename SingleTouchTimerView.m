@@ -9,7 +9,7 @@
 #import "SingleTouchTimerView.h"
 
 @implementation SingleTouchTimerView
-
+@synthesize selectSwitch;
 
 - (void)drawRect:(CGRect)rect {
     self.timerTable.delegate = self;
@@ -40,6 +40,7 @@
 
 #pragma mark ------------------------------------------------ 操作开关,发送指令
 - (void)operateSwitch:(id)sender{
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
     UITableViewCell *cell;
     if([phoneVersion intValue] > 8){
@@ -48,6 +49,7 @@
     }
     int index = (int)cell.tag-10;
     UISwitch *swi = (UISwitch *)[cell viewWithTag:4];
+    self.selectSwitch = swi;
     NSString *value = [NSString stringWithFormat:@"%d",swi.on];
     NSMutableArray *temp = [[AwiseGlobal sharedInstance].singleTouchTimerArray objectAtIndex:index];
     [temp replaceObjectAtIndex:3 withObject:value];

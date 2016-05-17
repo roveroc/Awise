@@ -520,6 +520,8 @@
         {
             if(byte[6] == 0x00){
                 [[AwiseGlobal sharedInstance] showRemindMsg:@"设置定时器失败" withTime:1.5];
+                BOOL b = self.timerTable.selectSwitch.on;
+                [self.timerTable.selectSwitch setOn:!b];
             }
         }
             break;
@@ -535,6 +537,10 @@
             if(byte[6] == 0x00){
                 [[AwiseGlobal sharedInstance] showRemindMsg:@"调用场景失败" withTime:1.5];
             }
+            else{
+                [self.sceneView setLabelEffect:self.sceneView.selectLabel];
+            }
+            
         }
             break;
             
