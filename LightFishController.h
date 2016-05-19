@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
+#import "RoverSqlite.h"
 
-@interface LightFishController : UIViewController<TCPSocketDelegate>{
+@interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate>{
     BOOL            onoffFlag;
     MBProgressHUD   *hud;
     MBProgressHUD   *hud1;
@@ -28,6 +29,8 @@
     
     UIImageView     *runImg;
     UIImageView     *backImg;
+    NSMutableArray          *deviceInfo;
+    RoverSqlite             *sql;
 }
 @property (assign) BOOL onoffFlag;
 @property (nonatomic, retain) MBProgressHUD *hud;
@@ -50,22 +53,9 @@
 
 @property (nonatomic, retain) UILabel       *windowLabel;
 @property (nonatomic, retain) UILabel       *timeLabel;
+@property (nonatomic, retain) NSMutableArray        *deviceInfo;          //当前设备的所有信息
+@property (nonatomic, retain) RoverSqlite           *sql;                 //操作数据库的对象
 
-//@property (weak, nonatomic) IBOutlet UIButton *btn1;
-//@property (weak, nonatomic) IBOutlet UIButton *btn2;
-//@property (weak, nonatomic) IBOutlet UIButton *btn3;
-//@property (weak, nonatomic) IBOutlet UIButton *btn4;
-//@property (weak, nonatomic) IBOutlet UIButton *btn5;
-//@property (weak, nonatomic) IBOutlet UIButton *btn6;
-
-
-
-//- (IBAction)btn1Clciked:(id)sender;
-//- (IBAction)btn2Clicked:(id)sender;
-//- (IBAction)btn3Clicked:(id)sender;
-//- (IBAction)btn4Clicked:(id)sender;
-//- (IBAction)btn5Clicked:(id)sender;
-//- (IBAction)btn6Clicked:(id)sender;
 
 - (IBAction)switchBtnClicked:(id)sender;
 

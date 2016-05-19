@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MBProgressHUD.h>
 #import <AsyncSocket.h>
 
 
@@ -30,13 +31,21 @@ typedef enum{
     AsyncSocket                 *socket;
     id<TCPSocketDelegate>       delegate;
     DeviceType                  controlDeviceType;
+    NSString                    *deviceIP;
+    NSString                    *devicePort;
+    BOOL                        responeFlag;
+    int                         reConnectCount;
 }
 @property (nonatomic, retain) AsyncSocket               *socket;
 @property (nonatomic, retain) id<TCPSocketDelegate>     delegate;
 @property (assign)            DeviceType                controlDeviceType;
+@property (nonatomic, retain) NSString                  *deviceIP;                      //当前受控的设备IP
+@property (nonatomic, retain) NSString                  *devicePort;                    //当前受控的设备端口
+@property (assign)            BOOL                      responeFlag;                    //记录的设备数据的返回情况
+@property (assign)            int                       reConnectCount;                 //断开连接后重连的次数记录：5次后将不再重连
 
 //连接设备
-- (void)connectToDevice:(NSString *)host port:(int)port;
+- (void)connectToDevice:(NSString *)host port:(NSString *)port;
 
 //发送数据给设备
 - (void)sendMeesageToDevice:(Byte[])data length:(int)length;

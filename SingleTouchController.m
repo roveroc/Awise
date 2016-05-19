@@ -20,9 +20,7 @@
 @synthesize timerTable;
 @synthesize sceneView;
 @synthesize deviceInfo;
-@synthesize deviceIP;
 @synthesize sql;
-
 
 
 - (void)viewDidLoad {
@@ -35,16 +33,17 @@
      *六个字段：name,mac,AP_ip,STA_ip,model,description
      */
     [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"333";
     if([AwiseGlobal sharedInstance].cMode == AP){
         if(self.deviceInfo.count > 0){
-            self.deviceIP = [self.deviceInfo objectAtIndex:2];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
         }
     }
     else if([AwiseGlobal sharedInstance].cMode == STA){
         if(self.deviceInfo.count > 0){
-            self.deviceIP = [self.deviceInfo objectAtIndex:3];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:self.deviceIP];
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
         }
     }else{
         [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
@@ -78,7 +77,7 @@
 //    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
 //    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
 //    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:333];
+//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"333"];
 
 }
 
@@ -95,7 +94,8 @@
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
             [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{
             [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:2.0];
@@ -111,7 +111,8 @@
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
             [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
             [[AwiseGlobal sharedInstance] scanNetwork];
@@ -129,7 +130,7 @@
     self.sql = [[RoverSqlite alloc] init];
     if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
         NSLog(@"更新设备IP成功 ----------%@ ",newIp);
-        self.deviceIP = newIp;
+        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
         if([AwiseGlobal sharedInstance].tcpSocket == nil ||
            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
             [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
@@ -138,7 +139,8 @@
         [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
         [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
         [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp port:333];
+        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
     }
 }
 
@@ -147,11 +149,6 @@
 
 }
 
-#pragma mark ------------------------------------------------ 设备断开连接，需重连
-- (void)TCPSocketBroken{
-    NSLog(@"------------- 断开连接，重新连接 -------------");
-    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:self.deviceIP port:333];
-}
 
 #pragma mark ------------------- 调用同步时间
 - (void)syncTime{
@@ -175,6 +172,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     if(self.controlSegment.selectedSegmentIndex == 2){
         self.defaultBtn1.hidden = YES;
         self.defaultBtn2.hidden = YES;

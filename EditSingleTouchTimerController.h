@@ -15,7 +15,7 @@
 
 @end
 
-@interface EditSingleTouchTimerController : UIViewController<saveSingleTouchTimerDelegate>{
+@interface EditSingleTouchTimerController : UIViewController<saveSingleTouchTimerDelegate,TCPSocketDelegate>{
     int                        timerIndex;
     NSMutableArray             *timerStatusArray;
     NSMutableArray             *weekArray;

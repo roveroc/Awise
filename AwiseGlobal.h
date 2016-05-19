@@ -75,7 +75,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 
 
 
-@interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate>{
+@interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate,TCPSocketDelegate>{
     NSMutableArray              *singleTouchTimerArray;
     id<PingDelegate>            delegate;
     ScanLAN                     *scan;
@@ -84,6 +84,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
     TCPCommunication            *tcpSocket;
     NSMutableArray              *deviceArray;
     ControlMode                 cMode;
+
     
 /*******水族等部分********/
     NSString       *wifiSSID;
@@ -125,6 +126,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 @property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
 @property (nonatomic, retain) NSMutableArray            *deviceArray;                   //所有已添加的设备
 @property (assign)            ControlMode               cMode;                          //用来区分当前的控制模式
+
 
 /*******水族等部分********/
 @property (nonatomic, retain) NSString       *wifiSSID;

@@ -26,36 +26,8 @@
 @synthesize windowLabel;
 @synthesize switchBtn;
 @synthesize timeLabel;
-
-- (void)addRunningImageview:(CGRect)rect{
-//    if(self.runImg)
-//        [self.runImg removeFromSuperview];
-//    if(iPhone4){
-//        CGRect rr = CGRectMake(rect.origin.x, rect.origin.y - 25, rect.size.width, rect.size.height);
-//        self.runImg = [[UIImageView alloc] initWithFrame:rr];
-//    }
-//    else{
-//        CGRect rr = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
-//        self.runImg = [[UIImageView alloc] initWithFrame:rr];
-//    }
-//    self.runImg.image = [UIImage imageNamed:@"running"];
-//    [self.view addSubview:self.runImg];
-}
-
-- (void)addRuningImgview{
-//    if(self.runImg)
-//        [self.runImg removeFromSuperview];
-//    if([AwiseGlobal sharedInstance].isManualModel == YES){
-//        [self addRunningImageview:CGRectMake(87, 357, 15, 27)];
-//    }else if ([AwiseGlobal sharedInstance].isLightingModel == YES){
-//        [self addRunningImageview:CGRectMake(193, 357, 15, 27)];
-//    }else if ([AwiseGlobal sharedInstance].isCloudy == YES){
-//        [self addRunningImageview:CGRectMake(303, 357, 15, 27)];
-//    }
-//    [AwiseGlobal sharedInstance].isManualModel = NO;
-//    [AwiseGlobal sharedInstance].isLightingModel = NO;
-//    [AwiseGlobal sharedInstance].isCloudy = NO;
-}
+@synthesize deviceInfo;
+@synthesize sql;
 
 - (void)showTabBar{
     if (self.tabBarController.tabBar.hidden == NO)
@@ -75,8 +47,8 @@
 
 
 - (void)viewWillAppear:(BOOL)animated{
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [self showTabBar];
-    [self addRuningImgview];
 }
 
 
@@ -98,20 +70,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title= @"Home";
     self.navigationItem.title = @"Home";
     self.onoffFlag = NO;
     
-    [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] getCurrentWifiSSID];
-    NSLog(@"手机连接上的WIFI SSID --> %@",[AwiseGlobal sharedInstance].wifiSSID);
     
     //进入设备管理页，搜索设备、添加到路由器等功能
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Device" style:UIBarButtonItemStyleDone target:self action:@selector(gotoDeviceManagerController)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Device" style:UIBarButtonItemStyleDone target:self action:@selector(gotoDeviceManagerController)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
     
     //刷新读取设备时间
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+    self.navigationItem.rightBarButtonItem = leftItem;
     
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].isSuccess = NO;
@@ -131,21 +100,90 @@
     
     [self layOutView];
     
-    
-//连接设备 TCP 测试
-    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+//连接设备部分
+    [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        if(self.deviceInfo.count > 0){
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+        }
     }
-    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;  //受控设备为触摸面板
-    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
+    else if([AwiseGlobal sharedInstance].cMode == STA){
+        if(self.deviceInfo.count > 0){
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+        }
+    }else{
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
+    }
+
+}
+
+#pragma mark ------------------------------------------------ Ping IP 地址的回调
+- (void)ipIsOnline:(BOOL)result{
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        if(result == YES){
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为水族灯
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+        }
+        else{
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:2.0];
+        }
+    }
+    else{
+        if(result == YES){                 //Ping得通，直接连接
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为水族灯
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+        }
+        else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
+            [[AwiseGlobal sharedInstance] scanNetwork];
+        }
+    }
+}
+
+#pragma mark ------------------------------------------------ 扫描局域网完成
+- (void)scanNetworkFinish{
+    NSLog(@" ------- 扫描到的ARP表 ------- ");
+    NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
+    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpDic);
+    NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
+    //更新数据库
+    self.sql = [[RoverSqlite alloc] init];
+    if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
+            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+        }
+        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为触摸面板
+        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+    }
 }
 
 #pragma mark - 连接设备成功
--(void)TCPSocketConnectSuccess{
+- (void)TCPSocketConnectSuccess{
     
 }
 
@@ -249,25 +287,6 @@
         }
         NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
         self.timeLabel.text = timeStr;
-        
-        if([AwiseGlobal sharedInstance].modelStatus == 0x01){
-            [self addRunningImageview:CGRectMake(87, 357, 15, 27)];
-        }
-        else if ([AwiseGlobal sharedInstance].modelStatus == 0x02){
-            [self addRunningImageview:CGRectMake(193, 357, 15, 27)];
-        }
-        else if ([AwiseGlobal sharedInstance].modelStatus == 0x03){
-            [self addRunningImageview:CGRectMake(303, 357, 15, 27)];
-        }
-        else if ([AwiseGlobal sharedInstance].modelStatus == 0x04){
-            [self addRunningImageview:CGRectMake(87, 412, 15, 27)];
-        }
-        else if ([AwiseGlobal sharedInstance].modelStatus == 0x05){
-            [self addRunningImageview:CGRectMake(193, 412, 15, 27)];
-        }
-        else if ([AwiseGlobal sharedInstance].modelStatus == 0x06){
-            [self addRunningImageview:CGRectMake(293, 412, 15, 27)];
-        }
     }
     else{
         NSLog(@"状态读取失败");

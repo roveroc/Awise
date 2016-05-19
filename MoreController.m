@@ -32,7 +32,7 @@
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;  //受控设备为触摸面板
-    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
+//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
 }
 
 - (void)TCPSocketConnectSuccess{

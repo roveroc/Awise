@@ -568,13 +568,13 @@
 		976520FC1CDB512200EEEE01 /* LightFish */ = {
 			isa = PBXGroup;
 			children = (
-				976521201CDC2FB300EEEE01 /* ManualController */,
+				976520FE1CDB518D00EEEE01 /* MainController */,
 				976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect */,
 				976521071CDC2DFB00EEEE01 /* DeviceMannagerController */,
 				976521061CDC2DEB00EEEE01 /* LightingModeController */,
 				976521051CDC2DD500EEEE01 /* EditTimerSetting */,
 				976521041CDC2DC000EEEE01 /* SettingController */,
-				976520FE1CDB518D00EEEE01 /* MainController */,
+				976521201CDC2FB300EEEE01 /* ManualController */,
 			);
 			name = LightFish;
 			sourceTree = "<group>";

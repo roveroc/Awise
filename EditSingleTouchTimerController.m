@@ -25,6 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     //周一到每天，1表示选中
     weekArray = [[NSMutableArray alloc] initWithArray:(NSArray *)[[timerStatusArray objectAtIndex:2] componentsSeparatedByString:@"&"]];
     for(int i=0;i<weekArray.count;i++){
@@ -102,6 +103,22 @@
     bt[16] = [[timeArr objectAtIndex:1] intValue];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
+
+#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    switch (byte[2]) {
+        case 0x05:              //设置定时器返回值
+        {
+            if(byte[6] == 0x00){
+                [[AwiseGlobal sharedInstance] showRemindMsg:@"设置定时器失败" withTime:1.5];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 
 
 #pragma mark -------------------------------------------- 亮度值改变

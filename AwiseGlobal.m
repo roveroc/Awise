@@ -17,6 +17,7 @@
 @synthesize tcpSocket;
 @synthesize deviceArray;
 @synthesize cMode;
+
 /*******水族等部分********/
 @synthesize wifiSSID;
 @synthesize lineArray;
