@@ -18,7 +18,6 @@
 @end
 
 @implementation LightFishController
-@synthesize onoffFlag;
 @synthesize hud;
 @synthesize btn1,btn2,btn3,btn4,btn5,btn6;
 @synthesize runImg;
@@ -71,7 +70,6 @@
     // Do any additional setup after loading the view from its nib.
     
     self.navigationItem.title = @"Home";
-    self.onoffFlag = NO;
     
     
     //进入设备管理页，搜索设备、添加到路由器等功能
@@ -85,14 +83,6 @@
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].isSuccess = NO;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-    
-//    [self addMessageLabel];
-//每次软件启动时，自动同步时间至设备
-    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
-    
-//获取设备状态值
-    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:1.0];
-    [self performSelector:@selector(getDeviceStatusFinished) withObject:nil afterDelay:WAITTIME];
     
     self.backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
     self.backImg.image = [UIImage imageNamed:@"lightFishBackImg.png"];
@@ -184,7 +174,11 @@
 
 #pragma mark - 连接设备成功
 - (void)TCPSocketConnectSuccess{
-    
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态" withTime:WAITTIME];
+    //每次软件启动时，自动同步时间至设备
+    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+    //获取设备状态值
+    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:1.0];
 }
 
 - (void)addMessageLabel{
@@ -257,44 +251,6 @@
     [self.hud hide:YES afterDelay:WAITTIME];
     [self getDeviceStatus];
     [self performSelector:@selector(getDeviceStatusFinished) withObject:nil afterDelay:WAITTIME];
-}
-
-
-#pragma mark - 一秒后默认设备状态读取完毕
-- (void)getDeviceStatusFinished{
-    if([AwiseGlobal sharedInstance].isSuccess == YES){
-        if([AwiseGlobal sharedInstance].switchStatus == 0x00){
-            self.onoffFlag = NO;
-            [AwiseGlobal sharedInstance].isClosed = YES;
-            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
-        }
-        else{
-            [AwiseGlobal sharedInstance].isClosed = NO;
-            self.onoffFlag = YES;
-            [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
-        }
-        NSString *hStr;
-        if([AwiseGlobal sharedInstance].hourStatus < 10){
-            hStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].hourStatus];
-        }else{
-            hStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].hourStatus];
-        }
-        NSString *mStr;
-        if([AwiseGlobal sharedInstance].minuteStatus < 10){
-            mStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].minuteStatus];
-        }else{
-            mStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].minuteStatus];
-        }
-        NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
-        self.timeLabel.text = timeStr;
-    }
-    else{
-        NSLog(@"状态读取失败");
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
-    }
 }
 
 
@@ -399,31 +355,10 @@
     
     b3[4] = 0x00;
     
-    if(self.onoffFlag == NO){
-        [self performSelector:@selector(roverTurnOn) withObject:nil afterDelay:1.1];
-        b3[5] = 0x01;
-    }else{
-        [self performSelector:@selector(roverTurnOff) withObject:nil afterDelay:1.1];
-        b3[5] = 0x00;
-    }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
-- (void)roverTurnOn{
-    if([AwiseGlobal sharedInstance].isSuccess == YES){
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
-        self.onoffFlag = YES;
-    }
-}
-
-- (void)roverTurnOff{
-    if([AwiseGlobal sharedInstance].isSuccess == YES){
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
-        self.onoffFlag = NO;
-
-    }
-}
 
 
 - (void)confirmSuccess{
@@ -437,46 +372,67 @@
 
 #pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
 - (void)dataBackFormDevice:(Byte *)byte{
-    switch (byte[2]) {
-        case 0x01:              //读取状态返回值
-        {
-            
-        }
-            break;
-        case 0x02:              //开关状态返回值
-        {
-            
-        }
-            break;
-        case 0x03:              //亮度控制返回值
-        {
-            
-        }
-            break;
-        case 0x04:              //同步时间返回值
-        {
-            
-        }
-            break;
-        case 0x05:              //设置定时器返回值
-        {
-            
-        }
-            break;
-        case 0x06:              //设置场景返回值
-        {
-            
-        }
-            break;
-        case 0x07:              //开关场景返回值
-        {
-            
-        }
-            break;
-            
-        default:
-            break;
+    if (byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x01){          //开指令：成功
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
     }
+    else if(byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x00){      //关指令：成功
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+    }
+    else if(byte[2] == 0x06 && byte[3] == 0x01){
+        [AwiseGlobal sharedInstance].switchStatus = byte[5];
+        [AwiseGlobal sharedInstance].hourStatus   = byte[6];
+        [AwiseGlobal sharedInstance].minuteStatus = byte[7];
+        [AwiseGlobal sharedInstance].modelStatus  = byte[8];
+        switch (byte[8]) {
+            case 0x01:
+                [AwiseGlobal sharedInstance].mode = Manual_Model;
+                break;
+            case 0x02:
+                [AwiseGlobal sharedInstance].mode = Lighting_Model;
+                break;
+            case 0x03:
+                [AwiseGlobal sharedInstance].mode = Cloudy_Model;
+                break;
+            case 0x04:
+                [AwiseGlobal sharedInstance].mode = Timer1_Model;
+                break;
+            case 0x05:
+                [AwiseGlobal sharedInstance].mode = Timer2_Model;
+                break;
+            case 0x06:
+                [AwiseGlobal sharedInstance].mode = Timer3_Model;
+                break;
+            default:
+                break;
+        }
+        [self getDeviceStatusFinished];
+    }
+}
+
+#pragma mark ---------------------------------------------------- 一秒后默认设备状态读取完毕
+- (void)getDeviceStatusFinished{
+    if([AwiseGlobal sharedInstance].switchStatus == 0x00){
+        [AwiseGlobal sharedInstance].isClosed = YES;
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+    }
+    else{
+        [AwiseGlobal sharedInstance].isClosed = NO;
+        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+    }
+    NSString *hStr;
+    if([AwiseGlobal sharedInstance].hourStatus < 10){
+        hStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].hourStatus];
+    }else{
+        hStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].hourStatus];
+    }
+    NSString *mStr;
+    if([AwiseGlobal sharedInstance].minuteStatus < 10){
+        mStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].minuteStatus];
+    }else{
+        mStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].minuteStatus];
+    }
+    NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
+    self.timeLabel.text = timeStr;
 }
 
 @end

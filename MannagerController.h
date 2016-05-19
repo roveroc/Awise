@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "AwiseGlobal.h"
 
-@interface MannagerController : UIViewController{
+@interface MannagerController : UIViewController<TCPSocketDelegate>{
     MBProgressHUD       *hud;
 }
 @property (nonatomic, retain) MBProgressHUD *hud;

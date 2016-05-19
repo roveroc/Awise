@@ -11,7 +11,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface ManualController : UIViewController{
+@interface ManualController : UIViewController<TCPSocketDelegate>{
     NSMutableArray *dataArray;
     NSTimer        *sendTimer;
     MBProgressHUD  *hud;

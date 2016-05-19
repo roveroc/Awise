@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance] hideTabBar:self];
     [self closeSwitch:@[@1,@2,@3,@4,@5]];
     switch ([AwiseGlobal sharedInstance].mode) {
@@ -44,6 +45,16 @@
     }
 }
 
+#pragma mark ----------------------------------- 解析从设备的返回值
+- (void)dataBackFormDevice:(Byte *)byte{
+    if (byte[2] == 0x08 && byte[3] == 0x00){                           //操作定时器
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.5];
+    }
+    else if (byte[2] == 0x05 && byte[3] == 0x00){                      //操作多云闪电
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.5];
+    }
+}
+
 
 - (UILabel *)customLabel:(CGRect)rect title:(NSString *)title{
     UILabel *lab = [[UILabel alloc] initWithFrame:rect];
@@ -58,13 +69,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 操作定时器1、2、3
+#pragma mark ------------------------------------------ 操作定时器1、2、3
 - (void)operateTimer:(Byte)tnumber onoff:(Byte)vaule{
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:1.0];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -78,17 +84,6 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
-
-#pragma mark - 确定指令是否发送成功
-- (void)confirmSuccess{
-    if([AwiseGlobal sharedInstance].isSuccess == NO){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        [self.view addSubview:self.hud];
-        self.hud.labelText = @"Failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
-    }
-}
 
 #pragma mark - 关闭某些开关
 - (void)closeSwitch:(NSArray *)tagArr{
@@ -108,6 +103,7 @@
 
 #pragma mark - 打开或关闭某种模式
 - (IBAction)onoffSwitch:(id)sender {
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     UISwitch *s = (UISwitch *)sender;
     switch (s.tag) {
         case 1:             //定时器1

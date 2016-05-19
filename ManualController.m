@@ -32,6 +32,19 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
+#pragma mark ----------------------------------- 解析从设备的返回值
+- (void)dataBackFormDevice:(Byte *)byte{
+    if (byte[2] == 0x06 && byte[3] == 0x02){                           //读取通道值
+        self.slider1.value = byte[6];
+        self.slider2.value = byte[5];
+        self.slider3.value = byte[7];
+        
+        self.label1.text = [NSString stringWithFormat:@"%d%%",(int)self.slider3.value];
+        self.label2.text = [NSString stringWithFormat:@"%d%%",(int)self.slider1.value];
+        self.label3.text = [NSString stringWithFormat:@"%d%%",(int)self.slider2.value];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,9 +52,9 @@
 
     self.navigationItem.title = @"Manual";
     [[AwiseGlobal sharedInstance] hideTabBar:self];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     
     self.dataArray = [[NSMutableArray alloc] init];
-    
     self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
     
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
@@ -57,42 +70,12 @@
     [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_gray.png"] forState:UIControlStateNormal];
     [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_blue.png"] forState:UIControlStateNormal];
     
-    
-//    [self setMinimumTrackImage:@"slider_blue.png" withCapInsets:UIEdgeInsetsMake(0, 16, 0, 16) forState:UIControlStateNormal];
-    
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
-    [AwiseGlobal sharedInstance].isSuccess = NO;
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
+
     [self getDeviceStatus];
-    [self performSelector:@selector(getDeviceStatusFinished) withObject:nil afterDelay:1.0];
-}
 
-
-- (void)getDeviceStatusFinished{
-    if([AwiseGlobal sharedInstance].isSuccess == YES){
-        self.slider1.value = [AwiseGlobal sharedInstance].pipeValue3;
-        self.slider2.value = [AwiseGlobal sharedInstance].pipeValue1;
-        self.slider3.value = [AwiseGlobal sharedInstance].pipeValue2;
-        
-        self.label1.text = [NSString stringWithFormat:@"%d%%",[AwiseGlobal sharedInstance].pipeValue3];
-        self.label2.text = [NSString stringWithFormat:@"%d%%",[AwiseGlobal sharedInstance].pipeValue1];
-        self.label3.text = [NSString stringWithFormat:@"%d%%",[AwiseGlobal sharedInstance].pipeValue2];
-    }
-    else{
-        NSLog(@"读取通道值失败");
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Get device status failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alert show];
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Get device status failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
-    }
     if([AwiseGlobal sharedInstance].isClosed == YES){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Device Has been shut down";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备总开关已关闭" withTime:1.5];
         self.slider1.enabled = NO;
         self.slider2.enabled = NO;
         self.slider3.enabled = NO;
@@ -158,79 +141,6 @@
         [self.dataArray removeObjectAtIndex:0];
     }
 }
-
-
-#pragma mark - 组织将要发送的数据
-- (void)buildDataStruct{
-    Byte b3[64];
-    for(int k=0;k<64;k++){
-        b3[k] = 0x00;
-    }
-    b3[0] = 0x55;
-    b3[1] = 0xAA;
-    b3[2] = 0x05;
-    b3[4] = 0x00;
-    if(self.modeFlag == 1){
-        b3[3] = 0x00;         //闪电
-        NSArray *sArr = [[AwiseUserDefault sharedInstance].light_sTime componentsSeparatedByString:@":"];  //开始时间
-        int shhstr = [sArr[0] intValue];
-        Byte shhbb = shhstr;
-        b3[5] = shhbb;
-        int smmstr = [sArr[1] intValue];
-        Byte smmbb = smmstr;
-        b3[6] = smmbb;
-        
-        NSArray *eArr = [[AwiseUserDefault sharedInstance].light_eTime componentsSeparatedByString:@":"];  //结束时间
-        int ehhstr = [eArr[0] intValue];
-        Byte ehhbb = ehhstr;
-        b3[7] = ehhbb;
-        int emmstr = [eArr[1] intValue];
-        Byte emmbb = emmstr;
-        b3[8] = emmbb;
-        
-        int pValue = [[AwiseUserDefault sharedInstance].light_precent intValue];   //百分比
-        Byte pbb = pValue;
-        b3[9] = pbb;
-        
-        Byte runbb = 0x01;            //立即运行，看效果
-        b3[10] = runbb;
-        
-        Byte openbb = 0x00;           //打开(关闭)
-        b3[11] = openbb;
-        [AwiseGlobal sharedInstance].mode = Lighting_Model;
-    }else if(self.modeFlag == 2){
-        b3[3] = 0x01;           //多云
-        NSArray *sArr = [[AwiseUserDefault sharedInstance].cloudy_sTime componentsSeparatedByString:@":"];  //开始时间
-        int shhstr = [sArr[0] intValue];
-        Byte shhbb = shhstr;
-        b3[5] = shhbb;
-        int smmstr = [sArr[1] intValue];
-        Byte smmbb = smmstr;
-        b3[6] = smmbb;
-        
-        NSArray *eArr = [[AwiseUserDefault sharedInstance].cloudy_eTime componentsSeparatedByString:@":"];  //结束时间
-        int ehhstr = [eArr[0] intValue];
-        Byte ehhbb = ehhstr;
-        b3[7] = ehhbb;
-        int emmstr = [eArr[1] intValue];
-        Byte emmbb = emmstr;
-        b3[8] = emmbb;
-        
-        int pValue = [[AwiseUserDefault sharedInstance].cloudy_precent intValue];   //百分比
-        Byte pbb = pValue;
-        b3[9] = pbb;
-        
-        Byte runbb = 0x01;            //立即运行，看效果
-        b3[10] = runbb;
-        
-        Byte openbb = 0x00;           //打开(关闭)
-        b3[11] = openbb;
-        [AwiseGlobal sharedInstance].mode = Cloudy_Model;
-    }
-    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
-}
-
 
 
 @end
