@@ -10,7 +10,7 @@
 #import "AwiseGlobal.h"
 #import "lineView.h"
 
-@interface EditTimerController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface EditTimerController : UIViewController<UITableViewDelegate,UITableViewDataSource,TCPSocketDelegate>{
     NSString        *navTitle;
     NSString        *fileName;
     UITableView     *timerTable;

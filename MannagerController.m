@@ -18,10 +18,13 @@
 @implementation MannagerController
 @synthesize hud;
 
+- (void)viewWillAppear:(BOOL)animated{
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance] hideTabBar:self];
     [self closeSwitch:@[@1,@2,@3,@4,@5]];
     switch ([AwiseGlobal sharedInstance].mode) {

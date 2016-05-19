@@ -24,6 +24,7 @@
 @synthesize dataArr;
 
 - (void)viewWillAppear:(BOOL)animated{
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     if([AwiseGlobal sharedInstance].freshFlag == YES){
         [self.timerTable reloadData];
         if(self.lineview != nil){
@@ -89,7 +90,7 @@
         NSLog(@"exist");
     }
     
-#pragma mark - 默认三个时间段的值
+#pragma mark ---------------------------------------- 默认三个时间段的值
     if([AwiseGlobal sharedInstance].lineArray.count == 0){
         NSMutableArray *arr1 = [[NSMutableArray alloc] initWithObjects:@"06:00",@"10",@"20",@"30", nil];
         NSMutableArray *arr2 = [[NSMutableArray alloc] initWithObjects:@"08:00",@"50",@"60",@"70", nil];
@@ -114,13 +115,9 @@
     self.dataArr = [[NSMutableArray alloc] init];
 }
 
-#pragma mark - 下载数据到设备
+#pragma mark ---------------------------------------- 下载数据到设备
 - (void)downDataToDevice{
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:WAITTIME];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:DISMISS_TIME];
+    [[AwiseGlobal sharedInstance] showWaitingView:1.5];
     NSLog(@"下载数据到设备 ");
     if(self.dataArr.count > 0)
        [self.dataArr removeAllObjects];
@@ -173,24 +170,19 @@
     }
 }
 
-- (void)confirmSuccess{
-    if([AwiseGlobal sharedInstance].isSuccess == NO){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        [self.view addSubview:self.hud];
-        self.hud.labelText = @"Failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
+#pragma mark ----------------------------------- 解析从设备的返回值
+- (void)dataBackFormDevice:(Byte *)byte{
+    if (byte[2] == 0x01 && byte[5] == 0x00){                           //下载数据到设备是否成功
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"设置定时器数据失败" withTime:1.5];
     }
 }
-
-
 
 - (void)sendTimerData:(NSData *)dd{
     Byte *by = (Byte *)[dd bytes];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:by length:64];
 }
 
-#pragma mark - 获取数据存储路径
+#pragma mark ---------------------------------------- 获取数据存储路径
 - (NSString *)getPlistPath{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -199,7 +191,7 @@
 }
 
 
-#pragma mark - 返回
+#pragma mark ---------------------------------------- 返回
 - (void)backFun{
     self.hidesBottomBarWhenPushed = NO;
     [[AwiseGlobal sharedInstance].lineArray writeToFile:[self getPlistPath] atomically:YES];
@@ -207,7 +199,7 @@
 }
 
 
-#pragma mark - 保存
+#pragma mark ---------------------------------------- 保存
 - (void)SaveData{
     NSLog(@"保存");
     [[AwiseGlobal sharedInstance].lineArray writeToFile:[self getPlistPath] atomically:YES];
@@ -286,7 +278,7 @@
     return tableRow;
 }
 
-#pragma mark - 添加行（最大24）
+#pragma mark ---------------------------------------- 添加行（最大24）
 - (IBAction)addRow:(id)sender {
     if(tableRow > 23)
         tableRow = 24;
@@ -308,7 +300,7 @@
     }
 }
 
-#pragma mark - 添加行（最小3）
+#pragma mark ---------------------------------------- 添加行（最小3）
 - (IBAction)subRow:(id)sender {
     if(tableRow < 4)
         tableRow = 3;

@@ -67,7 +67,6 @@
     [self.view addSubview:self.lineview];
     
     [self.datepicker addTarget:self action:@selector(dateChange:)forControlEvents:UIControlEventValueChanged];
-    [self.datepicker setDatePickerMode:UIDatePickerModeCountDownTimer];
     NSString *time = [self.singleArray objectAtIndex:0];
     int tv = [[time componentsSeparatedByString:@":"][0] intValue]*60*60 + [[time componentsSeparatedByString:@":"][1] intValue]*60;
     dispatch_async(dispatch_get_main_queue(), ^{

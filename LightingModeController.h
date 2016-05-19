@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface LightingModeController : UIViewController{
-    int modeFlag;   //1:闪电模式  2:多云模式
-    int percent;
-    NSString *sTime;
-    NSString *eTime;
-    int sswitch;
-    int runingValue;
-    BOOL editFlag;
-    MBProgressHUD *hud;
+@interface LightingModeController : UIViewController<TCPSocketDelegate>{
+    int                 modeFlag;   //1:闪电模式  2:多云模式
+    int                 percent;
+    NSString            *sTime;
+    NSString            *eTime;
+    int                 sswitch;
+    int                 runingValue;
+    BOOL               editFlag;
+    MBProgressHUD       *hud;
 }
 @property (assign) int modeFlag;
 @property (assign) int percent;
