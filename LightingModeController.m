@@ -26,6 +26,7 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(SaveDataAndBack)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance] hideTabBar:self];
     self.editFlag = YES; //YES:编辑开始时间   NO:编辑结束时间
     
@@ -195,11 +196,7 @@
     }else{
         self.runingValue = 1;
     }
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:WAITTIME];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     [self SaveData];
     [self buildDataStruct];
 }
@@ -211,24 +208,11 @@
     }else{
         self.sswitch = 1;
     }
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:WAITTIME];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     [self SaveData];
     [self buildDataStruct];
 }
 
-- (void)confirmSuccess{
-    if([AwiseGlobal sharedInstance].isSuccess == NO){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        [self.view addSubview:self.hud];
-        self.hud.labelText = @"Failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
-    }
-}
 
 #pragma mark - 组织将要发送的数据
 - (void)buildDataStruct{
@@ -298,6 +282,13 @@
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark ----------------------------------- 解析从设备的返回值
+- (void)dataBackFormDevice:(Byte *)byte{
+    if (byte[2] == 0x05 && byte[5] == 0x00){                           //操作定时器
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.5];
+    }
 }
 
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7E804D40B1F66607D80B60 /* libPods.a */; };
 		97128FC81CEAB1BE00F58045 /* ipScanner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 97128FC71CEAB1BE00F58045 /* ipScanner.sh */; };
+		97128FCB1CEEB3B700F58045 /* DeviceTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */; };
 		97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */; };
 		97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BE01CCA1E4600082ACB /* TCPCommunication.m */; };
 		9735C02D1CC7832A000B0727 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02C1CC7832A000B0727 /* main.m */; };
@@ -110,6 +111,7 @@
 /* Begin PBXFileReference section */
 		7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		97128FC71CEAB1BE00F58045 /* ipScanner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ipScanner.sh; sourceTree = "<group>"; };
+		97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceTypeCell.xib; sourceTree = "<group>"; };
 		97291BDC1CCA1E2C00082ACB /* UDPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPCommunication.h; sourceTree = "<group>"; };
 		97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPCommunication.m; sourceTree = "<group>"; };
 		97291BDF1CCA1E4600082ACB /* TCPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommunication.h; sourceTree = "<group>"; };
@@ -297,6 +299,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		97128FC91CEEB2D900F58045 /* DeviceTypeTableCel */ = {
+			isa = PBXGroup;
+			children = (
+				97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */,
+			);
+			name = DeviceTypeTableCel;
+			sourceTree = "<group>";
+		};
 		97291BDA1CCA1DA900082ACB /* UDP */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +400,7 @@
 		9735C04D1CC7895D000B0727 /* RootController */ = {
 			isa = PBXGroup;
 			children = (
+				97128FC91CEEB2D900F58045 /* DeviceTypeTableCel */,
 				9735C04E1CC78998000B0727 /* RootController.h */,
 				9735C04F1CC78998000B0727 /* RootController.m */,
 				9735C0501CC78998000B0727 /* RootController.xib */,
@@ -878,6 +889,7 @@
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
 				976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */,
 				9765213C1CDC3E3300EEEE01 /* btnBackimg.png in Resources */,
+				97128FCB1CEEB3B700F58045 /* DeviceTypeCell.xib in Resources */,
 				9765213E1CDC3E3300EEEE01 /* more.png in Resources */,
 				9765212A1CDC2FE600EEEE01 /* LightingModeController.xib in Resources */,
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,

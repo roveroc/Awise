@@ -66,8 +66,6 @@
     LightFishController *lightCon = [[LightFishController alloc] init];
     lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
     [self.navigationController pushViewController:lightCon animated:YES];
-    
-    
 }
 
 

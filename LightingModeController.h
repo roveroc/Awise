@@ -16,7 +16,7 @@
     NSString            *eTime;
     int                 sswitch;
     int                 runingValue;
-    BOOL               editFlag;
+    BOOL                editFlag;
     MBProgressHUD       *hud;
 }
 @property (assign) int modeFlag;

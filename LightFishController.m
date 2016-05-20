@@ -47,7 +47,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [self showTabBar];
+//    [self showTabBar];
 }
 
 
@@ -243,30 +243,22 @@
     [self.view addSubview:self.btn2];
 }
 
+#pragma mark --------------------------------------------- 获取最新的设备状态值
 - (void)refreshStatus{
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:WAITTIME];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     [self getDeviceStatus];
-    [self performSelector:@selector(getDeviceStatusFinished) withObject:nil afterDelay:WAITTIME];
 }
 
 
-#pragma mark - 进入设备管理页面
+#pragma mark --------------------------------------------- 进入设备管理页面
 - (void)gotoDeviceManagerController{
     DeviceMannagerController *deviceCon = [[DeviceMannagerController alloc] init];
     [self.navigationController pushViewController:deviceCon animated:YES];
 }
 
 
-#pragma mark - 同步时间
+#pragma mark --------------------------------------------- 同步时间
 - (void)syncDeviceTime{
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:2.5];
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:1.0];
     NSDateFormatter *dateFormatter1 =[[NSDateFormatter alloc] init];
     [dateFormatter1 setDateFormat:@"YYYY"];
     int yearstr = [[dateFormatter1 stringFromDate:[NSDate date]] intValue];
@@ -339,11 +331,7 @@
 }
 
 - (void)switchBtnClicked:(id)sender {
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [self performSelector:@selector(confirmSuccess) withObject:nil afterDelay:WAITTIME];
-    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.hud.dimBackground = YES;
-    [self.hud hide:YES afterDelay:WAITTIME];
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -357,17 +345,6 @@
     
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
-}
-
-
-
-- (void)confirmSuccess{
-    if([AwiseGlobal sharedInstance].isSuccess == NO){
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Failed";
-        [self.hud hide:YES afterDelay:DISMISS_TIME];
-    }
 }
 
 #pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
