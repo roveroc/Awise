@@ -26,6 +26,9 @@
 //插入一条设备信息
 - (BOOL)insertDeivceInfo:(NSMutableArray *)info;
 
+//删除一条设备信息
+- (BOOL)deleteDeviceInfo:(NSString *)mac;
+
 //修改设备IP地址
 - (BOOL)modifyDeviceIP:(NSString *)mac newIP:(NSString *)newip;
 

@@ -10,6 +10,10 @@
 		02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7E804D40B1F66607D80B60 /* libPods.a */; };
 		97128FC81CEAB1BE00F58045 /* ipScanner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 97128FC71CEAB1BE00F58045 /* ipScanner.sh */; };
 		97128FCB1CEEB3B700F58045 /* DeviceTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */; };
+		97128FD01CEEE54B00F58045 /* ManageDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */; };
+		97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */; };
+		97128FD61CEEEAE000F58045 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97128FD41CEEEAE000F58045 /* AboutUsController.m */; };
+		97128FD71CEEEAE000F58045 /* AboutUsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FD51CEEEAE000F58045 /* AboutUsController.xib */; };
 		97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */; };
 		97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BE01CCA1E4600082ACB /* TCPCommunication.m */; };
 		9735C02D1CC7832A000B0727 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02C1CC7832A000B0727 /* main.m */; };
@@ -112,6 +116,12 @@
 		7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		97128FC71CEAB1BE00F58045 /* ipScanner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ipScanner.sh; sourceTree = "<group>"; };
 		97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceTypeCell.xib; sourceTree = "<group>"; };
+		97128FCD1CEEE54B00F58045 /* ManageDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageDeviceController.h; sourceTree = "<group>"; };
+		97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageDeviceController.m; sourceTree = "<group>"; };
+		97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageDeviceController.xib; sourceTree = "<group>"; };
+		97128FD31CEEEAE000F58045 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
+		97128FD41CEEEAE000F58045 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
+		97128FD51CEEEAE000F58045 /* AboutUsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsController.xib; sourceTree = "<group>"; };
 		97291BDC1CCA1E2C00082ACB /* UDPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPCommunication.h; sourceTree = "<group>"; };
 		97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPCommunication.m; sourceTree = "<group>"; };
 		97291BDF1CCA1E4600082ACB /* TCPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommunication.h; sourceTree = "<group>"; };
@@ -307,6 +317,26 @@
 			name = DeviceTypeTableCel;
 			sourceTree = "<group>";
 		};
+		97128FCC1CEEE4D300F58045 /* ManageDeviceController */ = {
+			isa = PBXGroup;
+			children = (
+				97128FCD1CEEE54B00F58045 /* ManageDeviceController.h */,
+				97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */,
+				97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */,
+			);
+			name = ManageDeviceController;
+			sourceTree = "<group>";
+		};
+		97128FD21CEEEAA300F58045 /* AboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				97128FD31CEEEAE000F58045 /* AboutUsController.h */,
+				97128FD41CEEEAE000F58045 /* AboutUsController.m */,
+				97128FD51CEEEAE000F58045 /* AboutUsController.xib */,
+			);
+			name = AboutUs;
+			sourceTree = "<group>";
+		};
 		97291BDA1CCA1DA900082ACB /* UDP */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +441,8 @@
 		9735C0531CC78A2B000B0727 /* MoreController */ = {
 			isa = PBXGroup;
 			children = (
+				97128FD21CEEEAA300F58045 /* AboutUs */,
+				97128FCC1CEEE4D300F58045 /* ManageDeviceController */,
 				97651EC91CD84FB400EEEE01 /* AddDeviceController */,
 				9735C0541CC78A40000B0727 /* MoreController.h */,
 				9735C0551CC78A40000B0727 /* MoreController.m */,
@@ -901,6 +933,7 @@
 				976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
+				97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				976522151CE076A700EEEE01 /* checkerboard.png in Resources */,
 				976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */,
@@ -920,6 +953,7 @@
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
 				976521251CDC2FDC00EEEE01 /* ManualController.xib in Resources */,
 				9765211F1CDC2FA400EEEE01 /* DetailEditController.xib in Resources */,
+				97128FD71CEEEAE000F58045 /* AboutUsController.xib in Resources */,
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
@@ -989,6 +1023,7 @@
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
 				976522191CE076A700EEEE01 /* HSV.c in Sources */,
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
+				97128FD61CEEEAE000F58045 /* AboutUsController.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
 				97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */,
@@ -1011,6 +1046,7 @@
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
+				97128FD01CEEE54B00F58045 /* ManageDeviceController.m in Sources */,
 				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
 				9765221C1CE076A700EEEE01 /* KZColorPickerAlphaSlider.m in Sources */,
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,

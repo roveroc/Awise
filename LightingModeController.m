@@ -33,7 +33,6 @@
     [self.endBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     [self.datePicker addTarget:self action:@selector(dateChange:)forControlEvents:UIControlEventValueChanged];
-    [self.datePicker setDatePickerMode:UIDatePickerModeCountDownTimer];
     
     [self.switch1 setOn:NO animated:NO];
     self.runingValue = 0;

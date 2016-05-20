@@ -71,7 +71,7 @@
                 NSString *info = [resultAsString substringFromIndex:9];
                 infoArr = (NSMutableArray *)[info componentsSeparatedByString:@"&"];
             }
-            for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){                                       //判断设备是否已经添加过
+            for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){                  //判断设备是否已经添加过
                 NSMutableArray *temp = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:i];
                 if([temp containsObject:[infoArr objectAtIndex:1]]){
                     NSLog(@"该产品已添加");
@@ -80,7 +80,7 @@
             }
             if([self.sql insertDeivceInfo:infoArr] == YES){
                 NSLog(@"添加的产品信息成功 --- %@", infoArr);
-                [AwiseGlobal sharedInstance].deviceArray = [self.sql getAllDeviceInfomation];                        //获取所有已添加设备信息
+                [AwiseGlobal sharedInstance].deviceArray = [self.sql getAllDeviceInfomation];   //获取所有已添加设备信息
             }else{
                 NSLog(@"添加的产品信息出错，请再次添加");
             }

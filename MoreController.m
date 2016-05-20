@@ -7,6 +7,8 @@
 //
 
 #import "MoreController.h"
+#import "ManageDeviceController.h"
+#import "AboutUsController.h"
 
 @interface MoreController ()
 
@@ -67,6 +69,16 @@
         AddDeviceController *addCon = [[AddDeviceController alloc] init];
         addCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
         [self.navigationController pushViewController:addCon animated:YES];
+    }
+    else if (indexPath.row == 1){
+        ManageDeviceController *manCon = [[ManageDeviceController alloc] init];
+        manCon.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:manCon animated:YES];
+    }
+    else if (indexPath.row == 2){
+        AboutUsController *manCon = [[AboutUsController alloc] init];
+        manCon.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:manCon animated:YES];
     }
     else if (indexPath.row == 3){
         [self sendRouterAccount];

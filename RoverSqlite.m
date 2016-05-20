@@ -92,6 +92,23 @@
     return YES;
 }
 
+#pragma mark ------------------------------------------------ 删除一条设备信息
+- (BOOL)deleteDeviceInfo:(NSString *)mac{
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM AwiseDevice where mac = %@",mac];
+    sqlite3_stmt *stmt;
+    [self openDataBase];
+    if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK) {
+        
+    }
+    if (sqlite3_step(stmt) != SQLITE_DONE){
+        NSLog(@"删除设备信息失败");
+        return NO;
+    }
+    sqlite3_finalize(stmt);
+    sqlite3_close(database);
+    return YES;
+}
+
 #pragma mark ------------------------------------------------ 修改设备IP
 - (BOOL)modifyDeviceIP:(NSString *)mac newIP:(NSString *)newip{
     NSString *sql = [NSString stringWithFormat:@"update AwiseDevice set STA_ip='%@' where mac='%@';",newip,mac];
