@@ -14,8 +14,20 @@
 
 #pragma mark - 获取ARP表单
 - (NSMutableDictionary*) arpTable{
-    macDic = [[NSMutableDictionary alloc] init];
-    [self dump:0];
+    
+    for(int i=0;i<255;i++){
+        NSString *ip = @"192.168.1.";
+        ip = [ip stringByAppendingFormat:@"%d",i];
+        NSString *mac = [Utils ipToMac:ip];
+        NSLog(@"%@ ip 对应的mac  = %@",ip,mac);
+        
+        [macDic setObject:ip forKey:mac];
+        
+    }
+    
+    
+//    macDic = [[NSMutableDictionary alloc] init];
+//    [self dump:0];
     return macDic;
 }
 
@@ -72,9 +84,15 @@ u_char *cp;
                 continue;
             found_entry = 1;
         }
-        if (nflag == 0)
+        if (nflag == 0){
+            printf("ip ==== (%s) ", inet_ntoa(sin->sin_addr));
             hp = gethostbyaddr((caddr_t)&(sin->sin_addr),
                                sizeof sin->sin_addr, AF_INET);
+            
+            if(hp != nil)
+                NSLog(@"hp = %s",hp->h_name);
+            continue;
+        }
         else
             hp = 0;
         if (hp)

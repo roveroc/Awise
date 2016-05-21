@@ -13,12 +13,13 @@
 #import <MBProgressHUD.h>
 #import "AwiseUserDefault.h"
 #import "TCPCommunication.h"
+#import "GBPing.h"
 
 #import <SystemConfiguration/CaptiveNetwork.h>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-#define BLE_SERVICE_NAME         @"AmoRgbLight"
+#define BLE_SERVICE_NAME         @"AwiseLight"
 #define UUIDSTR_ISSC_PROPRIETARY_SERVICE    @"FFF0"
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
@@ -75,7 +76,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 
 
 
-@interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate,TCPSocketDelegate>{
+@interface AwiseGlobal : NSObject <SimplePingDelegate,PingDelegate,ScanLANDelegate,TCPSocketDelegate,GBPingDelegate>{
     NSMutableArray              *singleTouchTimerArray;
     id<PingDelegate>            delegate;
     ScanLAN                     *scan;
@@ -84,7 +85,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
     TCPCommunication            *tcpSocket;
     NSMutableArray              *deviceArray;
     ControlMode                 cMode;
-
+    GBPing                      *gbPing;
     
 /*******水族等部分********/
     NSString       *wifiSSID;
@@ -126,6 +127,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 @property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
 @property (nonatomic, retain) NSMutableArray            *deviceArray;                   //所有已添加的设备
 @property (assign)            ControlMode               cMode;                          //用来区分当前的控制模式
+@property (nonatomic, retain) GBPing                    *gbPing;
 
 
 /*******水族等部分********/

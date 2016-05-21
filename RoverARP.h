@@ -38,6 +38,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "Utils.h"
+
 @interface RoverARP : NSObject{
     
     int nflag;
@@ -46,6 +48,7 @@
 @property (nonatomic, retain) NSMutableDictionary *macDic;
 
 - (NSMutableDictionary *) arpTable;
+
 
 
 @end

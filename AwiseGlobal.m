@@ -17,6 +17,7 @@
 @synthesize tcpSocket;
 @synthesize deviceArray;
 @synthesize cMode;
+@synthesize gbPing;
 
 /*******水族等部分********/
 @synthesize wifiSSID;
@@ -152,6 +153,44 @@
     }
     self.scan = [[ScanLAN alloc] initWithDelegate:self];
     [self.scan startScan];
+//    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(gbScanner) userInfo:nil repeats:YES];
+}
+
+static int i = 0;
+
+- (void)gbScanner{
+//    self.gbPing = [[GBPing alloc] init];
+    GBPing *ping = [[GBPing alloc] init];
+    ping.delegate = self;
+    NSString *str = @"192.168.1.";
+    str = [str stringByAppendingFormat:@"%d",i++];
+    ping.host = str;
+    ping.timeout = 0.2;
+    ping.pingPeriod = 0.9;
+    
+    [ping setupWithBlock:^(BOOL success, NSError *error) { //necessary to resolve hostname
+        if (success) {
+            //start pinging
+            [self.gbPing startPinging];
+            
+            //stop it after 5 seconds
+            [self performSelector:@selector(releasePing:) withObject:ping afterDelay:0.1];
+            
+        }
+        else {
+            NSLog(@"failed to start");
+        }
+    }];
+}
+
+- (void)releasePing:(GBPing *)ping{
+    [ping stop];
+    ping.delegate = nil;
+    ping = nil;
+}
+
+-(void)ping:(GBPing *)pinger didReceiveReplyWithSummary:(GBPingSummary *)summary{
+    NSLog(@"pinger = %@",pinger.host);
 }
 
 #pragma mark -------------------------------------------------------- 遍历局域网完成

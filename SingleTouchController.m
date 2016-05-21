@@ -78,6 +78,7 @@
 //    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
 //    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
 //    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"333"];
+    [[AwiseGlobal sharedInstance] scanNetwork];
 
 }
 
@@ -125,23 +126,23 @@
     NSLog(@" ------- 扫描到的ARP表 ------- ");
     NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
     NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpDic);
-    NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
+//    NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
     //更新数据库
-    self.sql = [[RoverSqlite alloc] init];
-    if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
-        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
-        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
-        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-        }
-        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
-                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
-    }
+//    self.sql = [[RoverSqlite alloc] init];
+//    if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+//        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+//        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+//        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+//           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+//            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+//            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+//        }
+//        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+//        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+//        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+//        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+//                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+//    }
 }
 
 #pragma mark ------------------------------------------------ 连接设备成功
