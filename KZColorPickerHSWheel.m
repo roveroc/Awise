@@ -21,6 +21,9 @@
 @synthesize wheelKnobView;
 @synthesize currentHSV;
 
+@synthesize touchFlag;
+@synthesize touchTimer;
+
 - (id)initAtOrigin:(CGPoint)origin
 {
     if ((self = [super initWithFrame:CGRectMake(origin.x, origin.y, 240, 240)])) 
@@ -123,18 +126,38 @@
 		return NO;
 	
 	[self mapPointToColor:[touch locationInView:self.wheelImageView]];
+    
+    
+    if([self.touchTimer isValid]){
+        [self.touchTimer invalidate];
+        self.touchTimer = nil;
+    }
+    self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
+    [self.touchTimer fire];
+    
 	return YES;
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
+    if(self.touchFlag == NO)
+        return YES;
 	[self mapPointToColor:[touch locationInView:self.wheelImageView]];
+    self.touchFlag = NO;
 	return YES;
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
 	[self continueTrackingWithTouch:touch withEvent:event];
+    [self.touchTimer invalidate];
+    self.touchTimer = nil;
+}
+
+
+//by rover
+- (void)changeFlag{
+    self.touchFlag = YES;
 }
 
 @end

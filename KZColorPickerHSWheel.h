@@ -15,7 +15,15 @@
 	UIImageView *wheelKnobView;
 	
 	HSVType currentHSV;
+    
+    //by rover
+    BOOL touchFlag;
+    NSTimer *touchTimer;
 }
+
+@property (assign) BOOL touchFlag;
+@property (nonatomic, retain) NSTimer *touchTimer;
+
 
 @property (nonatomic) HSVType currentHSV;
 

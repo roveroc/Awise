@@ -12,4 +12,6 @@ pod 'QRCodeReaderViewController', '~> 4.0.1'                          #二维码
 
 pod "EFCircularSlider", "~> 0.1.0"                                    #圆弧slider
 
-#pod 'AudioKit', '~> 3.1'                                              #音频解析库
+#pod 'AudioKit', '~> 3.1'                                             #音频解析库
+
+pod 'ASValueTrackingSlider'                                           #UISlider

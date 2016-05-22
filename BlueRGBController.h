@@ -11,18 +11,18 @@
 #import "KZColorPicker.h"
 #import "AwiseGlobal.h"
 
-@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate>{
+@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
     KZColorPicker           *colorPicker;
     UIColor                 *selectedColor;
     CBCentralManager        *centralManager;
     CBPeripheral            *connectPeripheral;
     CBCharacteristic        *character;
     NSMutableArray          *dataArray;
-    NSTimer                 *sendTimer;
     
-    int                     rValue;
-    int                     gValue;
-    int                     bValue;
+    UIPickerView            *modePicker;
+    UISlider                *lightSlider;
+    UISlider                *modeSlider;
+    NSMutableArray          *modeArray;
 }
 
 
@@ -32,7 +32,10 @@
 @property (nonatomic, strong) CBPeripheral              *connectPeripheral;      //连接成功后的外围设备
 @property (nonatomic, strong) CBCharacteristic          *character;              //外围设备提供的特征
 @property (nonatomic, retain) NSMutableArray            *dataArray;              //带发送数据
-@property (nonatomic, retain) NSTimer                   *sendTimer;              //定时轮询数据
+@property (nonatomic, retain) UIPickerView              *modePicker;             //模式选择器
+@property (nonatomic, retain) NSMutableArray            *modeArray;              //模式
+@property (nonatomic, retain) UISlider                  *lightSlider;            //模式
+@property (nonatomic, retain) UISlider                  *modeSlider;             //模式
 
 @property (assign) int rValue;
 @property (assign) int gValue;

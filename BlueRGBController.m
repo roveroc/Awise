@@ -19,8 +19,10 @@
 @synthesize connectPeripheral;
 @synthesize character;
 @synthesize dataArray;
-@synthesize sendTimer;
-@synthesize rValue,gValue,bValue;
+@synthesize modePicker;
+@synthesize modeArray;
+@synthesize lightSlider;
+@synthesize modeSlider;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -32,17 +34,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    self.rValue = 0;
-    self.gValue = 0;
-    self.bValue = 0;
-    
     // Do any additional setup after loading the view from its nib.
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.centralManager = [[CBCentralManager alloc]
                            initWithDelegate:self queue:dispatch_get_main_queue()];
-    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(sendDataToBLEDevice) userInfo:nil repeats:YES];
+    self.modeArray = [[NSMutableArray alloc] initWithObjects:
+                      @"黑 色 输 出",
+                      @"红 色 输 出",
+                      @"绿 色 输 出",
+                      @"蓝 色 输 出",
+                      @"黄 色 输 出",
+                      @"紫 色 输 出",
+                      @"青 色 输 出",
+                      @"白 色 输 出",
+                      @"三 色 跳 变",
+                      @"七 色 跳 变",
+                      @"三 色 渐 变",
+                      @"七 色 渐 变",
+                      @"红 色 频 闪",
+                      @"绿 色 频 闪",
+                      @"蓝 色 频 闪",
+                      @"黄 色 频 闪",
+                      @"紫 色 频 闪",
+                      @"青 色 频 闪",
+                      @"白 色 频 闪",
+                      @"红 蓝 交 替 渐 变",
+                      @"蓝 绿 交 替 渐 变",
+                      @"红 绿 交 替 渐 变",
+                      @"红 色 爆 闪",
+                      @"绿 色 爆 闪",
+                      @"蓝 色 爆 闪",
+                      @"黄 色 爆 闪",
+                      @"紫 色 爆 闪",
+                      @"青 色 爆 闪",
+                      @"白 色 爆 闪",
+                      @"三 色 爆 闪",
+                      @"七 色 爆 闪",
+                      @"三 色 闪 变",
+                      @"七 色 闪 变",
+                      @"红 色 呼 吸 渐 变",
+                      @"绿 色 呼 吸 渐 变",
+                      @"蓝 色 呼 吸 渐 变",
+                      @"黄 色 呼 吸 渐 变",
+                      @"紫 色 呼 吸 渐 变",
+                      @"青 色 呼 吸 渐 变",
+                      @"白 色 呼 吸 渐 变",
+                      @"三 色 呼 吸 渐 变",
+    nil];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
@@ -133,112 +172,77 @@
     [colorPicker addTarget:self action:@selector(pickerChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:colorPicker];
     
-//    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(5, 50, 80, 80)];
-//    [btn1 setTitle:@"红++" forState:UIControlStateNormal];
-//    [btn1 addTarget:self action:@selector(sendData1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn1];
-//    
-//    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(5, 150, 80, 80)];
-//    [btn2 setTitle:@"绿++" forState:UIControlStateNormal];
-//    [btn2 addTarget:self action:@selector(sendData2) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn2];
-//    
-//    UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(5, 250, 80, 80)];
-//    [btn3 setTitle:@"蓝++" forState:UIControlStateNormal];
-//    [btn3 addTarget:self action:@selector(sendData3) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn3];
-//    
-//    UIButton *btn1_1 = [[UIButton alloc] initWithFrame:CGRectMake(230, 50, 80, 80)];
-//    [btn1_1 setTitle:@"红--" forState:UIControlStateNormal];
-//    [btn1_1 addTarget:self action:@selector(sendData1_1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn1_1];
-//    
-//    UIButton *btn2_1 = [[UIButton alloc] initWithFrame:CGRectMake(230, 150, 80, 80)];
-//    [btn2_1 setTitle:@"绿--" forState:UIControlStateNormal];
-//    [btn2_1 addTarget:self action:@selector(sendData2_1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn2_1];
-//    
-//    UIButton *btn3_1 = [[UIButton alloc] initWithFrame:CGRectMake(230, 250, 80, 80)];
-//    [btn3_1 setTitle:@"蓝--" forState:UIControlStateNormal];
-//    [btn3_1 addTarget:self action:@selector(sendData3_1) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn3_1];
+    self.modePicker = [[UIPickerView alloc] init];
+    self.modePicker.dataSource = self;
+    self.modePicker.delegate = self;
+    if(iPhone6){
+        self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
+    }
+    [self.view addSubview:self.modePicker];
     
-//    UIButton *btn4 = [[UIButton alloc] initWithFrame:CGRectMake(280, 50, 80, 80)];
-//    [btn4 setTitle:@"归零" forState:UIControlStateNormal];
-//    [btn4 addTarget:self action:@selector(sendData4) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btn4];
+    self.lightSlider = [[UISlider alloc] init];
+    self.lightSlider.minimumValue = 0;
+    self.lightSlider.maximumValue = 100;
+    self.modeSlider  = [[UISlider alloc] init];
+    self.modeSlider.minimumValue = 0;
+    self.modeSlider.maximumValue = 100;
+    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"area_school.png"];
+    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"area_school.png"];
+    if(iPhone6){
+        self.lightSlider.frame = CGRectMake(50, 400+130, SCREEN_WIDHT-100, 20);
+        self.modeSlider.frame  = CGRectMake(50, 400+130+40+5, SCREEN_WIDHT-100, 20);
+    }
+    [self.view addSubview:self.lightSlider];
+    [self.view addSubview:self.modeSlider];
+    [self.view bringSubviewToFront:self.lightSlider];
+    [self.view bringSubviewToFront:self.modeSlider];
+    [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    
 }
 
-- (void)sendData1{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue++;
-    by[2] = gValue;
-    by[3] = bValue;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+#pragma mark ----------------------------------- 亮度值改变
+- (void)lightSliderValueChange:(UISlider *)slider{
+    
 }
 
-- (void)sendData2{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue;
-    by[2] = gValue++;
-    by[3] = bValue;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+#pragma mark ----------------------------------- 模式速度改变
+- (void)modeSliderValueChange:(UISlider *)slider{
+    
 }
 
-- (void)sendData3{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue;
-    by[2] = gValue;
-    by[3] = bValue++;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+#pragma mark ----------------------------------- 多少组
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
 }
 
-- (void)sendData1_1{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue--;
-    by[2] = gValue;
-    by[3] = bValue;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+#pragma mark ----------------------------------- 每组多少个
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return self.modeArray.count;
 }
 
-- (void)sendData2_1{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue;
-    by[2] = gValue--;
-    by[3] = bValue;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+#pragma mark ----------------------------------- 选中某一行
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    if(self.character != nil){
+//        Byte by[4];
+//        by[0] = 1;
+//        by[1] = r;
+//        by[2] = g;
+//        by[3] = b;
+//        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+//        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        
+    }
 }
 
-- (void)sendData3_1{
-    Byte by[4];
-    by[0] = 1;
-    by[1] = rValue;
-    by[2] = gValue;
-    by[3] = bValue--;
-    NSData *da = [[NSData alloc] initWithBytes:by length:4];
-    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-    NSLog(@"发送的数据为 ====  %d   %d  %d",rValue,gValue,bValue);
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
+    return 45;
 }
 
-- (void)sendData4{
-    rValue = 0;
-    gValue = 0;
-    bValue = 0;
+#pragma mark ----------------------------------- 每行标题
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return self.modeArray[row];
 }
 
 #pragma mark ----------------------------------- 颜色改变
@@ -256,20 +260,7 @@
         by[2] = g;
         by[3] = b;
         NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.dataArray addObject:da];
-//        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        
-    }
-}
-
-#pragma mark ------------------------------------ 定时器轮询发送数据
-- (void)sendDataToBLEDevice{
-    if(self.dataArray.count > 0){
-        NSData *da = [self.dataArray objectAtIndex:0];
-        NSLog(@"发送的数据为 ====   %@",da);
         [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        [self.dataArray removeObjectAtIndex:0];
-//        [self.connectPeripheral readValueForCharacteristic:self.character];
         
     }
 }

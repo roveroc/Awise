@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7E804D40B1F66607D80B60 /* libPods.a */; };
-		97128FC81CEAB1BE00F58045 /* ipScanner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 97128FC71CEAB1BE00F58045 /* ipScanner.sh */; };
 		97128FCB1CEEB3B700F58045 /* DeviceTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */; };
 		97128FD01CEEE54B00F58045 /* ManageDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */; };
 		97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */; };
@@ -114,7 +113,6 @@
 
 /* Begin PBXFileReference section */
 		7F4A24A3778B2179C72FCB1C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		97128FC71CEAB1BE00F58045 /* ipScanner.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ipScanner.sh; sourceTree = "<group>"; };
 		97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceTypeCell.xib; sourceTree = "<group>"; };
 		97128FCD1CEEE54B00F58045 /* ManageDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageDeviceController.h; sourceTree = "<group>"; };
 		97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageDeviceController.m; sourceTree = "<group>"; };
@@ -359,7 +357,6 @@
 		9735C01F1CC7832A000B0727 = {
 			isa = PBXGroup;
 			children = (
-				97128FC71CEAB1BE00F58045 /* ipScanner.sh */,
 				9735C0851CC8A2D9000B0727 /* tempFile.h */,
 				9735C0451CC7839F000B0727 /* Podfile */,
 				9735C04C1CC7894B000B0727 /* ViewController */,
@@ -937,7 +934,6 @@
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				976522151CE076A700EEEE01 /* checkerboard.png in Resources */,
 				976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */,
-				97128FC81CEAB1BE00F58045 /* ipScanner.sh in Resources */,
 				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
 				97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */,
 				976522221CE076A700EEEE01 /* pickerColorWheel@2x.png in Resources */,

@@ -43,7 +43,9 @@
 {
 	// set the frame to a fixed 300 x 300
 	//self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, 300, 280);
-	self.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor colorWithRed:0.225 green:0.225 blue:0.225 alpha:1.000];
+//	self.backgroundColor = IS_IPAD ? [UIColor clearColor] : [UIColor colorWithRed:0.225 green:0.225 blue:0.225 alpha:1.000];
+    
+    self.backgroundColor =[UIColor clearColor];
     
     //by rover
     CGPoint point;
@@ -52,7 +54,7 @@
     }else if (iPhone5){
         point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
     }else if (iPhone6){
-        point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
+        point = CGPointMake((SCREEN_WIDHT-240)/2, 5+74);
     }else if (iPhone6P){
         point = CGPointMake((SCREEN_WIDHT-240)/2, 15+74);
     }else{
@@ -295,7 +297,8 @@ RGBType rgbWithUIColor(UIColor *color)
         CGFloat swatchCellWidth = totalWidth / 6.0;
         
         int sx = 20;
-        int sy = 370;
+//        int sy = 370;
+        int sy = 340;
         for (KZColorPickerSwatchView *swatch in self.swatches)
         {
             swatch.frame = CGRectMake(sx + swatchCellWidth * 0.5 - 18.0,
