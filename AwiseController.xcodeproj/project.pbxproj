@@ -95,6 +95,8 @@
 		976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522141CE076A700EEEE01 /* UIColor-Expanded.m */; };
 		976522271CE0793400EEEE01 /* BlueRGBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522251CE0793400EEEE01 /* BlueRGBController.m */; };
 		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
+		977575231CF1911100D34D45 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575201CF1911100D34D45 /* ASValuePopUpView.m */; };
+		977575241CF1911100D34D45 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575221CF1911100D34D45 /* ASValueTrackingSlider.m */; };
 		97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97930FC61CE5BC7C006601D8 /* Reachability.m */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
@@ -247,6 +249,10 @@
 		976522241CE0793400EEEE01 /* BlueRGBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueRGBController.h; sourceTree = "<group>"; };
 		976522251CE0793400EEEE01 /* BlueRGBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueRGBController.m; sourceTree = "<group>"; };
 		976522261CE0793400EEEE01 /* BlueRGBController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlueRGBController.xib; sourceTree = "<group>"; };
+		9775751F1CF1911100D34D45 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
+		977575201CF1911100D34D45 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
+		977575211CF1911100D34D45 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
+		977575221CF1911100D34D45 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
 		97930FC51CE5BC7C006601D8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		97930FC61CE5BC7C006601D8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
@@ -403,6 +409,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				9775751E1CF190FB00D34D45 /* PopSlider */,
 				97930FC41CE5BC69006601D8 /* Reachability */,
 				976521FC1CE0765E00EEEE01 /* ColorPciker */,
 				9735C0751CC87EA2000B0727 /* Sqlite */,
@@ -783,6 +790,17 @@
 			name = ColorPciker;
 			sourceTree = "<group>";
 		};
+		9775751E1CF190FB00D34D45 /* PopSlider */ = {
+			isa = PBXGroup;
+			children = (
+				9775751F1CF1911100D34D45 /* ASValuePopUpView.h */,
+				977575201CF1911100D34D45 /* ASValuePopUpView.m */,
+				977575211CF1911100D34D45 /* ASValueTrackingSlider.h */,
+				977575221CF1911100D34D45 /* ASValueTrackingSlider.m */,
+			);
+			name = PopSlider;
+			sourceTree = "<group>";
+		};
 		97930FC41CE5BC69006601D8 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -1041,11 +1059,13 @@
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */,
+				977575241CF1911100D34D45 /* ASValueTrackingSlider.m in Sources */,
 				9735C0571CC78A40000B0727 /* MoreController.m in Sources */,
 				97128FD01CEEE54B00F58045 /* ManageDeviceController.m in Sources */,
 				9735C0721CC86CC3000B0727 /* RoverQRCode.m in Sources */,
 				9765221C1CE076A700EEEE01 /* KZColorPickerAlphaSlider.m in Sources */,
 				9735C0641CC78FF0000B0727 /* Utils.m in Sources */,
+				977575231CF1911100D34D45 /* ASValuePopUpView.m in Sources */,
 				97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */,
 				9765221F1CE076A700EEEE01 /* KZColorPickerSwatchView.m in Sources */,
 				97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */,

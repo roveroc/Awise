@@ -23,6 +23,11 @@
 @synthesize modeArray;
 @synthesize lightSlider;
 @synthesize modeSlider;
+@synthesize lightValue;
+@synthesize speedValue;
+@synthesize modeValue;
+@synthesize onButton;
+@synthesize offButton;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -35,6 +40,9 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+    self.speedValue = 100;
+    self.lightValue = 100;
+    self.modeValue  = 10;
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.centralManager = [[CBCentralManager alloc]
@@ -179,18 +187,51 @@
         self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
     }
     [self.view addSubview:self.modePicker];
+//关按钮
+    self.offButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.onButton  = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.offButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x"]
+                              forState:UIControlStateNormal];
+    [self.onButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x"]
+                              forState:UIControlStateNormal];
+    if(iPhone6){
+        self.offButton.frame = CGRectMake(10, 78, 60, 60);
+        self.onButton.frame = CGRectMake(305, 78, 60, 60);
+    }
+    [self.offButton addTarget:self
+                       action:@selector(turnOffDevice)
+             forControlEvents:UIControlEventTouchUpInside];
+    [self.onButton addTarget:self
+                       action:@selector(turnOnDevice)
+             forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.offButton];
+    [self.view addSubview:self.onButton];
     
-    self.lightSlider = [[UISlider alloc] init];
+//亮度值滑条
+    self.lightSlider = [[ASValueTrackingSlider alloc] init];
     self.lightSlider.minimumValue = 0;
     self.lightSlider.maximumValue = 100;
-    self.modeSlider  = [[UISlider alloc] init];
+    self.lightSlider.popUpViewCornerRadius = 12.0;
+    [self.lightSlider setMaxFractionDigitsDisplayed:0];
+    self.lightSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
+    self.lightSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
+    self.lightSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
+    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
+    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
+//速度值滑条
+    self.modeSlider  = [[ASValueTrackingSlider alloc] init];
     self.modeSlider.minimumValue = 0;
-    self.modeSlider.maximumValue = 100;
-    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"area_school.png"];
-    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"area_school.png"];
-    if(iPhone6){
-        self.lightSlider.frame = CGRectMake(50, 400+130, SCREEN_WIDHT-100, 20);
-        self.modeSlider.frame  = CGRectMake(50, 400+130+40+5, SCREEN_WIDHT-100, 20);
+    self.modeSlider.maximumValue = 20;
+    self.modeSlider.popUpViewCornerRadius = 12.0;
+    [self.modeSlider setMaxFractionDigitsDisplayed:0];
+    self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
+    self.modeSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
+    self.modeSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
+    self.modeSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
+    self.modeSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
+    if(iPhone6 || iPhone5){
+        self.lightSlider.frame = CGRectMake(20, 400+130, SCREEN_WIDHT-40, 20);
+        self.modeSlider.frame  = CGRectMake(20, 400+130+40+5, SCREEN_WIDHT-40, 20);
     }
     [self.view addSubview:self.lightSlider];
     [self.view addSubview:self.modeSlider];
@@ -198,18 +239,45 @@
     [self.view bringSubviewToFront:self.modeSlider];
     [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
-    
-    
+}
+
+#pragma mark ----------------------------------- 关闭
+- (void)turnOffDevice{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 1;
+        by[1] = 0;
+        by[2] = 0;
+        by[3] = 0;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+#pragma mark ----------------------------------- 打开
+- (void)turnOnDevice{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 3;
+        by[1] = 0;
+        by[2] = 0;
+        by[3] = 0;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        
+    }
 }
 
 #pragma mark ----------------------------------- 亮度值改变
 - (void)lightSliderValueChange:(UISlider *)slider{
-    
+    self.lightValue = (int)slider.value;
+    [self sendModeData];
 }
 
 #pragma mark ----------------------------------- 模式速度改变
 - (void)modeSliderValueChange:(UISlider *)slider{
-    
+    self.speedValue = (int)slider.value;
+    [self sendModeData];
 }
 
 #pragma mark ----------------------------------- 多少组
@@ -224,16 +292,8 @@
 
 #pragma mark ----------------------------------- 选中某一行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if(self.character != nil){
-//        Byte by[4];
-//        by[0] = 1;
-//        by[1] = r;
-//        by[2] = g;
-//        by[3] = b;
-//        NSData *da = [[NSData alloc] initWithBytes:by length:4];
-//        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        
-    }
+    self.modeValue = (int)row;
+    [self sendModeData];
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -264,6 +324,21 @@
         
     }
 }
+
+#pragma mark ----------------------------------- 发送模式数据
+- (void)sendModeData{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 2;
+        by[1] = self.modeValue;
+        by[2] = self.lightValue;
+        by[3] = self.speedValue;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        
+    }
+}
+
 
 - (void)peripheral:(CBPeripheral *)peripheral
 didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic

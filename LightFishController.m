@@ -80,9 +80,11 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
     self.navigationItem.rightBarButtonItem = leftItem;
     
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].isSuccess = NO;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+    
     
     self.backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
     self.backImg.image = [UIImage imageNamed:@"lightFishBackImg.png"];
@@ -92,12 +94,15 @@
     
 //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
     if([AwiseGlobal sharedInstance].cMode == AP){
         if(self.deviceInfo.count > 0){
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
             [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
         }
+        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+        
     }
     else if([AwiseGlobal sharedInstance].cMode == STA){
         if(self.deviceInfo.count > 0){
