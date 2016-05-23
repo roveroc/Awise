@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIImageView-Letters.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XHRadarView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6FA7E2668F0D7B2030B88FBEFA7B85B4</key>
+		<key>4CD490B6B8C2C00A6F12C2BF479A4206</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8237F90419B78E5E6A9B6D1CDF623AE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,12 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D2098E6BCA4BF13AE196B1A424D66F55</key>
+		<key>B4F943F2FD64499A1AAC7DE67C3DDC75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FB11638447466992183B0695EAD26336</key>
+		<key>E90B619638E2DB3E4D26FF1FF1F16096</key>
 		<dict>
 			<key>primary</key>
 			<true/>

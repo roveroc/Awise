@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FB6FB4AC91CB8A8BF2602742'
-               BlueprintName = 'EFCircularSlider'
+               BlueprintIdentifier = 'A2884498E0C1ED449F570065'
+               BlueprintName = 'UIImageView-Letters'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libEFCircularSlider.a'>
+               BuildableName = 'libUIImageView-Letters.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

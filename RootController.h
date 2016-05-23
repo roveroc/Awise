@@ -13,8 +13,9 @@
 #import "AwiseGlobal.h"
 #import "LightFishController.h"
 #import "BlueRGBController.h"
+#import <UIImageView+Letters.h>
 
-@interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate>{
+@interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate,UIGestureRecognizerDelegate>{
     RoverSqlite *sqlite;
     TCPCommunication *tcpSocket;
     
@@ -24,15 +25,17 @@
 @property (nonatomic, retain) RoverSqlite *sqlite;
 @property (nonatomic, retain) TCPCommunication *tcpSocket;
 
-
-
 - (IBAction)VIPClicked:(id)sender;
-
-
 - (IBAction)searchFun:(id)sender;
-
-
 - (IBAction)changeFun:(id)sender;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *deviceImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *deviceImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *deviceImage3;
+@property (weak, nonatomic) IBOutlet UIImageView *deviceImage4;
+
+
 
 
 @end
