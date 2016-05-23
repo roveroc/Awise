@@ -29,8 +29,8 @@
 - (void)connectToDevice:(NSString *)host port:(NSString *)port{
     self.reConnectCount = 0;
     if([socket isConnected]){
-//        [socket disconnect];
-        NSLog(@"设备已连接 ");
+        [socket disconnect];
+//        NSLog(@"设备已连接 ");
         return;
     }
     socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
@@ -38,7 +38,7 @@
     [socket disconnect];    //断开tcp连接
     @try {
         [socket connectToHost:host onPort:[port intValue] error:nil];
-        [socket readDataWithTimeout:0.5 tag:1];
+        [socket readDataWithTimeout:-1 tag:1];
     }
     @catch (NSException *exception) { //异常处理
         NSLog(@"连接设备异常 %@,%@", [exception name], [exception description]);
@@ -63,15 +63,15 @@
 - (void)sendMeesageToDevice:(Byte [])data length:(int)length{
     NSData *da = [[NSData alloc] initWithBytes:data length:length];
     NSLog(@"============ 发送的数据 = :%@",da);
-    [socket readDataWithTimeout:0.5 tag:1];
-    [socket writeData:da withTimeout:0.5 tag:1];
+    [socket readDataWithTimeout:-1 tag:1];
+    [socket writeData:da withTimeout:-1 tag:1];
     self.responeFlag = NO;
-    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:1];
 }
 
 #pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
 - (void)isDeviceRespone{
-    if(self.responeFlag == YES){
+    if(self.responeFlag == NO){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"操作可能失败了";

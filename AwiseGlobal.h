@@ -48,7 +48,7 @@
 #define BroadCast   @"255.255.255.255"     //广播地址
 #define WAITTIME    2.0
 #define DISMISS_TIME 1.5
-#define WIFISSID    @"Awise-"
+#define WIFISSID    @"Awise"
 
 typedef enum{
     Manual_Model = 0,

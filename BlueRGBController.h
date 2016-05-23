@@ -29,8 +29,10 @@
     int                     speedValue;
     int                     modeValue;
     
-    UIButton                *onButton;
-    UIButton                *offButton;
+    UIButton                *onOffButton;
+    UIButton                *PlayPauseButton;
+    BOOL                    offFlag;
+    BOOL                    palyFlag;
     
     UIScrollView            *backScrollView;
 }
@@ -48,8 +50,11 @@
 @property (assign)            int                   lightValue;              //亮度值
 @property (assign)            int                   speedValue;              //速度值
 @property (assign)            int                   modeValue;               //速度值
-@property (nonatomic, retain) UIButton              *onButton;               //开灯
-@property (nonatomic, retain) UIButton              *offButton;              //关灯
+@property (assign)            BOOL                  offFlag;                 //开关标识
+@property (assign)            BOOL                  palyFlag;                //播放标识
+@property (nonatomic, retain) UIButton              *onOffButton;            //开关
+@property (nonatomic, retain) UIButton              *PlayPauseButton;        //播放、暂停
+
 @property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
 
 @end

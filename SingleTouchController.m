@@ -32,52 +32,52 @@
      *
      *六个字段：name,mac,AP_ip,STA_ip,model,description
      */
-    [AwiseGlobal sharedInstance].delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"333";
-    if([AwiseGlobal sharedInstance].cMode == AP){
-        if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-        }
-    }
-    else if([AwiseGlobal sharedInstance].cMode == STA){
-        if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-        }
-    }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
-    }
-    
-    //初始化定时器数据
-    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer];
-    [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
-    //如果无数据则初始化默认数据
-    if([AwiseGlobal sharedInstance].singleTouchTimerArray == nil){
-        [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] init];
-        NSString *time      = @"10:00";
-        NSString *percent   = @"100";
-        NSString *week      = @"1&1&1&1&1&1&1&1";
-        NSString *_switch   = @"0";
-        NSMutableArray *oneTimer = [[NSMutableArray alloc] initWithObjects:time,percent,week,_switch, nil];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
-        [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
-    }
+//    [AwiseGlobal sharedInstance].delegate = self;
+//    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"333";
+//    if([AwiseGlobal sharedInstance].cMode == AP){
+//        if(self.deviceInfo.count > 0){
+//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+//        }
+//    }
+//    else if([AwiseGlobal sharedInstance].cMode == STA){
+//        if(self.deviceInfo.count > 0){
+//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+//        }
+//    }else{
+//        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
+//    }
+//    
+//    //初始化定时器数据
+//    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer];
+//    [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+//    //如果无数据则初始化默认数据
+//    if([AwiseGlobal sharedInstance].singleTouchTimerArray == nil){
+//        [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] init];
+//        NSString *time      = @"10:00";
+//        NSString *percent   = @"100";
+//        NSString *week      = @"1&1&1&1&1&1&1&1";
+//        NSString *_switch   = @"0";
+//        NSMutableArray *oneTimer = [[NSMutableArray alloc] initWithObjects:time,percent,week,_switch, nil];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray addObject:oneTimer];
+//        [[AwiseGlobal sharedInstance].singleTouchTimerArray writeToFile:filePath atomically:YES];
+//    }
     
     //真正逻辑，不需要这块代码
-//    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-//       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-//        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-//        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-//    }
-//    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.1.108" port:@"4567"];
+    if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+       [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
+        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+        [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+    }
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
     
 //    [[AwiseGlobal sharedInstance] scanNetwork];
 
@@ -478,12 +478,12 @@
     switch (byte[2]) {
         case 0x01:              //读取状态返回值
         {
-            if(byte[6] == 0x01){            //开状态
+            if(byte[5] == 0x01){            //开状态
                 switchState = NO;
-                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
             }else{                          //关状态
                 switchState = YES;
-                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+                [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
             }
             [tbSlider setNeedsDisplay];     //亮度值
             tbSlider.angle = byte[6];
@@ -491,10 +491,10 @@
             break;
         case 0x02:              //开关状态返回值
         {
-            if(byte[6] == 0x00){
+            if(byte[5] == 0x00){
                 [[AwiseGlobal sharedInstance] showRemindMsg:@"操作失败" withTime:1.5];
             }
-            else if(byte[6] == 0x01){
+            else if(byte[5] == 0x01){
                 if(switchState == NO){
                     [switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
                     switchState = YES;

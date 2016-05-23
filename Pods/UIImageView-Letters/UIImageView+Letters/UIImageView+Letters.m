@@ -98,7 +98,10 @@ static const CGFloat kFontResizingProportion = 0.42f;
     
     UIColor *backgroundColor = color ? color : [self randomColor];
 
-    self.image = [self imageSnapshotFromText:[displayString uppercaseString] backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
+    //self.image = [self imageSnapshotFromText:[displayString uppercaseString] backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
+    
+    //by rover
+    self.image = [self imageSnapshotFromText:displayString backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
 }
 
 #pragma mark - Helpers
