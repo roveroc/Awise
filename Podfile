@@ -14,4 +14,6 @@ pod "EFCircularSlider", "~> 0.1.0"                                    #圆弧sli
 
 #pod 'AudioKit', '~> 3.1'                                             #音频解析库
 
-pod 'ASValueTrackingSlider'                                           #UISlider
+#pod 'ASValueTrackingSlider'                                          #UISlider
+
+pod "UIImageView-Letters"                                             #圆形Image带文件

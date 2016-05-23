@@ -42,6 +42,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [[AwiseGlobal sharedInstance] hideTabBar:self];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backFun)];
     self.navigationItem.leftBarButtonItem = leftItem;
@@ -76,7 +77,7 @@
     timerTable = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     timerTable.delegate = self;
     timerTable.dataSource = self;
-    [timerTable setBackgroundColor:[UIColor clearColor]];
+    [timerTable setBackgroundColor:[UIColor whiteColor]];
     self.tableRow = 6;
     [self.view addSubview:timerTable];
     

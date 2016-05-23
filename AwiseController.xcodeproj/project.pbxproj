@@ -616,12 +616,12 @@
 			isa = PBXGroup;
 			children = (
 				976520FE1CDB518D00EEEE01 /* MainController */,
-				976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect */,
-				976521071CDC2DFB00EEEE01 /* DeviceMannagerController */,
+				976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect(no use) */,
+				976521071CDC2DFB00EEEE01 /* DeviceMannagerController(no use) */,
 				976521061CDC2DEB00EEEE01 /* LightingModeController */,
 				976521051CDC2DD500EEEE01 /* EditTimerSetting */,
 				976521041CDC2DC000EEEE01 /* SettingController */,
-				976521201CDC2FB300EEEE01 /* ManualController */,
+				976521201CDC2FB300EEEE01 /* ManualController(no use) */,
 			);
 			name = LightFish;
 			sourceTree = "<group>";
@@ -679,24 +679,24 @@
 			name = LightingModeController;
 			sourceTree = "<group>";
 		};
-		976521071CDC2DFB00EEEE01 /* DeviceMannagerController */ = {
+		976521071CDC2DFB00EEEE01 /* DeviceMannagerController(no use) */ = {
 			isa = PBXGroup;
 			children = (
 				9765212B1CDC302200EEEE01 /* DeviceMannagerController.h */,
 				9765212C1CDC302200EEEE01 /* DeviceMannagerController.m */,
 				9765212D1CDC302200EEEE01 /* DeviceMannagerController.xib */,
 			);
-			name = DeviceMannagerController;
+			name = "DeviceMannagerController(no use)";
 			sourceTree = "<group>";
 		};
-		976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect */ = {
+		976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect(no use) */ = {
 			isa = PBXGroup;
 			children = (
 				976521301CDC302E00EEEE01 /* MannagerController.h */,
 				976521311CDC302E00EEEE01 /* MannagerController.m */,
 				976521321CDC302E00EEEE01 /* MannagerController.xib */,
 			);
-			name = "MannagerTimer&Effect";
+			name = "MannagerTimer&Effect(no use)";
 			sourceTree = "<group>";
 		};
 		976521131CDC2F2600EEEE01 /* DrawLine */ = {
@@ -726,14 +726,14 @@
 			name = DetailEdit;
 			sourceTree = "<group>";
 		};
-		976521201CDC2FB300EEEE01 /* ManualController */ = {
+		976521201CDC2FB300EEEE01 /* ManualController(no use) */ = {
 			isa = PBXGroup;
 			children = (
 				976521211CDC2FDC00EEEE01 /* ManualController.h */,
 				976521221CDC2FDC00EEEE01 /* ManualController.m */,
 				976521231CDC2FDC00EEEE01 /* ManualController.xib */,
 			);
-			name = ManualController;
+			name = "ManualController(no use)";
 			sourceTree = "<group>";
 		};
 		976521351CDC3DE300EEEE01 /* LightFishImg */ = {

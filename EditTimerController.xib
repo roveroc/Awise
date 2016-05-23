@@ -15,9 +15,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8fx-lm-ylh">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="RIa-aV-NEZ">
                     <rect key="frame" x="10" y="165" width="300" height="22"/>
                     <constraints>
@@ -46,21 +43,16 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="8fx-lm-ylh" secondAttribute="trailing" id="262-nS-sIe"/>
                 <constraint firstAttribute="trailing" secondItem="RIa-aV-NEZ" secondAttribute="trailing" constant="10" id="Ln2-86-6v7"/>
-                <constraint firstAttribute="bottom" secondItem="8fx-lm-ylh" secondAttribute="bottom" id="Wbh-cW-sMP"/>
-                <constraint firstItem="8fx-lm-ylh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dRx-BF-ur3"/>
-                <constraint firstItem="8fx-lm-ylh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ea0-Gg-G4B"/>
                 <constraint firstItem="RIa-aV-NEZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="gxc-dm-dpO"/>
                 <constraint firstItem="RIa-aV-NEZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="165" id="qkh-N3-cTx"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-614" y="419"/>
+            <point key="canvasLocation" x="-695" y="401"/>
         </view>
     </objects>
     <resources>
-        <image name="lightFishBackImg.png" width="320" height="568"/>
         <image name="orgbtn.png" width="220" height="46"/>
         <image name="timeLine.png" width="608" height="42"/>
     </resources>

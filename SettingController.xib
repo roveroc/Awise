@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="8Wu-K7-3ad">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Wu-K7-3ad">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version:1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqw-sa-KBJ">
@@ -72,6 +72,5 @@
     <resources>
         <image name="btnBackimg.png" width="136" height="84"/>
         <image name="fishlogo.png" width="158" height="89"/>
-        <image name="lightFishBackImg.png" width="320" height="568"/>
     </resources>
 </document>

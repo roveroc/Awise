@@ -11,53 +11,56 @@
 #import "RoverSqlite.h"
 
 @interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate>{
-    BOOL            onoffFlag;
-    MBProgressHUD   *hud;
-    MBProgressHUD   *hud1;
-    
-    UIButton        *switchBtn;
-    
-    UIButton        *btn1;
-    UIButton        *btn2;
-    UIButton        *btn3;
-    UIButton        *btn4;
-    UIButton        *btn5;
-    UIButton        *btn6;
-    
-    UILabel         *windowLabel;
-    UILabel         *timeLabel;
-    
-    UIImageView     *runImg;
-    UIImageView     *backImg;
+    int                     pipe1Value;
+    int                     pipe2Value;
+    int                     pipe3Value;
+    NSMutableArray          *dataArray;
+    NSTimer                 *sendTimer;
     NSMutableArray          *deviceInfo;
     RoverSqlite             *sql;
 }
-@property (assign) BOOL onoffFlag;
-@property (nonatomic, retain) MBProgressHUD *hud;
-@property (nonatomic, retain) MBProgressHUD *hud1;
-
-//@property (weak, nonatomic) IBOutlet UIButton *switchBtn;
-//@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-
-@property (nonatomic, retain) UIButton *switchBtn;
-
-@property (nonatomic, retain) UIButton *btn1;
-@property (nonatomic, retain) UIButton *btn2;
-@property (nonatomic, retain) UIButton *btn3;
-@property (nonatomic, retain) UIButton *btn4;
-@property (nonatomic, retain) UIButton *btn5;
-@property (nonatomic, retain) UIButton *btn6;
-
-@property (nonatomic, retain) UIImageView *backImg;
-@property (nonatomic, retain) UIImageView *runImg;
-
-@property (nonatomic, retain) UILabel       *windowLabel;
-@property (nonatomic, retain) UILabel       *timeLabel;
+@property (assign)            int                   pipe1Value;           //三个通道值
+@property (assign)            int                   pipe2Value;
+@property (assign)            int                   pipe3Value;
+@property (nonatomic, retain) NSMutableArray        *dataArray;           //用来充当数据发送队列
+@property (nonatomic, retain) NSTimer               *sendTimer;           //定时器轮询队列是否有数据需要发送
 @property (nonatomic, retain) NSMutableArray        *deviceInfo;          //当前设备的所有信息
 @property (nonatomic, retain) RoverSqlite           *sql;                 //操作数据库的对象
 
 
 - (IBAction)switchBtnClicked:(id)sender;
+
+
+//new Interface
+@property (weak, nonatomic) IBOutlet UIButton *switchButton;
+@property (weak, nonatomic) IBOutlet UIButton *timer1Button;
+@property (weak, nonatomic) IBOutlet UIButton *timer2Button;
+@property (weak, nonatomic) IBOutlet UIButton *timer3Button;
+@property (weak, nonatomic) IBOutlet UIButton *lightingButton;
+@property (weak, nonatomic) IBOutlet UIButton *cloudyButton;
+@property (weak, nonatomic) IBOutlet UIButton *customButton;
+
+@property (weak, nonatomic) IBOutlet UISwitch *timer1Switch;
+@property (weak, nonatomic) IBOutlet UISwitch *timer2Switch;
+@property (weak, nonatomic) IBOutlet UISwitch *timer3Switch;
+@property (weak, nonatomic) IBOutlet UISwitch *timer4Switch;
+@property (weak, nonatomic) IBOutlet UISwitch *timer5Switch;
+@property (weak, nonatomic) IBOutlet UISwitch *timer6Switch;
+
+@property (weak, nonatomic) IBOutlet UISlider *pipe1Slider;
+@property (weak, nonatomic) IBOutlet UISlider *pipe2Slider;
+@property (weak, nonatomic) IBOutlet UISlider *pipe3Slider;
+
+@property (weak, nonatomic) IBOutlet UILabel *pipe1Label;
+@property (weak, nonatomic) IBOutlet UILabel *pipe2Label;
+@property (weak, nonatomic) IBOutlet UILabel *pipe3Label;
+
+- (IBAction)switchButtonClicked:(id)sender;
+- (IBAction)switchOperate:(id)sender;
+- (IBAction)pipeSliderValueChange:(id)sender;
+
+- (IBAction)modeButtonClicked:(id)sender;
+
 
 
 

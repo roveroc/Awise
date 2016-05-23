@@ -13,18 +13,17 @@
 #import "DeviceMannagerController.h"
 #import "MannagerController.h"
 
+
 @interface LightFishController ()
 
 @end
 
 @implementation LightFishController
-@synthesize hud;
-@synthesize btn1,btn2,btn3,btn4,btn5,btn6;
-@synthesize runImg;
-@synthesize hud1;
-@synthesize windowLabel;
-@synthesize switchBtn;
-@synthesize timeLabel;
+@synthesize pipe1Value;
+@synthesize pipe2Value;
+@synthesize pipe3Value;
+@synthesize dataArray;
+@synthesize sendTimer;
 @synthesize deviceInfo;
 @synthesize sql;
 
@@ -44,14 +43,20 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
-
+#pragma mark ------------------------------------------------ 重新启动定时器
 - (void)viewWillAppear:(BOOL)animated{
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//    [self showTabBar];
+    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
+    [self.sendTimer fire];
 }
 
+#pragma mark ------------------------------------------------ 界面消失是销毁定时器
+- (void)viewWillDisappear:(BOOL)animated{
+    [self.sendTimer invalidate];
+    self.sendTimer = nil;
+}
 
-#pragma mark - 读取设备状态
+#pragma mark ------------------------------------------------ 读取设备状态
 - (void)getDeviceStatus{
     Byte b3[64];
     for(int k=0;k<64;k++){
@@ -69,9 +74,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.title = @"Home";
-    
-    
     //进入设备管理页，搜索设备、添加到路由器等功能
 //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Device" style:UIBarButtonItemStyleDone target:self action:@selector(gotoDeviceManagerController)];
 //    self.navigationItem.rightBarButtonItem = rightItem;
@@ -85,12 +87,6 @@
     [AwiseGlobal sharedInstance].isSuccess = NO;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
     
-    
-    self.backImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
-    self.backImg.image = [UIImage imageNamed:@"lightFishBackImg.png"];
-    [self.view addSubview:self.backImg];
-    
-    [self layOutView];
     
 //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
@@ -186,79 +182,12 @@
     [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:1.0];
 }
 
-- (void)addMessageLabel{
-    if([AwiseGlobal sharedInstance].wifiSSID == nil ||
-       ![[AwiseGlobal sharedInstance].wifiSSID rangeOfString:WIFISSID].location == NSNotFound){
-        UILabel *label = (UILabel *)[[UIApplication sharedApplication].windows[0] viewWithTag:1000];
-        [label removeFromSuperview];
-        self.windowLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 25)];
-        self.windowLabel.tag = 1000;
-        self.windowLabel.center = CGPointMake(self.view.frame.size.width/2, 74);
-        self.windowLabel.text = @"Device OffLine";
-        self.windowLabel.textAlignment = NSTextAlignmentCenter;
-        self.windowLabel.textColor = [UIColor redColor];
-        self.windowLabel.font = [UIFont fontWithName:@"Arial" size:12];
-        [[UIApplication sharedApplication].windows[0] addSubview:self.windowLabel];
-        self.windowLabel.center = CGPointMake(SCREEN_WIDHT/2, self.windowLabel.center.y);
-    }
-}
 
-#pragma mark - 初始化自定义按钮
-- (UIButton *)customButton:(UIButton *)btn rect:(CGRect)ret title:(NSString *)str{
-    btn = [[UIButton alloc] initWithFrame:ret];
-    btn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
-    [btn setTitle:str forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageNamed:@"orgbtn.png"] forState:UIControlStateNormal];
-    return btn;
-}
-
-- (void)layOutView{
-    
-    int height;
-    if(iPhone4)
-        height = 30;
-    else if(iPhone5)
-        height = 50;
-    else if(iPhone6)
-        height = 80;
-    else if(iPhone6)
-        height = 120;
-    
-    
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 100, 30)];
-    self.timeLabel.text = @"12:00";
-    self.timeLabel.textAlignment = NSTextAlignmentCenter;
-    self.timeLabel.center = CGPointMake(SCREEN_WIDHT/2, self.timeLabel.center.y);
-    [self.view addSubview:self.timeLabel];
-    
-    self.switchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.timeLabel.frame.origin.y + height+30, 100, 100)];
-    self.switchBtn.center = CGPointMake(SCREEN_WIDHT/2, self.switchBtn.center.y);
-    self.switchBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
-    [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
-    [self.switchBtn addTarget:self action:@selector(switchBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.switchBtn];
-    
-    
-    //每个button算100宽度
-    self.btn1 = [self customButton:self.btn1 rect:CGRectMake((SCREEN_WIDHT-200)/3, self.switchBtn.frame.origin.y +100 + height, 100, 40) title:@"Manual"];
-    self.btn2 = [self customButton:self.btn2 rect:CGRectMake((SCREEN_WIDHT-200)/3*2+100, self.switchBtn.frame.origin.y +100 + height, 100, 40) title:@"Timer&Effect"];
-    [self.btn1 addTarget:self action:@selector(btn1Clicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.btn2 addTarget:self action:@selector(btn2Clicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.btn1];
-    [self.view addSubview:self.btn2];
-}
 
 #pragma mark --------------------------------------------- 获取最新的设备状态值
 - (void)refreshStatus{
     [[AwiseGlobal sharedInstance] showWaitingView:0];
     [self getDeviceStatus];
-}
-
-
-#pragma mark --------------------------------------------- 进入设备管理页面
-- (void)gotoDeviceManagerController{
-    DeviceMannagerController *deviceCon = [[DeviceMannagerController alloc] init];
-    [self.navigationController pushViewController:deviceCon animated:YES];
 }
 
 
@@ -312,53 +241,13 @@
 }
 
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (void)btn1Clicked{
-    ManualController *manual = [[ManualController alloc] init];
-    [self.navigationController pushViewController:manual animated:YES];
-}
-
-- (void)btn2Clicked{
-    MannagerController *man = [[MannagerController alloc] init];
-    [self.navigationController pushViewController:man animated:YES];
-}
-
-- (void)btn3Clicked:(id)sender {
-    LightingModeController *light = [[LightingModeController alloc] init];
-    light.modeFlag = 2;
-    [self.navigationController pushViewController:light animated:YES];
-}
-
-- (void)switchBtnClicked:(id)sender {
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
-    Byte b3[64];
-    for(int k=0;k<64;k++){
-        b3[k] = 0x00;
-    }
-    b3[0] = 0x55;
-    b3[1] = 0xAA;
-    b3[2] = 0x04;
-    b3[3] = 0x01;
-    
-    b3[4] = 0x00;
-    
-    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
-}
-
 #pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
 - (void)dataBackFormDevice:(Byte *)byte{
     if (byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x01){          //开指令：成功
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+        [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
     }
     else if(byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x00){      //关指令：成功
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+        [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
     }
     else if(byte[2] == 0x06 && byte[3] == 0x01){
         [AwiseGlobal sharedInstance].switchStatus = byte[5];
@@ -395,11 +284,11 @@
 - (void)getDeviceStatusFinished{
     if([AwiseGlobal sharedInstance].switchStatus == 0x00){
         [AwiseGlobal sharedInstance].isClosed = YES;
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+        [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
     }
     else{
         [AwiseGlobal sharedInstance].isClosed = NO;
-        [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+        [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
     }
     NSString *hStr;
     if([AwiseGlobal sharedInstance].hourStatus < 10){
@@ -414,7 +303,290 @@
         mStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].minuteStatus];
     }
     NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
-    self.timeLabel.text = timeStr;
+}
+
+#pragma mark ---------------------------------------------------- 开灯关灯
+- (IBAction)switchButtonClicked:(id)sender {
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x04;
+    b3[3] = 0x01;
+    if([AwiseGlobal sharedInstance].isClosed == NO)
+        b3[5] = 0x00;   //关
+    else
+        b3[5] = 0x01;   //开
+    
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark ---------------------------------------------------- 打开或关闭某种模式
+- (IBAction)switchOperate:(id)sender {
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    UISwitch *s = (UISwitch *)sender;
+    switch (s.tag) {
+        case 1:             //定时器1
+        {
+            if([s isOn]){
+                [self operateTimer:0x01 onoff:0x01];
+            }else{
+                [self operateTimer:0x01 onoff:0x00];
+            }
+            [self closeSwitch:@[@2,@3,@4,@5]];
+            [AwiseGlobal sharedInstance].mode = Timer1_Model;
+        }
+            break;
+        case 2:             //定时器2
+        {
+            if([s isOn]){
+                [self operateTimer:0x02 onoff:0x01];
+            }else{
+                [self operateTimer:0x02 onoff:0x00];
+            }
+            [self closeSwitch:@[@1,@3,@4,@5]];
+            [AwiseGlobal sharedInstance].mode = Timer2_Model;
+        }
+            break;
+        case 3:             //定时器3
+        {
+            if([s isOn]){
+                [self operateTimer:0x03 onoff:0x01];
+            }else{
+                [self operateTimer:0x03 onoff:0x00];
+            }
+            [self closeSwitch:@[@2,@1,@4,@5]];
+            [AwiseGlobal sharedInstance].mode = Timer3_Model;
+        }
+            break;
+        case 4:             //闪电
+        {
+            if([s isOn]){
+                [self lightingClouldMode:1 onOff:0x01];
+            }else{
+                [self lightingClouldMode:1 onOff:0x00];
+            }
+            [self closeSwitch:@[@2,@3,@1,@5]];
+            [AwiseGlobal sharedInstance].mode = Lighting_Model;
+        }
+            break;
+        case 5:             //多云
+        {
+            if([s isOn]){
+                [self lightingClouldMode:2 onOff:0x01];
+            }else{
+                [self lightingClouldMode:2 onOff:0x00];
+            }
+            [self closeSwitch:@[@2,@3,@4,@1]];
+            [AwiseGlobal sharedInstance].mode = Cloudy_Model;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - 关闭某些开关
+- (void)closeSwitch:(NSArray *)tagArr{
+    for(int i=0;i<tagArr.count;i++){
+        UISwitch *temp = (UISwitch *)[self.view viewWithTag:[tagArr[i] intValue]];
+        [temp setOn:NO animated:YES];
+    }
+}
+
+#pragma mark ------------------------------------------ 操作定时器1、2、3
+- (void)operateTimer:(Byte)tnumber onoff:(Byte)vaule{
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x08;
+    b3[3] = tnumber;
+    b3[5] = vaule;
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark ------------------------------------------ 操作定多云闪电
+- (void)lightingClouldMode:(int)flag onOff:(Byte)vaule{
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x05;
+    b3[4] = 0x00;
+    if(flag == 1){
+        b3[3] = 0x00;         //闪电
+        NSArray *sArr = [[AwiseUserDefault sharedInstance].light_sTime componentsSeparatedByString:@":"];  //开始时间
+        int shhstr = [sArr[0] intValue];
+        Byte shhbb = shhstr;
+        b3[5] = shhbb;
+        int smmstr = [sArr[1] intValue];
+        Byte smmbb = smmstr;
+        b3[6] = smmbb;
+        
+        NSArray *eArr = [[AwiseUserDefault sharedInstance].light_eTime componentsSeparatedByString:@":"];  //结束时间
+        int ehhstr = [eArr[0] intValue];
+        Byte ehhbb = ehhstr;
+        b3[7] = ehhbb;
+        int emmstr = [eArr[1] intValue];
+        Byte emmbb = emmstr;
+        b3[8] = emmbb;
+        
+        int pValue = [[AwiseUserDefault sharedInstance].light_precent intValue];   //百分比
+        Byte pbb = pValue;
+        b3[9] = pbb;
+        
+        Byte runbb = 0x00;            //立即运行，看效果(设为关闭)
+        b3[10] = runbb;
+        
+        Byte openbb = vaule;           //打开(关闭)
+        b3[11] = openbb;
+    }else if(flag == 2){
+        b3[3] = 0x01;           //多云
+        NSArray *sArr = [[AwiseUserDefault sharedInstance].cloudy_sTime componentsSeparatedByString:@":"];  //开始时间
+        int shhstr = [sArr[0] intValue];
+        Byte shhbb = shhstr;
+        b3[5] = shhbb;
+        int smmstr = [sArr[1] intValue];
+        Byte smmbb = smmstr;
+        b3[6] = smmbb;
+        
+        NSArray *eArr = [[AwiseUserDefault sharedInstance].cloudy_eTime componentsSeparatedByString:@":"];  //结束时间
+        int ehhstr = [eArr[0] intValue];
+        Byte ehhbb = ehhstr;
+        b3[7] = ehhbb;
+        int emmstr = [eArr[1] intValue];
+        Byte emmbb = emmstr;
+        b3[8] = emmbb;
+        
+        int pValue = [[AwiseUserDefault sharedInstance].cloudy_precent intValue];   //百分比
+        Byte pbb = pValue;
+        b3[9] = pbb;
+        
+        Byte runbb = 0x00;             //立即运行，看效果(设为关闭)
+        b3[10] = runbb;
+        
+        Byte openbb = vaule;           //打开(关闭)
+        b3[11] = openbb;
+    }
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark ---------------------------------------------------- 三通道亮度值改变
+- (IBAction)pipeSliderValueChange:(id)sender {
+    UISlider *slider = (UISlider *)sender;
+    switch (slider.tag) {
+        case 7:{
+            int value = (int)slider.value;
+            self.pipe1Label.text = [NSString stringWithFormat:@"%d%%",value];
+        }
+            break;
+        case 8:{
+            int value = (int)slider.value;
+            self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",value];
+        }
+            break;
+        case 9:{
+            int value = (int)slider.value;
+            self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",value];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x05;
+    b3[3] = 0x02;
+    b3[4] = 0x00;
+    
+    b3[5] = (int)self.pipe1Value;        //由于硬件  将一通道和三通道调换
+    b3[6] = (int)self.pipe2Value;
+    b3[7] = (int)self.pipe3Value;
+    
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
+    [self.dataArray addObject:data];
+}
+
+#pragma mark ---------------------------------------------------- 定时器轮询数组是否有需要发送的数据
+- (void)timerSendData{
+    if(self.dataArray.count > 0){
+        NSData *data = [self.dataArray objectAtIndex:0];
+        Byte *by = (Byte *)[data bytes];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:by length:64];
+        [self.dataArray removeObjectAtIndex:0];
+    }
+}
+
+#pragma mark ---------------------------------------------------- 查看编辑某种模式
+- (IBAction)modeButtonClicked:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    switch (btn.tag) {
+        case 11:{                       //定时器一
+            EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.navTitle = @"Edit Timer1";
+            editCon.fileName = @"timerData1";
+            [AwiseGlobal sharedInstance].timerNumber = 1;
+            [self.navigationController pushViewController:editCon animated:YES];
+        }
+            break;
+        case 12:{                         //定时器二
+            EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.navTitle = @"Edit Timer2";
+            editCon.fileName = @"timerData2";
+            [AwiseGlobal sharedInstance].timerNumber = 2;
+            [self.navigationController pushViewController:editCon animated:YES];
+        }
+            break;
+        case 13:{                         //定时器三
+            EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.navTitle = @"Edit Timer3";
+            editCon.fileName = @"timerData3";
+            [AwiseGlobal sharedInstance].timerNumber = 3;
+            [self.navigationController pushViewController:editCon animated:YES];
+        }
+            break;
+        case 14:{                         //闪电
+            LightingModeController *light = [[LightingModeController alloc] init];
+            light.modeFlag = 1;
+            [self.navigationController pushViewController:light animated:YES];
+        }
+            break;
+        case 15:{                         //多云
+            LightingModeController *light = [[LightingModeController alloc] init];
+            light.modeFlag = 1;
+            [self.navigationController pushViewController:light animated:YES];
+        }
+            break;
+        case 16:{                         //自定义模式
+            
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="VKm-kl-pSx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VKm-kl-pSx">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="ex5-yR-2ZU">
@@ -91,7 +91,6 @@
     </objects>
     <resources>
         <image name="btnBackimg.png" width="136" height="84"/>
-        <image name="lightFishBackImg.png" width="320" height="568"/>
         <image name="timeLine.png" width="608" height="42"/>
     </resources>
 </document>

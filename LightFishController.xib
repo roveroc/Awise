@@ -3,10 +3,30 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LightFishController">
             <connections>
+                <outlet property="cloudyButton" destination="E2j-5N-cM1" id="Qc6-Wc-mG0"/>
+                <outlet property="customButton" destination="s9r-4t-F3a" id="5SD-ye-6JE"/>
+                <outlet property="lightingButton" destination="O4w-FR-DQp" id="tYp-2x-Ebq"/>
+                <outlet property="pipe1Label" destination="lPt-Qt-yVn" id="Tro-ny-j50"/>
+                <outlet property="pipe1Slider" destination="h70-Ya-afN" id="op3-JL-mdk"/>
+                <outlet property="pipe2Label" destination="Wto-kP-8Px" id="dCE-WB-w99"/>
+                <outlet property="pipe2Slider" destination="hth-Fm-0cB" id="2fg-4R-MZl"/>
+                <outlet property="pipe3Label" destination="yvj-sQ-ph4" id="5iG-Pa-Dr1"/>
+                <outlet property="pipe3Slider" destination="Khe-x9-6V2" id="vJr-XM-E7c"/>
+                <outlet property="switchButton" destination="0F3-1i-euA" id="ydz-xC-ido"/>
+                <outlet property="timer1Button" destination="SwC-rt-S8X" id="Yex-JW-dbE"/>
+                <outlet property="timer1Switch" destination="EJ1-zp-LH3" id="dBf-46-YVQ"/>
+                <outlet property="timer2Button" destination="Epu-vK-mEi" id="Dpe-wz-FLD"/>
+                <outlet property="timer2Switch" destination="uU9-tq-MRb" id="xry-lu-pfT"/>
+                <outlet property="timer3Button" destination="NgW-BP-ZQQ" id="MF2-1U-V5q"/>
+                <outlet property="timer3Switch" destination="TwJ-FJ-go3" id="FKq-FJ-kFk"/>
+                <outlet property="timer4Switch" destination="glX-6e-MGc" id="g93-Cr-oF1"/>
+                <outlet property="timer5Switch" destination="EFd-98-6LU" id="avN-yS-P8z"/>
+                <outlet property="timer6Switch" destination="kXR-mh-ber" id="Mep-G5-qxP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,17 +35,226 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="VzK-Lu-3gK">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0F3-1i-euA">
+                    <rect key="frame" x="105" y="77" width="110" height="110"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="fVi-SN-4bB"/>
+                        <constraint firstAttribute="height" constant="110" id="mvs-vf-fIh"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="turnOnLight@3x.png"/>
+                    <connections>
+                        <action selector="switchButtonClicked:" destination="-1" eventType="touchUpInside" id="hyz-ut-3wE"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJ1-zp-LH3">
+                    <rect key="frame" x="85" y="197" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="60P-Jr-fKk"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-rt-S8X">
+                    <rect key="frame" x="8" y="198" width="66" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Timer 1">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="E6q-hy-4BX"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="glX-6e-MGc">
+                    <rect key="frame" x="263" y="197" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="1NQ-es-yHj"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="14" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-FR-DQp">
+                    <rect key="frame" x="176" y="198" width="71" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Lighting">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="aAf-j6-V7J"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uU9-tq-MRb">
+                    <rect key="frame" x="85" y="248" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="2po-mA-RYP"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="12" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-vK-mEi">
+                    <rect key="frame" x="8" y="249" width="66" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Timer 2">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="3IX-qG-fm2"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFd-98-6LU">
+                    <rect key="frame" x="263" y="248" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="6I1-fd-9H3"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="15" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2j-5N-cM1">
+                    <rect key="frame" x="176" y="249" width="71" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Cloudy">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="fzR-GR-glv"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TwJ-FJ-go3">
+                    <rect key="frame" x="85" y="299" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="9sr-za-bVR"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="13" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgW-BP-ZQQ">
+                    <rect key="frame" x="8" y="300" width="66" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Timer 3">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="FYz-j0-Cvr"/>
+                    </connections>
+                </button>
+                <switch opaque="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kXR-mh-ber">
+                    <rect key="frame" x="263" y="299" width="51" height="31"/>
+                    <connections>
+                        <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="xXt-Gj-AIo"/>
+                    </connections>
+                </switch>
+                <button opaque="NO" tag="16" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s9r-4t-F3a">
+                    <rect key="frame" x="176" y="300" width="71" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Custom">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="mc7-7M-DWC"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="A:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BrL-Sn-asy">
+                    <rect key="frame" x="8" y="351" width="24" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="h70-Ya-afN">
+                    <rect key="frame" x="33" y="347" width="235" height="31"/>
+                    <connections>
+                        <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="F75-2Q-JBu"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPt-Qt-yVn">
+                    <rect key="frame" x="271" y="352" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="B:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqP-LA-fez">
+                    <rect key="frame" x="8" y="393" width="24" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" tag="8" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="hth-Fm-0cB">
+                    <rect key="frame" x="33" y="389" width="235" height="31"/>
+                    <connections>
+                        <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="uNY-FZ-bj7"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wto-kP-8Px">
+                    <rect key="frame" x="271" y="394" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="C:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xns-JT-Hjf">
+                    <rect key="frame" x="8" y="435" width="24" height="22"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" tag="9" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Khe-x9-6V2">
+                    <rect key="frame" x="33" y="431" width="235" height="31"/>
+                    <connections>
+                        <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="w9c-FP-NMB"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvj-sQ-ph4">
+                    <rect key="frame" x="271" y="436" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="h70-Ya-afN" firstAttribute="centerY" secondItem="BrL-Sn-asy" secondAttribute="centerY" id="0UV-JC-EHa"/>
+                <constraint firstItem="s9r-4t-F3a" firstAttribute="centerX" secondItem="E2j-5N-cM1" secondAttribute="centerX" id="10N-7i-AQO"/>
+                <constraint firstItem="Epu-vK-mEi" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.1" id="1oh-Zz-cGQ"/>
+                <constraint firstItem="h70-Ya-afN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.51" id="2Ox-aF-vIg"/>
+                <constraint firstItem="NgW-BP-ZQQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.31" id="3CG-PX-jnH"/>
+                <constraint firstItem="glX-6e-MGc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.8" id="3ED-RM-JH6"/>
+                <constraint firstItem="lPt-Qt-yVn" firstAttribute="leading" secondItem="h70-Ya-afN" secondAttribute="trailing" constant="5" id="8Zr-W6-ifq"/>
+                <constraint firstItem="yvj-sQ-ph4" firstAttribute="leading" secondItem="Khe-x9-6V2" secondAttribute="trailing" constant="5" id="A2N-9J-MwB"/>
+                <constraint firstItem="Xns-JT-Hjf" firstAttribute="centerX" secondItem="qqP-LA-fez" secondAttribute="centerX" id="B0z-Zj-qrR"/>
+                <constraint firstItem="kXR-mh-ber" firstAttribute="centerX" secondItem="EFd-98-6LU" secondAttribute="centerX" id="Bpl-NB-04G"/>
+                <constraint firstItem="BrL-Sn-asy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.12" id="DXk-Ne-iAX"/>
+                <constraint firstItem="TwJ-FJ-go3" firstAttribute="centerX" secondItem="uU9-tq-MRb" secondAttribute="centerX" id="EcV-8G-fMg"/>
+                <constraint firstItem="Khe-x9-6V2" firstAttribute="leading" secondItem="Xns-JT-Hjf" secondAttribute="trailing" constant="3" id="EkY-xl-d4c"/>
+                <constraint firstItem="O4w-FR-DQp" firstAttribute="centerY" secondItem="SwC-rt-S8X" secondAttribute="centerY" id="Erj-R6-HOr"/>
+                <constraint firstItem="0F3-1i-euA" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.55" id="GPo-dK-Gxf"/>
+                <constraint firstItem="s9r-4t-F3a" firstAttribute="centerY" secondItem="TwJ-FJ-go3" secondAttribute="centerY" id="IVy-Wl-nbm"/>
+                <constraint firstItem="EJ1-zp-LH3" firstAttribute="centerY" secondItem="SwC-rt-S8X" secondAttribute="centerY" id="JQb-fJ-o6y"/>
+                <constraint firstItem="TwJ-FJ-go3" firstAttribute="centerY" secondItem="NgW-BP-ZQQ" secondAttribute="centerY" id="LMO-bb-z33"/>
+                <constraint firstItem="Khe-x9-6V2" firstAttribute="centerY" secondItem="Xns-JT-Hjf" secondAttribute="centerY" id="LPQ-zn-UXV"/>
+                <constraint firstItem="EFd-98-6LU" firstAttribute="centerY" secondItem="E2j-5N-cM1" secondAttribute="centerY" id="Mhu-vh-2rk"/>
+                <constraint firstItem="0F3-1i-euA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="NCx-rC-Sfz"/>
+                <constraint firstItem="h70-Ya-afN" firstAttribute="leading" secondItem="BrL-Sn-asy" secondAttribute="trailing" constant="3" id="Nca-UF-cXq"/>
+                <constraint firstItem="NgW-BP-ZQQ" firstAttribute="centerX" secondItem="Epu-vK-mEi" secondAttribute="centerX" id="QCa-P1-Kmd"/>
+                <constraint firstItem="yvj-sQ-ph4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.86" id="ReJ-O2-DI6"/>
+                <constraint firstItem="SwC-rt-S8X" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.26" id="T5U-QO-Cu7"/>
+                <constraint firstItem="hth-Fm-0cB" firstAttribute="centerY" secondItem="qqP-LA-fez" secondAttribute="centerY" id="TEs-cA-BoW"/>
+                <constraint firstItem="h70-Ya-afN" firstAttribute="centerY" secondItem="lPt-Qt-yVn" secondAttribute="centerY" id="V0b-rl-jbm"/>
+                <constraint firstItem="glX-6e-MGc" firstAttribute="centerY" secondItem="O4w-FR-DQp" secondAttribute="centerY" id="V7o-P1-2Zv"/>
+                <constraint firstItem="uU9-tq-MRb" firstAttribute="centerY" secondItem="Epu-vK-mEi" secondAttribute="centerY" id="Vaa-Hn-Qb0"/>
+                <constraint firstItem="h70-Ya-afN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.94" id="WfP-wY-khU"/>
+                <constraint firstItem="EFd-98-6LU" firstAttribute="centerX" secondItem="glX-6e-MGc" secondAttribute="centerX" id="aPn-gh-hmm"/>
+                <constraint firstItem="hth-Fm-0cB" firstAttribute="leading" secondItem="qqP-LA-fez" secondAttribute="trailing" constant="3" id="co4-WY-tQh"/>
+                <constraint firstItem="E2j-5N-cM1" firstAttribute="centerY" secondItem="uU9-tq-MRb" secondAttribute="centerY" id="eRL-W3-ZtW"/>
+                <constraint firstItem="O4w-FR-DQp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.32" id="edN-DB-GJZ"/>
+                <constraint firstItem="lPt-Qt-yVn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.82" id="fU7-5c-TH9"/>
+                <constraint firstItem="E2j-5N-cM1" firstAttribute="centerX" secondItem="O4w-FR-DQp" secondAttribute="centerX" id="gqR-dQ-xm1"/>
+                <constraint firstItem="qqP-LA-fez" firstAttribute="centerY" secondItem="Wto-kP-8Px" secondAttribute="centerY" id="ikK-DG-Cba"/>
+                <constraint firstItem="kXR-mh-ber" firstAttribute="centerY" secondItem="s9r-4t-F3a" secondAttribute="centerY" id="kEW-kc-jgW"/>
+                <constraint firstItem="qqP-LA-fez" firstAttribute="centerX" secondItem="BrL-Sn-asy" secondAttribute="centerX" id="mgA-xl-dl5"/>
+                <constraint firstItem="Wto-kP-8Px" firstAttribute="leading" secondItem="hth-Fm-0cB" secondAttribute="trailing" constant="5" id="msD-Ba-Dir"/>
+                <constraint firstItem="Wto-kP-8Px" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.685" id="oAb-Oy-tz7"/>
+                <constraint firstItem="yvj-sQ-ph4" firstAttribute="centerX" secondItem="Wto-kP-8Px" secondAttribute="centerX" id="oRT-bB-UjE"/>
+                <constraint firstItem="Xns-JT-Hjf" firstAttribute="centerY" secondItem="yvj-sQ-ph4" secondAttribute="centerY" id="ojo-0I-4gi"/>
+                <constraint firstItem="SwC-rt-S8X" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.89" id="rT6-nS-j1d"/>
+                <constraint firstItem="uU9-tq-MRb" firstAttribute="centerX" secondItem="EJ1-zp-LH3" secondAttribute="centerX" id="siO-Ri-sa2"/>
+                <constraint firstItem="Epu-vK-mEi" firstAttribute="centerX" secondItem="SwC-rt-S8X" secondAttribute="centerX" id="xpq-v0-C7b"/>
+                <constraint firstItem="Wto-kP-8Px" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="1.82" id="yJe-T6-uhI"/>
+                <constraint firstItem="Wto-kP-8Px" firstAttribute="centerX" secondItem="lPt-Qt-yVn" secondAttribute="centerX" id="yrF-ja-ZGo"/>
+                <constraint firstItem="EJ1-zp-LH3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.68" id="zY2-Kb-piC"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-2084" y="485"/>
+            <point key="canvasLocation" x="-2843" y="338"/>
         </view>
     </objects>
     <resources>
-        <image name="lightFishBackImg.png" width="320" height="568"/>
+        <image name="turnOnLight@3x.png" width="320" height="568"/>
     </resources>
 </document>

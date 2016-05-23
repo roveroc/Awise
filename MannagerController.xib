@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lightFishBackImg.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ick-Kt-1gx">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ick-Kt-1gx">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
                 <switch opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="59l-PU-VYq">
@@ -230,7 +230,6 @@
         </view>
     </objects>
     <resources>
-        <image name="lightFishBackImg.png" width="320" height="568"/>
         <image name="orgbtn.png" width="220" height="46"/>
     </resources>
 </document>

@@ -32,7 +32,7 @@
     lab.backgroundColor = [UIColor clearColor];
     lab.text = txt;
     lab.font = [UIFont fontWithName:@"Arial" size:15];
-    lab.textColor = [UIColor whiteColor];
+    lab.textColor = [UIColor blackColor];
     [self.view addSubview:lab];
     return lab;
 }
