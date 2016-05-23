@@ -28,6 +28,7 @@
 @synthesize modeValue;
 @synthesize onButton;
 @synthesize offButton;
+@synthesize backScrollView;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -170,23 +171,32 @@
     NSLog(@"设备断开连接");
 }
 
+#pragma mark ------------------------------------------------ 布局界面
 - (void)viewWillLayoutSubviews{
     if(colorPicker != nil)
         return;
+    self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
+    self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667);
+    [self.view addSubview:self.backScrollView];
+    
     colorPicker = [[KZColorPicker alloc] initWithFrame:self.view.bounds];
     colorPicker.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     colorPicker.selectedColor = self.selectedColor;
     colorPicker.oldColor = self.selectedColor;
     [colorPicker addTarget:self action:@selector(pickerChanged:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:colorPicker];
+//    [self.view addSubview:colorPicker];
+    [self.backScrollView addSubview:colorPicker];
     
     self.modePicker = [[UIPickerView alloc] init];
     self.modePicker.dataSource = self;
     self.modePicker.delegate = self;
-    if(iPhone6){
+    if(iPhone6P){
+        self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 160);
+    }
+    else{
         self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
     }
-    [self.view addSubview:self.modePicker];
+    [self.backScrollView addSubview:self.modePicker];
 //关按钮
     self.offButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.onButton  = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -194,9 +204,10 @@
                               forState:UIControlStateNormal];
     [self.onButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x"]
                               forState:UIControlStateNormal];
-    if(iPhone6){
+//    if(iPhone6)
+    {
         self.offButton.frame = CGRectMake(10, 78, 60, 60);
-        self.onButton.frame = CGRectMake(305, 78, 60, 60);
+        self.onButton.frame = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
     }
     [self.offButton addTarget:self
                        action:@selector(turnOffDevice)
@@ -204,8 +215,8 @@
     [self.onButton addTarget:self
                        action:@selector(turnOnDevice)
              forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.offButton];
-    [self.view addSubview:self.onButton];
+    [self.backScrollView addSubview:self.offButton];
+    [self.backScrollView addSubview:self.onButton];
     
 //亮度值滑条
     self.lightSlider = [[ASValueTrackingSlider alloc] init];
@@ -229,14 +240,18 @@
     self.modeSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
     self.modeSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
     self.modeSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
-    if(iPhone6 || iPhone5){
+    if(iPhone6P){
+        self.lightSlider.frame = CGRectMake(20, 400+130+30, SCREEN_WIDHT-40, 20);
+        self.modeSlider.frame  = CGRectMake(20, 400+130+40+15+30, SCREEN_WIDHT-40, 20);
+    }
+    else{
         self.lightSlider.frame = CGRectMake(20, 400+130, SCREEN_WIDHT-40, 20);
         self.modeSlider.frame  = CGRectMake(20, 400+130+40+5, SCREEN_WIDHT-40, 20);
     }
-    [self.view addSubview:self.lightSlider];
-    [self.view addSubview:self.modeSlider];
-    [self.view bringSubviewToFront:self.lightSlider];
-    [self.view bringSubviewToFront:self.modeSlider];
+    [self.backScrollView addSubview:self.lightSlider];
+    [self.backScrollView addSubview:self.modeSlider];
+    [self.backScrollView bringSubviewToFront:self.lightSlider];
+    [self.backScrollView bringSubviewToFront:self.modeSlider];
     [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
 }

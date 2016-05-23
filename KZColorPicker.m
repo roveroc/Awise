@@ -96,7 +96,7 @@
     [colorView addTarget:self action:@selector(oldColor:) forControlEvents:UIControlEventTouchUpInside];
     colorView.oldColor = self.oldColor;
 //    self.currentColorView = colorView;    
-    [self addSubview:colorView];
+//    [self addSubview:colorView];
     [colorView release];
     
 	// swatches.	    

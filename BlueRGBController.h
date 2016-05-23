@@ -31,6 +31,8 @@
     
     UIButton                *onButton;
     UIButton                *offButton;
+    
+    UIScrollView            *backScrollView;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -46,7 +48,8 @@
 @property (assign)            int                   lightValue;              //亮度值
 @property (assign)            int                   speedValue;              //速度值
 @property (assign)            int                   modeValue;               //速度值
-@property (nonatomic, retain) UIButton              *onButton;               //选中的颜色
-@property (nonatomic, retain) UIButton              *offButton;              //选中的颜色
+@property (nonatomic, retain) UIButton              *onButton;               //开灯
+@property (nonatomic, retain) UIButton              *offButton;              //关灯
+@property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
 
 @end
