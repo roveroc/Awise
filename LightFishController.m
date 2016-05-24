@@ -86,29 +86,32 @@
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].isSuccess = NO;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+    [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+    
     
     
 //连接设备部分
-    [AwiseGlobal sharedInstance].delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
-    if([AwiseGlobal sharedInstance].cMode == AP){
-        if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-        }
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
-        
-    }
-    else if([AwiseGlobal sharedInstance].cMode == STA){
-        if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-        }
-    }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
-    }
-
+//    [AwiseGlobal sharedInstance].delegate = self;
+//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+//    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+//    if([AwiseGlobal sharedInstance].cMode == AP){
+//        if(self.deviceInfo.count > 0){
+//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+//        }
+//        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+//        
+//    }
+//    else if([AwiseGlobal sharedInstance].cMode == STA){
+//        if(self.deviceInfo.count > 0){
+//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+//        }
+//    }else{
+//        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
+//    }
 }
 
 #pragma mark ------------------------------------------------ Ping IP 地址的回调
@@ -307,6 +310,9 @@
 
 #pragma mark ---------------------------------------------------- 开灯关灯
 - (IBAction)switchButtonClicked:(id)sender {
+    BOOL b = [[AwiseGlobal sharedInstance].tcpSocket.socket isConnected];
+    NSLog(@"b = %d",b);
+    
     [[AwiseGlobal sharedInstance] showWaitingView:0];
     Byte b3[64];
     for(int k=0;k<64;k++){

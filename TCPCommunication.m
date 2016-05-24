@@ -28,19 +28,18 @@
 #pragma mark ---------------------------------------------------- 连接设备
 - (void)connectToDevice:(NSString *)host port:(NSString *)port{
     self.reConnectCount = 0;
-    [self.socket setDelegate:nil];
-    [self.socket disconnect];
-    self.socket=nil;
-    if([self.socket isConnected]){
-        [self.socket disconnect];
-//        NSLog(@"设备已连接 ");
-    }
+//    [self.socket setDelegate:nil];
+//    [self.socket disconnect];
+//    self.socket=nil;
+//    if([self.socket isConnected]){
+//        [self.socket disconnect];
+//    }
     self.socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
     //TODO 这里需要在退出局域网模式下断开
-    [self.socket disconnect];    //断开tcp连接
+//    [self.socket disconnect];    //断开tcp连接
     @try {
-//        [self.socket connectToHost:host onPort:[port intValue] error:nil];
-        [self.socket connectToHost:host onPort:[port intValue] withTimeout:2. error:nil];
+        [self.socket connectToHost:host onPort:[port intValue] error:nil];
+//        [self.socket connectToHost:host onPort:[port intValue] withTimeout:2. error:nil];
 //        [self.socket acceptOnPort:54321 error:nil];
 //        [self.socket readDataWithTimeout:-1 tag:0];
     }
@@ -118,10 +117,10 @@
 #pragma mark ---------------------------------------------------- 设备断开连接调用函数，断开后重连
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock{
     NSLog(@"设备IP = %@ 的设备断开连接，并且尝试重连",sock);
-    if(self.reConnectCount < 5 ){
-        [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
-        self.reConnectCount ++;
-    }
+//    if(self.reConnectCount < 5 ){
+//        [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
+//        self.reConnectCount ++;
+//    }
 }
 
 -(void)onSocket:(AsyncSocket *) sock willDisconnectWithError:(NSError *)err{
