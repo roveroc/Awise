@@ -48,7 +48,7 @@
 #define BroadCast   @"255.255.255.255"     //广播地址
 #define WAITTIME    2.0
 #define DISMISS_TIME 1.5
-#define WIFISSID    @"Awise-"
+#define WIFISSID    @"Awise"
 
 typedef enum{
     Manual_Model = 0,
@@ -124,7 +124,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 @property (nonatomic, retain) ScanLAN                   *scan;                          //扫描局域网IP对象
 @property (nonatomic, retain) RoverARP                  *arp;                           //获取手机ARP表对象
 @property (nonatomic, retain) MBProgressHUD             *hud;                           //提示用户等待View
-@property (nonatomic, retain) TCPCommunication          *tcpSocket;                     //tcpSocket
+@property (nonatomic, strong) TCPCommunication          *tcpSocket;                     //tcpSocket
 @property (nonatomic, retain) NSMutableArray            *deviceArray;                   //所有已添加的设备
 @property (assign)            ControlMode               cMode;                          //用来区分当前的控制模式
 @property (nonatomic, retain) GBPing                    *gbPing;

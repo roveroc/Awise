@@ -28,22 +28,27 @@
 #pragma mark ---------------------------------------------------- 连接设备
 - (void)connectToDevice:(NSString *)host port:(NSString *)port{
     self.reConnectCount = 0;
-    if([socket isConnected]){
-//        [socket disconnect];
-        NSLog(@"设备已连接 ");
-        return;
+    [self.socket setDelegate:nil];
+    [self.socket disconnect];
+    self.socket=nil;
+    if([self.socket isConnected]){
+        [self.socket disconnect];
+//        NSLog(@"设备已连接 ");
     }
-    socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
+    self.socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
     //TODO 这里需要在退出局域网模式下断开
-    [socket disconnect];    //断开tcp连接
+    [self.socket disconnect];    //断开tcp连接
     @try {
-        [socket connectToHost:host onPort:[port intValue] error:nil];
-        [socket readDataWithTimeout:0.5 tag:1];
+//        [self.socket connectToHost:host onPort:[port intValue] error:nil];
+        [self.socket connectToHost:host onPort:[port intValue] withTimeout:2. error:nil];
+//        [self.socket acceptOnPort:54321 error:nil];
+//        [self.socket readDataWithTimeout:-1 tag:0];
     }
     @catch (NSException *exception) { //异常处理
         NSLog(@"连接设备异常 %@,%@", [exception name], [exception description]);
     }
 }
+
 
 
 #pragma mark ---------------------------------------------------- 断开连接
@@ -55,7 +60,8 @@
 #pragma mark ---------------------------------------------------- 连接设备成功后的回调
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port{
     NSLog(@"连接设备成功 ip =  %@ 端口 = %d", host, port);
-    [delegate TCPSocketConnectSuccess];
+    [sock readDataWithTimeout:-1 tag:0];
+//    [delegate TCPSocketConnectSuccess];
 }
 
 
@@ -63,15 +69,15 @@
 - (void)sendMeesageToDevice:(Byte [])data length:(int)length{
     NSData *da = [[NSData alloc] initWithBytes:data length:length];
     NSLog(@"============ 发送的数据 = :%@",da);
-    [socket readDataWithTimeout:0.5 tag:1];
-    [socket writeData:da withTimeout:0.5 tag:1];
+    [socket readDataWithTimeout:-1 tag:0];
+    [socket writeData:da withTimeout:-1 tag:0];
     self.responeFlag = NO;
-    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:1];
 }
 
 #pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
 - (void)isDeviceRespone{
-    if(self.responeFlag == YES){
+    if(self.responeFlag == NO){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"操作可能失败了";
@@ -83,6 +89,7 @@
 #pragma mark ---------------------------------------------------- 发送数据完成功后，设备返回数据调用该函数
 -(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
     self.responeFlag = YES;
+    [sock readDataWithTimeout:-1 tag:0];
     NSLog(@"===================== 设备返回的数据 =====================  :%@", data);
     switch (controlDeviceType) {
         case SingleTouchDevice:                 //单色触摸面板
@@ -104,7 +111,7 @@
 
 #pragma mark ---------------------------------------------------- 发送数据完成功后调用该函数
 -(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag{
-//    NSLog(@"didWriteDataWithTag tag:%ld",tag);
+    NSLog(@"didWriteDataWithTag tag:%ld",tag);
 }
 
 
@@ -115,6 +122,10 @@
         [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
         self.reConnectCount ++;
     }
+}
+
+-(void)onSocket:(AsyncSocket *) sock willDisconnectWithError:(NSError *)err{
+    NSLog(@"设备IP = %@   错误 = %@",sock,[err localizedDescription]);
 }
 
 @end

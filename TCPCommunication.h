@@ -37,7 +37,7 @@ typedef enum{
     BOOL                        responeFlag;
     int                         reConnectCount;
 }
-@property (nonatomic, retain) AsyncSocket               *socket;
+@property (nonatomic, strong) AsyncSocket               *socket;
 @property (nonatomic, retain) id<TCPSocketDelegate>     delegate;
 @property (assign)            DeviceType                controlDeviceType;
 @property (nonatomic, retain) NSString                  *deviceIP;                      //当前受控的设备IP

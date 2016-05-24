@@ -26,8 +26,10 @@
 @synthesize lightValue;
 @synthesize speedValue;
 @synthesize modeValue;
-@synthesize onButton;
-@synthesize offButton;
+@synthesize onOffButton;
+@synthesize PlayPauseButton;
+@synthesize offFlag;
+@synthesize palyFlag;
 @synthesize backScrollView;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
@@ -197,26 +199,31 @@
         self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
     }
     [self.backScrollView addSubview:self.modePicker];
-//关按钮
-    self.offButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.onButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.offButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x"]
+//开关、暂停播放
+    self.offFlag = NO;
+    self.palyFlag = NO;
+    
+    self.onOffButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"]
                               forState:UIControlStateNormal];
-    [self.onButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x"]
+    [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"]
                               forState:UIControlStateNormal];
+    [self.onOffButton setTitle:@"开"  forState:UIControlStateNormal];
+    [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
 //    if(iPhone6)
     {
-        self.offButton.frame = CGRectMake(10, 78, 60, 60);
-        self.onButton.frame = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
+        self.PlayPauseButton.frame = CGRectMake(10, 78, 60, 60);
+        self.onOffButton.frame = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
     }
-    [self.offButton addTarget:self
-                       action:@selector(turnOffDevice)
+    [self.PlayPauseButton addTarget:self
+                       action:@selector(PlayPauseMode)
              forControlEvents:UIControlEventTouchUpInside];
-    [self.onButton addTarget:self
-                       action:@selector(turnOnDevice)
+    [self.onOffButton addTarget:self
+                       action:@selector(onOffLight)
              forControlEvents:UIControlEventTouchUpInside];
-    [self.backScrollView addSubview:self.offButton];
-    [self.backScrollView addSubview:self.onButton];
+    [self.backScrollView addSubview:self.onOffButton];
+    [self.backScrollView addSubview:self.PlayPauseButton];
     
 //亮度值滑条
     self.lightSlider = [[ASValueTrackingSlider alloc] init];
@@ -257,29 +264,56 @@
 }
 
 #pragma mark ----------------------------------- 关闭
-- (void)turnOffDevice{
+- (void)PlayPauseMode{
     if(self.character != nil){
-        Byte by[4];
-        by[0] = 1;
-        by[1] = 0;
-        by[2] = 0;
-        by[3] = 0;
-        NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        if(self.palyFlag == NO){
+            self.palyFlag = YES;
+            Byte by[4];
+            by[0] = 3;
+            by[1] = 3;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+        }else{
+            self.palyFlag = NO;
+            Byte by[4];
+            by[0] = 3;
+            by[1] = 2;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
+        }
     }
 }
 
 #pragma mark ----------------------------------- 打开
-- (void)turnOnDevice{
+- (void)onOffLight{
     if(self.character != nil){
-        Byte by[4];
-        by[0] = 3;
-        by[1] = 0;
-        by[2] = 0;
-        by[3] = 0;
-        NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        
+        if(self.offFlag == NO){
+            self.offFlag = YES;
+            Byte by[4];
+            by[0] = 4;
+            by[1] = 3;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.onOffButton setTitle:@"开" forState:UIControlStateNormal];
+        }else{
+            self.offFlag = NO;
+            Byte by[4];
+            by[0] = 4;
+            by[1] = 2;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.onOffButton setTitle:@"关" forState:UIControlStateNormal];
+        }
     }
 }
 
