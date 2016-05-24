@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -12,6 +12,7 @@
                 <outlet property="defaultBtn1" destination="6fD-fn-B9r" id="h3O-3S-RS9"/>
                 <outlet property="defaultBtn2" destination="WIO-l1-ktx" id="aU5-SI-1bZ"/>
                 <outlet property="defaultBtn3" destination="LoC-Gc-CHR" id="zNT-wR-AcU"/>
+                <outlet property="percentLabel" destination="dXU-6b-psi" id="wg7-zr-1wa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -64,6 +65,24 @@
                         <action selector="defauleValueClicked:" destination="-1" eventType="touchUpInside" id="vhG-vJ-pqT"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXU-6b-psi">
+                    <rect key="frame" x="120" y="123" width="80" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="B74-5e-UeU"/>
+                        <constraint firstAttribute="width" constant="80" id="NS3-St-j9q"/>
+                        <constraint firstAttribute="height" constant="44" id="bHo-ok-Np7"/>
+                        <constraint firstAttribute="width" constant="80" id="ceH-2h-SMQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="bHo-ok-Np7"/>
+                            <exclude reference="ceH-2h-SMQ"/>
+                        </mask>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -72,13 +91,24 @@
                 <constraint firstAttribute="trailing" secondItem="LoC-Gc-CHR" secondAttribute="trailing" constant="18" id="Bow-ck-0dn"/>
                 <constraint firstAttribute="trailing" secondItem="gr8-w6-S3s" secondAttribute="trailing" constant="38" id="HOf-bo-Ipf"/>
                 <constraint firstItem="WIO-l1-ktx" firstAttribute="centerY" secondItem="LoC-Gc-CHR" secondAttribute="centerY" id="IAq-Mv-ff4"/>
+                <constraint firstItem="dXU-6b-psi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ouf-f0-YTw"/>
+                <constraint firstItem="dXU-6b-psi" firstAttribute="top" secondItem="gr8-w6-S3s" secondAttribute="bottom" constant="15" id="RF9-Kq-jSr"/>
                 <constraint firstItem="WIO-l1-ktx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Z5n-bf-COu"/>
+                <constraint firstAttribute="trailing" secondItem="dXU-6b-psi" secondAttribute="trailing" constant="120" id="ced-WA-vrP"/>
                 <constraint firstItem="WIO-l1-ktx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.61" id="e8Y-4f-kHN"/>
                 <constraint firstItem="6fD-fn-B9r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="jGN-iX-UxN"/>
                 <constraint firstItem="gr8-w6-S3s" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="lbi-sP-j8L"/>
+                <constraint firstItem="dXU-6b-psi" firstAttribute="top" secondItem="gr8-w6-S3s" secondAttribute="bottom" constant="26" id="qIY-Lo-uPb"/>
+                <constraint firstItem="dXU-6b-psi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="120" id="vpG-fy-Pip"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-1937" y="533"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Ouf-f0-YTw"/>
+                    <exclude reference="qIY-Lo-uPb"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-1912" y="613"/>
         </view>
     </objects>
 </document>

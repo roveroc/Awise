@@ -17,3 +17,5 @@ pod "EFCircularSlider", "~> 0.1.0"                                    #圆弧sli
 #pod 'ASValueTrackingSlider'                                          #UISlider
 
 pod "UIImageView-Letters"                                             #圆形Image带文件
+
+#pod 'LTMorphingLabel'                                                 #带动画的UILabel

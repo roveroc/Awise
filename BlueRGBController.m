@@ -31,12 +31,16 @@
 @synthesize offFlag;
 @synthesize palyFlag;
 @synthesize backScrollView;
+@synthesize touchFlag;
+@synthesize touchTimer;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
     if(self.connectPeripheral != nil){
         [self.centralManager cancelPeripheralConnection:self.connectPeripheral];
     }
+    [self.touchTimer invalidate];
+    self.touchTimer = nil;
 }
 
 - (void)viewDidLoad {
@@ -46,6 +50,9 @@
     self.speedValue = 100;
     self.lightValue = 100;
     self.modeValue  = 10;
+    //间隔取值
+    self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
+    [self.touchTimer fire];
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.centralManager = [[CBCentralManager alloc]
@@ -358,20 +365,27 @@
 - (void)pickerChanged:(KZColorPicker *)cp{
     self.selectedColor = cp.selectedColor;
     if(self.character != nil){
-        NSString *RGBValue = [NSString stringWithFormat:@"%@",self.selectedColor];
-        NSArray *arr = [RGBValue componentsSeparatedByString:@" "];
-        int r = [[arr objectAtIndex:1] floatValue]*100;
-        int g = [[arr objectAtIndex:2] floatValue]*100;
-        int b = [[arr objectAtIndex:3] floatValue]*100;
-        Byte by[4];
-        by[0] = 1;
-        by[1] = r;
-        by[2] = g;
-        by[3] = b;
-        NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        
+        if(self.touchFlag == YES){
+            self.touchFlag = NO;
+            NSString *RGBValue = [NSString stringWithFormat:@"%@",self.selectedColor];
+            NSArray *arr = [RGBValue componentsSeparatedByString:@" "];
+            int r = [[arr objectAtIndex:1] floatValue]*100;
+            int g = [[arr objectAtIndex:2] floatValue]*100;
+            int b = [[arr objectAtIndex:3] floatValue]*100;
+            Byte by[4];
+            by[0] = 1;
+            by[1] = r;
+            by[2] = g;
+            by[3] = b;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        }
     }
+}
+
+//by rover 用于间隔取值
+- (void)changeFlag{
+    self.touchFlag = YES;
 }
 
 #pragma mark ----------------------------------- 发送模式数据

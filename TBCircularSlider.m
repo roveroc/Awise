@@ -237,11 +237,11 @@
     
     //Store the new angle
     self.angle = 360 - angleInt;   //edit by rover
-    if(self.angle<90)
-        return;
-    if(self.angle == 360)
-        self.angle = 0;
-    //Update the textfield 
+//    if(self.angle<90)
+//        return;
+//    if(self.angle == 360)
+//        self.angle = 0;
+    //Update the textfield
     _textField.text =  [NSString stringWithFormat:@"%d", self.angle];
     //Redraw
     [self setNeedsDisplay];

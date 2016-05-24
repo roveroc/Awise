@@ -25,6 +25,11 @@
     ASValueTrackingSlider   *modeSlider;
     NSMutableArray          *modeArray;
     
+    
+    //by rover
+    BOOL touchFlag;
+    NSTimer *touchTimer;
+    
     int                     lightValue;
     int                     speedValue;
     int                     modeValue;
@@ -47,6 +52,8 @@
 @property (nonatomic, retain) NSMutableArray        *modeArray;              //模式
 @property (nonatomic, retain) ASValueTrackingSlider *lightSlider;            //亮度值指示条
 @property (nonatomic, retain) ASValueTrackingSlider *modeSlider;             //速度值指示条
+@property (assign) BOOL touchFlag;
+@property (nonatomic, retain) NSTimer *touchTimer;
 @property (assign)            int                   lightValue;              //亮度值
 @property (assign)            int                   speedValue;              //速度值
 @property (assign)            int                   modeValue;               //速度值

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '672A2A517DE6B1F545CACDF0'
+               BlueprintIdentifier = 'EF6D0C64E6F32B249248C2B3'
                BlueprintName = 'XHRadarView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libXHRadarView.a'>

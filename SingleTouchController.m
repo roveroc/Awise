@@ -192,8 +192,8 @@
     tbSlider = [[TBCircularSlider alloc]initWithFrame:CGRectMake(0, 0, TB_SLIDER_SIZE, TB_SLIDER_SIZE)];
     [tbSlider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
     tbSlider.center = self.view.center;
-    tbSlider.angle = 250;
-//    tbSlider.angle = 360;
+//    tbSlider.angle = 250;
+    tbSlider.angle = 360;
     [tempView addSubview:tbSlider];
 
     switchButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
@@ -283,9 +283,11 @@
 
 #pragma mark ------------------------------------------------ 圆环代理,值发生改变触发
 - (void)sliderValueChange:(TBCircularSlider *)slider{
-    if(slider.angle < 90)
-        return;
-    int value = (100/270.)*(360-slider.angle);
+//    if(slider.angle < 90)
+//        return;
+//    int value = (100/270.)*(360-slider.angle);
+    NSLog(@"value = %d",slider.angle);
+    int value = (100/360.)*(360-slider.angle);
     Byte bt[20];
     for(int k=0;k<20;k++){
         bt[k] = 0x00;
@@ -385,19 +387,21 @@
     switch (btn.tag) {
         case 1:{
             bt[11]  = 0;        //数据值
-//            tbSlider.angle = 0;
+            tbSlider.angle = 0;
+            self.percentLabel.text = [NSString stringWithFormat:@"%d%%",0];
             [self performSelector:@selector(syncTime) withObject:nil afterDelay:.1];
         }
             break;
         case 2:{
             bt[11]  = 50;       //数据值
-//            tbSlider.angle = 225;
+            tbSlider.angle = 180;
+            self.percentLabel.text = [NSString stringWithFormat:@"%d%%",50];
             [self performSelector:@selector(readStatus) withObject:nil afterDelay:.3];
         }
             break;
         case 3:{
             bt[11]  = 100;      //数据值
-            tbSlider.angle = 90;
+            tbSlider.angle = 360;
             self.percentLabel.text = [NSString stringWithFormat:@"%d%%",bt[11]];
             [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
         }
