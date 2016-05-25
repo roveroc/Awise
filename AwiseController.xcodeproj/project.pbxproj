@@ -13,6 +13,7 @@
 		97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */; };
 		97128FD61CEEEAE000F58045 /* AboutUsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97128FD41CEEEAE000F58045 /* AboutUsController.m */; };
 		97128FD71CEEEAE000F58045 /* AboutUsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97128FD51CEEEAE000F58045 /* AboutUsController.xib */; };
+		972287391CF54DAC0001225F /* D3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 972287381CF54DAC0001225F /* D3View.m */; };
 		97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */; };
 		97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BE01CCA1E4600082ACB /* TCPCommunication.m */; };
 		9735C02D1CC7832A000B0727 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02C1CC7832A000B0727 /* main.m */; };
@@ -122,6 +123,8 @@
 		97128FD31CEEEAE000F58045 /* AboutUsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsController.h; sourceTree = "<group>"; };
 		97128FD41CEEEAE000F58045 /* AboutUsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsController.m; sourceTree = "<group>"; };
 		97128FD51CEEEAE000F58045 /* AboutUsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsController.xib; sourceTree = "<group>"; };
+		972287371CF54DAC0001225F /* D3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D3View.h; sourceTree = "<group>"; };
+		972287381CF54DAC0001225F /* D3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D3View.m; sourceTree = "<group>"; };
 		97291BDC1CCA1E2C00082ACB /* UDPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPCommunication.h; sourceTree = "<group>"; };
 		97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPCommunication.m; sourceTree = "<group>"; };
 		97291BDF1CCA1E4600082ACB /* TCPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommunication.h; sourceTree = "<group>"; };
@@ -341,6 +344,15 @@
 			name = AboutUs;
 			sourceTree = "<group>";
 		};
+		972287361CF54D810001225F /* D3ViewAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				972287371CF54DAC0001225F /* D3View.h */,
+				972287381CF54DAC0001225F /* D3View.m */,
+			);
+			name = D3ViewAnimation;
+			sourceTree = "<group>";
+		};
 		97291BDA1CCA1DA900082ACB /* UDP */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,6 +421,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				972287361CF54D810001225F /* D3ViewAnimation */,
 				9775751E1CF190FB00D34D45 /* PopSlider */,
 				97930FC41CE5BC69006601D8 /* Reachability */,
 				976521FC1CE0765E00EEEE01 /* ColorPciker */,
@@ -1070,6 +1083,7 @@
 				9765221F1CE076A700EEEE01 /* KZColorPickerSwatchView.m in Sources */,
 				97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */,
 				9765210C1CDC2F0500EEEE01 /* SettingController.m in Sources */,
+				972287391CF54DAC0001225F /* D3View.m in Sources */,
 				97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */,
 				9765211E1CDC2FA400EEEE01 /* DetailEditController.m in Sources */,
 				9765221B1CE076A700EEEE01 /* KZColorPicker.m in Sources */,

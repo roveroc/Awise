@@ -19,6 +19,23 @@
 @synthesize tcpSocket;
 
 
+- (void)animationImage1{
+    [self.deviceImage1 d3_heartbeat];
+}
+
+- (void)animationImage2{
+    [self.deviceImage2 d3_heartbeat];
+}
+
+- (void)animationImage3{
+    [self.deviceImage3 d3_heartbeat];
+}
+
+- (void)animationImage4{
+    [self.deviceImage4 d3_heartbeat];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -26,10 +43,18 @@
      *根据当前设备的数量和种类布局界面
      */
     
-    [self.deviceImage1 setImageWithString:@"Touch" color:nil circular:YES];
+    
     [self.deviceImage2 setImageWithString:@"Blue" color:nil circular:YES];
     [self.deviceImage3 setImageWithString:@"Water" color:nil circular:YES];
     [self.deviceImage4 setImageWithString:@"Wait" color:nil circular:YES];
+    self.deviceImage1.image = [UIImage imageNamed:@"area_school.png"];
+    [self.deviceImage1 setImageWithString:@"Touch" color:nil circular:YES];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animationImage1) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:3.1 target:self selector:@selector(animationImage2) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(animationImage3) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:4.1 target:self selector:@selector(animationImage4) userInfo:nil repeats:YES];
+    
     
     self.deviceImage1.userInteractionEnabled = YES;
     self.deviceImage2.userInteractionEnabled = YES;

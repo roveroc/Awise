@@ -14,6 +14,7 @@
 #import "LightFishController.h"
 #import "BlueRGBController.h"
 #import <UIImageView+Letters.h>
+#import "D3View.h"
 
 @interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate,UIGestureRecognizerDelegate>{
     RoverSqlite *sqlite;
