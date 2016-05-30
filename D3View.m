@@ -301,7 +301,7 @@
 
 -(void)d3_heartbeat{
 //    [self d3_heartbeat:1.2 duration:0.5 completion:nil];
-    [self d3_heartbeat:1.1 duration:0.5 completion:nil];
+    [self d3_heartbeat:1.2 duration:0.5 completion:nil];
 }
 
 

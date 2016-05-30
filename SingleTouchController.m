@@ -47,7 +47,7 @@
             [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
         }
     }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
+//        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
     }
     
     //初始化定时器数据
@@ -81,7 +81,7 @@
 //    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
     
     
-//    [[AwiseGlobal sharedInstance] scanNetwork];
+    [[AwiseGlobal sharedInstance] scanNetwork];
 
 }
 

@@ -20,10 +20,12 @@
     RoverSqlite             *sqlite;
     TCPCommunication        *tcpSocket;
     UIScrollView            *deviceScroll;
+    NSMutableArray          *deviceImgArray;
 }
 @property (nonatomic, retain) RoverSqlite           *sqlite;
 @property (nonatomic, retain) TCPCommunication      *tcpSocket;
 @property (nonatomic, retain) UIScrollView          *deviceScroll;
+@property (nonatomic, retain) NSMutableArray        *deviceImgArray;;
 
 - (IBAction)VIPClicked:(id)sender;
 - (IBAction)searchFun:(id)sender;

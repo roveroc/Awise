@@ -71,7 +71,7 @@
     [socket readDataWithTimeout:-1 tag:0];
     [socket writeData:da withTimeout:-1 tag:0];
     self.responeFlag = NO;
-    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:3.0];
+    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:4.0];
 }
 
 #pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功

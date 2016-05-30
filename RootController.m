@@ -18,6 +18,7 @@
 @synthesize sqlite;
 @synthesize tcpSocket;
 @synthesize deviceScroll;
+@synthesize deviceImgArray;
 
 - (void)animationImage1{
     [self.deviceImage1 d3_heartbeat];
@@ -72,14 +73,69 @@
 }
 
 
-#pragma mark ----------------------------------------- 根据数据库中设备的数量布局界面
-//- (void)layoutDevice{
-//    int x = SCREEN_WIDHT
-//    for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){
-//        
-//    }
-//}
+- (void)viewWillLayoutSubviews{
+    [self layoutDevice];
+}
 
+#pragma mark ----------------------------------------- 根据数据库中设备的数量布局界面
+- (void)layoutDevice{
+    if(self.deviceImgArray.count == 0){
+        self.deviceImgArray = [[NSMutableArray alloc] init];
+    }
+    else{
+        return;
+    }
+    int size = 110;         //长宽
+    int distance = 80;      //竖间距
+    int x = (SCREEN_WIDHT/2 - size)/2;
+    int y = 150;
+    self.deviceScroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    self.deviceScroll.contentSize = CGSizeMake(SCREEN_WIDHT, SCREEN_HEIGHT*2);
+    [self.view addSubview:self.deviceScroll];
+//    for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){
+    for(int i=0;i<10;i++){
+        if(i%2 == 0){
+            x = (SCREEN_WIDHT/2 - size)/2;
+            y = size * (i/2) + 150 + distance * (i/2);
+        }else{
+            x = (SCREEN_WIDHT/2 - size)/2 + SCREEN_WIDHT/2;
+            y = size * (i/2) + 150 + distance * (i/2);
+        }
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(x, y, size, size)];
+        [imgView d3_heartbeat];
+        [self.deviceImgArray addObject:imgView];
+        UIButton    *btn     = [[UIButton alloc] initWithFrame:CGRectMake(x, y, size, size)];
+        btn.tag = i+1;
+        [btn addTarget:self action:@selector(enterDeviceController:) forControlEvents:UIControlEventTouchUpInside];
+        [imgView setImageWithString:@"Blue" color:nil circular:YES];
+        [self.deviceScroll addSubview:imgView];
+        [self.deviceScroll addSubview:btn];
+    }
+    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(deviceImgAnimation) userInfo:nil repeats:YES];
+}
+
+- (void)deviceImgAnimation{
+    srand((unsigned)time(0));  //不加这句每次产生的随机数不变
+    int num1 = rand() % 10;
+    
+    srand((unsigned)time(0));  //不加这句每次产生的随机数不变
+    int num2 = rand() % 10;
+    
+    srand((unsigned)time(0));  //不加这句每次产生的随机数不变
+    int num3 = rand() % 10;
+    
+    UIImageView *img1 = (UIImageView *)[self.deviceImgArray objectAtIndex:num1];
+    UIImageView *img2 = (UIImageView *)[self.deviceImgArray objectAtIndex:num2];
+    UIImageView *img3 = (UIImageView *)[self.deviceImgArray objectAtIndex:num3];
+    [img1 d3_heartbeat];
+    [img2 d3_heartbeat];
+    [img3 d3_heartbeat];
+}
+
+#pragma mark --------------------------- 进入设备控制界面，根据button的tag值
+- (void)enterDeviceController:(UIButton *)sender{
+    NSLog(@"sender.tag = %ld",(long)sender.tag);
+}
 
 #pragma mark --------------------------- 单色触摸面板
 - (void)enterSingleTouchController{

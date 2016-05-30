@@ -298,7 +298,7 @@
                 break;
             case 0x06:{
                 [AwiseGlobal sharedInstance].mode = Timer3_Model;
-                [self closeSwitch:@[@1,@2,@3,@4,@5]];
+                [self closeSwitch:@[@1,@2,@4,@5]];
             }
                 break;
             default:

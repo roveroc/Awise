@@ -54,7 +54,7 @@
 
 #pragma mark ------------------------------------------------ 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.tableViewItems.count;
+    return self.tableViewItems.count-1;
 }
 
 #pragma mark ------------------------------------------------ 行高

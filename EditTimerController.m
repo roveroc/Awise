@@ -118,7 +118,7 @@
 
 #pragma mark ---------------------------------------- 下载数据到设备
 - (void)downDataToDevice{
-    [[AwiseGlobal sharedInstance] showWaitingView:1.5];
+    [[AwiseGlobal sharedInstance] showWaitingView:0];
     NSLog(@"下载数据到设备 ");
     if(self.dataArr.count > 0)
        [self.dataArr removeAllObjects];
@@ -167,12 +167,19 @@
     
     for(int i=0;i<self.dataArr.count;i++){
         NSData *dd = [self.dataArr objectAtIndex:i];
-        [self performSelector:@selector(sendTimerData:) withObject:dd afterDelay:i*0.1];
+        [self performSelector:@selector(sendTimerData:) withObject:dd afterDelay:i*0.5];
     }
 }
 
+#pragma mark ---------------------------------------------------- 数据返回超时
+- (void)dataBackTimeOut{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+}
+
+
 #pragma mark ----------------------------------- 解析从设备的返回值
 - (void)dataBackFormDevice:(Byte *)byte{
+    [[AwiseGlobal sharedInstance] disMissHUD];
     if (byte[2] == 0x01 && byte[5] == 0x00){                           //下载数据到设备是否成功
         [[AwiseGlobal sharedInstance] showRemindMsg:@"设置定时器数据失败" withTime:1.5];
     }
