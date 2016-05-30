@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "RoverSqlite.h"
 #import "Reachability.h"
+#import "AwiseGlobal.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

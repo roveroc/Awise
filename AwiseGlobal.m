@@ -102,10 +102,10 @@
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.mode = MBProgressHUDModeText;
     self.hud.labelText = msg;
-    if(time > HudDismissTime)
-        [self.hud hide:YES afterDelay:time];
-    else
-        [self.hud hide:YES afterDelay:HudDismissTime];
+//    if(time > HudDismissTime)
+//        [self.hud hide:YES afterDelay:time];
+//    else
+//        [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
 
@@ -113,10 +113,10 @@
 - (void)showWaitingView:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
-    if(time > HudDismissTime)
-        [self.hud hide:YES afterDelay:time];
-    else
-        [self.hud hide:YES afterDelay:HudDismissTime];
+//    if(time > HudDismissTime)
+//        [self.hud hide:YES afterDelay:time];
+//    else
+//        [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
 
@@ -125,13 +125,22 @@
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
     self.hud.labelText = msg;
-    if(time > HudDismissTime)
-        [self.hud hide:YES afterDelay:time];
-    else
-        [self.hud hide:YES afterDelay:HudDismissTime];
+//    if(time > HudDismissTime)
+//        [self.hud hide:YES afterDelay:time];
+//    else
+//        [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
 
+#pragma mark -------------------------------------------------------- 隐藏HUD
+- (void)disMissHUD{
+    [self.hud hide:YES];
+}
+
+#pragma mark -------------------------------------------------------- 数据返回超时
+- (void)dataBackTimeOut{
+    [self.hud hide:YES];
+}
 
 #pragma mark -------------------------------------------------------- 判断一个IP是否能Ping通
 - (void)pingIPisOnline:(NSString *)ip{

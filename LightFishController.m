@@ -43,7 +43,7 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
-#pragma mark ------------------------------------------------ 重新启动定时器
+#pragma mark ------------------------------------------------ 重新启动定时器,并断开连接
 - (void)viewWillAppear:(BOOL)animated{
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
@@ -54,6 +54,11 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [self.sendTimer invalidate];
     self.sendTimer = nil;
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+    }
 }
 
 #pragma mark ------------------------------------------------ 读取设备状态
@@ -73,6 +78,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"Light";
     
     //进入设备管理页，搜索设备、添加到路由器等功能
 //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Device" style:UIBarButtonItemStyleDone target:self action:@selector(gotoDeviceManagerController)];
@@ -180,9 +187,9 @@
 - (void)TCPSocketConnectSuccess{
     [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态" withTime:WAITTIME];
     //每次软件启动时，自动同步时间至设备
-    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+//    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
     //获取设备状态值
-    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.2];
 }
 
 
@@ -239,18 +246,24 @@
     b3[7] = ssbb;
  
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
+#pragma mark ---------------------------------------------------- 数据返回超时
+- (void)dataBackTimeOut{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+}
 
-#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+#pragma mark ---------------------------------------------------- 处理水族灯设备返回的数据
 - (void)dataBackFormDevice:(Byte *)byte{
+    [[AwiseGlobal sharedInstance] disMissHUD];
     if (byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x01){          //开指令：成功
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+        [AwiseGlobal sharedInstance].isClosed = NO;
     }
     else if(byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x00){      //关指令：成功
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+        [AwiseGlobal sharedInstance].isClosed = YES;
     }
     else if(byte[2] == 0x06 && byte[3] == 0x01){
         [AwiseGlobal sharedInstance].switchStatus = byte[5];
@@ -258,23 +271,35 @@
         [AwiseGlobal sharedInstance].minuteStatus = byte[7];
         [AwiseGlobal sharedInstance].modelStatus  = byte[8];
         switch (byte[8]) {
-            case 0x01:
+            case 0x01:{
                 [AwiseGlobal sharedInstance].mode = Manual_Model;
+                [self closeSwitch:@[@1,@2,@3,@4,@5,@6]];
+            }
                 break;
-            case 0x02:
+            case 0x02:{
                 [AwiseGlobal sharedInstance].mode = Lighting_Model;
+                [self closeSwitch:@[@1,@2,@3,@5,@6]];
+            }
                 break;
-            case 0x03:
+            case 0x03:{
                 [AwiseGlobal sharedInstance].mode = Cloudy_Model;
+                [self closeSwitch:@[@1,@2,@3,@4,@6]];
+            }
                 break;
-            case 0x04:
+            case 0x04:{
                 [AwiseGlobal sharedInstance].mode = Timer1_Model;
+                [self closeSwitch:@[@2,@3,@4,@5,@6]];
+            }
                 break;
-            case 0x05:
+            case 0x05:{
                 [AwiseGlobal sharedInstance].mode = Timer2_Model;
+                [self closeSwitch:@[@1,@3,@4,@5,@6]];
+            }
                 break;
-            case 0x06:
+            case 0x06:{
                 [AwiseGlobal sharedInstance].mode = Timer3_Model;
+                [self closeSwitch:@[@1,@2,@3,@4,@5]];
+            }
                 break;
             default:
                 break;
@@ -490,6 +515,7 @@
 
 #pragma mark ---------------------------------------------------- 三通道亮度值改变
 - (IBAction)pipeSliderValueChange:(id)sender {
+    [self closeSwitch:@[@1,@2,@3,@4,@5,@6]];
     UISlider *slider = (UISlider *)sender;
     switch (slider.tag) {
         case 7:{

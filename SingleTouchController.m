@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Touch";
     /*
      *如果是路由模式（STA）,判断上次保存的设备IP能否Ping通，如果能则直接控制,还要加一条指令，
      *如果不能，则需重新扫描局域网，获取设备MAC对应新的IP，更新数据库
@@ -78,6 +79,7 @@
 //    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
 //    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
 //    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+    
     
 //    [[AwiseGlobal sharedInstance] scanNetwork];
 

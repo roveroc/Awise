@@ -10,13 +10,16 @@
 #import <MBProgressHUD.h>
 #import <AsyncSocket.h>
 
+@class AwiseGlobal;
 
 @protocol TCPSocketDelegate <NSObject>
 
 @optional
+
 - (void)TCPSocketConnectSuccess;            //设备连接成功
 - (void)TCPSocketBroken;                    //设备断开连接
 - (void)dataBackFormDevice:(Byte *)byte;    //发送数据到控制器
+- (void)dataBackTimeOut;                    //数据返回超时
 
 @end
 

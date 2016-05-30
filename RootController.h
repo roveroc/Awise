@@ -17,14 +17,13 @@
 #import "D3View.h"
 
 @interface RootController : UIViewController <QRCodeReaderDelegate,PingDelegate,UIGestureRecognizerDelegate>{
-    RoverSqlite *sqlite;
-    TCPCommunication *tcpSocket;
-    
-    
-
+    RoverSqlite             *sqlite;
+    TCPCommunication        *tcpSocket;
+    UIScrollView            *deviceScroll;
 }
-@property (nonatomic, retain) RoverSqlite *sqlite;
-@property (nonatomic, retain) TCPCommunication *tcpSocket;
+@property (nonatomic, retain) RoverSqlite           *sqlite;
+@property (nonatomic, retain) TCPCommunication      *tcpSocket;
+@property (nonatomic, retain) UIScrollView          *deviceScroll;
 
 - (IBAction)VIPClicked:(id)sender;
 - (IBAction)searchFun:(id)sender;

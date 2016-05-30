@@ -24,7 +24,7 @@
 #define AwiseDataBase            @"AwiseDeivce.sqlite"              //数据库
 #define AwiseSingleTouchTimer    @"SingleTouchTimer.plist"          //单色触摸面板定时器数据存储文件
 
-#define HudDismissTime           0.5                                //提示框消失的时间
+#define HudDismissTime           1.5                                //提示框消失的时间
 
 //******************* ******************* *******************
 //判断iPhone4/iPhone4S
@@ -175,6 +175,8 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 - (void)showWaitingViewWithMsg:(NSString *)msg withTime:(float)time;   //展示提示用户等待，带文字提示,如果参数time为0，则使用默认时间
 
 - (void)showRemindMsg:(NSString *)msg withTime:(float)time;            //纯文字提示
+
+- (void)disMissHUD;
 
 - (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
 

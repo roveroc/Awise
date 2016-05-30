@@ -17,7 +17,7 @@
 @implementation RootController
 @synthesize sqlite;
 @synthesize tcpSocket;
-
+@synthesize deviceScroll;
 
 - (void)animationImage1{
     [self.deviceImage1 d3_heartbeat];
@@ -42,7 +42,6 @@
     /*
      *根据当前设备的数量和种类布局界面
      */
-    
     
     [self.deviceImage2 setImageWithString:@"Blue" color:nil circular:YES];
     [self.deviceImage3 setImageWithString:@"Water" color:nil circular:YES];
@@ -71,6 +70,16 @@
     [self.deviceImage2 addGestureRecognizer:tap2];
     [self.deviceImage3 addGestureRecognizer:tap3];
 }
+
+
+#pragma mark ----------------------------------------- 根据数据库中设备的数量布局界面
+//- (void)layoutDevice{
+//    int x = SCREEN_WIDHT
+//    for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){
+//        
+//    }
+//}
+
 
 #pragma mark --------------------------- 单色触摸面板
 - (void)enterSingleTouchController{
