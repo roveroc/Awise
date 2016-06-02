@@ -59,3 +59,38 @@
  
  [self presentViewController:vc animated:YES completion:NULL];
  */
+
+
+
+#pragma mark ---------------------------------------------------- 连接设备
+/*- (void)connectToDevice:(NSString *)host port:(NSString *)port{
+    self.reConnectCount = 0;
+    //    [self.socket setDelegate:nil];
+    //    [self.socket disconnect];
+    //    self.socket=nil;
+    //    if([self.socket isConnected]){
+    //        [self.socket disconnect];
+    //    }
+    self.socket = [[AsyncSocket alloc] initWithDelegate:self]; //设置回调的delegate
+    //TODO 这里需要在退出局域网模式下断开
+    //    [self.socket disconnect];    //断开tcp连接
+    @try {
+        [self.socket connectToHost:host onPort:[port intValue] error:nil];
+        [self.socket readDataWithTimeout:-1 tag:0];
+        //        [self.socket connectToHost:host onPort:[port intValue] withTimeout:2. error:nil];
+        //        [self.socket acceptOnPort:54321 error:nil];
+    }
+    @catch (NSException *exception) { //异常处理
+        NSLog(@"连接设备异常 %@,%@", [exception name], [exception description]);
+    }
+}*/
+
+
+#pragma mar ----------------------------------------------- 改变uitablecell左边默认图标尺寸
+//    cell.imageView.image=[UIImage imageNamed:@"area_school.png"];
+//    CGSize itemSize = CGSizeMake(40, 40);
+//    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+//    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+//    [cell.imageView.image drawInRect:imageRect];
+//    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();

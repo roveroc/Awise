@@ -97,20 +97,32 @@
     return weekStr;
 }
 
+#pragma mark -------------------------------------------------------- 提示用户等待，带时间
+- (void)showWaitingViewWithTime:(NSString *)msg time:(float)time{
+    self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
+    self.hud.dimBackground = YES;
+    self.hud.labelText = msg;
+    if(time > HudDismissTime)
+        [self.hud hide:YES afterDelay:time];
+    else
+        [self.hud hide:YES afterDelay:HudDismissTime];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
+}
+
 #pragma mark -------------------------------------------------------- 纯文字提示
 - (void)showRemindMsg:(NSString *)msg withTime:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.mode = MBProgressHUDModeText;
     self.hud.labelText = msg;
-//    if(time > HudDismissTime)
-//        [self.hud hide:YES afterDelay:time];
-//    else
-//        [self.hud hide:YES afterDelay:HudDismissTime];
+    if(time > HudDismissTime)
+        [self.hud hide:YES afterDelay:time];
+    else
+        [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
 }
 
 #pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待
-- (void)showWaitingView:(float)time{
+- (void)showWaitingView{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
 //    if(time > HudDismissTime)
@@ -121,7 +133,7 @@
 }
 
 #pragma mark -------------------------------------------------------- 弹出HUD，提示用户等待,带文字提示
-- (void)showWaitingViewWithMsg:(NSString *)msg withTime:(float)time{
+- (void)showWaitingViewWithMsg:(NSString *)msg{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
     self.hud.labelText = msg;
@@ -162,34 +174,6 @@
     }
     self.scan = [[ScanLAN alloc] initWithDelegate:self];
     [self.scan startScan];
-//    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(gbScanner) userInfo:nil repeats:YES];
-}
-
-static int i = 0;
-
-- (void)gbScanner{
-//    self.gbPing = [[GBPing alloc] init];
-    GBPing *ping = [[GBPing alloc] init];
-    ping.delegate = self;
-    NSString *str = @"192.168.1.";
-    str = [str stringByAppendingFormat:@"%d",i++];
-    ping.host = str;
-    ping.timeout = 0.2;
-    ping.pingPeriod = 0.9;
-    
-    [ping setupWithBlock:^(BOOL success, NSError *error) { //necessary to resolve hostname
-        if (success) {
-            //start pinging
-            [self.gbPing startPinging];
-            
-            //stop it after 5 seconds
-            [self performSelector:@selector(releasePing:) withObject:ping afterDelay:0.1];
-            
-        }
-        else {
-            NSLog(@"failed to start");
-        }
-    }];
 }
 
 - (void)releasePing:(GBPing *)ping{

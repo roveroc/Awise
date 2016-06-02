@@ -106,7 +106,7 @@
 
 #pragma mark - 打开或关闭某种模式
 - (IBAction)onoffSwitch:(id)sender {
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     UISwitch *s = (UISwitch *)sender;
     switch (s.tag) {
         case 1:             //定时器1

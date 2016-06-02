@@ -32,7 +32,7 @@
 #pragma mark ------------------------------------------------ 创建表
 #pragma mark ---- 六个字段：name,mac,AP_ip,STA_ip,model,description
 - (BOOL)createTable{
-    NSString *deviceTable = @"CREATE TABLE IF NOT EXISTS AwiseDevice(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mac TEXT, AP_ip TEXT,STA_ip, model TEXT, description TEXT)";
+    NSString *deviceTable = @"CREATE TABLE IF NOT EXISTS AwiseDevice(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mac TEXT, AP_ip TEXT,port TEXT,STA_ip TEXT, model TEXT, description TEXT)";
     char *ERROR;
     if (sqlite3_exec(database, [deviceTable UTF8String], NULL, NULL, &ERROR)!=SQLITE_OK){
         sqlite3_close(database);
@@ -55,7 +55,6 @@
         NSLog(@"查询所有设备表出错");
         return nil;
     }
-    NSLog(@"表中共有记录 %d 个设备信息，每个设备记录有 %d 属性",nRow,nColumn);
     if (sqlite3_prepare_v2(database, [quary UTF8String], -1, &stmt, nil) == SQLITE_OK) {
         while (sqlite3_step(stmt)==SQLITE_ROW) {
             NSMutableArray *deviceInfo = [[NSMutableArray alloc] init];
@@ -69,12 +68,13 @@
         sqlite3_finalize(stmt);  
     }
     sqlite3_close(database);
+    NSLog(@"数据库中最新设备记录为 == %@",infoArray);
     return infoArray;
 }
 
 #pragma mark ------------------------------------------------ 插入设备信息
 - (BOOL)insertDeivceInfo:(NSMutableArray *)info{
-    NSString *sql = @"INSERT INTO AwiseDevice(name,mac,AP_ip,STA_ip,model,description) VALUES(?,?,?,?,?,?);";
+    NSString *sql = @"INSERT INTO AwiseDevice(name,mac,AP_ip,port,STA_ip,model,description) VALUES(?,?,?,?,?,?,?);";
     sqlite3_stmt *stmt;
     [self openDataBase];
     if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK) {
@@ -94,7 +94,7 @@
 
 #pragma mark ------------------------------------------------ 删除一条设备信息
 - (BOOL)deleteDeviceInfo:(NSString *)mac{
-    NSString *sql = [NSString stringWithFormat:@"DELETE FROM AwiseDevice where mac = %@",mac];
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM AwiseDevice where mac = '%@'",mac];
     sqlite3_stmt *stmt;
     [self openDataBase];
     if (sqlite3_prepare_v2(database, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK) {

@@ -16,6 +16,7 @@
 		972287391CF54DAC0001225F /* D3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 972287381CF54DAC0001225F /* D3View.m */; };
 		97291BDE1CCA1E2C00082ACB /* UDPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */; };
 		97291BE11CCA1E4600082ACB /* TCPCommunication.m in Sources */ = {isa = PBXBuildFile; fileRef = 97291BE01CCA1E4600082ACB /* TCPCommunication.m */; };
+		972F72801D000F25008560ED /* MannageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972F727F1D000F25008560ED /* MannageCell.xib */; };
 		9735C02D1CC7832A000B0727 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02C1CC7832A000B0727 /* main.m */; };
 		9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C02F1CC7832A000B0727 /* AppDelegate.m */; };
 		9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0371CC7832A000B0727 /* AwiseController.xcdatamodeld */; };
@@ -129,6 +130,7 @@
 		97291BDD1CCA1E2C00082ACB /* UDPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPCommunication.m; sourceTree = "<group>"; };
 		97291BDF1CCA1E4600082ACB /* TCPCommunication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPCommunication.h; sourceTree = "<group>"; };
 		97291BE01CCA1E4600082ACB /* TCPCommunication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPCommunication.m; sourceTree = "<group>"; };
+		972F727F1D000F25008560ED /* MannageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MannageCell.xib; sourceTree = "<group>"; };
 		9735C0281CC7832A000B0727 /* AwiseController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwiseController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9735C02C1CC7832A000B0727 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9735C02E1CC7832A000B0727 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		97128FCC1CEEE4D300F58045 /* ManageDeviceController */ = {
 			isa = PBXGroup;
 			children = (
+				972F727E1D000EFF008560ED /* MannageCell */,
 				97128FCD1CEEE54B00F58045 /* ManageDeviceController.h */,
 				97128FCE1CEEE54B00F58045 /* ManageDeviceController.m */,
 				97128FCF1CEEE54B00F58045 /* ManageDeviceController.xib */,
@@ -370,6 +373,14 @@
 				97291BE01CCA1E4600082ACB /* TCPCommunication.m */,
 			);
 			name = TCP;
+			sourceTree = "<group>";
+		};
+		972F727E1D000EFF008560ED /* MannageCell */ = {
+			isa = PBXGroup;
+			children = (
+				972F727F1D000F25008560ED /* MannageCell.xib */,
+			);
+			name = MannageCell;
 			sourceTree = "<group>";
 		};
 		9735C01F1CC7832A000B0727 = {
@@ -939,6 +950,7 @@
 				97651F781CD8B07C00EEEE01 /* 750x1334.png in Resources */,
 				9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */,
 				97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */,
+				972F72801D000F25008560ED /* MannageCell.xib in Resources */,
 				97F55A561CCB262F00E92957 /* button_nomal.png in Resources */,
 				976522211CE076A700EEEE01 /* pickerColorWheel.png in Resources */,
 				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,

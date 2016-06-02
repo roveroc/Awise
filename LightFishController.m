@@ -92,34 +92,43 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
     self.navigationItem.rightBarButtonItem = leftItem;
     
-//    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-//    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
-//    [AwiseGlobal sharedInstance].isSuccess = NO;
-//    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-//    [AwiseGlobal sharedInstance].delegate = self;
-//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
-    
-    
     
 //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
     if([AwiseGlobal sharedInstance].cMode == AP){
-        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+//AP模式下，先检查设备的WIFI连接是否对应
+        NSString *macStr = [[[[AwiseGlobal sharedInstance].wifiSSID componentsSeparatedByString:@"-"] lastObject] lowercaseStringWithLocale:[NSLocale currentLocale]];
+        if([[deviceInfo objectAtIndex:1] rangeOfString:macStr].location != NSNotFound){
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+            [[AwiseGlobal sharedInstance].tcpSocket
+             connectToDevice:[deviceInfo objectAtIndex:2]
+             port:[deviceInfo objectAtIndex:3]];
+        }else{
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"请先连接该设备Wifi" withTime:2.0];
+        }
     }
     else if([AwiseGlobal sharedInstance].cMode == STA){
         if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接中..."];
+//如果是STA模式，首先尝试建立连接看设备在线或IP发生变化
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:4];
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[self.deviceInfo objectAtIndex:4] port:[self.deviceInfo objectAtIndex:3]];
+//连接设备超时
+            [self performSelector:@selector(connectDeviceTimeout) withObject:nil afterDelay:2.0];
         }
     }else{
-//        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
-        NSLog(@"设备无连接");
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"当前无Wifi连接" withTime:2.0];
     }
+}
+
+#pragma mark ------------------------------------------------ 连接设备超时 -- 超时
+- (void)connectDeviceTimeout{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接超时，重新查找设备..."];
+    [[AwiseGlobal sharedInstance] scanNetwork];
 }
 
 #pragma mark ------------------------------------------------ Ping IP 地址的回调
@@ -134,7 +143,7 @@
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
             [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
@@ -153,12 +162,13 @@
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
             [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:4];
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"正在局域网内查找设备"];
             [[AwiseGlobal sharedInstance] scanNetwork];
         }
     }
@@ -166,6 +176,7 @@
 
 #pragma mark ------------------------------------------------ 扫描局域网完成
 - (void)scanNetworkFinish{
+    [[AwiseGlobal sharedInstance] disMissHUD];
     NSLog(@" ------- 扫描到的ARP表 ------- ");
     NSMutableArray *arpArray = [[AwiseGlobal sharedInstance] getARPTable];
     NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpArray);
@@ -186,7 +197,7 @@
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
             [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
@@ -198,7 +209,8 @@
 
 #pragma mark - 连接设备成功
 - (void)TCPSocketConnectSuccess{
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态" withTime:WAITTIME];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
+//    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态"];
     //每次软件启动时，自动同步时间至设备
     [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
     //获取设备状态值
@@ -209,7 +221,7 @@
 
 #pragma mark --------------------------------------------- 获取最新的设备状态值
 - (void)refreshStatus{
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     [self getDeviceStatus];
 }
 
@@ -279,6 +291,31 @@
         [AwiseGlobal sharedInstance].isClosed = YES;
     }
     else if(byte[2] == 0x06 && byte[3] == 0x01){
+        if([AwiseGlobal sharedInstance].cMode == AP){
+            Byte macbb[12];
+            for(int i=51;i<63;i++){
+                macbb[i-51] = byte[i];
+            }
+            NSString *hexStr=@"";
+            for(int i=0;i<12;i++){
+                NSString *newHexStr = [NSString stringWithFormat:@"%x",macbb[i]&0xff]; ///16进制数
+                if([newHexStr length]==1)
+                    hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
+                else
+                    hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
+            }
+            NSLog(@"返回数据设备的MAC == %@",hexStr);
+            NSString *ssid = [[[[AwiseGlobal sharedInstance].wifiSSID componentsSeparatedByString:@"-"] lastObject] lowercaseStringWithLocale:[NSLocale currentLocale]];
+            if([hexStr rangeOfString:ssid].location != NSNotFound){
+                
+            }
+            else{
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"连接失败(mac不对应)" time:1.2];
+                return;
+            }
+        }
+
+        [self closeSwitch:@[@1,@2,@3,@4,@5,@6]];
         [AwiseGlobal sharedInstance].switchStatus = byte[5];
         [AwiseGlobal sharedInstance].hourStatus   = byte[6];
         [AwiseGlobal sharedInstance].minuteStatus = byte[7];
@@ -341,19 +378,20 @@
         [AwiseGlobal sharedInstance].isClosed = NO;
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
     }
-    NSString *hStr;
-    if([AwiseGlobal sharedInstance].hourStatus < 10){
-        hStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].hourStatus];
-    }else{
-        hStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].hourStatus];
-    }
-    NSString *mStr;
-    if([AwiseGlobal sharedInstance].minuteStatus < 10){
-        mStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].minuteStatus];
-    }else{
-        mStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].minuteStatus];
-    }
-    NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
+//得到设备返回的时间、暂时没用到
+//    NSString *hStr;
+//    if([AwiseGlobal sharedInstance].hourStatus < 10){
+//        hStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].hourStatus];
+//    }else{
+//        hStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].hourStatus];
+//    }
+//    NSString *mStr;
+//    if([AwiseGlobal sharedInstance].minuteStatus < 10){
+//        mStr = [NSString stringWithFormat:@"0%d",[AwiseGlobal sharedInstance].minuteStatus];
+//    }else{
+//        mStr = [NSString stringWithFormat:@"%d",[AwiseGlobal sharedInstance].minuteStatus];
+//    }
+//    NSString *timeStr = [NSString stringWithFormat:@"%@:%@",hStr,mStr];
 }
 
 #pragma mark ---------------------------------------------------- 开灯关灯
@@ -361,7 +399,7 @@
     BOOL b = [[AwiseGlobal sharedInstance].tcpSocket.socket isConnected];
     NSLog(@"b = %d",b);
     
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -381,7 +419,7 @@
 
 #pragma mark ---------------------------------------------------- 打开或关闭某种模式
 - (IBAction)switchOperate:(id)sender {
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     UISwitch *s = (UISwitch *)sender;
     switch (s.tag) {
         case 1:             //定时器1

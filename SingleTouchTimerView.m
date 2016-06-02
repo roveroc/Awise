@@ -40,7 +40,7 @@
 
 #pragma mark ------------------------------------------------ 操作开关,发送指令
 - (void)operateSwitch:(id)sender{
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
     UITableViewCell *cell;
     if([phoneVersion intValue] > 8){

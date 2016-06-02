@@ -21,11 +21,13 @@
     TCPCommunication        *tcpSocket;
     UIScrollView            *deviceScroll;
     NSMutableArray          *deviceImgArray;
+    NSTimer                 *imgMoveTimer;
 }
 @property (nonatomic, retain) RoverSqlite           *sqlite;
 @property (nonatomic, retain) TCPCommunication      *tcpSocket;
 @property (nonatomic, retain) UIScrollView          *deviceScroll;
-@property (nonatomic, retain) NSMutableArray        *deviceImgArray;;
+@property (nonatomic, retain) NSMutableArray        *deviceImgArray;
+@property (nonatomic, retain) NSTimer               *imgMoveTimer;
 
 - (IBAction)VIPClicked:(id)sender;
 - (IBAction)searchFun:(id)sender;
@@ -37,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImage3;
 @property (weak, nonatomic) IBOutlet UIImageView *deviceImage4;
 
+@property (weak, nonatomic) IBOutlet UILabel *remindLabel;
 
 
 

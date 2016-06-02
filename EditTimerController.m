@@ -118,7 +118,7 @@
 
 #pragma mark ---------------------------------------- 下载数据到设备
 - (void)downDataToDevice{
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     NSLog(@"下载数据到设备 ");
     if(self.dataArr.count > 0)
        [self.dataArr removeAllObjects];

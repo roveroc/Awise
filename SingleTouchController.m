@@ -273,11 +273,11 @@
     bt[18]  = 0x0d;
     bt[19]  = 0x0a;
     if(switchState == NO){                                     //开
-        [[AwiseGlobal sharedInstance] showWaitingView:0];
+        [[AwiseGlobal sharedInstance] showWaitingView];
         bt[11] = 0x01;
     }
     else if(switchState == YES){                               //关
-        [[AwiseGlobal sharedInstance] showWaitingView:0];
+        [[AwiseGlobal sharedInstance] showWaitingView];
         bt[11] = 0x00;
     }
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];

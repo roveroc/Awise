@@ -70,7 +70,7 @@
     [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_gray.png"] forState:UIControlStateNormal];
     [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_blue.png"] forState:UIControlStateNormal];
     
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
 
     [self getDeviceStatus];
 

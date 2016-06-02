@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "RoverSqlite.h"
 #import "AwiseGlobal.h"
+#import "RouterView.h"
 
-@interface ManageDeviceController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ManageDeviceController : UIViewController<UITableViewDataSource,UITableViewDelegate,TCPSocketDelegate>
+{
+    UIButton            *tempButton;
+    RouterView          *routeView;
+}
+@property (nonatomic, retain) UIButton          *tempButton;
+@property (nonatomic, retain) RouterView        *routeView;
 
 
 @property (weak, nonatomic) IBOutlet UITableView *deviceTable;

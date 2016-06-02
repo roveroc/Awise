@@ -170,9 +170,11 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 
 - (NSMutableArray *)getARPTable;                                       //获取ARP表
 
-- (void)showWaitingView:(float)time;                                   //展示提示用户等待
+- (void)showWaitingView;                                               //展示提示用户等待
 
-- (void)showWaitingViewWithMsg:(NSString *)msg withTime:(float)time;   //展示提示用户等待，带文字提示,如果参数time为0，则使用默认时间
+- (void)showWaitingViewWithMsg:(NSString *)msg;                        //展示提示用户等待
+
+- (void)showWaitingViewWithTime:(NSString *)msg time:(float)time;      //展示提示用户等待，带时间间隔
 
 - (void)showRemindMsg:(NSString *)msg withTime:(float)time;            //纯文字提示
 

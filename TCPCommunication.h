@@ -10,7 +10,6 @@
 #import <MBProgressHUD.h>
 #import <AsyncSocket.h>
 
-@class AwiseGlobal;
 
 @protocol TCPSocketDelegate <NSObject>
 

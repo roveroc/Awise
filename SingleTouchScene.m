@@ -23,7 +23,7 @@
 
 #pragma mark ------------------------------------------------ 运行某个场景值
 - (IBAction)sceneClicked:(id)sender {
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     Byte bt[20];
     for(int k=0;k<20;k++){
         bt[k] = 0x00;

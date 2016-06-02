@@ -195,7 +195,7 @@
     }else{
         self.runingValue = 1;
     }
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     [self SaveData];
     [self buildDataStruct];
 }
@@ -207,7 +207,7 @@
     }else{
         self.sswitch = 1;
     }
-    [[AwiseGlobal sharedInstance] showWaitingView:0];
+    [[AwiseGlobal sharedInstance] showWaitingView];
     [self SaveData];
     [self buildDataStruct];
 }

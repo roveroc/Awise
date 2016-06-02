@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface RouterView : UIView <UITextFieldDelegate>
-
+@interface RouterView : UIView <UITextFieldDelegate>{
+    NSString *wifiAccount;
+    NSString *wifiPwd;
+}
+@property (nonatomic, retain) NSString *wifiAccount;
+@property (nonatomic, retain) NSString *wifiPwd;
 
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImg;
 @property (weak, nonatomic) IBOutlet UIView *inputView;
@@ -30,7 +34,7 @@
 - (IBAction)ssidFieldEndEdit:(id)sender;
 - (IBAction)pwdFieldEndEdit:(id)sender;
 
-
+- (void)removeRouteView;
 
 
 @end

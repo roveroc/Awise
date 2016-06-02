@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -12,6 +12,7 @@
                 <outlet property="deviceImage2" destination="UKN-64-BVL" id="n94-l5-HES"/>
                 <outlet property="deviceImage3" destination="J8S-Uv-K2X" id="kKt-UJ-eV1"/>
                 <outlet property="deviceImage4" destination="E2D-cL-N8J" id="bvm-0T-Buk"/>
+                <outlet property="remindLabel" destination="Of4-NH-aw3" id="e3o-UG-BAJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,34 +21,40 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21r-bg-eg8">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21r-bg-eg8">
                     <rect key="frame" x="22" y="117" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="G7d-TY-HXq"/>
                         <constraint firstAttribute="width" constant="110" id="wko-wp-pSc"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-64-BVL">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-64-BVL">
                     <rect key="frame" x="188" y="117" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="OYF-1H-5gh"/>
                         <constraint firstAttribute="height" constant="110" id="mni-Lr-cGi"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-Uv-K2X">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-Uv-K2X">
                     <rect key="frame" x="22" y="254" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="Jir-6c-B11"/>
                         <constraint firstAttribute="width" constant="110" id="orD-Gp-cAs"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-cL-N8J">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-cL-N8J">
                     <rect key="frame" x="188" y="254" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="P31-SN-ZPl"/>
                         <constraint firstAttribute="height" constant="110" id="nYr-lH-l2Y"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="空空如也、快去添加设备吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-NH-aw3">
+                    <rect key="frame" x="29" y="220" width="262" height="39"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -58,10 +65,12 @@
                 <constraint firstItem="21r-bg-eg8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="0.48" id="VUu-Tp-8vg"/>
                 <constraint firstItem="E2D-cL-N8J" firstAttribute="centerY" secondItem="J8S-Uv-K2X" secondAttribute="centerY" id="WhM-kC-IQF"/>
                 <constraint firstItem="J8S-Uv-K2X" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1.29" id="fqP-my-0ui"/>
+                <constraint firstItem="Of4-NH-aw3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="klE-FU-umg"/>
+                <constraint firstItem="Of4-NH-aw3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oNy-pI-WBu"/>
                 <constraint firstItem="21r-bg-eg8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.72" id="xnE-gs-cc8"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-81" y="184"/>
+            <point key="canvasLocation" x="-358" y="200"/>
         </view>
     </objects>
 </document>

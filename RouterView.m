@@ -9,7 +9,8 @@
 #import "RouterView.h"
 
 @implementation RouterView
-
+@synthesize wifiAccount;
+@synthesize wifiPwd;
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
@@ -27,6 +28,11 @@
 
 #pragma mark ------------------------------------------------ 取消
 - (IBAction)cancelBtnClicked:(id)sender {
+    [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+    [self removeRouteView];
+}
+
+- (void)removeRouteView{
     [UIView beginAnimations:@"animation" context:nil];
     //动画时长
     [UIView setAnimationDuration:0.3];
@@ -52,8 +58,9 @@
         [self.ssidField setValue:[UIColor colorWithRed:1 green:0 blue:0 alpha:1] forKeyPath:@"_placeholderLabel.textColor"];
         return;
     }
-    NSString *ssid = self.ssidField.text;
-    NSString *pwd  = self.pwdField.text;
+    [[AwiseGlobal sharedInstance] showWaitingView];
+    self.wifiAccount = self.ssidField.text;
+    self.wifiPwd  = self.pwdField.text;
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -64,9 +71,9 @@
     b3[3] = 0x01;
     b3[4] = 0x00;
     
-    NSLog(@"加入路由器的 账号 为：---> %@",ssid);
-    NSLog(@"加入路由器的 密码 为：---> %@",pwd);
-    NSData * ssidData = [ssid dataUsingEncoding:NSASCIIStringEncoding];
+    NSLog(@"加入路由器的 账号 为：---> %@",self.wifiAccount);
+    NSLog(@"加入路由器的 密码 为：---> %@",self.wifiPwd);
+    NSData * ssidData = [self.wifiAccount dataUsingEncoding:NSASCIIStringEncoding];
     Byte *ssidBtye = (Byte *)[ssidData bytes];
     
     for(int i=0;i<ssidData.length ;i++){
@@ -88,8 +95,8 @@
     b3[3] = 0x02;
     b3[4] = 0x00;
     
-    NSString * password = self.pwdField.text;//@"Awise2015@";
-    NSData * passwordData = [password dataUsingEncoding:NSASCIIStringEncoding];
+//    NSString * password = self.pwdField.text;//@"Awise2015@";
+    NSData * passwordData = [self.wifiPwd dataUsingEncoding:NSASCIIStringEncoding];
     Byte *ssidBtye = (Byte *)[passwordData bytes];
     
     for(int i=0;i<passwordData.length ;i++){
@@ -142,42 +149,12 @@
     [UIView commitAnimations];
 }
 
-#pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
+#pragma mark ---------------------------------------------------- 处理设置完路由器返回的数据
 - (void)dataBackFormDevice:(Byte *)byte{
     switch (byte[2]) {
-        case 0x01:              //读取状态返回值
-        {
-            
-        }
-            break;
-        case 0x02:              //开关状态返回值
-        {
-            
-        }
-            break;
-        case 0x03:              //亮度控制返回值
-        {
-            
-        }
-            break;
-        case 0x04:              //同步时间返回值
-        {
-            
-        }
-            break;
-        case 0x05:              //设置定时器返回值
-        {
-            
-        }
-            break;
-        case 0x06:              //设置场景返回值
-        {
-            
-        }
-            break;
-        case 0x07:              //开关场景返回值
-        {
-            
+        case 0x18:{              //发送账号密码成功
+            [[AwiseGlobal sharedInstance] disMissHUD];
+            [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"设备正在切换网络，请切换至对应网络控制" time:2.0];
         }
             break;
             
