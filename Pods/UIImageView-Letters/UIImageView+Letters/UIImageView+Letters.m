@@ -111,7 +111,7 @@ static const CGFloat kFontResizingProportion = 0.42f;
 //    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion;
 
     //by rover
-    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion/2;
+    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion/3;
     
     if (fontName) {
         return [UIFont fontWithName:fontName size:fontSize];

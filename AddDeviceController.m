@@ -30,7 +30,7 @@
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;  //受控设备为触摸面板
-//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:30000];
+    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
 }
 
 #pragma mark --------------------- 连接设备成功
@@ -65,7 +65,7 @@
         NSMutableArray *infoArr;
         if([resultAsString rangeOfString:@"Awise"].location != NSNotFound){
             if([resultAsString rangeOfString:@"AwiseWIFI"].location != NSNotFound){             //表明扫描到是Wifi类控制器
-                NSString *info = [resultAsString substringFromIndex:10];
+                NSString *info = [resultAsString substringFromIndex:9];
                 infoArr = (NSMutableArray *)[info componentsSeparatedByString:@"&"];
             }else if([resultAsString rangeOfString:@"AwiseBLE"].location != NSNotFound){        //表明扫描到是蓝牙类控制器
                 NSString *info = [resultAsString substringFromIndex:9];

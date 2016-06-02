@@ -28,7 +28,8 @@
  */
 
 
-
+//sample
+//AwiseWIFIFish1.0&5ccf7f1b4390&192.168.3.26&1.1.1.1&WIFI&www.awise123.com
 
 
 

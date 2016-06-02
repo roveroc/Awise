@@ -46,6 +46,9 @@
 #pragma mark ------------------------------------------------ 重新启动定时器,并断开连接
 - (void)viewWillAppear:(BOOL)animated{
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    if(self.dataArray == nil){
+        self.dataArray = [[NSMutableArray alloc] init];
+    }
     self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
     [self.sendTimer fire];
 }
@@ -89,36 +92,34 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
     self.navigationItem.rightBarButtonItem = leftItem;
     
-    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
-    [AwiseGlobal sharedInstance].isSuccess = NO;
-    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
-    [AwiseGlobal sharedInstance].delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+//    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+//    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
+//    [AwiseGlobal sharedInstance].isSuccess = NO;
+//    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+//    [AwiseGlobal sharedInstance].delegate = self;
+//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+//    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
     
     
     
 //连接设备部分
-//    [AwiseGlobal sharedInstance].delegate = self;
-//    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
-//    if([AwiseGlobal sharedInstance].cMode == AP){
-//        if(self.deviceInfo.count > 0){
-//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
-//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-//        }
-//        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
-//        
-//    }
-//    else if([AwiseGlobal sharedInstance].cMode == STA){
-//        if(self.deviceInfo.count > 0){
-//            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
-//            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
-//        }
-//    }else{
+    [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
+    }
+    else if([AwiseGlobal sharedInstance].cMode == STA){
+        if(self.deviceInfo.count > 0){
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
+            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+        }
+    }else{
 //        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
-//    }
+        NSLog(@"设备无连接");
+    }
 }
 
 #pragma mark ------------------------------------------------ Ping IP 地址的回调
@@ -132,7 +133,9 @@
             }
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为水族灯
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
@@ -149,7 +152,9 @@
             }
             [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
             [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为水族灯
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
@@ -162,24 +167,32 @@
 #pragma mark ------------------------------------------------ 扫描局域网完成
 - (void)scanNetworkFinish{
     NSLog(@" ------- 扫描到的ARP表 ------- ");
-    NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
-    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpDic);
-    NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
-    //更新数据库
-    self.sql = [[RoverSqlite alloc] init];
-    if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
-        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
-        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
-        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
-            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+    NSMutableArray *arpArray = [[AwiseGlobal sharedInstance] getARPTable];
+    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpArray);
+    NSString *temp = [self.deviceInfo objectAtIndex:1];
+    if([arpArray containsObject:temp]){
+        int index = (int)[arpArray indexOfObject:temp];
+        NSString *newIp = [arpArray objectAtIndex:index+1];
+        //更新数据库
+        self.sql = [[RoverSqlite alloc] init];
+        if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+            NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"30000";
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
-        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;      //受控设备为触摸面板
-        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
-                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+    }else{
+        NSLog(@"确保设备正常工作");
     }
 }
 
@@ -187,9 +200,9 @@
 - (void)TCPSocketConnectSuccess{
     [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态" withTime:WAITTIME];
     //每次软件启动时，自动同步时间至设备
-//    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
     //获取设备状态值
-    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.2];
+    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
 }
 
 
@@ -279,26 +292,36 @@
             case 0x02:{
                 [AwiseGlobal sharedInstance].mode = Lighting_Model;
                 [self closeSwitch:@[@1,@2,@3,@5,@6]];
+                UISwitch *temp = (UISwitch *)[self.view viewWithTag:4];
+                [temp setOn:YES animated:YES];
             }
                 break;
             case 0x03:{
                 [AwiseGlobal sharedInstance].mode = Cloudy_Model;
                 [self closeSwitch:@[@1,@2,@3,@4,@6]];
+                UISwitch *temp = (UISwitch *)[self.view viewWithTag:5];
+                [temp setOn:YES animated:YES];
             }
                 break;
             case 0x04:{
                 [AwiseGlobal sharedInstance].mode = Timer1_Model;
                 [self closeSwitch:@[@2,@3,@4,@5,@6]];
+                UISwitch *temp = (UISwitch *)[self.view viewWithTag:1];
+                [temp setOn:YES animated:YES];
             }
                 break;
             case 0x05:{
                 [AwiseGlobal sharedInstance].mode = Timer2_Model;
                 [self closeSwitch:@[@1,@3,@4,@5,@6]];
+                UISwitch *temp = (UISwitch *)[self.view viewWithTag:2];
+                [temp setOn:YES animated:YES];
             }
                 break;
             case 0x06:{
                 [AwiseGlobal sharedInstance].mode = Timer3_Model;
-                [self closeSwitch:@[@1,@2,@4,@5]];
+                [self closeSwitch:@[@1,@2,@4,@5,@6]];
+                UISwitch *temp = (UISwitch *)[self.view viewWithTag:3];
+                [temp setOn:YES animated:YES];
             }
                 break;
             default:

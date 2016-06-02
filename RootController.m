@@ -44,11 +44,11 @@
      *根据当前设备的数量和种类布局界面
      */
     
-    [self.deviceImage2 setImageWithString:@"Blue" color:nil circular:YES];
-    [self.deviceImage3 setImageWithString:@"Water" color:nil circular:YES];
-    [self.deviceImage4 setImageWithString:@"Wait" color:nil circular:YES];
-    self.deviceImage1.image = [UIImage imageNamed:@"area_school.png"];
-    [self.deviceImage1 setImageWithString:@"Touch" color:nil circular:YES];
+    [self.deviceImage1 setImageWithString:@"单色触摸面板" color:nil circular:YES];
+    [self.deviceImage2 setImageWithString:@"蓝牙RGB" color:nil circular:YES];
+    [self.deviceImage3 setImageWithString:@"水族灯" color:nil circular:YES];
+    [self.deviceImage4 setImageWithString:@"健身房大灯" color:nil circular:YES];
+    
     
     [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animationImage1) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:3.1 target:self selector:@selector(animationImage2) userInfo:nil repeats:YES];
@@ -74,7 +74,7 @@
 
 
 - (void)viewWillLayoutSubviews{
-    [self layoutDevice];
+//    [self layoutDevice];
 }
 
 #pragma mark ----------------------------------------- 根据数据库中设备的数量布局界面
@@ -152,9 +152,13 @@
 
 #pragma mark ---------------------------水族灯
 -(void)enterLightFishController{
-    LightFishController *lightCon = [[LightFishController alloc] init];
-    lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
-    [self.navigationController pushViewController:lightCon animated:YES];
+    if([AwiseGlobal sharedInstance].deviceArray.count > 0){
+        LightFishController *lightCon = [[LightFishController alloc] init];
+        lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+        lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:0];
+        [self.navigationController pushViewController:lightCon animated:YES];
+    }
+    
 }
 
 

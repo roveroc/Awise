@@ -59,7 +59,6 @@
     self.centralManager = [[CBCentralManager alloc]
                            initWithDelegate:self queue:dispatch_get_main_queue()];
     self.modeArray = [[NSMutableArray alloc] initWithObjects:
-                      @"黑 色 输 出",
                       @"红 色 输 出",
                       @"绿 色 输 出",
                       @"蓝 色 输 出",
@@ -213,11 +212,10 @@
     
     self.onOffButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"]
-                              forState:UIControlStateNormal];
+    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"]
+                                forState:UIControlStateNormal];
     [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"]
-                              forState:UIControlStateNormal];
-    [self.onOffButton setTitle:@"开"  forState:UIControlStateNormal];
+                                forState:UIControlStateNormal];
     [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
 //    if(iPhone6)
     {
@@ -310,7 +308,9 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.onOffButton setTitle:@"开" forState:UIControlStateNormal];
+//            [self.onOffButton setTitle:@"开" forState:UIControlStateNormal];
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"]
+                                        forState:UIControlStateNormal];
         }else{
             self.offFlag = NO;
             Byte by[4];
@@ -320,7 +320,9 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.onOffButton setTitle:@"关" forState:UIControlStateNormal];
+//            [self.onOffButton setTitle:@"关" forState:UIControlStateNormal];
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"]
+                                        forState:UIControlStateNormal];
         }
     }
 }
@@ -349,8 +351,16 @@
 
 #pragma mark ----------------------------------- 选中某一行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.modeValue = (int)row;
+    self.modeValue = (int)row+1;
     [self sendModeData];
+    if((int)row > 6){
+        self.PlayPauseButton.enabled = YES;
+        self.modeSlider.enabled = YES;
+    }
+    else{
+        self.PlayPauseButton.enabled = NO;
+        self.modeSlider.enabled = NO;
+    }
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
@@ -364,6 +374,8 @@
 
 #pragma mark ----------------------------------- 颜色改变
 - (void)pickerChanged:(KZColorPicker *)cp{
+    self.PlayPauseButton.enabled = NO;
+    self.modeSlider.enabled = NO;
     self.selectedColor = cp.selectedColor;
     if(self.character != nil){
         if(self.touchFlag == YES){

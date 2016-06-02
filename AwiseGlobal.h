@@ -48,7 +48,7 @@
 #define BroadCast   @"255.255.255.255"     //广播地址
 #define WAITTIME    2.0
 #define DISMISS_TIME 1.5
-#define WIFISSID    @"Awise"
+#define WIFISSID    @"Awise-"
 
 typedef enum{
     Manual_Model = 0,
@@ -168,7 +168,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 
 - (void)scanNetwork;                                                   //遍历局域网
 
-- (NSMutableDictionary *)getARPTable;                                  //获取ARP表
+- (NSMutableArray *)getARPTable;                                       //获取ARP表
 
 - (void)showWaitingView:(float)time;                                   //展示提示用户等待
 

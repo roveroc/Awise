@@ -81,7 +81,7 @@
 //    [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:@"192.168.3.26" port:@"30000"];
     
     
-    [[AwiseGlobal sharedInstance] scanNetwork];
+//    [[AwiseGlobal sharedInstance] scanNetwork];
 
 }
 

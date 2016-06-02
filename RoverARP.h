@@ -47,7 +47,7 @@
 }
 @property (nonatomic, retain) NSMutableDictionary *macDic;
 
-- (NSMutableDictionary *) arpTable;
+- (NSMutableArray *) arpTable;
 
 
 

@@ -47,15 +47,10 @@
     NSLog(@" ----- 所有已添加的设备信息为 ----- ");
     NSLog(@"       所有已添加的设备信息为 ----- %@",[AwiseGlobal sharedInstance].deviceArray);
     NSLog(@" ----- 所有已添加的设备信息为 ----- ");
-    
-    float i = 0.1;
-    if(i == 0){
-        NSLog(@"iiii == ");
-    }
-    else{
-        NSLog(@"iiii == 111111");
-    }
 
+//得到手机IP地址
+    [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
+    NSLog(@"当前手的ip地址为 = %@",[AwiseGlobal sharedInstance].IphoneIP);
     
 /*********************水族灯部分**********************/
     NSDictionary *defaultValues = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"light_precent",nil];

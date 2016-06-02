@@ -7,28 +7,40 @@
 //
 
 #import "RoverARP.h"
+#import "AwiseGlobal.h"
 
 @implementation RoverARP
 @synthesize macDic;
 
 
 #pragma mark - 获取ARP表单
-- (NSMutableDictionary*) arpTable{
+- (NSMutableArray*) arpTable{
     
+    NSMutableArray *macArray = [[NSMutableArray alloc] init];
     for(int i=0;i<255;i++){
-        NSString *ip = @"192.168.1.";
+        
+        NSArray *arr = [[AwiseGlobal sharedInstance].IphoneIP componentsSeparatedByString:@"."];
+        NSString *ip = @"";
+        for(int i=0;i<arr.count-1;i++){
+            ip = [[ip stringByAppendingString:arr[i]] stringByAppendingString:@"."];
+        }
         ip = [ip stringByAppendingFormat:@"%d",i];
         NSString *mac = [Utils ipToMac:ip];
         NSLog(@"%@ ip 对应的mac  = %@",ip,mac);
-        
-        [macDic setObject:ip forKey:mac];
+        if(mac.length > 0){
+            NSArray *arr = [mac componentsSeparatedByString:@":"];
+            NSString *_mac = [arr componentsJoinedByString:@""];
+//            [macDic setObject:ip forKey:_mac];
+            [macArray addObject:[_mac lowercaseStringWithLocale:[NSLocale currentLocale]]];
+            [macArray addObject:ip];
+        }
         
     }
     
     
 //    macDic = [[NSMutableDictionary alloc] init];
 //    [self dump:0];
-    return macDic;
+    return macArray;
 }
 
 

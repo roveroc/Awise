@@ -209,12 +209,12 @@ static int i = 0;
 }
 
 #pragma mark -------------------------------------------------------- 获取手机ARP表
-- (NSMutableDictionary *)getARPTable{
+- (NSMutableArray *)getARPTable{
     if(self.arp == nil){
         self.arp = [[RoverARP alloc] init];
     }
-    NSMutableDictionary *arpDic = [self.arp arpTable];
-    return arpDic;
+    NSMutableArray *arpArray = [self.arp arpTable];
+    return arpArray;
 }
 
 #pragma mark -------------------------------------------------------- 隐藏界面下方TabBar
