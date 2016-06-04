@@ -92,7 +92,6 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
     self.navigationItem.rightBarButtonItem = leftItem;
     
-    
 //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
@@ -120,7 +119,7 @@
             [self performSelector:@selector(connectDeviceTimeout) withObject:nil afterDelay:2.0];
         }
     }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"当前无Wifi连接" withTime:2.0];
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"当前无Wifi连接" withTime:1.2];
     }
 }
 
@@ -149,7 +148,7 @@
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{
-            [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:2.0];
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:1.2];
         }
     }
     else{
@@ -634,7 +633,7 @@
         case 11:{                       //定时器一
             EditTimerController *editCon = [[EditTimerController alloc] init];
             editCon.navTitle = @"Edit Timer1";
-            editCon.fileName = @"timerData1";
+            editCon.fileName = @"timerData1.plist";
             [AwiseGlobal sharedInstance].timerNumber = 1;
             [self.navigationController pushViewController:editCon animated:YES];
         }
@@ -642,7 +641,7 @@
         case 12:{                         //定时器二
             EditTimerController *editCon = [[EditTimerController alloc] init];
             editCon.navTitle = @"Edit Timer2";
-            editCon.fileName = @"timerData2";
+            editCon.fileName = @"timerData2.plist";
             [AwiseGlobal sharedInstance].timerNumber = 2;
             [self.navigationController pushViewController:editCon animated:YES];
         }
@@ -650,7 +649,7 @@
         case 13:{                         //定时器三
             EditTimerController *editCon = [[EditTimerController alloc] init];
             editCon.navTitle = @"Edit Timer3";
-            editCon.fileName = @"timerData3";
+            editCon.fileName = @"timerData3.plist";
             [AwiseGlobal sharedInstance].timerNumber = 3;
             [self.navigationController pushViewController:editCon animated:YES];
         }

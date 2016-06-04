@@ -153,13 +153,24 @@
 - (void)dataBackFormDevice:(Byte *)byte{
     switch (byte[2]) {
         case 0x18:{              //发送账号密码成功
-            [[AwiseGlobal sharedInstance] disMissHUD];
-            [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"设备正在切换网络，请切换至对应网络控制" time:2.0];
+            if(byte[3] == 0x02){
+                [[AwiseGlobal sharedInstance] disMissHUD];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请稍候，控制器正在重启..." time:20.0];
+                //在设备重启的时候，在后台Ping一边局域网
+                [self performSelector:@selector(doScanNetwork) withObject:nil afterDelay:10.0];
+            }
         }
             break;
             
         default:
             break;
+    }
+}
+
+
+- (void)doScanNetwork{
+    if([AwiseGlobal sharedInstance].cMode == STA){
+        [[AwiseGlobal sharedInstance] scanNetwork];
     }
 }
 

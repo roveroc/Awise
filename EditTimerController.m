@@ -81,7 +81,8 @@
     self.tableRow = 6;
     [self.view addSubview:timerTable];
     
-    [[AwiseGlobal sharedInstance].lineArray removeAllObjects];
+//    [[AwiseGlobal sharedInstance].lineArray removeAllObjects];
+    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:[self getPlistPath]];
     if(arr.count > 0)
         [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] initWithArray:(NSArray *)arr];
@@ -192,9 +193,10 @@
 
 #pragma mark ---------------------------------------- 获取数据存储路径
 - (NSString *)getPlistPath{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:self.fileName];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *path = [documentsDirectory stringByAppendingPathComponent:self.fileName];
+    NSString *path = [[AwiseGlobal sharedInstance] getFilePath:self.fileName];
     return path;
 }
 

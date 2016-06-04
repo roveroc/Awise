@@ -89,6 +89,8 @@
 }
 
 - (void)viewWillLayoutSubviews{
+    if(self.deviceScroll != nil)
+        return;
     if([AwiseGlobal sharedInstance].deviceArray.count > 0){
         self.remindLabel.hidden = YES;
     }

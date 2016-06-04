@@ -25,12 +25,12 @@
     UITabBarController *tabCon = [[UITabBarController alloc] init];
     
     RootController *rootCon = [[RootController alloc] init];
-//    rootCon.tabBarItem.image = [UIImage imageNamed:@"single.png"];
+    rootCon.tabBarItem.image = [UIImage imageNamed:@"device_1.png"];
     rootCon.title= @"设备";
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:rootCon];
     
     MoreController *moreCon = [[MoreController alloc] init];
-//    moreCon.tabBarItem.image = [UIImage imageNamed:@"more.png"];
+    moreCon.tabBarItem.image = [UIImage imageNamed:@"more_1.png"];
     moreCon.title= @"更多";
     UINavigationController *setNav = [[UINavigationController alloc] initWithRootViewController:moreCon];
     
@@ -149,10 +149,12 @@
     }
     else if([[AwiseGlobal sharedInstance].wifiSSID rangeOfString:WIFISSID].location != NSNotFound){
         [AwiseGlobal sharedInstance].cMode = AP;
+        [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
         NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:点对点AP模式",[AwiseGlobal sharedInstance].wifiSSID);
     }
     else{
         [AwiseGlobal sharedInstance].cMode = STA;
+        [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
         NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:路由STA模式",[AwiseGlobal sharedInstance].wifiSSID);
     }
     

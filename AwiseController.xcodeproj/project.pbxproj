@@ -99,6 +99,26 @@
 		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
 		977575231CF1911100D34D45 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575201CF1911100D34D45 /* ASValuePopUpView.m */; };
 		977575241CF1911100D34D45 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575221CF1911100D34D45 /* ASValueTrackingSlider.m */; };
+		9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD11D02735800DA3270 /* edit1Highlight.png */; };
+		9782ECD41D02735800DA3270 /* editNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD21D02735800DA3270 /* editNormal.png */; };
+		9782ECDE1D02739400DA3270 /* bigLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD61D02739400DA3270 /* bigLight.png */; };
+		9782ECDF1D02739400DA3270 /* fastSpeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD71D02739400DA3270 /* fastSpeed.png */; };
+		9782ECE01D02739400DA3270 /* lowSpeed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD81D02739400DA3270 /* lowSpeed.png */; };
+		9782ECE11D02739400DA3270 /* off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD91D02739400DA3270 /* off.png */; };
+		9782ECE21D02739400DA3270 /* on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECDA1D02739400DA3270 /* on.png */; };
+		9782ECE31D02739400DA3270 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECDB1D02739400DA3270 /* pause.png */; };
+		9782ECE41D02739400DA3270 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECDC1D02739400DA3270 /* play.png */; };
+		9782ECE51D02739400DA3270 /* samllLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECDD1D02739400DA3270 /* samllLight.png */; };
+		9782ECEB1D02746400DA3270 /* device_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECE71D02746400DA3270 /* device_1.png */; };
+		9782ECEC1D02746400DA3270 /* device_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECE81D02746400DA3270 /* device_2.png */; };
+		9782ECED1D02746400DA3270 /* more_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECE91D02746400DA3270 /* more_1.png */; };
+		9782ECEE1D02746400DA3270 /* more_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECEA1D02746400DA3270 /* more_2.png */; };
+		9782ECF01D02752E00DA3270 /* set.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECEF1D02752E00DA3270 /* set.png */; };
+		9782ECF31D0275AC00DA3270 /* aboutUs.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF11D0275AC00DA3270 /* aboutUs.png */; };
+		9782ECF41D0275AC00DA3270 /* addDevice.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF21D0275AC00DA3270 /* addDevice.png */; };
+		9782ECF91D02769A00DA3270 /* timerData3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF61D02769A00DA3270 /* timerData3.plist */; };
+		9782ECFA1D02769A00DA3270 /* timerData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF71D02769A00DA3270 /* timerData2.plist */; };
+		9782ECFB1D02769A00DA3270 /* timerData1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF81D02769A00DA3270 /* timerData1.plist */; };
 		97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97930FC61CE5BC7C006601D8 /* Reachability.m */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
@@ -258,6 +278,26 @@
 		977575201CF1911100D34D45 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		977575211CF1911100D34D45 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
 		977575221CF1911100D34D45 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
+		9782ECD11D02735800DA3270 /* edit1Highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit1Highlight.png; sourceTree = "<group>"; };
+		9782ECD21D02735800DA3270 /* editNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editNormal.png; sourceTree = "<group>"; };
+		9782ECD61D02739400DA3270 /* bigLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bigLight.png; sourceTree = "<group>"; };
+		9782ECD71D02739400DA3270 /* fastSpeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fastSpeed.png; sourceTree = "<group>"; };
+		9782ECD81D02739400DA3270 /* lowSpeed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lowSpeed.png; sourceTree = "<group>"; };
+		9782ECD91D02739400DA3270 /* off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = off.png; sourceTree = "<group>"; };
+		9782ECDA1D02739400DA3270 /* on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = on.png; sourceTree = "<group>"; };
+		9782ECDB1D02739400DA3270 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		9782ECDC1D02739400DA3270 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		9782ECDD1D02739400DA3270 /* samllLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = samllLight.png; sourceTree = "<group>"; };
+		9782ECE71D02746400DA3270 /* device_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_1.png; sourceTree = "<group>"; };
+		9782ECE81D02746400DA3270 /* device_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_2.png; sourceTree = "<group>"; };
+		9782ECE91D02746400DA3270 /* more_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_1.png; sourceTree = "<group>"; };
+		9782ECEA1D02746400DA3270 /* more_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_2.png; sourceTree = "<group>"; };
+		9782ECEF1D02752E00DA3270 /* set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set.png; sourceTree = "<group>"; };
+		9782ECF11D0275AC00DA3270 /* aboutUs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutUs.png; sourceTree = "<group>"; };
+		9782ECF21D0275AC00DA3270 /* addDevice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addDevice.png; sourceTree = "<group>"; };
+		9782ECF61D02769A00DA3270 /* timerData3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = timerData3.plist; sourceTree = "<group>"; };
+		9782ECF71D02769A00DA3270 /* timerData2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = timerData2.plist; sourceTree = "<group>"; };
+		9782ECF81D02769A00DA3270 /* timerData1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = timerData1.plist; sourceTree = "<group>"; };
 		97930FC51CE5BC7C006601D8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		97930FC61CE5BC7C006601D8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
@@ -552,6 +592,8 @@
 		9735C07A1CC87F37000B0727 /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				9782ECE61D0273A000DA3270 /* More */,
+				9782ECD51D02736900DA3270 /* BuleRGB */,
 				976521351CDC3DE300EEEE01 /* LightFishImg */,
 				9735C08D1CC9C49D000B0727 /* SingleTouchImg */,
 				9735C07B1CC87F48000B0727 /* Screen */,
@@ -599,6 +641,8 @@
 		9735C08D1CC9C49D000B0727 /* SingleTouchImg */ = {
 			isa = PBXGroup;
 			children = (
+				9782ECD11D02735800DA3270 /* edit1Highlight.png */,
+				9782ECD21D02735800DA3270 /* editNormal.png */,
 				97651F7A1CD98B3600EEEE01 /* area_school.png */,
 				97F55A551CCB262F00E92957 /* button_nomal.png */,
 				976521421CDC43F100EEEE01 /* turnOffLight@3x.png */,
@@ -643,6 +687,7 @@
 				976521061CDC2DEB00EEEE01 /* LightingModeController */,
 				976521051CDC2DD500EEEE01 /* EditTimerSetting */,
 				976521041CDC2DC000EEEE01 /* SettingController */,
+				9782ECF51D02767200DA3270 /* TimerData */,
 				976521081CDC2E0A00EEEE01 /* MannagerTimer&Effect(no use) */,
 				976521071CDC2DFB00EEEE01 /* DeviceMannagerController(no use) */,
 				976521201CDC2FB300EEEE01 /* ManualController(no use) */,
@@ -825,6 +870,45 @@
 			name = PopSlider;
 			sourceTree = "<group>";
 		};
+		9782ECD51D02736900DA3270 /* BuleRGB */ = {
+			isa = PBXGroup;
+			children = (
+				9782ECD61D02739400DA3270 /* bigLight.png */,
+				9782ECD71D02739400DA3270 /* fastSpeed.png */,
+				9782ECD81D02739400DA3270 /* lowSpeed.png */,
+				9782ECD91D02739400DA3270 /* off.png */,
+				9782ECDA1D02739400DA3270 /* on.png */,
+				9782ECDB1D02739400DA3270 /* pause.png */,
+				9782ECDC1D02739400DA3270 /* play.png */,
+				9782ECDD1D02739400DA3270 /* samllLight.png */,
+			);
+			name = BuleRGB;
+			sourceTree = "<group>";
+		};
+		9782ECE61D0273A000DA3270 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				9782ECF11D0275AC00DA3270 /* aboutUs.png */,
+				9782ECF21D0275AC00DA3270 /* addDevice.png */,
+				9782ECEF1D02752E00DA3270 /* set.png */,
+				9782ECE71D02746400DA3270 /* device_1.png */,
+				9782ECE81D02746400DA3270 /* device_2.png */,
+				9782ECE91D02746400DA3270 /* more_1.png */,
+				9782ECEA1D02746400DA3270 /* more_2.png */,
+			);
+			name = More;
+			sourceTree = "<group>";
+		};
+		9782ECF51D02767200DA3270 /* TimerData */ = {
+			isa = PBXGroup;
+			children = (
+				9782ECF61D02769A00DA3270 /* timerData3.plist */,
+				9782ECF71D02769A00DA3270 /* timerData2.plist */,
+				9782ECF81D02769A00DA3270 /* timerData1.plist */,
+			);
+			name = TimerData;
+			sourceTree = "<group>";
+		};
 		97930FC41CE5BC69006601D8 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,10 +1031,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9782ECEC1D02746400DA3270 /* device_2.png in Resources */,
 				97651F781CD8B07C00EEEE01 /* 750x1334.png in Resources */,
 				9735C03E1CC7832A000B0727 /* LaunchScreen.storyboard in Resources */,
+				9782ECE31D02739400DA3270 /* pause.png in Resources */,
+				9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */,
 				97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */,
 				972F72801D000F25008560ED /* MannageCell.xib in Resources */,
+				9782ECE01D02739400DA3270 /* lowSpeed.png in Resources */,
+				9782ECE21D02739400DA3270 /* on.png in Resources */,
+				9782ECEB1D02746400DA3270 /* device_1.png in Resources */,
 				97F55A561CCB262F00E92957 /* button_nomal.png in Resources */,
 				976522211CE076A700EEEE01 /* pickerColorWheel.png in Resources */,
 				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,
@@ -960,28 +1050,42 @@
 				9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
 				976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */,
+				9782ECF41D0275AC00DA3270 /* addDevice.png in Resources */,
+				9782ECEE1D02746400DA3270 /* more_2.png in Resources */,
 				9765213C1CDC3E3300EEEE01 /* btnBackimg.png in Resources */,
+				9782ECF31D0275AC00DA3270 /* aboutUs.png in Resources */,
 				97128FCB1CEEB3B700F58045 /* DeviceTypeCell.xib in Resources */,
 				9765213E1CDC3E3300EEEE01 /* more.png in Resources */,
+				9782ECE41D02739400DA3270 /* play.png in Resources */,
 				9765212A1CDC2FE600EEEE01 /* LightingModeController.xib in Resources */,
 				9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */,
 				9765214B1CDC698700EEEE01 /* lightFishBackImg.png in Resources */,
 				97F55A5D1CCB4CC300E92957 /* TimerCell.xib in Resources */,
+				9782ECFB1D02769A00DA3270 /* timerData1.plist in Resources */,
 				976521411CDC3E9700EEEE01 /* 05-time-Line.png in Resources */,
 				976522171CE076A700EEEE01 /* colorPickerKnob.png in Resources */,
+				9782ECDF1D02739400DA3270 /* fastSpeed.png in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */,
+				9782ECFA1D02769A00DA3270 /* timerData2.plist in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
 				97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */,
+				9782ECF91D02769A00DA3270 /* timerData3.plist in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
+				9782ECED1D02746400DA3270 /* more_1.png in Resources */,
+				9782ECE11D02739400DA3270 /* off.png in Resources */,
 				976522151CE076A700EEEE01 /* checkerboard.png in Resources */,
 				976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */,
 				97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */,
+				9782ECDE1D02739400DA3270 /* bigLight.png in Resources */,
 				97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */,
+				9782ECE51D02739400DA3270 /* samllLight.png in Resources */,
 				976522221CE076A700EEEE01 /* pickerColorWheel@2x.png in Resources */,
 				9765211A1CDC2F9500EEEE01 /* RoverCell.xib in Resources */,
+				9782ECF01D02752E00DA3270 /* set.png in Resources */,
 				9765213D1CDC3E3300EEEE01 /* single.png in Resources */,
+				9782ECD41D02735800DA3270 /* editNormal.png in Resources */,
 				976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */,
 				97651F771CD8B07C00EEEE01 /* 640x1136.png in Resources */,
 				97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */,

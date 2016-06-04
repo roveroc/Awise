@@ -139,7 +139,12 @@
         cell = [[UITableViewCell alloc] init];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
-    cell.imageView.image=[UIImage imageNamed:@"area_school.png"];
+    if(indexPath.row == 0)
+        cell.imageView.image=[UIImage imageNamed:@"addDevice.png"];
+    else if(indexPath.row == 1)
+        cell.imageView.image=[UIImage imageNamed:@"set.png"];
+    else if(indexPath.row == 2)
+        cell.imageView.image=[UIImage imageNamed:@"aboutUs.png"];
     CGSize itemSize = CGSizeMake(40, 40);
     UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
     CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
