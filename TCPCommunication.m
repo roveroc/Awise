@@ -59,7 +59,11 @@
     [socket readDataWithTimeout:-1 tag:0];
     [socket writeData:da withTimeout:-1 tag:0];
     self.responeFlag = NO;
-    [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:4.0];
+    if(data[2] == 0x05 && data[3] == 0x02){
+        //词条指令为水族灯调光指令，不需要判断数据返回
+    }else{
+        [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:4.0];
+    }
 }
 
 #pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功

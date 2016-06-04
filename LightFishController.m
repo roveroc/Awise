@@ -186,6 +186,7 @@
         //更新数据库
         self.sql = [[RoverSqlite alloc] init];
         if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+            [AwiseGlobal sharedInstance].deviceArray = [self.sql getAllDeviceInfomation];   //获取所有已添加设备信息
             NSLog(@"更新设备IP成功 ----------%@ ",newIp);
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
             if([AwiseGlobal sharedInstance].tcpSocket == nil ||

@@ -11,11 +11,15 @@
 #import <QRCodeReaderViewController.h>
 #import "RoverSqlite.h"
 #import "AwiseGlobal.h"
+#import "RouterView.h"
 
 @interface AddDeviceController : UIViewController<QRCodeReaderDelegate,TCPSocketDelegate>{
     RoverSqlite                 *sql;
+    RouterView                  *routeView;
 }
 @property (nonatomic, retain) RoverSqlite                   *sql;                   //数据库对象
+@property (nonatomic, retain) RouterView                    *routeView;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *QRBtn;
 @property (weak, nonatomic) IBOutlet UIButton *btn1;

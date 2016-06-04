@@ -15,6 +15,7 @@
 
 @implementation AddDeviceController
 @synthesize sql;
+@synthesize routeView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -129,7 +130,7 @@
 #pragma mark ------------------------------------- 弹出加入路由对话框
 - (IBAction)showBtnClicked:(id)sender {
     NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"RouterView" owner:nil options:nil];
-    UIView *routeView = [nibView objectAtIndex:0];
+    routeView = [nibView objectAtIndex:0];
     routeView.frame = self.view.frame;
     routeView.alpha = 0.0;
     [UIView beginAnimations:@"animation" context:nil];
@@ -146,5 +147,32 @@
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader{
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+#pragma mark ---------------------------------------------------- 处理设置完路由器返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    switch (byte[2]) {
+        case 0x18:{              //发送账号密码成功
+            if(byte[3] == 0x02){
+                [routeView removeRouteView];
+                [[AwiseGlobal sharedInstance] disMissHUD];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请稍候，控制器正在重启..." time:20.0];
+                //在设备重启的时候，在后台Ping一边局域网
+                [self performSelector:@selector(doScanNetwork) withObject:nil afterDelay:10.0];
+            }
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+- (void)doScanNetwork{
+    if([AwiseGlobal sharedInstance].cMode == STA){
+        [[AwiseGlobal sharedInstance] scanNetwork];
+    }
+}
+
 
 @end
