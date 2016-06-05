@@ -120,6 +120,7 @@
 		9782ECFA1D02769A00DA3270 /* timerData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF71D02769A00DA3270 /* timerData2.plist */; };
 		9782ECFB1D02769A00DA3270 /* timerData1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF81D02769A00DA3270 /* timerData1.plist */; };
 		97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97930FC61CE5BC7C006601D8 /* Reachability.m */; };
+		97965CC01D03F797008DB298 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97965CC21D03F797008DB298 /* Localizable.strings */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -300,6 +301,8 @@
 		9782ECF81D02769A00DA3270 /* timerData1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = timerData1.plist; sourceTree = "<group>"; };
 		97930FC51CE5BC7C006601D8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		97930FC61CE5BC7C006601D8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		97965CC31D03F7A3008DB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		97965CC41D03F7C0008DB298 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -426,6 +429,7 @@
 		9735C01F1CC7832A000B0727 = {
 			isa = PBXGroup;
 			children = (
+				97965CC21D03F797008DB298 /* Localizable.strings */,
 				9735C0851CC8A2D9000B0727 /* tempFile.h */,
 				9735C0451CC7839F000B0727 /* Podfile */,
 				9735C04C1CC7894B000B0727 /* ViewController */,
@@ -1015,6 +1019,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 9735C01F1CC7832A000B0727;
 			productRefGroup = 9735C0291CC7832A000B0727 /* Products */;
@@ -1100,6 +1105,7 @@
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
+				97965CC01D03F797008DB298 /* Localizable.strings in Resources */,
 				976522181CE076A700EEEE01 /* colorPickerKnob@2x.png in Resources */,
 				976521491CDC68E600EEEE01 /* timeLine.png in Resources */,
 				9735C0581CC78A40000B0727 /* MoreController.xib in Resources */,
@@ -1224,6 +1230,15 @@
 				9735C03D1CC7832A000B0727 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		97965CC21D03F797008DB298 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97965CC31D03F7A3008DB298 /* en */,
+				97965CC41D03F7C0008DB298 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

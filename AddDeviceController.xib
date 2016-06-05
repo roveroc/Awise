@@ -30,6 +30,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEy-bi-xlA">
                     <rect key="frame" x="60" y="75" width="200" height="120"/>
                     <color key="backgroundColor" red="0.50196078431372548" green="0.7803921568627451" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <state key="normal" title="点击扫描二维码">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -42,51 +43,51 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="H4Y-HI-8ks" secondAttribute="height" multiplier="1:1" id="K3O-yA-rRA"/>
                     </constraints>
-                    <state key="normal" backgroundImage="area_school.png"/>
+                    <state key="normal" backgroundImage="aboutUs.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gf5-EF-52h">
                     <rect key="frame" x="204" y="218" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Gf5-EF-52h" secondAttribute="height" multiplier="1:1" id="0Hc-03-cO8"/>
                     </constraints>
-                    <state key="normal" backgroundImage="area_school.png"/>
+                    <state key="normal" backgroundImage="aboutUs.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHV-5g-gXm">
                     <rect key="frame" x="55" y="320" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="wHV-5g-gXm" secondAttribute="height" multiplier="1:1" id="bK3-OU-kBN"/>
                     </constraints>
-                    <state key="normal" backgroundImage="area_school.png"/>
+                    <state key="normal" backgroundImage="aboutUs.png"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWI-wd-swa">
                     <rect key="frame" x="205" y="320" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="TWI-wd-swa" secondAttribute="height" multiplier="1:1" id="fFs-pU-Mgs"/>
                     </constraints>
-                    <state key="normal" backgroundImage="area_school.png"/>
+                    <state key="normal" backgroundImage="aboutUs.png"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="客厅壁灯" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6Q-Dq-dTJ">
                     <rect key="frame" x="35" y="287" width="100" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Awise-TM113" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-lE-W1B">
                     <rect key="frame" x="184" y="287" width="100" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="www.awise123.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRI-Gr-iXZ">
                     <rect key="frame" x="35" y="388" width="100" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Ver:1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGA-8z-K4e">
                     <rect key="frame" x="184" y="388" width="100" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jup-Gr-cy5">
@@ -95,6 +96,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="58" id="3Yo-Dj-5SO"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="将设备加入路由器">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -140,6 +142,6 @@
         </view>
     </objects>
     <resources>
-        <image name="area_school.png" width="80" height="80"/>
+        <image name="aboutUs.png" width="150" height="150"/>
     </resources>
 </document>

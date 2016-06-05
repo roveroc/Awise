@@ -216,6 +216,18 @@
 }
 
 
+
+- (NSString *)DPLocalizedString:(NSString *)translation_key {
+    
+    NSString * s = NSLocalizedString(translation_key, nil);
+    if (![CURR_LANG isEqual:@"zh-Hans-CN"]) {
+        NSString * path = [[NSBundle mainBundle] pathForResource:@"en" ofType:@"lproj"];
+        NSBundle * languageBundle = [NSBundle bundleWithPath:path];
+        s = [languageBundle localizedStringForKey:translation_key value:@"" table:nil];
+    }
+    return s;
+}
+
 /*********************水族灯部分*************************/
 - (NSString *)currentWifiSSID {
     // Does not work on the simulator.

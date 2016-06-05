@@ -12,6 +12,7 @@
 #import "RoverSqlite.h"
 #import "AwiseGlobal.h"
 #import "RouterView.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AddDeviceController : UIViewController<QRCodeReaderDelegate,TCPSocketDelegate>{
     RoverSqlite                 *sql;

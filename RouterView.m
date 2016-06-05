@@ -16,14 +16,20 @@
     // Drawing code
     self.ssidField.delegate         = self;
     self.ssidField.returnKeyType    = UIReturnKeyDone;
-    self.ssidField.placeholder      = @"路由器帐号";
+    self.ssidField.placeholder      = [[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_routerAcc"];
     [self.ssidField setAutocorrectionType:UITextAutocorrectionTypeNo];
     [self.ssidField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     self.pwdField.delegate          = self;
     self.pwdField.returnKeyType     = UIReturnKeyDone;
-    self.pwdField.placeholder      = @"路由器密码";
+    self.pwdField.placeholder      = [[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_routerPwd"];
     [self.pwdField setAutocorrectionType:UITextAutocorrectionTypeNo];
     [self.pwdField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    
+    self.titleLabel.text = [[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_routerMsg"];
+    self.ssidLabel.text  = [[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_routerAcc"];
+    self.pwdLabel.text   = [[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_routerPwd"];
+    [self.cancelBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"cancel"] forState:UIControlStateNormal];
+    [self.sureBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"ok"] forState:UIControlStateNormal];
 }
 
 #pragma mark ------------------------------------------------ 取消

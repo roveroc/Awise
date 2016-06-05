@@ -106,12 +106,13 @@
              connectToDevice:[deviceInfo objectAtIndex:2]
              port:[deviceInfo objectAtIndex:3]];
         }else{
-            [[AwiseGlobal sharedInstance] showRemindMsg:@"请先连接该设备Wifi" withTime:2.0];
+            [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectDeviceFirst"]
+                                               withTime:2.0];
         }
     }
     else if([AwiseGlobal sharedInstance].cMode == STA){
         if(self.deviceInfo.count > 0){
-            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接中..."];
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connecting"]];
 //如果是STA模式，首先尝试建立连接看设备在线或IP发生变化
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:4];
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[self.deviceInfo objectAtIndex:4] port:[self.deviceInfo objectAtIndex:3]];
@@ -119,14 +120,14 @@
             [self performSelector:@selector(connectDeviceTimeout) withObject:nil afterDelay:2.0];
         }
     }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"当前无Wifi连接" withTime:1.2];
+        [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"noWifi"] withTime:1.2];
     }
 }
 
 #pragma mark ------------------------------------------------ 连接设备超时 -- 超时
 - (void)connectDeviceTimeout{
     [[AwiseGlobal sharedInstance] disMissHUD];
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"连接超时，重新查找设备..."];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectTimeout"]];
     [[AwiseGlobal sharedInstance] scanNetwork];
 }
 
@@ -148,7 +149,7 @@
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{
-            [[AwiseGlobal sharedInstance] showRemindMsg:@"设备似乎不在线" withTime:1.2];
+            [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"offLine"] withTime:1.2];
         }
     }
     else{
@@ -167,7 +168,7 @@
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
         else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
-            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"正在局域网内查找设备"];
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"searchDevice"]];
             [[AwiseGlobal sharedInstance] scanNetwork];
         }
     }

@@ -74,8 +74,11 @@
         UIButton *routeBtn = (UIButton *)[cell viewWithTag:12];
         UIButton *delBtn   = (UIButton *)[cell viewWithTag:13];
         [nameBtn addTarget:self action:@selector(editNameFunction:) forControlEvents:UIControlEventTouchUpInside];
+        [nameBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_name"] forState:UIControlStateNormal];
         [routeBtn addTarget:self action:@selector(editRouteFunction:) forControlEvents:UIControlEventTouchUpInside];
+        [routeBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_Router"] forState:UIControlStateNormal];
         [delBtn addTarget:self action:@selector(delDeviceFunction:) forControlEvents:UIControlEventTouchUpInside];
+        [delBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_delete"] forState:UIControlStateNormal];
     }
     cell.tag = indexPath.row;
     NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:indexPath.row];
@@ -96,7 +99,7 @@
     }
     NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:cell.tag];
     self.tempButton = (UIButton *)sender;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"取个响亮的名字吧" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"修改", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_newName"] delegate:nil cancelButtonTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"cancel"] otherButtonTitles:[[AwiseGlobal sharedInstance] DPLocalizedString:@"ok"], nil];
     alert.tag = 1;
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *text = [alert textFieldAtIndex:0];
@@ -125,7 +128,7 @@
         if([[deviceInfo objectAtIndex:1] rangeOfString:macStr].location != NSNotFound){
             [self connectDevice:ip port:port];
         }else{
-            [[AwiseGlobal sharedInstance] showRemindMsg:@"请先连接至该设备Wifi" withTime:2.0];
+            [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectDeviceFirst"] withTime:2.0];
         }
         
     }else if([AwiseGlobal sharedInstance].cMode == STA){
@@ -133,13 +136,13 @@
         port = [deviceInfo objectAtIndex:3];
         [self connectDevice:ip port:port];
     }else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"请先连接至Wifi" withTime:1.2];
+        [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"noWifi"] withTime:1.2];
     }
 }
 
 #pragma mark ------------------------------------------- 扫码到设备后，连接设备
 - (void)connectDevice:(NSString *)ip port:(NSString *)port{
-    [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"正在连接设备" time:2.0];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithTime:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connecting"] time:2.0];
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:ip port:port];
@@ -208,7 +211,7 @@
             NSString *mac = [deviceInfo objectAtIndex:1];
             RoverSqlite *sql = [[RoverSqlite alloc] init];
             if([sql deleteDeviceInfo:mac]){
-                [[AwiseGlobal sharedInstance] showRemindMsg:@"设备删除成功" withTime:1.2];
+                [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"delSuccess"] withTime:1.2];
                 [[AwiseGlobal sharedInstance].deviceArray removeObjectAtIndex:cell.tag];
                 [self.deviceTable reloadData];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"NeedLayoutDevice" object:nil];
@@ -220,7 +223,7 @@
 #pragma mark --------------------------------- 删除设备
 - (void)delDeviceFunction:(UIButton *)sender{
     self.tempButton = (UIButton *)sender;
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要删除该设备吗?" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[[AwiseGlobal sharedInstance] DPLocalizedString:@"delDeviceMsg"] delegate:nil cancelButtonTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"cancel"] otherButtonTitles:[[AwiseGlobal sharedInstance] DPLocalizedString:@"ok"], nil];
     alert.tag = 2;
     alert.delegate = self;
     [alert show];

@@ -22,6 +22,24 @@
     // Do any additional setup after loading the view from its nib.
     self.sql = [[RoverSqlite alloc] init];
     [self.sql openDataBase];
+    
+    self.QRBtn.layer.masksToBounds = YES;
+    self.QRBtn.layer.cornerRadius = 10.0;
+    self.QRBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    self.QRBtn.layer.borderWidth = 1.5;
+    self.showBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    self.showBtn.layer.borderWidth = 1.5;
+    [self.QRBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"add_scanCode"] forState:UIControlStateNormal];
+    [self.showBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"add_addRoute"] forState:UIControlStateNormal];
+    self.btn1.hidden = YES;
+    self.btn2.hidden = YES;
+    self.btn3.hidden = YES;
+    self.btn4.hidden = YES;
+    self.label1.hidden = YES;
+    self.label2.hidden = YES;
+    self.label3.hidden = YES;
+    self.label4.hidden = YES;
+    self.showBtn.hidden = YES;
 }
 
 #pragma mark ------------------------------------------------ 断开连接
@@ -55,7 +73,7 @@
 
 #pragma mark ------------------------------------------- 扫码到设备后，连接设备
 - (void)connectDevice:(NSString *)ip port:(NSString *)port{
-    [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"正在连接设备" time:2.0];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithTime:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connecting"] time:2.0];
     [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:ip port:port];
@@ -87,12 +105,24 @@
             NSMutableArray *infoArr = [[NSMutableArray alloc] init];
     //DeviceName&5ccf7f1b4390&192.168.3.26&30000&1.1.1.1&Awise_WIFI_Fish&www.awise123.com
             if([resultAsString rangeOfString:@"Awise"].location != NSNotFound){
+                self.btn1.hidden = NO;
+                self.btn2.hidden = NO;
+                self.btn3.hidden = NO;
+                self.btn4.hidden = NO;
+                self.label1.hidden = NO;
+                self.label2.hidden = NO;
+                self.label3.hidden = NO;
+                self.label4.hidden = NO;
+                self.showBtn.hidden = NO;
                 if([resultAsString rangeOfString:@"Awise_WIFI"].location != NSNotFound){             //表明扫描到是Wifi类控制器
                     //NSString *info = [resultAsString substringFromIndex:9];
                     infoArr = (NSMutableArray *)[resultAsString componentsSeparatedByString:@"&"];
                     NSLog(@"infoArr = %@",infoArr);
                     NSString *ip   = [infoArr objectAtIndex:2];
                     NSString *port = [infoArr objectAtIndex:3];
+                    self.label1.text = [infoArr objectAtIndex:0];
+                    self.label2.text = [infoArr objectAtIndex:5];
+                    self.label3.text = [infoArr objectAtIndex:6];
                     [self connectDevice:ip port:port];
                 }else if([resultAsString rangeOfString:@"AwiseBLE"].location != NSNotFound){            //表明扫描到是蓝牙类控制器
                     //NSString *info = [resultAsString substringFromIndex:9];
@@ -123,7 +153,7 @@
         [self presentViewController:vc animated:YES completion:NULL];
     }
     else{
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"请先连接将要添加的设备WIFI" withTime:1.5];
+        [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectDeviceFirst"] withTime:1.5];
     }
 }
 
@@ -155,7 +185,7 @@
             if(byte[3] == 0x02){
                 [routeView removeRouteView];
                 [[AwiseGlobal sharedInstance] disMissHUD];
-                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请稍候，控制器正在重启..." time:20.0];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:[[AwiseGlobal sharedInstance] DPLocalizedString:@"restart"] time:20.0];
                 //在设备重启的时候，在后台Ping一边局域网
                 [self performSelector:@selector(doScanNetwork) withObject:nil afterDelay:10.0];
             }

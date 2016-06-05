@@ -21,8 +21,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    self.tableViewItems = [[NSArray alloc] initWithObjects:@"添加设备",@"设备管理",@"关于我们",@"设备加入路由", nil];
-    self.moreTable.delegate = self;
+    self.tableViewItems = [[NSArray alloc] initWithObjects:
+                           [[AwiseGlobal sharedInstance] DPLocalizedString:@"addDevice"],
+                           [[AwiseGlobal sharedInstance] DPLocalizedString:@"managerDevice"],
+                           [[AwiseGlobal sharedInstance] DPLocalizedString:@"about"],
+                           nil];
+    self.moreTable.delegate   = self;
     self.moreTable.dataSource = self;
     self.moreTable.tableFooterView = [[UIView alloc] init];
     
@@ -54,7 +58,7 @@
 
 #pragma mark ------------------------------------------------ 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.tableViewItems.count-1;
+    return self.tableViewItems.count;
 }
 
 #pragma mark ------------------------------------------------ 行高

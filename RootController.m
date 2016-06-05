@@ -77,7 +77,7 @@
                                              selector:@selector(updateDeviceLayout) name:@"NeedLayoutDevice"
                                                object:nil];
     if([AwiseGlobal sharedInstance].deviceArray.count == 0){
-        self.remindLabel.hidden = NO;
+        self.remindLabel.hidden = YES;
     }
 }
 

@@ -26,12 +26,12 @@
     
     RootController *rootCon = [[RootController alloc] init];
     rootCon.tabBarItem.image = [UIImage imageNamed:@"device_1.png"];
-    rootCon.title= @"设备";
+    rootCon.title= [[AwiseGlobal sharedInstance] DPLocalizedString:@"device"];
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:rootCon];
     
     MoreController *moreCon = [[MoreController alloc] init];
     moreCon.tabBarItem.image = [UIImage imageNamed:@"more_1.png"];
-    moreCon.title= @"更多";
+    moreCon.title= [[AwiseGlobal sharedInstance] DPLocalizedString:@"more"];
     UINavigationController *setNav = [[UINavigationController alloc] initWithRootViewController:moreCon];
     
     NSArray *navArray = [[NSArray alloc] initWithObjects:mainNav,setNav, nil];
@@ -81,7 +81,6 @@
     [AwiseGlobal sharedInstance].deviceSSIDArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
 /*********************水族灯部分**********************/
-    
     //监测网络状态
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)

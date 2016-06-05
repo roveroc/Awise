@@ -163,7 +163,7 @@
 
 
 - (IBAction)startBtnClicked:(id)sender {
-    [self.startBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.startBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.endBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     self.editFlag = YES;
     int tv = [[self.sTime componentsSeparatedByString:@":"][0] intValue]*60*60 + [[self.sTime componentsSeparatedByString:@":"][1] intValue]*60;
@@ -174,7 +174,7 @@
 
 - (IBAction)endBtnClicked:(id)sender {
     [self.startBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.endBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.endBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.editFlag = NO;
     int tv = [[self.eTime componentsSeparatedByString:@":"][0] intValue]*60*60 + [[self.eTime componentsSeparatedByString:@":"][1] intValue]*60;
     dispatch_async(dispatch_get_main_queue(), ^{

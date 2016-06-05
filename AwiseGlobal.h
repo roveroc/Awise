@@ -26,6 +26,8 @@
 
 #define HudDismissTime           1.5                                //提示框消失的时间
 
+#define CURR_LANG                ([[NSLocale preferredLanguages] objectAtIndex:0])
+
 //******************* ******************* *******************
 //判断iPhone4/iPhone4S
 #define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
@@ -181,6 +183,8 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 - (void)disMissHUD;
 
 - (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
+
+- (NSString *)DPLocalizedString:(NSString *)translation_key;           //国际化文字
 
 /*******水族等部分********/
 - (NSString *)currentWifiSSID;          //获取连接WIFI的账号

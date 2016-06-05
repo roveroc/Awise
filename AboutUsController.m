@@ -7,6 +7,7 @@
 //
 
 #import "AboutUsController.h"
+#import "AwiseGlobal.h"
 
 @interface AboutUsController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[AwiseGlobal sharedInstance] DPLocalizedString:@"about_msg"];
 }
 
 - (void)didReceiveMemoryWarning {

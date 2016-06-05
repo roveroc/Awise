@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  AwiseController
+
+  Created by rover on 16/6/5.
+  Copyright © 2016年 rover. All rights reserved.
+*/
+
+
+"device"                =   "设备";
+"more"                  =   "更多";
+
+"addDevice"             =   "添加设备";
+"managerDevice"         =   "管理设备";
+"about"                 =   "关于我们";
+
+"add_scanCode"          =   "点击扫描二维码";
+"add_addRoute"          =   "将设备加入路由器";
+
+"manager_name"          =   "设备名";
+"manager_Router"        =   "加路由";
+"manager_delete"        =   "删除";
+"manager_newName"       =   "取个响亮的名字吧";
+"manager_routerMsg"     =   "路由器账号密码";
+"manager_routerAcc"     =   "账号";
+"manager_routerPwd"     =   "密码";
+
+"about_msg"             =   "深圳市艾汇思科技有限公司";
+
+"cancel"                =   "取消";
+"ok"                    =   "确定";
+
+
+//提示文字
+"connecting"            =   "连接中...";
+"connectTimeout"        =   "连接超时，重新查找设备...";
+"searchDevice"          =   "在局域网内查找设备";
+"getDeviceStatus"       =   "获取设备最新状态";
+
+"connectDeviceFirst"    =   "请先连接至该设备Wifi";
+"setTimerFailed"        =   "设置定时器失败";
+"noWifi"                =   "没有Wifi连接";
+"offLine"               =   "设备似乎不再线";
+"operateFailed"         =   "操作失败";
+"delSuccess"            =   "删除成功";
+"switchOff"             =   "";
+"saveSceneFailed"       =   "保存失败";
+"useSceneFailed"        =   "失败";
+"restart"               =   "请稍后，设备正在重启...";
+"delDeviceMsg"          =   "确定要删除该设备吗?";
+
+
+
+
+
+
+
+
+

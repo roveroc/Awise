@@ -10,4 +10,8 @@
 
 @interface AboutUsController : UIViewController
 
+
+@property (weak, nonatomic) IBOutlet UILabel *msgLabel;
+
+
 @end
