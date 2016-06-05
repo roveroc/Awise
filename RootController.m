@@ -107,8 +107,11 @@
     int distance = 80;      //竖间距
     int x = (SCREEN_WIDHT/2 - size)/2;
     int y = 150;
+    int contenctHeight = (int)([AwiseGlobal sharedInstance].deviceArray.count/4);
+    if(contenctHeight == 0)
+        contenctHeight = 1;
     self.deviceScroll = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    self.deviceScroll.contentSize = CGSizeMake(SCREEN_WIDHT, SCREEN_HEIGHT*2);
+    self.deviceScroll.contentSize = CGSizeMake(SCREEN_WIDHT, contenctHeight);
     [self.view addSubview:self.deviceScroll];
     for(int i=0;i<[AwiseGlobal sharedInstance].deviceArray.count;i++){
         NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:i];

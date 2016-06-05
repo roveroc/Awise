@@ -183,6 +183,7 @@
     if([arpArray containsObject:temp]){
         int index = (int)[arpArray indexOfObject:temp];
         NSString *newIp = [arpArray objectAtIndex:index+1];
+        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
         //更新数据库
         self.sql = [[RoverSqlite alloc] init];
         if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){

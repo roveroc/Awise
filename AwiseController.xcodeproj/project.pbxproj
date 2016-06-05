@@ -358,12 +358,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		97128FC91CEEB2D900F58045 /* DeviceTypeTableCel */ = {
+		97128FC91CEEB2D900F58045 /* DeviceTypeTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				97128FCA1CEEB3B700F58045 /* DeviceTypeCell.xib */,
 			);
-			name = DeviceTypeTableCel;
+			name = DeviceTypeTableCell;
 			sourceTree = "<group>";
 		};
 		97128FCC1CEEE4D300F58045 /* ManageDeviceController */ = {
@@ -498,7 +498,7 @@
 		9735C04D1CC7895D000B0727 /* RootController */ = {
 			isa = PBXGroup;
 			children = (
-				97128FC91CEEB2D900F58045 /* DeviceTypeTableCel */,
+				97128FC91CEEB2D900F58045 /* DeviceTypeTableCell */,
 				9735C04E1CC78998000B0727 /* RootController.h */,
 				9735C04F1CC78998000B0727 /* RootController.m */,
 				9735C0501CC78998000B0727 /* RootController.xib */,

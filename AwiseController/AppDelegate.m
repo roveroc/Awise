@@ -145,17 +145,17 @@
     [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
     if([AwiseGlobal sharedInstance].wifiSSID.length == 0){
         [AwiseGlobal sharedInstance].cMode = Other;
-        NSLog(@" ----- 手机WIFI断开连接,设备不可控 ----- ");
+        NSLog(@" -- 手机WIFI断开连接,设备不可控 ----- ");
     }
     else if([[AwiseGlobal sharedInstance].wifiSSID rangeOfString:WIFISSID].location != NSNotFound){
         [AwiseGlobal sharedInstance].cMode = AP;
         [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
-        NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:点对点AP模式",[AwiseGlobal sharedInstance].wifiSSID);
+        NSLog(@" -- 手机连接的WIFI为 ----- %@ ---- 手机IP =  %@ 点对点AP模式",[AwiseGlobal sharedInstance].wifiSSID,[AwiseGlobal sharedInstance].IphoneIP);
     }
     else{
         [AwiseGlobal sharedInstance].cMode = STA;
         [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
-        NSLog(@" ----- 手机连接的WIFI为 ----- %@  ----，当前控制模式为:路由STA模式",[AwiseGlobal sharedInstance].wifiSSID);
+        NSLog(@" -- 手机连接的WIFI为 ----- %@ ---- 手机IP =  %@ 点对点STA模式",[AwiseGlobal sharedInstance].wifiSSID,[AwiseGlobal sharedInstance].IphoneIP);
     }
     
 }
