@@ -121,6 +121,7 @@
 		9782ECFB1D02769A00DA3270 /* timerData1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECF81D02769A00DA3270 /* timerData1.plist */; };
 		97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97930FC61CE5BC7C006601D8 /* Reachability.m */; };
 		97965CC01D03F797008DB298 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97965CC21D03F797008DB298 /* Localizable.strings */; };
+		9796DB191D06A130008A65AE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9796DB181D06A130008A65AE /* MediaPlayer.framework */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
@@ -303,6 +304,7 @@
 		97930FC61CE5BC7C006601D8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		97965CC31D03F7A3008DB298 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		97965CC41D03F7C0008DB298 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		9796DB181D06A130008A65AE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		97A2AB791CD21B6800734E61 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
 		97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9796DB191D06A130008A65AE /* MediaPlayer.framework in Frameworks */,
 				976521891CE0371100EEEE01 /* CoreBluetooth.framework in Frameworks */,
 				9735C0741CC87E91000B0727 /* libsqlite3.0.tbd in Frameworks */,
 				02C279701F8A98F4FBCA29F9 /* libPods.a in Frameworks */,
@@ -354,6 +357,7 @@
 		6E996ED8F2B46A5945BB78C2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9796DB181D06A130008A65AE /* MediaPlayer.framework */,
 				976521881CE0371100EEEE01 /* CoreBluetooth.framework */,
 				9735C0731CC87E91000B0727 /* libsqlite3.0.tbd */,
 				EA7E804D40B1F66607D80B60 /* libPods.a */,

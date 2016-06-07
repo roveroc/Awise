@@ -33,6 +33,8 @@
 @synthesize backScrollView;
 @synthesize touchFlag;
 @synthesize touchTimer;
+@synthesize mPlayer,ipodMusicArray;
+@synthesize musicTimer;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -41,6 +43,10 @@
     }
     [self.touchTimer invalidate];
     self.touchTimer = nil;
+    if(self.mPlayer != nil){
+        [self.mPlayer stop];
+        self.mPlayer = nil;
+    }
 }
 
 - (void)viewDidLoad {
@@ -243,7 +249,7 @@
     self.lightSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
     self.lightSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
 //速度值滑条
-    self.modeSlider  = [[ASValueTrackingSlider alloc] init];
+    self.modeSlider = [[ASValueTrackingSlider alloc] init];
     self.modeSlider.minimumValue = 0;
     self.modeSlider.maximumValue = 20;
     self.modeSlider.popUpViewCornerRadius = 12.0;
@@ -271,29 +277,46 @@
 
 #pragma mark ----------------------------------- 关闭
 - (void)PlayPauseMode{
-    if(self.character != nil){
-        if(self.palyFlag == NO){
-            self.palyFlag = YES;
-            Byte by[4];
-            by[0] = 3;
-            by[1] = 3;
-            by[2] = 0;
-            by[3] = 0;
-            NSData *da = [[NSData alloc] initWithBytes:by length:4];
-            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
-        }else{
-            self.palyFlag = NO;
-            Byte by[4];
-            by[0] = 3;
-            by[1] = 2;
-            by[2] = 0;
-            by[3] = 0;
-            NSData *da = [[NSData alloc] initWithBytes:by length:4];
-            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
-        }
+//    if(self.character != nil){
+//        if(self.palyFlag == NO){
+//            self.palyFlag = YES;
+//            Byte by[4];
+//            by[0] = 3;
+//            by[1] = 3;
+//            by[2] = 0;
+//            by[3] = 0;
+//            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+//            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+//            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+//        }else{
+//            self.palyFlag = NO;
+//            Byte by[4];
+//            by[0] = 3;
+//            by[1] = 2;
+//            by[2] = 0;
+//            by[3] = 0;
+//            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+//            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+//            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
+//        }
+//    }
+    [self importMusicFormItunes];
+}
+
+#pragma mark ----------------------------------- 导入iTunes中的音乐
+- (void)importMusicFormItunes{
+    MPMediaQuery *allMp3 = [[MPMediaQuery alloc] init];
+    MPMediaPropertyPredicate *albumNamePredicate =
+    [MPMediaPropertyPredicate predicateWithValue:[NSNumber numberWithInt:MPMediaTypeMusic ] forProperty: MPMediaItemPropertyMediaType];
+    [allMp3 addFilterPredicate:albumNamePredicate];
+    self.ipodMusicArray = [[NSMutableArray alloc] init];
+    NSArray *musicArr = [allMp3 items];
+    for (MPMediaItem *song in musicArr) {
+        NSString *songTitle = song.title;
+        NSLog (@"%@, %@, %@", songTitle, song.assetURL,song.artist);
+        [self.ipodMusicArray addObject:song.assetURL];
     }
+    [self startPlayMusic];
 }
 
 #pragma mark ----------------------------------- 打开
@@ -428,6 +451,58 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     // Dispose of any resources that can be recreated.
 }
 
+
+
+/*************************************************************************/
+/*************************************************************************/
+//音乐播放模块
+/*************************************************************************/
+/*************************************************************************/
+- (void)startPlayMusic{
+    // 1.定义播放器
+    if(self.ipodMusicArray.count == 0)
+        return ;
+    
+    // 2.从字典中取player,如果取出出来是空,则对应创建对应的播放器
+    if(self.mPlayer != nil){
+        [self.mPlayer stop];
+        self.mPlayer = nil;
+    }
+    NSURL *fileUrl = [self.ipodMusicArray objectAtIndex:0];
+    if (fileUrl == nil)
+        return;
+    self.mPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileUrl error:nil];
+    self.mPlayer.delegate = self;
+    self.mPlayer.meteringEnabled= YES;
+    self.mPlayer.pan = 1.0;
+    
+    // 2.4.准备播放
+    [self.mPlayer prepareToPlay];
+    
+    // 3.播放音乐
+    [self.mPlayer play];
+    
+    if([self.musicTimer isValid]){
+        [self.musicTimer invalidate];
+        self.musicTimer = nil;
+    }
+    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(getPowerValue) userInfo:nil repeats:YES];
+    [self.musicTimer fire];
+}
+
+#pragma mark ----------------------------------- 获取音乐音量峰值
+- (void)getPowerValue{
+    [self.mPlayer updateMeters];
+//    float value1 = [self.mPlayer averagePowerForChannel:0];
+//    NSLog(@"value1 == %f",value1);
+    float value2 = [self.mPlayer averagePowerForChannel:1];
+    NSLog(@"value2 == %f",value2);
+//
+//    float value3 = [self.mPlayer peakPowerForChannel:0];
+//    NSLog(@"value3 == %f",value3);
+//    float value4 = [self.mPlayer peakPowerForChannel:1];
+//    NSLog(@"value4 == %f",value4);
+}
 
 
 @end
