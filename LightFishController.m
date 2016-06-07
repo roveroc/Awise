@@ -26,6 +26,7 @@
 @synthesize sendTimer;
 @synthesize deviceInfo;
 @synthesize sql;
+@synthesize sliderTimer,sliderFlag;
 
 - (void)showTabBar{
     if (self.tabBarController.tabBar.hidden == NO)
@@ -49,8 +50,16 @@
     if(self.dataArray == nil){
         self.dataArray = [[NSMutableArray alloc] init];
     }
-    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
+    self.sendTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(timerSendData) userInfo:nil repeats:YES];
     [self.sendTimer fire];
+    
+    self.sliderTimer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(changeSliderFlag) userInfo:nil repeats:YES];
+    [self.sliderTimer fire];
+}
+
+#pragma mark ------------------------------------------------ 改变取值的变量值
+- (void)changeSliderFlag{
+    self.sliderFlag = YES;
 }
 
 #pragma mark ------------------------------------------------ 界面消失是销毁定时器
@@ -578,22 +587,28 @@
 
 #pragma mark ---------------------------------------------------- 三通道亮度值改变
 - (IBAction)pipeSliderValueChange:(id)sender {
+    if(self.sliderFlag == NO)
+//        return;
+    self.sliderFlag = YES;
     [self closeSwitch:@[@1,@2,@3,@4,@5,@6]];
     UISlider *slider = (UISlider *)sender;
     switch (slider.tag) {
         case 7:{
             int value = (int)slider.value;
+            self.pipe1Value = value;
             self.pipe1Label.text = [NSString stringWithFormat:@"%d%%",value];
         }
             break;
         case 8:{
             int value = (int)slider.value;
+            self.pipe2Value = value;
             self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",value];
         }
             break;
         case 9:{
             int value = (int)slider.value;
-            self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",value];
+            self.pipe3Value = value;
+            self.pipe3Label.text = [NSString stringWithFormat:@"%d%%",value];
         }
             break;
             

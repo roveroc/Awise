@@ -18,6 +18,8 @@
     NSTimer                 *sendTimer;
     NSMutableArray          *deviceInfo;
     RoverSqlite             *sql;
+    NSTimer                 *sliderTimer;
+    BOOL                    sliderFlag;
 }
 @property (assign)            int                   pipe1Value;           //三个通道值
 @property (assign)            int                   pipe2Value;
@@ -26,7 +28,8 @@
 @property (nonatomic, retain) NSTimer               *sendTimer;           //定时器轮询队列是否有数据需要发送
 @property (nonatomic, retain) NSMutableArray        *deviceInfo;          //当前设备的所有信息
 @property (nonatomic, retain) RoverSqlite           *sql;                 //操作数据库的对象
-
+@property (nonatomic, retain) NSTimer               *sliderTimer;         //滑动条取值定时器
+@property (assign)            BOOL                  sliderFlag;           //滑动条取值标识
 
 - (IBAction)switchBtnClicked:(id)sender;
 
