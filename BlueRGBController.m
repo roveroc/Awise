@@ -218,11 +218,11 @@
     
     self.onOffButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"]
+    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                 forState:UIControlStateNormal];
-    [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"]
+    [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                 forState:UIControlStateNormal];
-    [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
+//    [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
 //    if(iPhone6)
     {
         self.PlayPauseButton.frame = CGRectMake(10, 78, 60, 60);
@@ -246,8 +246,8 @@
     self.lightSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
     self.lightSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
     self.lightSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
-    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
-    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
+    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"samllLight.png"];
+    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
 //速度值滑条
     self.modeSlider = [[ASValueTrackingSlider alloc] init];
     self.modeSlider.minimumValue = 0;
@@ -257,8 +257,8 @@
     self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
     self.modeSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
     self.modeSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
-    self.modeSlider.minimumValueImage = [UIImage imageNamed:@"single.png"];
-    self.modeSlider.maximumValueImage = [UIImage imageNamed:@"single.png"];
+    self.modeSlider.minimumValueImage = [UIImage imageNamed:@"lowSpeed.png"];
+    self.modeSlider.maximumValueImage = [UIImage imageNamed:@"fastSpeed.png"];
     if(iPhone6P){
         self.lightSlider.frame = CGRectMake(20, 400+130+30, SCREEN_WIDHT-40, 20);
         self.modeSlider.frame  = CGRectMake(20, 400+130+40+15+30, SCREEN_WIDHT-40, 20);
@@ -332,7 +332,7 @@
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
 //            [self.onOffButton setTitle:@"开" forState:UIControlStateNormal];
-            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"]
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"on.png"]
                                         forState:UIControlStateNormal];
         }else{
             self.offFlag = NO;
@@ -344,7 +344,7 @@
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
 //            [self.onOffButton setTitle:@"关" forState:UIControlStateNormal];
-            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"]
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                         forState:UIControlStateNormal];
         }
     }
