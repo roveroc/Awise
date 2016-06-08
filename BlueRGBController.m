@@ -28,6 +28,7 @@
 @synthesize modeValue;
 @synthesize onOffButton;
 @synthesize PlayPauseButton;
+@synthesize musicButton;
 @synthesize offFlag;
 @synthesize palyFlag;
 @synthesize backScrollView;
@@ -35,6 +36,7 @@
 @synthesize touchTimer;
 @synthesize mPlayer,ipodMusicArray;
 @synthesize musicTimer;
+@synthesize mview;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -216,17 +218,21 @@
     self.offFlag = NO;
     self.palyFlag = NO;
     
-    self.onOffButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.onOffButton      = [UIButton buttonWithType:UIButtonTypeCustom];
     self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
+    self.musicButton      = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.onOffButton     setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                 forState:UIControlStateNormal];
     [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                 forState:UIControlStateNormal];
+    [self.musicButton     setBackgroundImage:[UIImage imageNamed:@"play.png"]
+                                    forState:UIControlStateNormal];
 //    [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
 //    if(iPhone6)
     {
         self.PlayPauseButton.frame = CGRectMake(10, 78, 60, 60);
-        self.onOffButton.frame = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
+        self.onOffButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
+        self.musicButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 265, 60, 60);
     }
     [self.PlayPauseButton addTarget:self
                        action:@selector(PlayPauseMode)
@@ -234,8 +240,12 @@
     [self.onOffButton addTarget:self
                        action:@selector(onOffLight)
              forControlEvents:UIControlEventTouchUpInside];
+    [self.musicButton addTarget:self
+                         action:@selector(showMusicView)
+               forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:self.onOffButton];
     [self.backScrollView addSubview:self.PlayPauseButton];
+    [self.backScrollView addSubview:self.musicButton];
     
 //亮度值滑条
     self.lightSlider = [[ASValueTrackingSlider alloc] init];
@@ -277,30 +287,45 @@
 
 #pragma mark ----------------------------------- 关闭
 - (void)PlayPauseMode{
-//    if(self.character != nil){
-//        if(self.palyFlag == NO){
-//            self.palyFlag = YES;
-//            Byte by[4];
-//            by[0] = 3;
-//            by[1] = 3;
-//            by[2] = 0;
-//            by[3] = 0;
-//            NSData *da = [[NSData alloc] initWithBytes:by length:4];
-//            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-//            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
-//        }else{
-//            self.palyFlag = NO;
-//            Byte by[4];
-//            by[0] = 3;
-//            by[1] = 2;
-//            by[2] = 0;
-//            by[3] = 0;
-//            NSData *da = [[NSData alloc] initWithBytes:by length:4];
-//            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-//            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
-//        }
-//    }
-    [self importMusicFormItunes];
+    if(self.character != nil){
+        if(self.palyFlag == NO){
+            self.palyFlag = YES;
+            Byte by[4];
+            by[0] = 3;
+            by[1] = 3;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+        }else{
+            self.palyFlag = NO;
+            Byte by[4];
+            by[0] = 3;
+            by[1] = 2;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
+        }
+    }
+}
+
+#pragma mark ----------------------------------- 调到音乐播放界面
+- (void)showMusicView{
+    NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"MusicView" owner:nil options:nil];
+    mview = [nibView objectAtIndex:0];
+    mview.frame = self.view.frame;
+    mview.alpha = 0.0;
+    [UIView beginAnimations:@"animation" context:nil];
+    //动画时长
+    [UIView setAnimationDuration:0.3];
+    mview.alpha = 1.0;
+    //动画结束
+    [UIView commitAnimations];
+    [self.view addSubview:mview];
+    
 }
 
 #pragma mark ----------------------------------- 导入iTunes中的音乐

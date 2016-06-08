@@ -97,6 +97,8 @@
 		976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522141CE076A700EEEE01 /* UIColor-Expanded.m */; };
 		976522271CE0793400EEEE01 /* BlueRGBController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976522251CE0793400EEEE01 /* BlueRGBController.m */; };
 		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
+		976F5E941D08218F003FDF43 /* MusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976F5E931D08218F003FDF43 /* MusicView.m */; };
+		976F5E961D0821A9003FDF43 /* MusicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976F5E951D0821A9003FDF43 /* MusicView.xib */; };
 		977575231CF1911100D34D45 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575201CF1911100D34D45 /* ASValuePopUpView.m */; };
 		977575241CF1911100D34D45 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575221CF1911100D34D45 /* ASValueTrackingSlider.m */; };
 		9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD11D02735800DA3270 /* edit1Highlight.png */; };
@@ -276,6 +278,9 @@
 		976522241CE0793400EEEE01 /* BlueRGBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueRGBController.h; sourceTree = "<group>"; };
 		976522251CE0793400EEEE01 /* BlueRGBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueRGBController.m; sourceTree = "<group>"; };
 		976522261CE0793400EEEE01 /* BlueRGBController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlueRGBController.xib; sourceTree = "<group>"; };
+		976F5E921D08218F003FDF43 /* MusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicView.h; sourceTree = "<group>"; };
+		976F5E931D08218F003FDF43 /* MusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicView.m; sourceTree = "<group>"; };
+		976F5E951D0821A9003FDF43 /* MusicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicView.xib; sourceTree = "<group>"; };
 		9775751F1CF1911100D34D45 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
 		977575201CF1911100D34D45 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		977575211CF1911100D34D45 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
@@ -626,6 +631,7 @@
 		9735C0861CC9C134000B0727 /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				976F5E911D082162003FDF43 /* MusicView */,
 				976521871CE035E000EEEE01 /* BlueRGB */,
 				976520FC1CDB512200EEEE01 /* LightFish */,
 				9735C0871CC9C13B000B0727 /* SingleTouch */,
@@ -867,6 +873,16 @@
 			name = ColorPciker;
 			sourceTree = "<group>";
 		};
+		976F5E911D082162003FDF43 /* MusicView */ = {
+			isa = PBXGroup;
+			children = (
+				976F5E921D08218F003FDF43 /* MusicView.h */,
+				976F5E931D08218F003FDF43 /* MusicView.m */,
+				976F5E951D0821A9003FDF43 /* MusicView.xib */,
+			);
+			name = MusicView;
+			sourceTree = "<group>";
+		};
 		9775751E1CF190FB00D34D45 /* PopSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1056,6 +1072,7 @@
 				97651F791CD8B07C00EEEE01 /* 1242x2208.png in Resources */,
 				9735C07F1CC87F88000B0727 /* Default-960h@2x.png in Resources */,
 				976521121CDC2F1A00EEEE01 /* EditTimerController.xib in Resources */,
+				976F5E961D0821A9003FDF43 /* MusicView.xib in Resources */,
 				9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
 				976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */,
@@ -1181,6 +1198,7 @@
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,
 				97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */,
 				9735C0301CC7832A000B0727 /* AppDelegate.m in Sources */,
+				976F5E941D08218F003FDF43 /* MusicView.m in Sources */,
 				97F55A591CCB29DF00E92957 /* SingleTouchTimerView.m in Sources */,
 				9735C0791CC87EDB000B0727 /* AwiseGlobal.m in Sources */,
 				976521181CDC2F5500EEEE01 /* lineView.m in Sources */,

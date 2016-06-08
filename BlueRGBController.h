@@ -13,6 +13,7 @@
 #import "KZColorPicker.h"
 #import "AwiseGlobal.h"
 #import "ASValueTrackingSlider.h"
+#import "MusicView.h"
 
 @interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate>{
     KZColorPicker           *colorPicker;
@@ -38,6 +39,7 @@
     
     UIButton                *onOffButton;
     UIButton                *PlayPauseButton;
+    UIButton                *musicButton;
     BOOL                    offFlag;
     BOOL                    palyFlag;
     
@@ -47,6 +49,7 @@
     NSMutableArray          *ipodMusicArray;
     AVAudioPlayer           *mPlayer;
     NSTimer                 *musicTimer;
+    MusicView               *mview;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -68,11 +71,13 @@
 @property (assign)            BOOL                  palyFlag;                //播放标识
 @property (nonatomic, retain) UIButton              *onOffButton;            //开关
 @property (nonatomic, retain) UIButton              *PlayPauseButton;        //播放、暂停
+@property (nonatomic, retain) UIButton              *musicButton;            //调到音乐播放界面
 
 @property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
 
 @property (nonatomic, retain) NSMutableArray        *ipodMusicArray;         //music数组
 @property (nonatomic, retain) AVAudioPlayer         *mPlayer;                //播放器
 @property (nonatomic, retain) NSTimer               *musicTimer;             //播放音乐时的定时器
+@property (nonatomic, retain) MusicView             *mview;                  //播放音乐时的定时器
 
 @end
