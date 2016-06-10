@@ -34,9 +34,9 @@
 @synthesize backScrollView;
 @synthesize touchFlag;
 @synthesize touchTimer;
-@synthesize mPlayer,ipodMusicArray;
-@synthesize musicTimer;
+@synthesize ipodMusicArray;
 @synthesize mview;
+
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -45,10 +45,6 @@
     }
     [self.touchTimer invalidate];
     self.touchTimer = nil;
-    if(self.mPlayer != nil){
-        [self.mPlayer stop];
-        self.mPlayer = nil;
-    }
 }
 
 - (void)viewDidLoad {
@@ -62,6 +58,26 @@
     //间隔取值
     self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
     [self.touchTimer fire];
+    
+    UIBarButtonItem	*leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"fastSpeed.png"]
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self
+                                                              action:@selector(goBack)];
+//    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setBackgroundColor:[UIColor greenColor]];
+//    [button setImage:[UIImage imageNamed:@"fastSpeed.png"] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(goBack)forControlEvents:UIControlEventTouchUpInside];
+//    [button setFrame:CGRectMake(0, 0, 53, 31)];
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(23, 5, 50, 20)];
+//    [label setFont:[UIFont fontWithName:@"Arial-BoldMT" size:13]];
+//    [label setText:@"返回"];
+//    label.textAlignment = NSTextAlignmentRight;
+//    [label setTextColor:[UIColor blueColor]];
+//    [label setBackgroundColor:[UIColor clearColor]];
+//    [button addSubview:label];
+//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    self.navigationItem.leftBarButtonItem = barButton;
+    self.navigationItem.leftBarButtonItem = leftItem;
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.centralManager = [[CBCentralManager alloc]
@@ -108,11 +124,39 @@
                       @"白 色 呼 吸 渐 变",
                       @"三 色 呼 吸 渐 变",
     nil];
+//读取iTunes中的音乐
+    [self importMusicFormItunes];
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     NSLog(@"CBCentralManager             = %@",central);
     [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
+}
+
+#pragma mark ----------------------------------------------- 自定义返回按钮事件
+- (void)goBack{
+    if(mview == nil){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [UIView beginAnimations:@"animation" context:nil];
+        //动画时长
+        [UIView setAnimationDuration:0.3];
+        mview.alpha = 0.0;
+        //动画结束
+        [UIView commitAnimations];
+        [self performSelector:@selector(removeMview) withObject:nil afterDelay:0.3];
+        if([self.mview.mPlayer isPlaying]){
+            [self.mview.mPlayer stop];
+        }
+        self.mview.mPlayer.delegate = nil;
+        self.mview.mPlayer = nil;
+    }
+}
+
+- (void)removeMview{
+    [self.view addSubview:mview];
+    [mview removeFromSuperview];
+    mview = nil;
 }
 
 #pragma mark ----------------------------------------------- 扫描周围可用的蓝牙设备
@@ -312,12 +356,13 @@
     }
 }
 
-#pragma mark ----------------------------------- 调到音乐播放界面
+#pragma mark ----------------------------------- 跳到音乐播放界面
 - (void)showMusicView{
     NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"MusicView" owner:nil options:nil];
     mview = [nibView objectAtIndex:0];
     mview.frame = self.view.frame;
     mview.alpha = 0.0;
+    mview.musicArray = self.ipodMusicArray;
     [UIView beginAnimations:@"animation" context:nil];
     //动画时长
     [UIView setAnimationDuration:0.3];
@@ -339,9 +384,9 @@
     for (MPMediaItem *song in musicArr) {
         NSString *songTitle = song.title;
         NSLog (@"%@, %@, %@", songTitle, song.assetURL,song.artist);
-        [self.ipodMusicArray addObject:song.assetURL];
+        NSMutableArray *temp = [[NSMutableArray alloc] initWithObjects:songTitle,song.assetURL,song.artist, nil];
+        [self.ipodMusicArray addObject:temp];
     }
-    [self startPlayMusic];
 }
 
 #pragma mark ----------------------------------- 打开
@@ -475,59 +520,5 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-/*************************************************************************/
-/*************************************************************************/
-//音乐播放模块
-/*************************************************************************/
-/*************************************************************************/
-- (void)startPlayMusic{
-    // 1.定义播放器
-    if(self.ipodMusicArray.count == 0)
-        return ;
-    
-    // 2.从字典中取player,如果取出出来是空,则对应创建对应的播放器
-    if(self.mPlayer != nil){
-        [self.mPlayer stop];
-        self.mPlayer = nil;
-    }
-    NSURL *fileUrl = [self.ipodMusicArray objectAtIndex:0];
-    if (fileUrl == nil)
-        return;
-    self.mPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileUrl error:nil];
-    self.mPlayer.delegate = self;
-    self.mPlayer.meteringEnabled= YES;
-    self.mPlayer.pan = 1.0;
-    
-    // 2.4.准备播放
-    [self.mPlayer prepareToPlay];
-    
-    // 3.播放音乐
-    [self.mPlayer play];
-    
-    if([self.musicTimer isValid]){
-        [self.musicTimer invalidate];
-        self.musicTimer = nil;
-    }
-    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(getPowerValue) userInfo:nil repeats:YES];
-    [self.musicTimer fire];
-}
-
-#pragma mark ----------------------------------- 获取音乐音量峰值
-- (void)getPowerValue{
-    [self.mPlayer updateMeters];
-//    float value1 = [self.mPlayer averagePowerForChannel:0];
-//    NSLog(@"value1 == %f",value1);
-    float value2 = [self.mPlayer averagePowerForChannel:1];
-    NSLog(@"value2 == %f",value2);
-//
-//    float value3 = [self.mPlayer peakPowerForChannel:0];
-//    NSLog(@"value3 == %f",value3);
-//    float value4 = [self.mPlayer peakPowerForChannel:1];
-//    NSLog(@"value4 == %f",value4);
-}
-
 
 @end

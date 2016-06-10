@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import "KZColorPicker.h"
 #import "AwiseGlobal.h"
@@ -47,8 +46,6 @@
     
     //music part
     NSMutableArray          *ipodMusicArray;
-    AVAudioPlayer           *mPlayer;
-    NSTimer                 *musicTimer;
     MusicView               *mview;
 }
 
@@ -76,8 +73,6 @@
 @property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
 
 @property (nonatomic, retain) NSMutableArray        *ipodMusicArray;         //music数组
-@property (nonatomic, retain) AVAudioPlayer         *mPlayer;                //播放器
-@property (nonatomic, retain) NSTimer               *musicTimer;             //播放音乐时的定时器
 @property (nonatomic, retain) MusicView             *mview;                  //播放音乐时的定时器
 
 @end
