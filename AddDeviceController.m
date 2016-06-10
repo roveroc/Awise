@@ -103,7 +103,7 @@
         // Or use blocks
         [reader setCompletionWithBlock:^(NSString *resultAsString) {
             NSMutableArray *infoArr = [[NSMutableArray alloc] init];
-    //DeviceName&5ccf7f1b4390&192.168.3.26&30000&1.1.1.1&Awise_WIFI_Fish&www.awise123.com
+    //DeviceName&5ccf7f1adeb7&192.168.3.26&30000&1.1.1.1&Awise_WIFI_Fish&www.awise123.com
             if([resultAsString rangeOfString:@"Awise"].location != NSNotFound){
                 self.btn1.hidden = NO;
                 self.btn2.hidden = NO;

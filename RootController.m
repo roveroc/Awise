@@ -45,39 +45,39 @@
      *根据当前设备的数量和种类布局界面
      */
     
-    [self.deviceImage1 setImageWithString:@"单色触摸面板" color:nil circular:YES];
-    [self.deviceImage2 setImageWithString:@"蓝牙RGB" color:nil circular:YES];
-    [self.deviceImage3 setImageWithString:@"水族灯" color:nil circular:YES];
-    [self.deviceImage4 setImageWithString:@"健身房大灯" color:nil circular:YES];
-    
-    
-    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animationImage1) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:3.1 target:self selector:@selector(animationImage2) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(animationImage3) userInfo:nil repeats:YES];
-    [NSTimer scheduledTimerWithTimeInterval:4.1 target:self selector:@selector(animationImage4) userInfo:nil repeats:YES];
-    
-    
-    self.deviceImage1.userInteractionEnabled = YES;
-    self.deviceImage2.userInteractionEnabled = YES;
-    self.deviceImage3.userInteractionEnabled = YES;
-    self.deviceImage4.userInteractionEnabled = YES;
-    
-    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterSingleTouchController)];
-    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterBuleRGBController)];
-    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterLightFishController)];
-    tap1.delegate = self;
-    tap2.delegate = self;
-    tap3.delegate = self;
-    [self.deviceImage1 addGestureRecognizer:tap1];
-    [self.deviceImage2 addGestureRecognizer:tap2];
-    [self.deviceImage3 addGestureRecognizer:tap3];
+//    [self.deviceImage1 setImageWithString:@"单色触摸面板" color:nil circular:YES];
+//    [self.deviceImage2 setImageWithString:@"蓝牙RGB" color:nil circular:YES];
+//    [self.deviceImage3 setImageWithString:@"水族灯" color:nil circular:YES];
+//    [self.deviceImage4 setImageWithString:@"健身房大灯" color:nil circular:YES];
+//    
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(animationImage1) userInfo:nil repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:3.1 target:self selector:@selector(animationImage2) userInfo:nil repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:2.9 target:self selector:@selector(animationImage3) userInfo:nil repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:4.1 target:self selector:@selector(animationImage4) userInfo:nil repeats:YES];
+//    
+//    
+//    self.deviceImage1.userInteractionEnabled = YES;
+//    self.deviceImage2.userInteractionEnabled = YES;
+//    self.deviceImage3.userInteractionEnabled = YES;
+//    self.deviceImage4.userInteractionEnabled = YES;
+//    
+//    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterSingleTouchController)];
+//    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterBuleRGBController)];
+//    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enterLightFishController)];
+//    tap1.delegate = self;
+//    tap2.delegate = self;
+//    tap3.delegate = self;
+//    [self.deviceImage1 addGestureRecognizer:tap1];
+//    [self.deviceImage2 addGestureRecognizer:tap2];
+//    [self.deviceImage3 addGestureRecognizer:tap3];
     
 //监听是否需要重新布局界面
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDeviceLayout) name:@"NeedLayoutDevice"
                                                object:nil];
     if([AwiseGlobal sharedInstance].deviceArray.count == 0){
-        self.remindLabel.hidden = NO;
+        self.remindLabel.hidden = YES;
     }
 }
 
@@ -89,12 +89,12 @@
 }
 
 - (void)viewWillLayoutSubviews{
-//    if(self.deviceScroll != nil)
-//        return;
-//    if([AwiseGlobal sharedInstance].deviceArray.count > 0){
-//        self.remindLabel.hidden = YES;
-//    }
-//    [self layoutDevice];
+    if(self.deviceScroll != nil)
+        return;
+    if([AwiseGlobal sharedInstance].deviceArray.count > 0){
+        self.remindLabel.hidden = YES;
+    }
+    [self layoutDevice];
 }
 
 #pragma mark ----------------------------------------- 根据数据库中设备的数量布局界面

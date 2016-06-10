@@ -126,6 +126,8 @@
 		9796DB191D06A130008A65AE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9796DB181D06A130008A65AE /* MediaPlayer.framework */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
+		97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */; };
+		97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
 		97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */; };
 		97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */; };
@@ -315,6 +317,9 @@
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
 		97A2AB7C1CD21B6800734E61 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
 		97A2AB7D1CD21B6800734E61 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
+		97C5BD1C1D0A936000D4D6C4 /* TC_MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_MainController.h; sourceTree = "<group>"; };
+		97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_MainController.m; sourceTree = "<group>"; };
+		97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TC_MainController.xib; sourceTree = "<group>"; };
 		97D9EF281CD448BE0096F517 /* EditSingleTouchSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSingleTouchSceneController.h; sourceTree = "<group>"; };
 		97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSingleTouchSceneController.m; sourceTree = "<group>"; };
 		97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSingleTouchSceneController.xib; sourceTree = "<group>"; };
@@ -631,6 +636,7 @@
 		9735C0861CC9C134000B0727 /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				97C5BD1A1D0A92DF00D4D6C4 /* TC420 */,
 				976F5E911D082162003FDF43 /* MusicView */,
 				976521871CE035E000EEEE01 /* BlueRGB */,
 				976520FC1CDB512200EEEE01 /* LightFish */,
@@ -954,6 +960,24 @@
 			name = GBPing;
 			sourceTree = "<group>";
 		};
+		97C5BD1A1D0A92DF00D4D6C4 /* TC420 */ = {
+			isa = PBXGroup;
+			children = (
+				97C5BD1B1D0A92F800D4D6C4 /* MainController */,
+			);
+			name = TC420;
+			sourceTree = "<group>";
+		};
+		97C5BD1B1D0A92F800D4D6C4 /* MainController */ = {
+			isa = PBXGroup;
+			children = (
+				97C5BD1C1D0A936000D4D6C4 /* TC_MainController.h */,
+				97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */,
+				97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */,
+			);
+			name = MainController;
+			sourceTree = "<group>";
+		};
 		97D9EF271CD448930096F517 /* EditScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1119,6 +1143,7 @@
 				976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */,
 				976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */,
 				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
+				97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */,
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
 				976521251CDC2FDC00EEEE01 /* ManualController.xib in Resources */,
 				9765211F1CDC2FA400EEEE01 /* DetailEditController.xib in Resources */,
@@ -1212,6 +1237,7 @@
 				976520F81CD9F0F200EEEE01 /* RouterView.m in Sources */,
 				976521241CDC2FDC00EEEE01 /* ManualController.m in Sources */,
 				976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */,
+				97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */,
 				9765221A1CE076A700EEEE01 /* KZColorCompareView.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
@@ -1356,7 +1382,7 @@
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1371,7 +1397,7 @@
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

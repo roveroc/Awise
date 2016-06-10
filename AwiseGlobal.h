@@ -46,8 +46,8 @@
 #define SCREEN_WIDHT [[UIScreen mainScreen] bounds].size.width
 
 /*******水族等部分********/
-#define SENDPORT    5000                   //发送数据端口
-#define BroadCast   @"255.255.255.255"     //广播地址
+//#define SENDPORT    5000                   //发送数据端口
+//#define BroadCast   @"255.255.255.255"     //广播地址
 #define WAITTIME    2.0
 #define DISMISS_TIME 1.5
 #define WIFISSID    @"Awise-"
