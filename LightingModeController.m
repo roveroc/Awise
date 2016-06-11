@@ -18,13 +18,40 @@
 @synthesize editFlag;
 @synthesize runingValue;
 @synthesize hud;
+@synthesize speedFlag,speedTimer;
+
+#pragma mark ------------------------------------------------ 界面消失是销毁定时器
+- (void)viewWillDisappear:(BOOL)animated{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        if(self.modeFlag == 1){         //保存闪电模式
+            [AwiseUserDefault sharedInstance].light_precent = [NSString stringWithFormat:@"%d",self.percent];
+            [AwiseUserDefault sharedInstance].light_sTime = self.sTime;
+            [AwiseUserDefault sharedInstance].light_eTime = self.eTime;
+            [AwiseUserDefault sharedInstance].light_switch = [NSString stringWithFormat:@"%d",self.sswitch];
+        }else if(self.modeFlag == 2){   //保存多云模式
+            [AwiseUserDefault sharedInstance].cloudy_precent = [NSString stringWithFormat:@"%d",self.percent];
+            [AwiseUserDefault sharedInstance].cloudy_sTime = self.sTime;
+            [AwiseUserDefault sharedInstance].cloudy_eTime = self.eTime;
+            [AwiseUserDefault sharedInstance].cloudy_switch = [NSString stringWithFormat:@"%d",self.sswitch];
+        }
+        self.runingValue = 0;
+        [self buildDataStruct:NO];
+    }
+    [self.speedTimer invalidate];
+    self.speedTimer = nil;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(SaveDataAndBack)];
-    self.navigationItem.rightBarButtonItem = rightItem;
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(SaveDataAndBack)];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+    [self.startBtn setTitleColor:[UIColor colorWithRed:0.0/255 green:191./255 blue:95.255 alpha:1.0] forState:UIControlStateNormal];
+    [self.endBtn   setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
     [[AwiseGlobal sharedInstance] hideTabBar:self];
@@ -36,6 +63,9 @@
     
     [self.switch1 setOn:NO animated:NO];
     self.runingValue = 0;
+    
+    self.speedTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeSpeedFlag) userInfo:nil repeats:YES];
+    [self.speedTimer fire];
     
     if(self.modeFlag == 1){  //闪电
         self.navigationItem.title = @"Lighting";
@@ -92,7 +122,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - 保存数据
+#pragma mark - 保存数据 (暂时没用到)
 - (void)SaveData{
     if(self.modeFlag == 1){         //保存闪电模式
         [AwiseUserDefault sharedInstance].light_precent = [NSString stringWithFormat:@"%d",self.percent];
@@ -105,11 +135,11 @@
         [AwiseUserDefault sharedInstance].cloudy_eTime = self.eTime;
         [AwiseUserDefault sharedInstance].cloudy_switch = [NSString stringWithFormat:@"%d",self.sswitch];
     }
-    [self buildDataStruct];
+    [self buildDataStruct:NO];
 }
 
 
-#pragma 改变时间
+#pragma mark ---------------------------------- 改变时间
 - (void)dateChange:(UIDatePicker *)sender{
     NSString *time = [[self dateToString:sender.date] componentsSeparatedByString:@" "][1];
     if(self.editFlag == YES){
@@ -161,9 +191,24 @@
     return date;
 }
 
+#pragma mark ------------------------------------------ 预览当前效果
+- (IBAction)previewBtnClicked:(id)sender {
+    self.runingValue = 1;
+    [[AwiseGlobal sharedInstance] showWaitingView];
+    [self buildDataStruct:NO];
+}
+
+
+#pragma mark - 下载设置数据
+- (IBAction)downloadBtnClicked:(id)sender {
+    self.sswitch = 0;
+    [[AwiseGlobal sharedInstance] showWaitingView];
+    [self SaveData];
+    [self buildDataStruct:NO];
+}
 
 - (IBAction)startBtnClicked:(id)sender {
-    [self.startBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.startBtn setTitleColor:[UIColor colorWithRed:0.0/255 green:191./255 blue:95.255 alpha:1.0] forState:UIControlStateNormal];
     [self.endBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     self.editFlag = YES;
     int tv = [[self.sTime componentsSeparatedByString:@":"][0] intValue]*60*60 + [[self.sTime componentsSeparatedByString:@":"][1] intValue]*60;
@@ -174,7 +219,7 @@
 
 - (IBAction)endBtnClicked:(id)sender {
     [self.startBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.endBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.endBtn setTitleColor:[UIColor colorWithRed:0.0/255 green:191./255 blue:95.255 alpha:1.0] forState:UIControlStateNormal];
     self.editFlag = NO;
     int tv = [[self.eTime componentsSeparatedByString:@":"][0] intValue]*60*60 + [[self.eTime componentsSeparatedByString:@":"][1] intValue]*60;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -182,12 +227,22 @@
     });
 }
 
+#pragma makr ------------------------------------- 控制滑条取值间隔时间
+- (void)changeSpeedFlag{
+    self.speedFlag = YES;
+}
+
 - (IBAction)sliderValueChange:(id)sender {
+    if(self.speedFlag == NO)
+        return;
+    self.speedFlag = NO;
     UISlider *slider = (UISlider *)sender;
     self.valueLabel.text = [NSString stringWithFormat:@"%d%%",(int)slider.value];
     self.percent = (int)slider.value;
+    [self buildDataStruct:YES];
 }
 
+//no use
 - (IBAction)switch1StatusChange:(id)sender {
     UISwitch *swi = (UISwitch *)sender;
     if(swi.isOn == NO){
@@ -197,9 +252,10 @@
     }
     [[AwiseGlobal sharedInstance] showWaitingView];
     [self SaveData];
-    [self buildDataStruct];
+    [self buildDataStruct:NO];
 }
 
+//no use
 - (IBAction)switch2StatusChange:(id)sender {
     UISwitch *swi = (UISwitch *)sender;
     if(swi.isOn == NO){
@@ -209,12 +265,12 @@
     }
     [[AwiseGlobal sharedInstance] showWaitingView];
     [self SaveData];
-    [self buildDataStruct];
+    [self buildDataStruct:NO];
 }
 
 
 #pragma mark - 组织将要发送的数据
-- (void)buildDataStruct{
+- (void)buildDataStruct:(BOOL)sFlag{  //是否是控制滑条时产生的动作，如果是，则发送0x01,不要返回数据
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -241,7 +297,7 @@
         Byte emmbb = emmstr;
         b3[8] = emmbb;
         
-        int pValue = [[AwiseUserDefault sharedInstance].light_precent intValue];   //百分比
+        int pValue = self.percent;   //百分比
         Byte pbb = pValue;
         b3[9] = pbb;
         
@@ -269,7 +325,7 @@
         Byte emmbb = emmstr;
         b3[8] = emmbb;
         
-        int pValue = [[AwiseUserDefault sharedInstance].cloudy_precent intValue];   //百分比
+        int pValue = self.percent;   //百分比
         Byte pbb = pValue;
         b3[9] = pbb;
         
@@ -279,15 +335,20 @@
         Byte openbb = self.sswitch;     //打开(关闭)
         b3[11] = openbb;
     }
+    if(sFlag == YES)
+        b3[12] = 0x01;
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
 #pragma mark ----------------------------------- 解析从设备的返回值
 - (void)dataBackFormDevice:(Byte *)byte{
-    if (byte[2] == 0x05 && byte[5] == 0x00){                           //操作定时器
-        [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.5];
+    if (byte[2] == 0x05){                           //闪电、多云
+        
+    }else{
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.2];
     }
+    [[AwiseGlobal sharedInstance] disMissHUD];
 }
 
 

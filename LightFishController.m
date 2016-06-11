@@ -66,7 +66,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [self.sendTimer invalidate];
     self.sendTimer = nil;
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
         [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
@@ -218,10 +218,10 @@
     }
 }
 
-#pragma mark - 连接设备成功
+#pragma mark ---------------------------------------------- 连接设备成功
 - (void)TCPSocketConnectSuccess{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
-//    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态"];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态"];
     //每次软件启动时，自动同步时间至设备
     [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
     //获取设备状态值
@@ -374,6 +374,10 @@
                 break;
             default:
                 break;
+        }
+        if(byte[9] == 0x01){        //说明路由器加入失败
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"设置路由模式失败，请确保输入的账号密码正确"
+                                               withTime:1.1];
         }
         [self getDeviceStatusFinished];
     }
@@ -680,7 +684,7 @@
             break;
         case 15:{                         //多云
             LightingModeController *light = [[LightingModeController alloc] init];
-            light.modeFlag = 1;
+            light.modeFlag = 2;
             [self.navigationController pushViewController:light animated:YES];
         }
             break;

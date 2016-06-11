@@ -30,7 +30,7 @@
     [[AwiseGlobal sharedInstance].lineArray addObject:_arr2];
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    for(int i=0;i<3;i++){
+    for(int i=0;i<_arr1.count - 1;i++){
         //设置连接类型
         CGContextSetLineJoin(currentContext, kCGLineJoinMiter);
         //设置线条宽度
@@ -43,6 +43,11 @@
             CGContextSetRGBStrokeColor(currentContext, 0.1, 0.1, 1.0, 1.);
         else if (i == 3)
             CGContextSetRGBStrokeColor(currentContext, 1.0, 1.0, 1.0, 1.);
+        else if (i == 4)
+            CGContextSetRGBStrokeColor(currentContext, 0.1, 0.2, 0.3, 1.);
+        else if (i == 5)
+            CGContextSetRGBStrokeColor(currentContext, 0.3, 0.2, 0.1, 1.);
+        
         for(int j = 0;j<[AwiseGlobal sharedInstance].lineArray.count;j++){
             NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];

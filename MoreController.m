@@ -9,6 +9,7 @@
 #import "MoreController.h"
 #import "ManageDeviceController.h"
 #import "AboutUsController.h"
+#import "TC_MainController.h"
 
 @interface MoreController ()
 
@@ -80,9 +81,13 @@
         [self.navigationController pushViewController:manCon animated:YES];
     }
     else if (indexPath.row == 2){
-        AboutUsController *manCon = [[AboutUsController alloc] init];
-        manCon.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:manCon animated:YES];
+//        AboutUsController *manCon = [[AboutUsController alloc] init];
+//        manCon.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:manCon animated:YES];
+        
+        TC_MainController *con = [[TC_MainController alloc] init];
+        [self.navigationController pushViewController:con animated:YES];
+        
     }
     else if (indexPath.row == 3){
         [self sendRouterAccount];
