@@ -556,6 +556,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				976521131CDC2F2600EEEE01 /* DrawLine */,
 				972287361CF54D810001225F /* D3ViewAnimation */,
 				9775751E1CF190FB00D34D45 /* PopSlider */,
 				97930FC41CE5BC69006601D8 /* Reachability */,
@@ -815,7 +816,6 @@
 			children = (
 				976521151CDC2F3F00EEEE01 /* DetailEdit */,
 				976521141CDC2F3400EEEE01 /* RoverCell */,
-				976521131CDC2F2600EEEE01 /* DrawLine */,
 				9765210E1CDC2F1A00EEEE01 /* EditTimerController.h */,
 				9765210F1CDC2F1A00EEEE01 /* EditTimerController.m */,
 				976521101CDC2F1A00EEEE01 /* EditTimerController.xib */,

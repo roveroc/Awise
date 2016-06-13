@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "lineView.h"
 
-@interface CustomModeCell : UITableViewCell
+
+
+@interface CustomModeCell : UITableViewCell{
+    
+}
 
 @end

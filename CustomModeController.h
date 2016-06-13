@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 #import "lineView.h"
+#import "CustomModeCell.h"
 #import <UIImageView+Letters.h>
 
-@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource>
-
+@interface CustomModeController : UIViewController<
+                                                    UITableViewDelegate,
+                                                    UITableViewDataSource>{
+    
+    
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *modeTableView;
 

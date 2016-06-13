@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TC420_EditTimerController : UIViewController
+@interface TC420_EditTimerController : UIViewController{
+    NSMutableArray          *timerInfoArray;
+}
+@property (nonatomic, retain) NSMutableArray *timerInfoArray;      //定时器数据
+
 
 @end

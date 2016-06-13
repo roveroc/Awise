@@ -13,6 +13,7 @@
 @end
 
 @implementation TC420_EditTimerController
+@synthesize timerInfoArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

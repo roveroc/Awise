@@ -12,11 +12,14 @@
 
 @implementation lineView
 @synthesize activeIndex;
+@synthesize delegate;
+@synthesize pointArray;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
+    // Drawing codes
+    self.pointArray = [[NSMutableArray alloc] init];
     [self roverDraw];
 }
 
@@ -64,6 +67,7 @@
         }
         //画线
         CGContextStrokePath(currentContext);
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         for(int j = 1;j<[AwiseGlobal sharedInstance].lineArray.count-1;j++){
             NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];
@@ -71,23 +75,54 @@
                        [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
             int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
             int y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
-            if(i == self.activeIndex)
-                [self drawCrile:x y:y radius:5 context:currentContext];
-            else
-                [self drawCrile:x y:y radius:3 context:currentContext];
+            if(j == self.activeIndex){
+                UIColor *color = [UIColor colorWithRed:1. green:0.1 blue:0.1 alpha:1];
+                [self drawCrile:x y:y radius:4 color:color context:currentContext];
+            }
+            else{
+                UIColor *color = [UIColor colorWithRed:0.1 green:1.0 blue:0.1 alpha:1];
+                [self drawCrile:x y:y radius:4 color:color context:currentContext];
+            }
+            [tempArray addObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
         }
+        [self.pointArray addObject:tempArray];
     }
     [[AwiseGlobal sharedInstance].lineArray removeObjectAtIndex:0];
     [[AwiseGlobal sharedInstance].lineArray removeLastObject];
 }
 
-
-- (void)drawCrile:(int)x y:(int)y radius:(int)r context:(CGContextRef)ref{
+//标记一个锚点
+- (void)drawCrile:(int)x y:(int)y radius:(int)r color:(UIColor *)c context:(CGContextRef)ref{
     //填充圆，无边框
     CGContextAddArc(ref, x, y, r, 0, 2*PI, 0); //添加一个圆
-    UIColor*aColor = [UIColor colorWithRed:0. green:1.0 blue:0.1 alpha:1];
-    CGContextSetFillColorWithColor(ref, aColor.CGColor);//填充颜色
+//    UIColor*aColor = [UIColor colorWithRed:0. green:1.0 blue:0.1 alpha:1];
+    CGContextSetFillColorWithColor(ref, c.CGColor);//填充颜色
     CGContextDrawPath(ref, kCGPathFill);//绘制填充
 }
+
+//得到触摸点的坐标
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch =  [touches anyObject];
+    CGPoint point = [touch locationInView:self];
+    for(int i=0;i<self.pointArray.count;i++){
+        NSMutableArray *temp = [self.pointArray objectAtIndex:i];
+        for(int j=0;j<temp.count;j++){
+            NSValue *val = [temp objectAtIndex:j];
+            CGPoint p = [val CGPointValue];
+            CGFloat xDist = (point.x - p.x);
+            CGFloat yDist = (point.y - p.y);
+            CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
+            NSLog(@"两点间的距离为 = %f",distance);
+            if(distance < 20){
+//                [self.delegate lineViewPointSelected:(j+1)];
+                NSLog(@"相当于选中的列数为 = %d",j+1);
+                goto gotoLabel;
+            }
+        }
+    }
+gotoLabel:nil;
+}
+
+
 
 @end
