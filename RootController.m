@@ -180,7 +180,8 @@
 
 #pragma mark --------------------------- 水族灯
 -(void)enterLightFishController{
-    if([AwiseGlobal sharedInstance].deviceArray.count > 0){
+//    if([AwiseGlobal sharedInstance].deviceArray.count > 0)
+    {
         LightFishController *lightCon = [[LightFishController alloc] init];
         lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
         lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:0];

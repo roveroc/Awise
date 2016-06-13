@@ -11,7 +11,7 @@
 #define PI 3.14159265358979323846
 
 @implementation lineView
-
+@synthesize activeIndex;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -71,7 +71,10 @@
                        [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
             int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
             int y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
-            [self drawCrile:x y:y context:currentContext];
+            if(i == self.activeIndex)
+                [self drawCrile:x y:y radius:5 context:currentContext];
+            else
+                [self drawCrile:x y:y radius:3 context:currentContext];
         }
     }
     [[AwiseGlobal sharedInstance].lineArray removeObjectAtIndex:0];
@@ -79,9 +82,9 @@
 }
 
 
-- (void)drawCrile:(int)x y:(int)y context:(CGContextRef)ref{
+- (void)drawCrile:(int)x y:(int)y radius:(int)r context:(CGContextRef)ref{
     //填充圆，无边框
-    CGContextAddArc(ref, x, y, 4, 0, 2*PI, 0); //添加一个圆
+    CGContextAddArc(ref, x, y, r, 0, 2*PI, 0); //添加一个圆
     UIColor*aColor = [UIColor colorWithRed:0. green:1.0 blue:0.1 alpha:1];
     CGContextSetFillColorWithColor(ref, aColor.CGColor);//填充颜色
     CGContextDrawPath(ref, kCGPathFill);//绘制填充

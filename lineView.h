@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface lineView : UIView
+@interface lineView : UIView{
+    int             activeIndex;        //当前编辑的位置
+}
+@property (assign)      int     activeIndex;
 
 
 - (void)roverDraw;

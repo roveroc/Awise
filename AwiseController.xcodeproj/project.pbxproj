@@ -146,6 +146,8 @@
 		97B9C3C31D0E906F001A565A /* TC420_timerData5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C21D0E906F001A565A /* TC420_timerData5.plist */; };
 		97B9C3C51D0E907B001A565A /* TC420_timerData6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C41D0E907B001A565A /* TC420_timerData6.plist */; };
 		97B9C3C71D0E9086001A565A /* TC420_timerData7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C61D0E9086001A565A /* TC420_timerData7.plist */; };
+		97B9C3CC1D0E9180001A565A /* TC420_EditTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9C3CA1D0E9180001A565A /* TC420_EditTimerController.m */; };
+		97B9C3CD1D0E9180001A565A /* TC420_EditTimerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3CB1D0E9180001A565A /* TC420_EditTimerController.xib */; };
 		97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */; };
 		97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */; };
 		97CD48A71D0BF61600A4C87F /* LightCloudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CD48A51D0BF61600A4C87F /* LightCloudyController.m */; };
@@ -367,6 +369,9 @@
 		97B9C3C21D0E906F001A565A /* TC420_timerData5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData5.plist; sourceTree = "<group>"; };
 		97B9C3C41D0E907B001A565A /* TC420_timerData6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData6.plist; sourceTree = "<group>"; };
 		97B9C3C61D0E9086001A565A /* TC420_timerData7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData7.plist; sourceTree = "<group>"; };
+		97B9C3C91D0E9180001A565A /* TC420_EditTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC420_EditTimerController.h; sourceTree = "<group>"; };
+		97B9C3CA1D0E9180001A565A /* TC420_EditTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC420_EditTimerController.m; sourceTree = "<group>"; };
+		97B9C3CB1D0E9180001A565A /* TC420_EditTimerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TC420_EditTimerController.xib; sourceTree = "<group>"; };
 		97C5BD1C1D0A936000D4D6C4 /* TC_MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_MainController.h; sourceTree = "<group>"; };
 		97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_MainController.m; sourceTree = "<group>"; };
 		97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TC_MainController.xib; sourceTree = "<group>"; };
@@ -1050,6 +1055,16 @@
 			name = ModeData;
 			sourceTree = "<group>";
 		};
+		97B9C3C81D0E9128001A565A /* EditTimerController */ = {
+			isa = PBXGroup;
+			children = (
+				97B9C3C91D0E9180001A565A /* TC420_EditTimerController.h */,
+				97B9C3CA1D0E9180001A565A /* TC420_EditTimerController.m */,
+				97B9C3CB1D0E9180001A565A /* TC420_EditTimerController.xib */,
+			);
+			name = EditTimerController;
+			sourceTree = "<group>";
+		};
 		97C5BD1A1D0A92DF00D4D6C4 /* TC420 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,6 +1099,7 @@
 		97CD48A31D0BF5CC00A4C87F /* CustomModeController */ = {
 			isa = PBXGroup;
 			children = (
+				97B9C3C81D0E9128001A565A /* EditTimerController */,
 				97CD48B31D0BFC8C00A4C87F /* CustomModeCell */,
 				97CD48A91D0BF63100A4C87F /* CustomModeController.h */,
 				97CD48AA1D0BF63100A4C87F /* CustomModeController.m */,
@@ -1220,6 +1236,7 @@
 				9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */,
 				97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */,
 				972F72801D000F25008560ED /* MannageCell.xib in Resources */,
+				97B9C3CD1D0E9180001A565A /* TC420_EditTimerController.xib in Resources */,
 				9782ECE01D02739400DA3270 /* lowSpeed.png in Resources */,
 				9782ECE21D02739400DA3270 /* on.png in Resources */,
 				97B9C3BD1D0E904B001A565A /* TC420_timerData2.plist in Resources */,
@@ -1411,6 +1428,7 @@
 				9765211E1CDC2FA400EEEE01 /* DetailEditController.m in Sources */,
 				9765221B1CE076A700EEEE01 /* KZColorPicker.m in Sources */,
 				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
+				97B9C3CC1D0E9180001A565A /* TC420_EditTimerController.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */,
@@ -1536,7 +1554,7 @@
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseChao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1551,7 +1569,7 @@
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseChao;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.AwiseController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

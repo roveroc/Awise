@@ -232,6 +232,7 @@
         NSString *_s = [AwiseGlobal sharedInstance].lineArray[i][0];
         if([_s isEqualToString:_currentS]){
             self.index = i;
+            self.lineview.activeIndex = i;
             break;
         }
     }
@@ -340,6 +341,7 @@
     }
     if(self.isChange == YES){
         self.index --;
+        self.lineview.activeIndex = self.index;
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"had change,do you want to save?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
 //        alert.tag = 1;
 //        alert.delegate = self;
@@ -380,6 +382,7 @@
         [self.datepicker setCountDownDuration:tv];
         [self labelValue];
         self.index --;
+        self.lineview.activeIndex = self.index;
         [self labelValue];
     }
 }
@@ -392,6 +395,7 @@
     }
     if(self.isChange == YES){
         self.index ++;
+        self.lineview.activeIndex = self.index;
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"had change,do you want to save?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
 //        alert.tag = 2;
 //        alert.delegate = self;
@@ -434,6 +438,7 @@
         
         NSLog(@"lineArray lineArray = %@",[AwiseGlobal sharedInstance].lineArray);
         self.index ++;
+        self.lineview.activeIndex = self.index;
         [self labelValue];
     }
 }
