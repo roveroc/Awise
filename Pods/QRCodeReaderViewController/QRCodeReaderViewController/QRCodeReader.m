@@ -91,7 +91,6 @@
 
   [_metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
   [_metadataOutput setMetadataObjectTypes:_metadataObjectTypes];
-    
   [_previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
 }
 

@@ -19,7 +19,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-AwiseController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -34,40 +34,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>XHRadarView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>001903398D8FB09F5A43F8E42050DA4B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>419EDB8B2254E51A0882B66FDBEB3028</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>48F687CDE9990BD471D7883061F7E5D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CD490B6B8C2C00A6F12C2BF479A4206</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8237F90419B78E5E6A9B6D1CDF623AE0</key>
+		<key>88FB9E6B4E9A1643FCCC99644A8C69C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8C371B39E2F0C76A58432982E52077D2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B4F943F2FD64499A1AAC7DE67C3DDC75</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E90B619638E2DB3E4D26FF1FF1F16096</key>
 		<dict>
 			<key>primary</key>
 			<true/>

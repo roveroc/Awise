@@ -93,31 +93,24 @@ static const CGFloat kFontResizingProportion = 0.42f;
         }
     }
     
-    //by rover
-    displayString = (NSMutableString *)string;
-    
     UIColor *backgroundColor = color ? color : [self randomColor];
 
-    //self.image = [self imageSnapshotFromText:[displayString uppercaseString] backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
-    
     //by rover
-    self.image = [self imageSnapshotFromText:displayString backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
+//    self.image = [self imageSnapshotFromText:[displayString uppercaseString] backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
+    
+    self.image = [self imageSnapshotFromText:string backgroundColor:backgroundColor circular:isCircular textAttributes:textAttributes];
 }
 
 #pragma mark - Helpers
 
 - (UIFont *)fontForFontName:(NSString *)fontName {
     
-//    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion;
-
-    //by rover
-    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion/3;
-    
+    CGFloat fontSize = CGRectGetWidth(self.bounds) * kFontResizingProportion;
     if (fontName) {
-        return [UIFont fontWithName:fontName size:fontSize];
+        return [UIFont fontWithName:fontName size:fontSize/3];
     }
     else {
-        return [UIFont systemFontOfSize:fontSize];
+        return [UIFont systemFontOfSize:fontSize/3];
     }
     
 }

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3A5233680796BA1675BA4599'
+               BlueprintIdentifier = '8C371B39E2F0C76A58432982E52077D2'
                BlueprintName = 'EFCircularSlider'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libEFCircularSlider.a'>

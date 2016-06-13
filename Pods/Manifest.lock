@@ -10,7 +10,6 @@ PODS:
   - MBProgressHUD (0.9.2)
   - QRCodeReaderViewController (4.0.1)
   - UIImageView-Letters (1.1.4)
-  - XHRadarView (0.5.0)
 
 DEPENDENCIES:
   - CocoaAsyncSocket
@@ -18,16 +17,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.2)
   - QRCodeReaderViewController (~> 4.0.1)
   - UIImageView-Letters
-  - XHRadarView (from `https://github.com/0x51/XHRadarView.git`)
-
-EXTERNAL SOURCES:
-  XHRadarView:
-    :git: https://github.com/0x51/XHRadarView.git
-
-CHECKOUT OPTIONS:
-  XHRadarView:
-    :commit: 220375d3663d95682a525cb081cbb415213455ce
-    :git: https://github.com/0x51/XHRadarView.git
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
@@ -35,6 +24,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   QRCodeReaderViewController: 6538745c8f4ffa9407a26bd7f9489ea01739e7b0
   UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
-  XHRadarView: 5700ceec75a729669d1ffbedf8f8af61330504e0
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 465385a76c44a418b0ca6ae6ae1176d2e34a6c99
+
+COCOAPODS: 1.0.1
