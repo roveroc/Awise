@@ -70,7 +70,7 @@
     return docPath;
 }
 
-#pragma mark -------------------------------------------------------- 将0/1代表星期的字符串转化成周一、周二等字符串
+#pragma mark ---------------------------------------- 将0/1代表星期的字符串转化成周一、周二等字符串
 - (NSString *)convertWeekDayToString:(NSString *)str{
     NSMutableArray *arr = (NSMutableArray *)[str componentsSeparatedByString:@"&"];
     NSString *weekStr = @"";

@@ -139,6 +139,13 @@
 		97B9C3B51D0E874D001A565A /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9C3B11D0E874D001A565A /* QRCodeReader.m */; };
 		97B9C3B61D0E874D001A565A /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9C3B21D0E874D001A565A /* QRCodeReaderView.m */; };
 		97B9C3B71D0E874D001A565A /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9C3B31D0E874D001A565A /* QRToggleTorchButton.m */; };
+		97B9C3BB1D0E9031001A565A /* TC420_timerData1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3BA1D0E9031001A565A /* TC420_timerData1.plist */; };
+		97B9C3BD1D0E904B001A565A /* TC420_timerData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3BC1D0E904B001A565A /* TC420_timerData2.plist */; };
+		97B9C3BF1D0E9056001A565A /* TC420_timerData3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3BE1D0E9056001A565A /* TC420_timerData3.plist */; };
+		97B9C3C11D0E9064001A565A /* TC420_timerData4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C01D0E9064001A565A /* TC420_timerData4.plist */; };
+		97B9C3C31D0E906F001A565A /* TC420_timerData5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C21D0E906F001A565A /* TC420_timerData5.plist */; };
+		97B9C3C51D0E907B001A565A /* TC420_timerData6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C41D0E907B001A565A /* TC420_timerData6.plist */; };
+		97B9C3C71D0E9086001A565A /* TC420_timerData7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97B9C3C61D0E9086001A565A /* TC420_timerData7.plist */; };
 		97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */; };
 		97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */; };
 		97CD48A71D0BF61600A4C87F /* LightCloudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CD48A51D0BF61600A4C87F /* LightCloudyController.m */; };
@@ -353,6 +360,13 @@
 		97B9C3B11D0E874D001A565A /* QRCodeReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QRCodeReader.m; path = Pods/QRCodeReaderViewController/QRCodeReaderViewController/QRCodeReader.m; sourceTree = "<group>"; };
 		97B9C3B21D0E874D001A565A /* QRCodeReaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderView.m; path = Pods/QRCodeReaderViewController/QRCodeReaderViewController/QRCodeReaderView.m; sourceTree = "<group>"; };
 		97B9C3B31D0E874D001A565A /* QRToggleTorchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QRToggleTorchButton.m; path = Pods/QRCodeReaderViewController/QRCodeReaderViewController/QRToggleTorchButton.m; sourceTree = "<group>"; };
+		97B9C3BA1D0E9031001A565A /* TC420_timerData1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData1.plist; sourceTree = "<group>"; };
+		97B9C3BC1D0E904B001A565A /* TC420_timerData2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData2.plist; sourceTree = "<group>"; };
+		97B9C3BE1D0E9056001A565A /* TC420_timerData3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData3.plist; sourceTree = "<group>"; };
+		97B9C3C01D0E9064001A565A /* TC420_timerData4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData4.plist; sourceTree = "<group>"; };
+		97B9C3C21D0E906F001A565A /* TC420_timerData5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData5.plist; sourceTree = "<group>"; };
+		97B9C3C41D0E907B001A565A /* TC420_timerData6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData6.plist; sourceTree = "<group>"; };
+		97B9C3C61D0E9086001A565A /* TC420_timerData7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TC420_timerData7.plist; sourceTree = "<group>"; };
 		97C5BD1C1D0A936000D4D6C4 /* TC_MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_MainController.h; sourceTree = "<group>"; };
 		97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_MainController.m; sourceTree = "<group>"; };
 		97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TC_MainController.xib; sourceTree = "<group>"; };
@@ -489,7 +503,6 @@
 		9735C01F1CC7832A000B0727 = {
 			isa = PBXGroup;
 			children = (
-				97B9C3B81D0E8768001A565A /* ThridFrameWorkFile */,
 				97965CC21D03F797008DB298 /* Localizable.strings */,
 				9735C0851CC8A2D9000B0727 /* tempFile.h */,
 				9735C0451CC7839F000B0727 /* Podfile */,
@@ -499,6 +512,7 @@
 				9735C07A1CC87F37000B0727 /* ImageSource */,
 				9735C0291CC7832A000B0727 /* Products */,
 				6E996ED8F2B46A5945BB78C2 /* Frameworks */,
+				97B9C3B81D0E8768001A565A /* ThridFrameWorkFile */,
 				9735C0471CC78825000B0727 /* OtherFrameWork */,
 				DADE57639572695862C612A4 /* Pods */,
 			);
@@ -1022,9 +1036,24 @@
 			name = ThridFrameWorkFile;
 			sourceTree = "<group>";
 		};
+		97B9C3B91D0E8FF8001A565A /* ModeData */ = {
+			isa = PBXGroup;
+			children = (
+				97B9C3BA1D0E9031001A565A /* TC420_timerData1.plist */,
+				97B9C3BC1D0E904B001A565A /* TC420_timerData2.plist */,
+				97B9C3BE1D0E9056001A565A /* TC420_timerData3.plist */,
+				97B9C3C01D0E9064001A565A /* TC420_timerData4.plist */,
+				97B9C3C21D0E906F001A565A /* TC420_timerData5.plist */,
+				97B9C3C41D0E907B001A565A /* TC420_timerData6.plist */,
+				97B9C3C61D0E9086001A565A /* TC420_timerData7.plist */,
+			);
+			name = ModeData;
+			sourceTree = "<group>";
+		};
 		97C5BD1A1D0A92DF00D4D6C4 /* TC420 */ = {
 			isa = PBXGroup;
 			children = (
+				97B9C3B91D0E8FF8001A565A /* ModeData */,
 				97CD48A31D0BF5CC00A4C87F /* CustomModeController */,
 				97CD48A21D0BF4E000A4C87F /* Light&CloudyController */,
 				97C5BD1B1D0A92F800D4D6C4 /* MainController */,
@@ -1193,9 +1222,11 @@
 				972F72801D000F25008560ED /* MannageCell.xib in Resources */,
 				9782ECE01D02739400DA3270 /* lowSpeed.png in Resources */,
 				9782ECE21D02739400DA3270 /* on.png in Resources */,
+				97B9C3BD1D0E904B001A565A /* TC420_timerData2.plist in Resources */,
 				9782ECEB1D02746400DA3270 /* device_1.png in Resources */,
 				97F55A561CCB262F00E92957 /* button_nomal.png in Resources */,
 				976522211CE076A700EEEE01 /* pickerColorWheel.png in Resources */,
+				97B9C3C71D0E9086001A565A /* TC420_timerData7.plist in Resources */,
 				97CD48AD1D0BF63100A4C87F /* CustomModeController.xib in Resources */,
 				97F55A661CCB52DE00E92957 /* EditSingleTouchTimerController.xib in Resources */,
 				97651F791CD8B07C00EEEE01 /* 1242x2208.png in Resources */,
@@ -1222,14 +1253,17 @@
 				9782ECDF1D02739400DA3270 /* fastSpeed.png in Resources */,
 				9735C0461CC7839F000B0727 /* Podfile in Resources */,
 				976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */,
+				97B9C3C11D0E9064001A565A /* TC420_timerData4.plist in Resources */,
 				9782ECFA1D02769A00DA3270 /* timerData2.plist in Resources */,
 				97F55A6D1CCB5B7600E92957 /* SingleTouchScene.xib in Resources */,
 				976521341CDC302E00EEEE01 /* MannagerController.xib in Resources */,
 				97128FD11CEEE54B00F58045 /* ManageDeviceController.xib in Resources */,
+				97B9C3BF1D0E9056001A565A /* TC420_timerData3.plist in Resources */,
 				9782ECF91D02769A00DA3270 /* timerData3.plist in Resources */,
 				97F55A5B1CCB2B4600E92957 /* SingleTouchTimerView.xib in Resources */,
 				9782ECED1D02746400DA3270 /* more_1.png in Resources */,
 				9782ECE11D02739400DA3270 /* off.png in Resources */,
+				97B9C3C31D0E906F001A565A /* TC420_timerData5.plist in Resources */,
 				976522151CE076A700EEEE01 /* checkerboard.png in Resources */,
 				97CD48B21D0BFC8600A4C87F /* CustomModeCell.xib in Resources */,
 				976522161CE076A700EEEE01 /* checkerboard@2x.png in Resources */,
@@ -1249,6 +1283,7 @@
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
 				976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */,
 				976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */,
+				97B9C3C51D0E907B001A565A /* TC420_timerData6.plist in Resources */,
 				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
 				97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */,
 				9735C0811CC87F88000B0727 /* Default-667h@2x.png in Resources */,
@@ -1258,6 +1293,7 @@
 				9735C0801CC87F88000B0727 /* Default-568h@2x.png in Resources */,
 				9765213F1CDC3E3300EEEE01 /* orgbtn.png in Resources */,
 				9765210D1CDC2F0500EEEE01 /* SettingController.xib in Resources */,
+				97B9C3BB1D0E9031001A565A /* TC420_timerData1.plist in Resources */,
 				97965CC01D03F797008DB298 /* Localizable.strings in Resources */,
 				976522181CE076A700EEEE01 /* colorPickerKnob@2x.png in Resources */,
 				976521491CDC68E600EEEE01 /* timeLine.png in Resources */,

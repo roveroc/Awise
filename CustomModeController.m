@@ -23,32 +23,26 @@
     
     
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<10; i++) {
-        NSMutableArray *arr;
-        if(i == 0){
-            arr = [[NSMutableArray alloc] initWithObjects:@"1:10",@"20",@"30",@"40", nil];
-        }else if(i == 1){
-            arr = [[NSMutableArray alloc] initWithObjects:@"3:10",@"40",@"11",@"22", nil];
-        }else if(i == 2){
-            arr = [[NSMutableArray alloc] initWithObjects:@"5:10",@"14",@"33",@"55", nil];
-        }else if(i == 3){
-            arr = [[NSMutableArray alloc] initWithObjects:@"10:10",@"64",@"34",@"26", nil];
-        }else if(i == 4){
-            arr = [[NSMutableArray alloc] initWithObjects:@"12:10",@"78",@"45",@"55", nil];
-        }else if(i == 5){
-            arr = [[NSMutableArray alloc] initWithObjects:@"13:10",@"77",@"90",@"55", nil];
-        }else if(i == 6){
-            arr = [[NSMutableArray alloc] initWithObjects:@"15:10",@"88",@"33",@"22", nil];
-        }else{
-            arr = [[NSMutableArray alloc] initWithObjects:@"15:10",@"11",@"65",@"98", nil];
-        }
-        
-        
-        [[AwiseGlobal sharedInstance].lineArray addObject:arr];
-    }
     
+    NSMutableArray *arr1 = [[NSMutableArray alloc]
+                            initWithObjects:@"06:00",@"10",@"20",@"30",@"40",@"90", nil];
+    NSMutableArray *arr2 = [[NSMutableArray alloc]
+                            initWithObjects:@"08:00",@"50",@"60",@"70",@"60",@"50", nil];
+    NSMutableArray *arr3 = [[NSMutableArray alloc]
+                            initWithObjects:@"10:00",@"20",@"40",@"60",@"80",@"10", nil];
+    NSMutableArray *arr4 = [[NSMutableArray alloc]
+                            initWithObjects:@"12:00",@"20",@"40",@"60",@"100",@"20", nil];
+    NSMutableArray *arr5 = [[NSMutableArray alloc]
+                            initWithObjects:@"14:00",@"20",@"40",@"60",@"10",@"50", nil];
+    NSMutableArray *arr6 = [[NSMutableArray alloc]
+                            initWithObjects:@"16:00",@"20",@"40",@"60",@"40",@"80", nil];
     
-    
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr1];
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr2];
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr3];
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr4];
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr5];
+    [[AwiseGlobal sharedInstance].lineArray addObject:arr6];
     
 }
 
@@ -89,12 +83,21 @@
             cell = (UITableViewCell *)[array  objectAtIndex:1];
         else if(iPhone6P)
             cell = (UITableViewCell *)[array  objectAtIndex:2];
+        else
+            cell = (UITableViewCell *)[array  objectAtIndex:0];
         cell.backgroundColor = [UIColor clearColor];
         UIImageView *imgView = [cell viewWithTag:1];
         [imgView  setImageWithString:@"效果1" color:nil circular:YES];
     }
     lineView *line = [[lineView alloc] init];
-    line.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
+    if(iPhone4 || iPhone5)
+        line.frame = CGRectMake(81, 5, 231, 90);
+    else if (iPhone6)
+        line.frame = CGRectMake(81, 5, 286, 90);
+    else if (iPhone6P)
+        line.frame = CGRectMake(81, 5, 325, 90);
+    else
+        line.frame = CGRectMake(81, 5, 231, 90);
     [line setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:line];
     return cell;

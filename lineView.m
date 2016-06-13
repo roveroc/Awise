@@ -42,7 +42,7 @@
         else if (i == 2)
             CGContextSetRGBStrokeColor(currentContext, 0.1, 0.1, 1.0, 1.);
         else if (i == 3)
-            CGContextSetRGBStrokeColor(currentContext, 1.0, 1.0, 1.0, 1.);
+            CGContextSetRGBStrokeColor(currentContext, 0.5, 1.0, 0.2, 1.);
         else if (i == 4)
             CGContextSetRGBStrokeColor(currentContext, 0.1, 0.2, 0.3, 1.);
         else if (i == 5)
