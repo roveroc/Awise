@@ -21,35 +21,35 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21r-bg-eg8">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21r-bg-eg8">
                     <rect key="frame" x="22" y="117" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="G7d-TY-HXq"/>
                         <constraint firstAttribute="width" constant="110" id="wko-wp-pSc"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-64-BVL">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKN-64-BVL">
                     <rect key="frame" x="188" y="117" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="OYF-1H-5gh"/>
                         <constraint firstAttribute="height" constant="110" id="mni-Lr-cGi"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-Uv-K2X">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J8S-Uv-K2X">
                     <rect key="frame" x="22" y="254" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="Jir-6c-B11"/>
                         <constraint firstAttribute="width" constant="110" id="orD-Gp-cAs"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-cL-N8J">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2D-cL-N8J">
                     <rect key="frame" x="188" y="254" width="110" height="110"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="P31-SN-ZPl"/>
                         <constraint firstAttribute="height" constant="110" id="nYr-lH-l2Y"/>
                     </constraints>
                 </imageView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="空空如也、快去添加设备吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-NH-aw3">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="空空如也、快去添加设备吧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-NH-aw3">
                     <rect key="frame" x="29" y="220" width="262" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

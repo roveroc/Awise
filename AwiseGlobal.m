@@ -102,8 +102,17 @@
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
     self.hud.labelText = msg;
-    if(time > HudDismissTime)
+    if(time > HudDismissTime){
         [self.hud hide:YES afterDelay:time];
+//        if(time > 5){
+//            float progress = 0.0f;
+//            while (progress < 1.0f) {
+//                progress += 0.01f;
+//                self.hud.progress = progress;
+//                sleep(50000);
+//            }
+//        }
+    }
     else
         [self.hud hide:YES afterDelay:HudDismissTime];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.hud];
