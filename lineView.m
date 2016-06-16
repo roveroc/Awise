@@ -54,10 +54,13 @@
         for(int j = 0;j<[AwiseGlobal sharedInstance].lineArray.count;j++){
             NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];
-            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
-                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
-            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
-            int y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+//            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
+//                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
+            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/1) +
+            [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue];
+//            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
+            float x = ((self.frame.size.width)/1440.)*time+8;
+            float y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
             //设置开始点位置
             if(j == 0)
                 CGContextMoveToPoint(currentContext,x,y);
@@ -71,10 +74,13 @@
         for(int j = 1;j<[AwiseGlobal sharedInstance].lineArray.count-1;j++){
             NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];
-            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
-                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
-            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
-            int y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+//            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
+//                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
+            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/1) +
+                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue];
+//            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
+            float x = ((self.frame.size.width)/1440.)*time+8;
+            float y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
             if(j == self.activeIndex){
                 UIColor *color = [UIColor colorWithRed:1. green:0.1 blue:0.1 alpha:1];
                 [self drawCrile:x y:y radius:4 color:color context:currentContext];
@@ -92,7 +98,7 @@
 }
 
 //标记一个锚点
-- (void)drawCrile:(int)x y:(int)y radius:(int)r color:(UIColor *)c context:(CGContextRef)ref{
+- (void)drawCrile:(float)x y:(float)y radius:(int)r color:(UIColor *)c context:(CGContextRef)ref{
     //填充圆，无边框
     CGContextAddArc(ref, x, y, r, 0, 2*PI, 0); //添加一个圆
 //    UIColor*aColor = [UIColor colorWithRed:0. green:1.0 blue:0.1 alpha:1];

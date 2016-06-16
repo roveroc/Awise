@@ -176,11 +176,11 @@
     [self.effectImgView setImageWithString:@"自定义效果" color:nil circular:YES];
     [self.cloudyImgView setImageWithString:@"多云效果" color:nil circular:YES];
     
-    self.slider1.transform=CGAffineTransformRotate(self.slider1.transform,270.0/180*M_PI);
-    self.slider2.transform=CGAffineTransformRotate(self.slider2.transform,270.0/180*M_PI);
-    self.slider3.transform=CGAffineTransformRotate(self.slider3.transform,270.0/180*M_PI);
-    self.slider4.transform=CGAffineTransformRotate(self.slider4.transform,270.0/180*M_PI);
-    self.slider5.transform=CGAffineTransformRotate(self.slider5.transform,270.0/180*M_PI);
+    self.slider1.transform = CGAffineTransformRotate(self.slider1.transform,270.0/180*M_PI);
+    self.slider2.transform = CGAffineTransformRotate(self.slider2.transform,270.0/180*M_PI);
+    self.slider3.transform = CGAffineTransformRotate(self.slider3.transform,270.0/180*M_PI);
+    self.slider4.transform = CGAffineTransformRotate(self.slider4.transform,270.0/180*M_PI);
+    self.slider5.transform = CGAffineTransformRotate(self.slider5.transform,270.0/180*M_PI);
     
     [self.view addSubview:self.slider1];
     [self.view addSubview:self.slider2];

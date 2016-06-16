@@ -64,6 +64,9 @@
 @property (nonatomic, retain) UILabel *valueLab4;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *preBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+
 
 - (IBAction)previousFrame:(id)sender;
 - (IBAction)nextFrame:(id)sender;

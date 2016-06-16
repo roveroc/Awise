@@ -25,9 +25,9 @@
     
     self.QRBtn.layer.masksToBounds = YES;
     self.QRBtn.layer.cornerRadius = 10.0;
-    self.QRBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    self.QRBtn.layer.borderColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.].CGColor;
     self.QRBtn.layer.borderWidth = 1.5;
-    self.showBtn.layer.borderColor = [UIColor greenColor].CGColor;
+    self.showBtn.layer.borderColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.].CGColor;
     self.showBtn.layer.borderWidth = 1.5;
     [self.QRBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"add_scanCode"] forState:UIControlStateNormal];
     [self.showBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"add_addRoute"] forState:UIControlStateNormal];

@@ -31,6 +31,9 @@
 "cancel"                =   "Cancel";
 "ok"                    =   "OK";
 
+"updateStatus"          =   "Update";
+"noDeviceMsg"           =   "Empty, add a device it go";
+
 
 //提示文字
 "connecting"            =   "Connecting...";
@@ -49,6 +52,8 @@
 "useSceneFailed"        =   "Fialed";
 "restart"               =   "Please Wait,Device is Restart";
 "delDeviceMsg"          =   "You sure you want to delete this device?";
+
+"updateStatusMsg"       =   "Update device Status";
 
 
 

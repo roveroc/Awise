@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="backImgview" destination="VKm-kl-pSx" id="UQw-Pd-dER"/>
                 <outlet property="datepicker" destination="9nv-a9-JPG" id="q27-UE-D7C"/>
+                <outlet property="nextBtn" destination="7kU-8J-aex" id="QuC-Ne-Lqz"/>
+                <outlet property="preBtn" destination="iRO-Y9-nxc" id="aIe-jq-nR2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,12 +39,13 @@
                 </datePicker>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iRO-Y9-nxc">
                     <rect key="frame" x="7" y="269" width="62" height="30"/>
+                    <color key="backgroundColor" red="0.51868404541583013" green="0.80634407722513091" blue="0.36647691598812321" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Anu-Hu-9Ro"/>
                         <constraint firstAttribute="width" constant="62" id="efJ-P5-v1b"/>
                     </constraints>
-                    <state key="normal" title="Previous" backgroundImage="btnBackimg.png">
-                        <color key="titleColor" red="0.9926412563" green="0.9926412563" blue="0.9926412563" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Previous">
+                        <color key="titleColor" red="0.19269852069790583" green="0.19269852069790583" blue="0.19269852069790583" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -51,12 +54,13 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kU-8J-aex">
                     <rect key="frame" x="253" y="269" width="60" height="30"/>
+                    <color key="backgroundColor" red="0.51868404541583013" green="0.80634407722513091" blue="0.36647691598812321" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="FQj-VX-e51"/>
                         <constraint firstAttribute="width" constant="60" id="M5j-C1-O3v"/>
                     </constraints>
-                    <state key="normal" title="Next" backgroundImage="btnBackimg.png">
-                        <color key="titleColor" red="0.9926412563" green="0.9926412563" blue="0.9926412563" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" red="0.19269852069790583" green="0.19269852069790583" blue="0.19269852069790583" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -86,11 +90,10 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="-838" y="41"/>
+            <point key="canvasLocation" x="-583" y="-96"/>
         </view>
     </objects>
     <resources>
-        <image name="btnBackimg.png" width="136" height="84"/>
         <image name="timeLine.png" width="400" height="42"/>
     </resources>
 </document>

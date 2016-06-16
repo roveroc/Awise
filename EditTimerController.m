@@ -38,6 +38,15 @@
     }
 }
 
+#pragma mark ------------------------------------------------ 界面消失是销毁定时器
+- (void)viewWillDisappear:(BOOL)animated{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self backFun];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -45,8 +54,12 @@
     [[AwiseGlobal sharedInstance] hideTabBar:self];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backFun)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backFun)];
+//    UIBarButtonItem	*leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigatorBackImg.png"]
+//                                                                 style:UIBarButtonItemStyleBordered
+//                                                                target:self
+//                                                                action:@selector(backFun)];
+//    self.navigationItem.leftBarButtonItem = leftItem;
     
     self.navigationItem.title = self.navTitle;
     
@@ -58,20 +71,23 @@
     
     CGRect rect;
     UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [dBtn setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"] forState:UIControlStateNormal];
+    dBtn.layer.cornerRadius = 5;
+    dBtn.layer.masksToBounds = true;
+//    [dBtn setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"] forState:UIControlStateNormal];
+    [dBtn setBackgroundColor:[UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.]];
     [dBtn addTarget:self action:@selector(downDataToDevice) forControlEvents:UIControlEventTouchUpInside];
     [dBtn setTitle:@"DownLoad" forState:UIControlStateNormal];
     if(iPhone4){
-        rect = CGRectMake(10, 230, 300, 160);
+        rect = CGRectMake(0, 230, 300, 160);
         dBtn.frame = CGRectMake(75, 408, 171, 45);
     }
     else if(iPhone5){
-        rect = CGRectMake(10, 230, SCREEN_WIDHT, 260);
+        rect = CGRectMake(0, 230, SCREEN_WIDHT, 260);
         dBtn.frame = CGRectMake(75, 510, 171, 45);
     }
     else{
-        rect = CGRectMake(10, 230, SCREEN_WIDHT, 320);
-        dBtn.frame = CGRectMake(75, 610, 171, 45);
+        rect = CGRectMake(0, 230, SCREEN_WIDHT, 320);
+        dBtn.frame = CGRectMake(75, 600, 171, 45);
     }
     [self.view addSubview:dBtn];
     dBtn.center = CGPointMake(SCREEN_WIDHT/2, dBtn.center.y);
@@ -207,7 +223,7 @@
 - (void)backFun{
     self.hidesBottomBarWhenPushed = NO;
     [[AwiseGlobal sharedInstance].lineArray writeToFile:[self getPlistPath] atomically:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -215,7 +231,7 @@
 - (void)SaveData{
     NSLog(@"保存");
     [[AwiseGlobal sharedInstance].lineArray writeToFile:[self getPlistPath] atomically:YES];
-    [self backFun];
+//    [self backFun];
 }
 
 
@@ -237,10 +253,12 @@
             cell = (UITableViewCell *)[array  objectAtIndex:2];
         cell.backgroundColor = [UIColor clearColor];
         UIButton *editBtn = (UIButton *)[cell viewWithTag:17];
+        editBtn.hidden = YES;
         [editBtn addTarget:self action:@selector(enterEditView:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.tag = indexPath.row;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [cell.contentView setBackgroundColor:[UIColor clearColor]];
     
     NSMutableArray *arr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:indexPath.row];
@@ -264,7 +282,19 @@
     return cell;
 }
 
+#pragma mark ----------------------------------- 进入定时器编辑页面(现在的方式)
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    DetailEditController *detailCon = [[DetailEditController alloc] init];
+    detailCon.navTitle = [self.navTitle stringByAppendingFormat:@"--%d",(int)cell.tag+1];
+    NSMutableArray *tt = [[NSMutableArray alloc] initWithArray:(NSArray *)[[AwiseGlobal sharedInstance].lineArray objectAtIndex:(int)cell.tag]];
+    detailCon.singleArray = [tt mutableCopy];
+    detailCon.index = (int)cell.tag;
+    [self.navigationController pushViewController:detailCon animated:YES];
+}
 
+#pragma mark ----------------------------------- 进入定时器编辑页面(之前的方式)
 - (void)enterEditView:(id)sender{
     UIButton *btn = (UIButton *)sender;
     UITableViewCell *cell;

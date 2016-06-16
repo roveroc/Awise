@@ -7,6 +7,7 @@
 //
 
 #import "CustomModeController.h"
+#import "TC420_EditTimerController.h"
 
 @interface CustomModeController ()
 
@@ -66,6 +67,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
+    [self.navigationController pushViewController:editCon animated:YES];
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格
@@ -90,14 +93,15 @@
         [imgView  setImageWithString:@"效果1" color:nil circular:YES];
     }
     lineView *line = [[lineView alloc] init];
+    line.userInteractionEnabled = NO;
     if(iPhone4 || iPhone5)
-        line.frame = CGRectMake(81, 5, 231, 90);
+        line.frame = CGRectMake(78, 5, 231, 90);
     else if (iPhone6)
-        line.frame = CGRectMake(81, 5, 286, 90);
+        line.frame = CGRectMake(78, 5, 286, 90);
     else if (iPhone6P)
-        line.frame = CGRectMake(81, 5, 325, 90);
+        line.frame = CGRectMake(78, 5, 325, 90);
     else
-        line.frame = CGRectMake(81, 5, 231, 90);
+        line.frame = CGRectMake(78, 5, 231, 90);
     [line setBackgroundColor:[UIColor clearColor]];
     [cell addSubview:line];
     return cell;

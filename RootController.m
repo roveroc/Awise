@@ -76,6 +76,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDeviceLayout) name:@"NeedLayoutDevice"
                                                object:nil];
+    self.remindLabel.text = [[AwiseGlobal sharedInstance] DPLocalizedString:@"noDeviceMsg"];
     if([AwiseGlobal sharedInstance].deviceArray.count == 0){
         self.remindLabel.hidden = NO;
     }

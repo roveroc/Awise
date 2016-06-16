@@ -30,6 +30,8 @@
 "cancel"                =   "取消";
 "ok"                    =   "确定";
 
+"updateStatus"          =   "刷新";
+"noDeviceMsg"           =   "空空如也，快去添加设备吧";
 
 //提示文字
 "connecting"            =   "连接中...";
@@ -49,7 +51,7 @@
 "restart"               =   "请稍后，设备正在重启...";
 "delDeviceMsg"          =   "确定要删除该设备吗?";
 
-
+"updateStatusMsg"       =   "获取设备最新状态";
 
 
 

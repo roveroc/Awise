@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TC420_EditTimerController">
@@ -11,9 +12,117 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="kU9-SN-Yye">
+                    <rect key="frame" x="8" y="150" width="304" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="O5V-dl-RFZ"/>
+                    </constraints>
+                </imageView>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-vl-g7q">
+                    <rect key="frame" x="78" y="195" width="165" height="112"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="112" id="KmI-6F-BQR"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="487755903.74531198">
+                        <!--2016-06-16 07:45:03 +0000-->
+                    </date>
+                </datePicker>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到下一个时间点的变化效果：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxv-h8-w2f">
+                    <rect key="frame" x="12" y="335" width="196" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="PHY-Zb-jfX"/>
+                        <constraint firstAttribute="width" constant="196" id="byQ-ba-rz6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ga1-ZK-aQ1">
+                    <rect key="frame" x="216" y="305" width="41" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="DJF-Xc-g8X"/>
+                        <constraint firstAttribute="width" constant="41" id="sKr-VS-gnG"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="effect_disSelected.png"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-8O-qpm">
+                    <rect key="frame" x="216" y="347" width="41" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="41" id="StX-a8-xvI"/>
+                        <constraint firstAttribute="height" constant="41" id="oOA-Vj-vw9"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="effect_selected.png"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="跳变" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPe-e5-mjS">
+                    <rect key="frame" x="265" y="357" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="HAf-6M-3QF"/>
+                        <constraint firstAttribute="width" constant="42" id="s1a-Yx-qZh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rP-Nu-raR">
+                    <rect key="frame" x="8" y="232" width="62" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GMT-34-Nba"/>
+                        <constraint firstAttribute="width" constant="62" id="qO7-6S-ISi"/>
+                    </constraints>
+                    <state key="normal" title="前一帧"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcG-aa-TdW">
+                    <rect key="frame" x="250" y="232" width="62" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="62" id="89I-Re-Huz"/>
+                        <constraint firstAttribute="height" constant="40" id="DUF-v8-zn5"/>
+                    </constraints>
+                    <state key="normal" title="后一帧"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="渐变" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnN-oE-M8w">
+                    <rect key="frame" x="265" y="315" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="Qvt-1R-6JX"/>
+                        <constraint firstAttribute="height" constant="21" id="tRZ-vE-QS8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="XIK-vl-g7q" firstAttribute="top" secondItem="kU9-SN-Yye" secondAttribute="bottom" constant="5" id="4we-G2-nzH"/>
+                <constraint firstItem="OnN-oE-M8w" firstAttribute="top" secondItem="WcG-aa-TdW" secondAttribute="bottom" constant="43" id="73z-hH-bND"/>
+                <constraint firstAttribute="trailing" secondItem="OnN-oE-M8w" secondAttribute="trailing" constant="13" id="DVl-eg-tb6"/>
+                <constraint firstItem="u9p-8O-qpm" firstAttribute="top" secondItem="Ga1-ZK-aQ1" secondAttribute="bottom" constant="1" id="FFV-7C-A7W"/>
+                <constraint firstItem="kU9-SN-Yye" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="KPa-ae-IUx"/>
+                <constraint firstItem="XIK-vl-g7q" firstAttribute="leading" secondItem="3rP-Nu-raR" secondAttribute="trailing" constant="8" id="Tx7-SX-a2A"/>
+                <constraint firstItem="oxv-h8-w2f" firstAttribute="top" secondItem="XIK-vl-g7q" secondAttribute="bottom" constant="28" id="VMy-CC-XOf"/>
+                <constraint firstAttribute="trailing" secondItem="LPe-e5-mjS" secondAttribute="trailing" constant="13" id="Xq5-JC-TI9"/>
+                <constraint firstItem="3rP-Nu-raR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Y2Q-JP-fPm"/>
+                <constraint firstAttribute="trailing" secondItem="kU9-SN-Yye" secondAttribute="trailing" constant="8" id="YrH-hA-9YM"/>
+                <constraint firstItem="kU9-SN-Yye" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Z8Z-9Q-lXI"/>
+                <constraint firstAttribute="trailing" secondItem="WcG-aa-TdW" secondAttribute="trailing" constant="8" id="Zbx-b4-OBt"/>
+                <constraint firstItem="3rP-Nu-raR" firstAttribute="top" secondItem="kU9-SN-Yye" secondAttribute="bottom" constant="42" id="bjG-XV-mS0"/>
+                <constraint firstItem="oxv-h8-w2f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="ccK-u9-XM2"/>
+                <constraint firstItem="WcG-aa-TdW" firstAttribute="top" secondItem="kU9-SN-Yye" secondAttribute="bottom" constant="42" id="dLv-vH-LFe"/>
+                <constraint firstItem="WcG-aa-TdW" firstAttribute="leading" secondItem="XIK-vl-g7q" secondAttribute="trailing" constant="7" id="gnQ-kb-5hc"/>
+                <constraint firstItem="OnN-oE-M8w" firstAttribute="leading" secondItem="Ga1-ZK-aQ1" secondAttribute="trailing" constant="8" id="j7Z-Xz-e9A"/>
+                <constraint firstItem="Ga1-ZK-aQ1" firstAttribute="top" secondItem="WcG-aa-TdW" secondAttribute="bottom" constant="33" id="p9V-Yg-6Fd"/>
+                <constraint firstItem="LPe-e5-mjS" firstAttribute="top" secondItem="OnN-oE-M8w" secondAttribute="bottom" constant="21" id="qwZ-Ym-W5B"/>
+                <constraint firstItem="LPe-e5-mjS" firstAttribute="leading" secondItem="u9p-8O-qpm" secondAttribute="trailing" constant="8" id="t58-0g-Lje"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="1228" y="360"/>
         </view>
     </objects>
+    <resources>
+        <image name="effect_disSelected.png" width="40" height="40"/>
+        <image name="effect_selected.png" width="40" height="40"/>
+        <image name="timeLine.png" width="400" height="42"/>
+    </resources>
 </document>

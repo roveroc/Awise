@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="640x960.png" translatesAutoresizingMaskIntoConstraints="NO" id="eAT-Se-bZn">
+                <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eAT-Se-bZn">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sHM-3u-esE">
@@ -144,7 +144,4 @@
             <point key="canvasLocation" x="-563" y="493"/>
         </view>
     </objects>
-    <resources>
-        <image name="640x960.png" width="640" height="960"/>
-    </resources>
 </document>

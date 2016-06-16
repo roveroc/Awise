@@ -43,16 +43,33 @@
     slider.maximumValue = 100;
     slider.minimumValue = 0;
     slider.value = 50;
+    slider.minimumTrackTintColor = [UIColor colorWithRed:0x90/255.
+                                                         green:0xee/255.
+                                                          blue:0x90/255.
+                                                         alpha:1.0];
+    slider.maximumTrackTintColor = [UIColor colorWithRed:0xd1/255.
+                                                         green:0xee/255.
+                                                          blue:0xee/255.
+                                                         alpha:1.0];
     [self.view addSubview:slider];
     return slider;
+}
+
+#pragma mark ------------------------------------------------ 界面消失是销毁定时器
+- (void)viewWillDisappear:(BOOL)animated{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self backFun];
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backFun)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleDone target:self action:@selector(backFun)];
+//    self.navigationItem.leftBarButtonItem = leftItem;
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(SaveData)];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -60,6 +77,11 @@
     self.navigationItem.title = navTitle;
     self.fuckFlag = NO;
     self.isChange = NO;
+    
+    self.preBtn.layer.cornerRadius = 5;
+    self.preBtn.layer.masksToBounds = true;
+    self.nextBtn.layer.cornerRadius = 5;
+    self.nextBtn.layer.masksToBounds = true;
     
     self.lineview = [[lineView alloc] init];
     self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
@@ -126,15 +148,6 @@
         re4_2 = CGRectMake(39+(SCREEN_WIDHT-39-56)+8, 526, 46, 21);
     }
     
-    [self.slider1 setMinimumTrackImage:[UIImage imageNamed:@"slider_gray.png"] forState:UIControlStateNormal];
-    [self.slider1 setMinimumTrackImage:[UIImage imageNamed:@"slider_blue.png"] forState:UIControlStateNormal];
-    
-    [self.slider2 setMinimumTrackImage:[UIImage imageNamed:@"slider_gray.png"] forState:UIControlStateNormal];
-    [self.slider2 setMinimumTrackImage:[UIImage imageNamed:@"slider_blue.png"] forState:UIControlStateNormal];
-    
-    [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_gray.png"] forState:UIControlStateNormal];
-    [self.slider3 setMinimumTrackImage:[UIImage imageNamed:@"slider_blue.png"] forState:UIControlStateNormal];
-    
     self.lab1 = [self customLabel:self.lab1 rect:re1 text:@"A:"];
     self.lab2 = [self customLabel:self.lab2 rect:re2 text:@"B:"];
     self.lab3 = [self customLabel:self.lab3 rect:re3 text:@"C:"];
@@ -155,7 +168,6 @@
     self.valueLab3 = [self customLabel:self.valueLab3 rect:re3_2 text:[NSString stringWithFormat:@"%d%%",(int)self.slider3.value]];
 //    self.valueLab4 = [self customLabel:self.valueLab4 rect:re4_2 text:[NSString stringWithFormat:@"%d%%",(int)self.slider4.value]];
 
-    
     [self labelValue];
 }
 
@@ -265,19 +277,23 @@
 #pragma mark - 保存
 - (void)SaveData{
     [AwiseGlobal sharedInstance].freshFlag = YES;
-    [self.navigationController popViewControllerAnimated:YES];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"Had change,do you want to save?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+    alert.tag = 3;
+    alert.delegate = self;
+    [alert show];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 返回
 - (void)backFun{
     if(self.isChange == YES){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"had change,do you want to save?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Save" message:@"Had change,do you want to save?" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Save", nil];
         alert.tag = 3;
         alert.delegate = self;
         [alert show];
     }
     else{
-        [self.navigationController popViewControllerAnimated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

@@ -48,8 +48,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(SaveDataAndBack)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    self.previewBtn.layer.cornerRadius = 5;
+    self.previewBtn.layer.masksToBounds = true;
+    self.downloadBtn.layer.cornerRadius = 5;
+    self.downloadBtn.layer.masksToBounds = true;
+    
+    self.slider.minimumTrackTintColor = [UIColor colorWithRed:0x90/255.
+                                                             green:0xee/255.
+                                                              blue:0x90/255.
+                                                             alpha:1.0];
+    self.slider.maximumTrackTintColor = [UIColor colorWithRed:0xd1/255.
+                                                             green:0xee/255.
+                                                              blue:0xee/255.
+                                                             alpha:1.0];
+    
     [self.startBtn setTitleColor:[UIColor colorWithRed:0.0/255 green:191./255 blue:95.255 alpha:1.0] forState:UIControlStateNormal];
     [self.endBtn   setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     
@@ -203,7 +215,6 @@
 - (IBAction)downloadBtnClicked:(id)sender {
     self.sswitch = 0;
     [[AwiseGlobal sharedInstance] showWaitingView];
-    [self SaveData];
     [self buildDataStruct:NO];
 }
 

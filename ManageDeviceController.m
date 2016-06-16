@@ -81,6 +81,7 @@
         [delBtn setTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_delete"] forState:UIControlStateNormal];
     }
     cell.tag = indexPath.row;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:indexPath.row];
     UILabel *nameLabel = [cell viewWithTag:10];
     nameLabel.text = [deviceInfo objectAtIndex:0];
@@ -247,7 +248,8 @@
         case 0x18:{              //发送账号密码成功
             if(byte[3] == 0x02){
                 [[AwiseGlobal sharedInstance] disMissHUD];
-                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请稍候，控制器正在重启..." time:30.0];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:[[AwiseGlobal sharedInstance] DPLocalizedString:@"restart"]
+                                                                 time:20.0];
                 [self.routeView removeRouteView];
                 //在设备重启的时候，在后台Ping一边局域网
                 [self performSelector:@selector(doScanNetwork) withObject:nil afterDelay:10.0];

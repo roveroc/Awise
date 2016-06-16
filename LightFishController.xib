@@ -52,11 +52,16 @@
                         <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="60P-Jr-fKk"/>
                     </connections>
                 </switch>
-                <button opaque="NO" tag="11" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-rt-S8X">
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SwC-rt-S8X">
                     <rect key="frame" x="8" y="198" width="66" height="30"/>
+                    <color key="backgroundColor" red="0.51828710181171478" green="0.80634407722513091" blue="0.3709421898205657" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4ji-NM-8Am"/>
+                        <constraint firstAttribute="width" constant="66" id="PTW-2A-sFL"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Timer 1">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.17481565590582596" green="0.17720338461471599" blue="0.19709178664921467" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="E6q-hy-4BX"/>
@@ -68,27 +73,22 @@
                         <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="1NQ-es-yHj"/>
                     </connections>
                 </switch>
-                <button opaque="NO" tag="14" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-FR-DQp">
-                    <rect key="frame" x="176" y="198" width="71" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                    <state key="normal" title="Lighting">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="aAf-j6-V7J"/>
-                    </connections>
-                </button>
                 <switch opaque="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uU9-tq-MRb">
                     <rect key="frame" x="85" y="248" width="51" height="31"/>
                     <connections>
                         <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="2po-mA-RYP"/>
                     </connections>
                 </switch>
-                <button opaque="NO" tag="12" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-vK-mEi">
+                <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Epu-vK-mEi">
                     <rect key="frame" x="8" y="249" width="66" height="30"/>
+                    <color key="backgroundColor" red="0.49176391019570692" green="0.80634407722513091" blue="0.34343011187644501" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="lPw-oj-GuH"/>
+                        <constraint firstAttribute="width" constant="66" id="oge-8E-Zyw"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Timer 2">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.17481565590582596" green="0.17720338461471599" blue="0.19709178664921467" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="3IX-qG-fm2"/>
@@ -100,11 +100,16 @@
                         <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="6I1-fd-9H3"/>
                     </connections>
                 </switch>
-                <button opaque="NO" tag="15" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2j-5N-cM1">
+                <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2j-5N-cM1">
                     <rect key="frame" x="176" y="249" width="71" height="30"/>
+                    <color key="backgroundColor" red="0.45490196078431372" green="0.78431372549019607" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="71" id="m2q-zX-jQD"/>
+                        <constraint firstAttribute="height" constant="30" id="xxW-1v-bwF"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Cloudy">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.17481565590582596" green="0.17720338461471599" blue="0.19709178664921467" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="fzR-GR-glv"/>
@@ -116,11 +121,16 @@
                         <action selector="switchOperate:" destination="-1" eventType="valueChanged" id="9sr-za-bVR"/>
                     </connections>
                 </switch>
-                <button opaque="NO" tag="13" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgW-BP-ZQQ">
+                <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgW-BP-ZQQ">
                     <rect key="frame" x="8" y="300" width="66" height="30"/>
+                    <color key="backgroundColor" red="0.48969281490183475" green="0.80634407722513091" blue="0.34641942543883492" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="66" id="PYD-EH-rqI"/>
+                        <constraint firstAttribute="height" constant="30" id="wpm-dg-t5k"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Timer 3">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.17481565590582596" green="0.17720338461471599" blue="0.19709178664921467" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="FYz-j0-Cvr"/>
@@ -154,7 +164,7 @@
                         <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="F75-2Q-JBu"/>
                     </connections>
                 </slider>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPt-Qt-yVn">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPt-Qt-yVn">
                     <rect key="frame" x="271" y="352" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -172,7 +182,7 @@
                         <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="uNY-FZ-bj7"/>
                     </connections>
                 </slider>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wto-kP-8Px">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wto-kP-8Px">
                     <rect key="frame" x="271" y="394" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -190,12 +200,27 @@
                         <action selector="pipeSliderValueChange:" destination="-1" eventType="valueChanged" id="w9c-FP-NMB"/>
                     </connections>
                 </slider>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvj-sQ-ph4">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvj-sQ-ph4">
                     <rect key="frame" x="271" y="436" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-FR-DQp">
+                    <rect key="frame" x="176" y="198" width="71" height="30"/>
+                    <color key="backgroundColor" red="0.47275397883180692" green="0.80634407722513091" blue="0.32955556569309558" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Rtj-Ph-gdq"/>
+                        <constraint firstAttribute="width" constant="71" id="nnT-GG-CMt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Lighting">
+                        <color key="titleColor" red="0.17481565590582596" green="0.17720338461471599" blue="0.19709178664921467" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="modeButtonClicked:" destination="-1" eventType="touchUpInside" id="aAf-j6-V7J"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -251,10 +276,10 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-2929" y="252"/>
+            <point key="canvasLocation" x="-2806" y="289"/>
         </view>
     </objects>
     <resources>
-        <image name="turnOnLight@3x.png" width="320" height="568"/>
+        <image name="turnOnLight@3x.png" width="400" height="42"/>
     </resources>
 </document>

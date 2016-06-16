@@ -28,6 +28,7 @@
 @synthesize sql;
 @synthesize sliderTimer,sliderFlag;
 
+
 - (void)showTabBar{
     if (self.tabBarController.tabBar.hidden == NO)
     {
@@ -43,6 +44,7 @@
     contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - self.tabBarController.tabBar.frame.size.height);
     self.tabBarController.tabBar.hidden = NO;
 }
+
 
 #pragma mark ------------------------------------------------ 重新启动定时器,并断开连接
 - (void)viewWillAppear:(BOOL)animated{
@@ -87,19 +89,73 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }
 
+//当总开关在打开和关闭时，设置Slider的不同颜色
+- (void)IsSwitchShutDwon:(BOOL)flag{
+    if(flag == NO){
+        self.pipe1Slider.minimumTrackTintColor = [UIColor colorWithRed:0x90/255.
+                                                                 green:0xee/255.
+                                                                  blue:0x90/255.
+                                                                 alpha:1.0];
+        self.pipe1Slider.maximumTrackTintColor = [UIColor colorWithRed:0xd1/255.
+                                                                 green:0xee/255.
+                                                                  blue:0xee/255.
+                                                                 alpha:1.0];
+        self.pipe2Slider.minimumTrackTintColor = [UIColor colorWithRed:0x90/255.
+                                                                 green:0xee/255.
+                                                                  blue:0x90/255.
+                                                                 alpha:1.0];
+        self.pipe2Slider.maximumTrackTintColor = [UIColor colorWithRed:0xd1/255.
+                                                                 green:0xee/255.
+                                                                  blue:0xee/255.
+                                                                 alpha:1.0];
+        self.pipe3Slider.minimumTrackTintColor = [UIColor colorWithRed:0x90/255.
+                                                                 green:0xee/255.
+                                                                  blue:0x90/255.
+                                                                 alpha:1.0];
+        self.pipe3Slider.maximumTrackTintColor = [UIColor colorWithRed:0xd1/255.
+                                                                 green:0xee/255.
+                                                                  blue:0xee/255.
+                                                                 alpha:1.0];
+        self.pipe1Label.textColor = [UIColor blackColor];
+        self.pipe2Label.textColor = [UIColor blackColor];
+        self.pipe3Label.textColor = [UIColor blackColor];
+    }else{
+        self.pipe1Slider.minimumTrackTintColor = [UIColor grayColor];
+        self.pipe1Slider.maximumTrackTintColor = [UIColor grayColor];
+        self.pipe2Slider.minimumTrackTintColor = [UIColor grayColor];
+        self.pipe2Slider.maximumTrackTintColor = [UIColor grayColor];
+        self.pipe3Slider.minimumTrackTintColor = [UIColor grayColor];
+        self.pipe3Slider.maximumTrackTintColor = [UIColor grayColor];
+        self.pipe1Label.textColor = [UIColor grayColor];
+        self.pipe2Label.textColor = [UIColor grayColor];
+        self.pipe3Label.textColor = [UIColor grayColor];
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.title = @"Light";
-    
-    //进入设备管理页，搜索设备、添加到路由器等功能
-//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Device" style:UIBarButtonItemStyleDone target:self action:@selector(gotoDeviceManagerController)];
-//    self.navigationItem.rightBarButtonItem = rightItem;
+    self.title = [self.deviceInfo objectAtIndex:0];   //顶部标题名
     
     //刷新读取设备时间
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"refresh" style:UIBarButtonItemStyleDone target:self action:@selector(refreshStatus)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatus"]
+                                                                 style:UIBarButtonItemStyleDone
+                                                                target:self
+                                                                action:@selector(refreshStatus)];
     self.navigationItem.rightBarButtonItem = leftItem;
+    
+    self.timer1Button.layer.cornerRadius = 5;
+    self.timer1Button.layer.masksToBounds = true;
+    self.timer2Button.layer.cornerRadius = 5;
+    self.timer2Button.layer.masksToBounds = true;
+    self.timer3Button.layer.cornerRadius = 5;
+    self.timer3Button.layer.masksToBounds = true;
+    self.cloudyButton.layer.cornerRadius = 5;
+    self.cloudyButton.layer.masksToBounds = true;
+    self.lightingButton.layer.cornerRadius = 5;
+    self.lightingButton.layer.masksToBounds = true;
     
 //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
@@ -221,7 +277,8 @@
 #pragma mark ---------------------------------------------- 连接设备成功
 - (void)TCPSocketConnectSuccess{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"获取设备最新状态"];
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
     //每次软件启动时，自动同步时间至设备
     [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
     //获取设备状态值
@@ -232,7 +289,7 @@
 
 #pragma mark --------------------------------------------- 获取最新的设备状态值
 - (void)refreshStatus{
-    [[AwiseGlobal sharedInstance] showWaitingView];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
     [self getDeviceStatus];
 }
 
@@ -296,10 +353,12 @@
     if (byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x01){          //开指令：成功
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
         [AwiseGlobal sharedInstance].isClosed = NO;
+        [self IsSwitchShutDwon:NO];
     }
     else if(byte[2] == 0x04 && byte[3] == 0x01 && byte[5] == 0x00){      //关指令：成功
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
         [AwiseGlobal sharedInstance].isClosed = YES;
+        [self IsSwitchShutDwon:YES];
     }
     else if(byte[2] == 0x06 && byte[3] == 0x01){
         if([AwiseGlobal sharedInstance].cMode == AP){
@@ -383,15 +442,17 @@
     }
 }
 
-#pragma mark ---------------------------------------------------- 一秒后默认设备状态读取完毕
+#pragma mark ---------------------------------------------------- 设备状态读取完毕
 - (void)getDeviceStatusFinished{
     if([AwiseGlobal sharedInstance].switchStatus == 0x00){
         [AwiseGlobal sharedInstance].isClosed = YES;
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOffLight@3x.png"] forState:UIControlStateNormal];
+        [self IsSwitchShutDwon:YES];
     }
     else{
         [AwiseGlobal sharedInstance].isClosed = NO;
         [self.switchButton setBackgroundImage:[UIImage imageNamed:@"turnOnLight@3x.png"] forState:UIControlStateNormal];
+        [self IsSwitchShutDwon:NO];
     }
 //得到设备返回的时间、暂时没用到
 //    NSString *hStr;
