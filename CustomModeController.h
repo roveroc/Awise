@@ -12,12 +12,11 @@
 #import "CustomModeCell.h"
 #import <UIImageView+Letters.h>
 
-@interface CustomModeController : UIViewController<
-                                                    UITableViewDelegate,
-                                                    UITableViewDataSource>{
-    
+@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+    NSMutableArray      *timerData;
     
 }
+@property (nonatomic, retain) NSMutableArray        *timerData;         //7个定时器的数据
 
 @property (weak, nonatomic) IBOutlet UITableView *modeTableView;
 

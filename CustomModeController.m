@@ -14,6 +14,7 @@
 @end
 
 @implementation CustomModeController
+@synthesize timerData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,30 +23,57 @@
     self.modeTableView.delegate   = self;
     self.modeTableView.dataSource = self;
     
+    [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] init];
     
-    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
+    NSString *path1 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData1.plist"];
+    NSString *path2 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData2.plist"];
+    NSString *path3 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData3.plist"];
+    NSString *path4 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData4.plist"];
+    NSString *path5 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData5.plist"];
+    NSString *path6 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData6.plist"];
+    NSString *path7 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData7.plist"];
     
-    NSMutableArray *arr1 = [[NSMutableArray alloc]
-                            initWithObjects:@"06:00",@"10",@"20",@"30",@"40",@"90", nil];
-    NSMutableArray *arr2 = [[NSMutableArray alloc]
-                            initWithObjects:@"08:00",@"50",@"60",@"70",@"60",@"50", nil];
-    NSMutableArray *arr3 = [[NSMutableArray alloc]
-                            initWithObjects:@"10:00",@"20",@"40",@"60",@"80",@"10", nil];
-    NSMutableArray *arr4 = [[NSMutableArray alloc]
-                            initWithObjects:@"12:00",@"20",@"40",@"60",@"100",@"20", nil];
-    NSMutableArray *arr5 = [[NSMutableArray alloc]
-                            initWithObjects:@"14:00",@"20",@"40",@"60",@"10",@"50", nil];
-    NSMutableArray *arr6 = [[NSMutableArray alloc]
-                            initWithObjects:@"16:00",@"20",@"40",@"60",@"40",@"80", nil];
+    NSMutableArray *tempArr1 = [[NSMutableArray alloc] initWithContentsOfFile:path1];
+    NSMutableArray *tempArr2 = [[NSMutableArray alloc] initWithContentsOfFile:path2];
+    NSMutableArray *tempArr3 = [[NSMutableArray alloc] initWithContentsOfFile:path3];
+    NSMutableArray *tempArr4 = [[NSMutableArray alloc] initWithContentsOfFile:path4];
+    NSMutableArray *tempArr5 = [[NSMutableArray alloc] initWithContentsOfFile:path5];
+    NSMutableArray *tempArr6 = [[NSMutableArray alloc] initWithContentsOfFile:path6];
+    NSMutableArray *tempArr7 = [[NSMutableArray alloc] initWithContentsOfFile:path7];
+    if(tempArr1 == nil){
+        tempArr1 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr2 == nil){
+        tempArr2 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr3 == nil){
+        tempArr3 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr4 == nil){
+        tempArr4 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr5 == nil){
+        tempArr5 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr6 == nil){
+        tempArr6 = [[NSMutableArray alloc] init];
+    }
+    if(tempArr7 == nil){
+        tempArr7 = [[NSMutableArray alloc] init];
+    }
     
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr1];
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr2];
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr3];
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr4];
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr5];
-    [[AwiseGlobal sharedInstance].lineArray addObject:arr6];
+    self.timerData = [[NSMutableArray alloc] initWithObjects:tempArr1,
+                                                             tempArr2,
+                                                             tempArr3,
+                                                             tempArr4,
+                                                             tempArr5,
+                                                             tempArr6,
+                                                             tempArr7, nil];
+    
+    
     
 }
+
 
 
 #pragma mark ------------------------------------------------ 返回分组数
@@ -92,18 +120,28 @@
         UIImageView *imgView = [cell viewWithTag:1];
         [imgView  setImageWithString:@"效果1" color:nil circular:YES];
     }
-    lineView *line = [[lineView alloc] init];
-    line.userInteractionEnabled = NO;
-    if(iPhone4 || iPhone5)
-        line.frame = CGRectMake(78, 5, 231, 90);
-    else if (iPhone6)
-        line.frame = CGRectMake(78, 5, 286, 90);
-    else if (iPhone6P)
-        line.frame = CGRectMake(78, 5, 325, 90);
-    else
-        line.frame = CGRectMake(78, 5, 231, 90);
-    [line setBackgroundColor:[UIColor clearColor]];
-    [cell addSubview:line];
+    UIImageView *imgview = (UIImageView *)[cell viewWithTag:10];
+    UILabel *msgLabel    = (UILabel *)[cell viewWithTag:100];
+    [AwiseGlobal sharedInstance].singleTouchTimerArray = [self.timerData objectAtIndex:indexPath.row];
+    if([AwiseGlobal sharedInstance].singleTouchTimerArray != nil && [AwiseGlobal sharedInstance].singleTouchTimerArray.count > 0){
+        imgview.hidden = NO;
+        msgLabel.hidden = YES;
+        lineView *line = [[lineView alloc] init];
+        line.userInteractionEnabled = NO;
+        if(iPhone4 || iPhone5)
+            line.frame = CGRectMake(78, 5, 231, 90);
+        else if (iPhone6)
+            line.frame = CGRectMake(78, 5, 286, 90);
+        else if (iPhone6P)
+            line.frame = CGRectMake(78, 5, 325, 90);
+        else
+            line.frame = CGRectMake(78, 5, 231, 90);
+        [line setBackgroundColor:[UIColor clearColor]];
+        [cell addSubview:line];
+    }else{
+        msgLabel.hidden = NO;
+        imgview.hidden = YES;
+    }
     return cell;
 }
 

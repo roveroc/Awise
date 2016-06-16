@@ -14,15 +14,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="F9p-Mk-hjw">
+                    <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="F9p-Mk-hjw">
                         <rect key="frame" x="81" y="95" width="231" height="28"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZBv-JI-HvY">
                         <rect key="frame" x="8" y="30" width="65" height="65"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="点击设置效果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJr-iA-bdF">
+                        <rect key="frame" x="76" y="20" width="236" height="84"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <color key="textColor" red="0.28344853836076173" green="0.74639423076923084" blue="0.28338596751467365" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="199" y="72.5"/>
+            <point key="canvasLocation" x="333" y="69.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="180" id="j02-Z7-XJE" customClass="CustomModeCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
@@ -31,12 +37,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="fSy-OL-xWf">
+                    <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="fSy-OL-xWf">
                         <rect key="frame" x="81" y="92" width="286" height="30"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NW7-Pn-D1t">
                         <rect key="frame" x="8" y="30" width="65" height="65"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="点击设置效果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3I-03-FKw">
+                        <rect key="frame" x="81" y="22" width="278" height="81"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <color key="textColor" red="0.41985988241017325" green="0.71428285256410251" blue="0.39009493493641789" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
             <point key="canvasLocation" x="360.5" y="236.5"/>
@@ -48,15 +60,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="OoG-Qc-Efz">
+                    <imageView userInteractionEnabled="NO" tag="10" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="timeLine.png" translatesAutoresizingMaskIntoConstraints="NO" id="OoG-Qc-Efz">
                         <rect key="frame" x="81" y="93" width="325" height="30"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-XH-gUA">
                         <rect key="frame" x="8" y="30" width="65" height="65"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="点击设置效果" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7V-Cp-BNE">
+                        <rect key="frame" x="81" y="24" width="325" height="76"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                        <color key="textColor" red="0.40151424587971829" green="0.71428285256410251" blue="0.3401785209900986" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="360" y="407.5"/>
+            <point key="canvasLocation" x="380" y="413.5"/>
         </tableViewCell>
     </objects>
     <resources>

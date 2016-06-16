@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TC420_EditTimerController : UIViewController{
+@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate>{
     NSMutableArray          *timerInfoArray;
     UIScrollView            *sliderScroll;
     
@@ -50,6 +50,23 @@
 @property (nonatomic, retain) UILabel               *value_label3;
 @property (nonatomic, retain) UILabel               *value_label4;
 @property (nonatomic, retain) UILabel               *value_label5;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *timeLineImgview;
+@property (weak, nonatomic) IBOutlet UIButton *preBtn;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UILabel *effectMsgLabel;
+@property (weak, nonatomic) IBOutlet UIButton *effect1Btn;
+@property (weak, nonatomic) IBOutlet UILabel *effect1Label;
+@property (weak, nonatomic) IBOutlet UIButton *effcct2Btn;
+@property (weak, nonatomic) IBOutlet UILabel *effect2Label;
+
+- (IBAction)preBtnClicked:(id)sender;
+- (IBAction)nextBtnClicked:(id)sender;
+- (IBAction)effect1BtnClicked:(id)sender;
+- (IBAction)effected2BtnClicked:(id)sender;
+
 
 
 @end

@@ -60,7 +60,8 @@
             [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue];
 //            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
             float x = ((self.frame.size.width)/1440.)*time+8;
-            float y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+//            float y = self.frame.size.height - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+            float y = self.frame.size.height - self.frame.size.height/100.*[[tempArr objectAtIndex:i+1] intValue]+4;
             //设置开始点位置
             if(j == 0)
                 CGContextMoveToPoint(currentContext,x,y);
@@ -80,7 +81,8 @@
                        [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue];
 //            int x = (int)(((SCREEN_WIDHT-26)*time)/288.);//(int)((300*time)/288.);
             float x = ((self.frame.size.width)/1440.)*time+8;
-            float y = 95 - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+//            float y = self.frame.size.height - [[tempArr objectAtIndex:i+1] intValue]*90/100.;
+            float y = self.frame.size.height - self.frame.size.height/100.*[[tempArr objectAtIndex:i+1] intValue]+4;
             if(j == self.activeIndex){
                 UIColor *color = [UIColor colorWithRed:1. green:0.1 blue:0.1 alpha:1];
                 [self drawCrile:x y:y radius:4 color:color context:currentContext];

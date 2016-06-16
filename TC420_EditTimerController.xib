@@ -7,6 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TC420_EditTimerController">
             <connections>
+                <outlet property="datePicker" destination="XIK-vl-g7q" id="27z-Lb-QL5"/>
+                <outlet property="effcct2Btn" destination="u9p-8O-qpm" id="Tno-06-aZE"/>
+                <outlet property="effect1Btn" destination="Ga1-ZK-aQ1" id="cbV-sQ-gic"/>
+                <outlet property="effect1Label" destination="OnN-oE-M8w" id="a4J-6b-mDn"/>
+                <outlet property="effect2Label" destination="LPe-e5-mjS" id="3Bh-p7-4RW"/>
+                <outlet property="effectMsgLabel" destination="oxv-h8-w2f" id="qzT-Ri-RUh"/>
+                <outlet property="nextBtn" destination="WcG-aa-TdW" id="4xc-PH-s9J"/>
+                <outlet property="preBtn" destination="3rP-Nu-raR" id="3nG-fq-7cJ"/>
+                <outlet property="timeLineImgview" destination="kU9-SN-Yye" id="1kU-1Z-mOz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,6 +56,9 @@
                         <constraint firstAttribute="width" constant="41" id="sKr-VS-gnG"/>
                     </constraints>
                     <state key="normal" backgroundImage="effect_disSelected.png"/>
+                    <connections>
+                        <action selector="effect1BtnClicked:" destination="-1" eventType="touchUpInside" id="sGr-rg-73w"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-8O-qpm">
                     <rect key="frame" x="216" y="347" width="41" height="41"/>
@@ -55,6 +67,9 @@
                         <constraint firstAttribute="height" constant="41" id="oOA-Vj-vw9"/>
                     </constraints>
                     <state key="normal" backgroundImage="effect_selected.png"/>
+                    <connections>
+                        <action selector="effected2BtnClicked:" destination="-1" eventType="touchUpInside" id="c8H-qQ-3wM"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="跳变" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPe-e5-mjS">
                     <rect key="frame" x="265" y="357" width="42" height="21"/>
@@ -68,19 +83,31 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rP-Nu-raR">
                     <rect key="frame" x="8" y="232" width="62" height="40"/>
+                    <color key="backgroundColor" red="0.47954539828568477" green="0.80634407722513091" blue="0.33680561878713366" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="GMT-34-Nba"/>
                         <constraint firstAttribute="width" constant="62" id="qO7-6S-ISi"/>
                     </constraints>
-                    <state key="normal" title="前一帧"/>
+                    <state key="normal" title="前一帧">
+                        <color key="titleColor" red="0.084247758394395217" green="0.14166058363538736" blue="0.05917086995077158" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="preBtnClicked:" destination="-1" eventType="touchUpInside" id="bNn-KB-8v0"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcG-aa-TdW">
                     <rect key="frame" x="250" y="232" width="62" height="40"/>
+                    <color key="backgroundColor" red="0.47954539828568477" green="0.80634407722513091" blue="0.33680561878713366" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="62" id="89I-Re-Huz"/>
                         <constraint firstAttribute="height" constant="40" id="DUF-v8-zn5"/>
                     </constraints>
-                    <state key="normal" title="后一帧"/>
+                    <state key="normal" title="后一帧">
+                        <color key="titleColor" red="0.084247758394395217" green="0.14166058363538736" blue="0.05917086995077158" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="nextBtnClicked:" destination="-1" eventType="touchUpInside" id="vA3-4R-Lfa"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="渐变" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OnN-oE-M8w">
                     <rect key="frame" x="265" y="315" width="42" height="21"/>
@@ -117,7 +144,7 @@
                 <constraint firstItem="LPe-e5-mjS" firstAttribute="leading" secondItem="u9p-8O-qpm" secondAttribute="trailing" constant="8" id="t58-0g-Lje"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1228" y="360"/>
+            <point key="canvasLocation" x="1566" y="433"/>
         </view>
     </objects>
     <resources>
