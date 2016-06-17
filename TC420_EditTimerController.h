@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "lineView.h"
 
 @interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate>{
     NSMutableArray          *timerInfoArray;
@@ -29,6 +30,11 @@
     UILabel                 *value_label3;
     UILabel                 *value_label4;
     UILabel                 *value_label5;
+    
+    lineView                *lView;
+    
+    int                     currentIndex;
+    int                     totalIndex;
 }
 @property (nonatomic, retain) NSMutableArray        *timerInfoArray;      //定时器数据
 @property (nonatomic, retain) UIScrollView          *sliderScroll;        //放Slider
@@ -50,6 +56,11 @@
 @property (nonatomic, retain) UILabel               *value_label3;
 @property (nonatomic, retain) UILabel               *value_label4;
 @property (nonatomic, retain) UILabel               *value_label5;
+
+@property (nonatomic, retain) lineView              *lView;
+
+@property (assign)            int                   currentIndex;          //当前帧索引     （峰值=48）
+@property (assign)            int                   totalIndex;            //当前添加的总帧数（峰值=48）
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *timeLineImgview;

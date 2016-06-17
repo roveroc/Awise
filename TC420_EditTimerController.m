@@ -20,6 +20,8 @@
 @synthesize slider1,slider2,slider3,slider4,slider5;
 @synthesize value_label1,value_label2,value_label3,value_label4,value_label5;
 @synthesize sliderScroll;
+@synthesize currentIndex,totalIndex;
+@synthesize lView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,6 +34,21 @@
     self.effect2Label.userInteractionEnabled = YES;
     [self.effect1Label addGestureRecognizer:tap1];
     [self.effect2Label addGestureRecognizer:tap2];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(saveData)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    [self.datePicker addTarget:self action:@selector(dateChange:)forControlEvents:UIControlEventValueChanged];
+}
+
+#pragma mark ----------------------------------------- datePicker时间
+- (void)dateChange:(UIDatePicker *)picker{
+    
+}
+
+#pragma mark ----------------------------------------- 保存编辑的数据
+- (void)saveData{
+    
 }
 
 #pragma mark ----------------------------------------- 自定义初始化Label
@@ -76,7 +93,7 @@
     self.value_label1 = [self customLabel:self.value_label1 rect:CGRectMake(SCREEN_WIDHT-45, y, 40, 20)         text:@"100%"];
     
     self.label2       = [self customLabel:self.label2       rect:CGRectMake(10, y+temp, 20, 20) text:@"B:"];
-    self.slider2      = [self customSlider:self.slider2     rect:CGRectMake(35, y-5+temp, SCREEN_WIDHT-90, 30)  tag:3];
+    self.slider2      = [self customSlider:self.slider2     rect:CGRectMake(35, y-5+temp, SCREEN_WIDHT-90, 30)  tag:2];
     self.value_label2 = [self customLabel:self.value_label2 rect:CGRectMake(SCREEN_WIDHT-45, y+temp, 40, 20)    text:@"100%"];
     
     self.label3       = [self customLabel:self.label3       rect:CGRectMake(10, y+temp*2, 20, 20) text:@"C:"];
@@ -118,10 +135,35 @@
     self.nextBtn.layer.masksToBounds = true;
     
     //添加时间曲线时间轴
-    lineView *line = [[lineView alloc] init];
-    line.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
-    [line setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:line];
+    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
+    if(self.timerInfoArray.count > 0){
+        [AwiseGlobal sharedInstance].lineArray = self.timerInfoArray;
+        self.totalIndex   = (int)[AwiseGlobal sharedInstance].lineArray.count;
+        self.currentIndex = 0;
+    }else{
+        self.totalIndex   = 1;
+        self.currentIndex = 0;
+        NSString *timeStr = [[AwiseGlobal sharedInstance] getCurrentTime];
+        NSMutableArray *tempArr = [[NSMutableArray alloc] initWithObjects:timeStr,@"10",@"20",@"30",@"40",@"50", nil];
+        [self.timerInfoArray addObject:tempArr];
+        [AwiseGlobal sharedInstance].lineArray = self.timerInfoArray;
+    }
+    self.title = [NSString stringWithFormat:@"(%d/%d)",currentIndex+1,self.totalIndex];
+    
+    self.lView = [[lineView alloc] init];
+    self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
+    [self.lView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.lView];
+}
+
+- (void)reloadLineview{
+    if(self.lView != nil){
+        [self.lView removeFromSuperview];
+        self.lView = [[lineView alloc] init];
+        self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
+        [self.lView setBackgroundColor:[UIColor clearColor]];
+        [self.view addSubview:self.lView];
+    }
 }
 
 #pragma mark ----------------------------------------- Slider值发生变化
@@ -148,10 +190,12 @@
             self.value_label5.text = [NSString stringWithFormat:@"%d%%",value];
         }
             break;
-            
         default:
             break;
     }
+    NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:self.currentIndex];
+    [tempArr replaceObjectAtIndex:slider.tag withObject:[NSString stringWithFormat:@"%d",value]];
+    [self reloadLineview];
 }
 
 - (void)didReceiveMemoryWarning {

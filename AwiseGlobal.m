@@ -224,8 +224,20 @@
     con.tabBarController.tabBar.hidden = YES;
 }
 
+#pragma mark -------------------------------------------------------- 获取当前时间
+- (NSString *)getCurrentTime{
+    NSDateFormatter *dateFormatter4 =[[NSDateFormatter alloc] init];
+    [dateFormatter4 setDateFormat:@"HH"];
+    int hhstr = [[dateFormatter4 stringFromDate:[NSDate date]] intValue];
+    
+    NSDateFormatter *dateFormatter5 =[[NSDateFormatter alloc] init];
+    [dateFormatter5 setDateFormat:@"mm"];
+    int mmstr = [[dateFormatter5 stringFromDate:[NSDate date]] intValue];
 
+    return [NSString stringWithFormat:@"%d:%d",hhstr,mmstr];
+}
 
+#pragma mark -------------------------------------------------------- 国际化
 - (NSString *)DPLocalizedString:(NSString *)translation_key {
     
     NSString * s = NSLocalizedString(translation_key, nil);

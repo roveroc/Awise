@@ -186,6 +186,8 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 
 - (NSString *)DPLocalizedString:(NSString *)translation_key;           //国际化文字
 
+- (NSString *)getCurrentTime;                                          //获取当前时间：返回当前时分字符串
+
 /*******水族等部分********/
 - (NSString *)currentWifiSSID;          //获取连接WIFI的账号
 - (NSString *)getCurrentWifiSSID;       //获取连接WIFI的账号

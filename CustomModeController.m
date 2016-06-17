@@ -96,6 +96,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
+    editCon.timerInfoArray = [self.timerData objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:editCon animated:YES];
 }
 
