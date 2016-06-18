@@ -25,7 +25,7 @@
     self.music_PlayPauseBtn.enabled = NO;
     self.preBtn.enabled  = NO;
     self.nextBtn.enabled = NO;
-    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.08
+    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.03
                                                        target:self
                                                      selector:@selector(getPowerValue)
                                                      userInfo:nil

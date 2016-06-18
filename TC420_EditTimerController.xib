@@ -46,7 +46,7 @@
                         <constraint firstAttribute="width" constant="196" id="byQ-ba-rz6"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ga1-ZK-aQ1">
@@ -78,7 +78,7 @@
                         <constraint firstAttribute="width" constant="42" id="s1a-Yx-qZh"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rP-Nu-raR">
@@ -97,7 +97,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WcG-aa-TdW">
                     <rect key="frame" x="250" y="232" width="62" height="40"/>
-                    <color key="backgroundColor" red="0.47954539828568477" green="0.80634407722513091" blue="0.33680561878713366" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.47246409785140786" green="0.80634407722513091" blue="0.33645857317230227" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="62" id="89I-Re-Huz"/>
                         <constraint firstAttribute="height" constant="40" id="DUF-v8-zn5"/>
@@ -116,7 +116,7 @@
                         <constraint firstAttribute="height" constant="21" id="tRZ-vE-QS8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

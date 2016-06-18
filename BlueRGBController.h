@@ -50,6 +50,11 @@
     //music part
     NSMutableArray          *ipodMusicArray;
     MusicView               *mview;
+    
+    BOOL                    isTouchPicker;
+    int                     rValue;
+    int                     gValue;
+    int                     bValue;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -81,6 +86,9 @@
 @property (nonatomic, retain) NSMutableArray        *BLE_DeviceArray;        //周围设备集合
 @property (nonatomic, retain) UITableView           *deviceTable;            //设备列表
 @property (assign)            int                   selectDeviceIndex;       //控制的设备序号
-
+@property (assign)            BOOL                  isTouchPicker;           //调光？模式
+@property (assign)            int                   rValue;
+@property (assign)            int                   gValue;
+@property (assign)            int                   bValue;           
 
 @end

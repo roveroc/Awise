@@ -39,6 +39,8 @@
 @synthesize BLE_DeviceArray;
 @synthesize deviceTable;
 @synthesize selectDeviceIndex;
+@synthesize isTouchPicker;
+@synthesize rValue,gValue,bValue;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -58,6 +60,7 @@
     self.speedValue = 100;
     self.lightValue = 100;
     self.modeValue  = 10;
+    self.modeValue  = 1;
     //间隔取值
     self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
     [self.touchTimer fire];
@@ -213,7 +216,7 @@
         return;
     }
     for (CBService *service in peripheral.services){
-        NSLog(@"发现外设的服务号为------> %@",service.UUID);
+        NSLog(@"发现外设的服务号为 ------> %@",service.UUID);
         //发现服务
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_ISSC_PROPRIETARY_SERVICE]]){
             [self.connectPeripheral discoverCharacteristics:nil forService:service];     //读取服务上的特征
@@ -362,9 +365,15 @@
 - (void)sendMusicVoiceData:(int)value{
     Byte by[4];
     by[0] = 2;
-    by[1] = self.modeValue;
-    by[2] = value;
-    by[3] = self.speedValue;
+    if(self.modeValue > 7){
+        by[1] = self.modeValue;
+        by[2] = self.lightValue;
+        by[3] = 10+value/(100/20);
+    }else{
+        by[1] = self.modeValue;
+        by[2] = value;
+        by[3] = self.speedValue;
+    }
     NSData *da = [[NSData alloc] initWithBytes:by length:4];
     [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
 }
@@ -442,7 +451,6 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-//            [self.onOffButton setTitle:@"开" forState:UIControlStateNormal];
             [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"on.png"]
                                         forState:UIControlStateNormal];
         }else{
@@ -454,7 +462,6 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-//            [self.onOffButton setTitle:@"关" forState:UIControlStateNormal];
             [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                         forState:UIControlStateNormal];
         }
@@ -463,15 +470,20 @@
 
 #pragma mark ----------------------------------- 亮度值改变
 - (void)lightSliderValueChange:(UISlider *)slider{
-    self.lightValue = (int)slider.value;
-    [self sendModeData];
+    if(self.touchFlag == YES){
+        self.touchFlag = NO;
+        self.lightValue = (int)slider.value;
+        [self sendModeData];
+    }
 }
 
 #pragma mark ----------------------------------- 模式速度改变
 - (void)modeSliderValueChange:(UISlider *)slider{
-    self.speedValue = 30-(int)slider.value;
-    [self sendModeData];
-    NSLog(@"速度值 == %d",self.speedValue);
+    if(self.touchFlag == YES){
+        self.touchFlag = NO;
+        self.speedValue = 30-(int)slider.value;
+        [self sendModeData];
+    }
 }
 
 #pragma mark ----------------------------------- 多少组
@@ -486,6 +498,7 @@
 
 #pragma mark ----------------------------------- 选中某一行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    self.isTouchPicker = NO;
     self.modeValue = (int)row+1;
     [self sendModeData];
     if((int)row > 6){
@@ -509,6 +522,7 @@
 
 #pragma mark ----------------------------------- 颜色改变
 - (void)pickerChanged:(KZColorPicker *)cp{
+    self.isTouchPicker = YES;
     self.PlayPauseButton.enabled = NO;
     self.modeSlider.enabled = NO;
     self.selectedColor = cp.selectedColor;
@@ -517,14 +531,14 @@
             self.touchFlag = NO;
             NSString *RGBValue = [NSString stringWithFormat:@"%@",self.selectedColor];
             NSArray *arr = [RGBValue componentsSeparatedByString:@" "];
-            int r = [[arr objectAtIndex:1] floatValue]*100;
-            int g = [[arr objectAtIndex:2] floatValue]*100;
-            int b = [[arr objectAtIndex:3] floatValue]*100;
+            self.rValue = [[arr objectAtIndex:1] floatValue]*100;
+            self.gValue = [[arr objectAtIndex:2] floatValue]*100;
+            self.bValue = [[arr objectAtIndex:3] floatValue]*100;
             Byte by[4];
             by[0] = 1;
-            by[1] = r;
-            by[2] = g;
-            by[3] = b;
+            by[1] = self.rValue;
+            by[2] = self.gValue;
+            by[3] = self.bValue;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
         }
@@ -539,14 +553,23 @@
 #pragma mark ----------------------------------- 发送模式数据
 - (void)sendModeData{
     if(self.character != nil){
-        Byte by[4];
-        by[0] = 2;
-        by[1] = self.modeValue;
-        by[2] = self.lightValue;
-        by[3] = self.speedValue;
-        NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-        
+        if(self.isTouchPicker == NO){
+            Byte by[4];
+            by[0] = 2;
+            by[1] = self.modeValue;
+            by[2] = self.lightValue;
+            by[3] = self.speedValue;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        }else{
+            Byte by[4];
+            by[0] = 1;
+            by[1] = (self.rValue/100.)*self.lightValue;
+            by[2] = (self.gValue/100.)*self.lightValue;
+            by[3] = (self.bValue/100.)*self.lightValue;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        }
     }
 }
 
