@@ -14,7 +14,7 @@
 #import "ASValueTrackingSlider.h"
 #import "MusicView.h"
 
-@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate>{
+@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource,MusicDelegate>{
     KZColorPicker           *colorPicker;
     UIColor                 *selectedColor;
     CBCentralManager        *centralManager;
@@ -27,6 +27,9 @@
     ASValueTrackingSlider   *modeSlider;
     NSMutableArray          *modeArray;
     
+    NSMutableArray          *BLE_DeviceArray;
+    UITableView             *deviceTable;
+    int                     selectDeviceIndex;
     
     //by rover
     BOOL touchFlag;
@@ -74,5 +77,10 @@
 
 @property (nonatomic, retain) NSMutableArray        *ipodMusicArray;         //music数组
 @property (nonatomic, retain) MusicView             *mview;                  //播放音乐时的定时器
+
+@property (nonatomic, retain) NSMutableArray        *BLE_DeviceArray;        //周围设备集合
+@property (nonatomic, retain) UITableView           *deviceTable;            //设备列表
+@property (assign)            int                   selectDeviceIndex;       //控制的设备序号
+
 
 @end

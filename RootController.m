@@ -155,12 +155,21 @@
     NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
     NSString *deviceType = [deviceInfo objectAtIndex:5];
     if([deviceType isEqualToString:@"Awise_WIFI_Fish"]){
-        LightFishController *lightCon = [[LightFishController alloc] init];
+//        LightFishController *lightCon = [[LightFishController alloc] init];
+//        lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+//        lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
+//        [self.navigationController pushViewController:lightCon animated:YES];
+        
+        BlueRGBController *blueCon = [[BlueRGBController alloc] init];
+        [self.navigationController pushViewController:blueCon animated:YES];
+        
+        
+    }else if ([deviceType isEqualToString:@"Awise_WIFI_Touch"]){
+        SingleTouchController *lightCon = [[SingleTouchController alloc] init];
         lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
         lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
         [self.navigationController pushViewController:lightCon animated:YES];
-    }else if ([deviceType isEqualToString:@"Awise_WIFI_SingleTouch"]){
-        
+
     }else if([deviceType isEqualToString:@"Awise_Bule_RGB"]){
         
     }

@@ -33,22 +33,37 @@
      *
      *六个字段：name,mac,AP_ip,STA_ip,model,description
      */
+    //连接设备部分
     [AwiseGlobal sharedInstance].delegate = self;
-    [AwiseGlobal sharedInstance].tcpSocket.devicePort = @"333";
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
     if([AwiseGlobal sharedInstance].cMode == AP){
-        if(self.deviceInfo.count > 0){
+        //AP模式下，先检查设备的WIFI连接是否对应
+        NSString *macStr = [[[[AwiseGlobal sharedInstance].wifiSSID componentsSeparatedByString:@"-"] lastObject] lowercaseStringWithLocale:[NSLocale currentLocale]];
+        if([[deviceInfo objectAtIndex:1] rangeOfString:macStr].location != NSNotFound){
             [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+            [[AwiseGlobal sharedInstance].tcpSocket
+             connectToDevice:[deviceInfo objectAtIndex:2]
+             port:[deviceInfo objectAtIndex:3]];
+        }else{
+            [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectDeviceFirst"]
+                                               withTime:2.0];
         }
     }
     else if([AwiseGlobal sharedInstance].cMode == STA){
         if(self.deviceInfo.count > 0){
-            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:3];
-            [[AwiseGlobal sharedInstance] pingIPisOnline:[AwiseGlobal sharedInstance].tcpSocket.deviceIP];
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connecting"]];
+            //如果是STA模式，首先尝试建立连接看设备在线或IP发生变化
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:4];
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[self.deviceInfo objectAtIndex:4] port:[self.deviceInfo objectAtIndex:3]];
+            //连接设备超时
+            [self performSelector:@selector(connectDeviceTimeout) withObject:nil afterDelay:2.0];
         }
     }else{
-//        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备无连接" withTime:2.0];
+        [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"noWifi"] withTime:1.2];
     }
+
     
     //初始化定时器数据
     NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:AwiseSingleTouchTimer];
@@ -85,6 +100,12 @@
 
 }
 
+#pragma mark ------------------------------------------------ 连接设备超时 -- 超时
+- (void)connectDeviceTimeout{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectTimeout"]];
+    [[AwiseGlobal sharedInstance] scanNetwork];
+}
 
 #pragma mark ------------------------------------------------ Ping IP 地址的回调
 - (void)ipIsOnline:(BOOL)result{
@@ -126,31 +147,48 @@
 
 #pragma mark ------------------------------------------------ 扫描局域网完成
 - (void)scanNetworkFinish{
+    [[AwiseGlobal sharedInstance] disMissHUD];
     NSLog(@" ------- 扫描到的ARP表 ------- ");
-    NSMutableDictionary *arpDic = [[AwiseGlobal sharedInstance] getARPTable];
-    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpDic);
-//    NSString *newIp = [arpDic objectForKey:[self.deviceInfo objectAtIndex:3]];
-    //更新数据库
-//    self.sql = [[RoverSqlite alloc] init];
-//    if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
-//        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
-//        [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
-//        if([AwiseGlobal sharedInstance].tcpSocket == nil ||
-//           [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != SingleTouchDevice){
-//            [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
-//            [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
-//        }
-//        [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
-//        [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
-//        [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = SingleTouchDevice;      //受控设备为触摸面板
-//        [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
-//                                                           port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
-//    }
+    NSMutableArray *arpArray = [[AwiseGlobal sharedInstance] getARPTable];
+    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpArray);
+    NSString *temp = [self.deviceInfo objectAtIndex:1];
+    if([arpArray containsObject:temp]){
+        int index = (int)[arpArray indexOfObject:temp];
+        NSString *newIp = [arpArray objectAtIndex:index+1];
+        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+        //更新数据库
+        self.sql = [[RoverSqlite alloc] init];
+        if([self.sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+            [AwiseGlobal sharedInstance].deviceArray = [self.sql getAllDeviceInfomation];   //获取所有已添加设备信息
+            NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice;
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+        }
+    }else{
+        NSLog(@"确保设备正常工作");
+    }
 }
 
-#pragma mark ------------------------------------------------ 连接设备成功
+#pragma mark ---------------------------------------------- 连接设备成功
 - (void)TCPSocketConnectSuccess{
-
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
+    //每次软件启动时，自动同步时间至设备
+    [self performSelector:@selector(syncTime) withObject:nil afterDelay:0.2];
+    //获取设备状态值
+    [self performSelector:@selector(readStatus) withObject:nil afterDelay:0.8];
 }
 
 
@@ -391,28 +429,25 @@
             bt[11]  = 0;        //数据值
             tbSlider.angle = 0;
             self.percentLabel.text = [NSString stringWithFormat:@"%d%%",0];
-            [self performSelector:@selector(syncTime) withObject:nil afterDelay:.1];
         }
             break;
         case 2:{
             bt[11]  = 50;       //数据值
             tbSlider.angle = 180;
             self.percentLabel.text = [NSString stringWithFormat:@"%d%%",50];
-            [self performSelector:@selector(readStatus) withObject:nil afterDelay:.3];
         }
             break;
         case 3:{
             bt[11]  = 100;      //数据值
             tbSlider.angle = 360;
             self.percentLabel.text = [NSString stringWithFormat:@"%d%%",bt[11]];
-            [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
         }
             break;
         default:
             break;
     }
-//    self.percentLabel.text = [NSString stringWithFormat:@"%d%%",bt[11]];
-//    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
+    self.percentLabel.text = [NSString stringWithFormat:@"%d%%",bt[11]];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
 
@@ -480,8 +515,15 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bt length:20];
 }
 
+#pragma mark ---------------------------------------------------- 数据返回超时
+- (void)dataBackTimeOut{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+}
+
+
 #pragma mark ---------------------------------------------------- 处理单色触摸面板返回的数据
 - (void)dataBackFormDevice:(Byte *)byte{
+    [[AwiseGlobal sharedInstance] disMissHUD];
     switch (byte[2]) {
         case 0x01:              //读取状态返回值
         {

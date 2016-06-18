@@ -70,7 +70,7 @@
                 <constraint firstItem="21r-bg-eg8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.72" id="xnE-gs-cc8"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-502" y="313"/>
+            <point key="canvasLocation" x="-828" y="356"/>
         </view>
     </objects>
 </document>

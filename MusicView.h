@@ -10,7 +10,13 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface MusicView : UIView<UITableViewDelegate,UITableViewDataSource,AVAudioPlayerDelegate>{
+@protocol MusicDelegate <NSObject>
+
+- (void)sendMusicVoiceData:(int)value;
+
+@end
+
+@interface MusicView : UIView<UITableViewDelegate,UITableViewDataSource,AVAudioPlayerDelegate,MusicDelegate>{
     NSMutableArray              *musicArray;
     int                         musicLength;
     int                         musicCurrentIndex;
@@ -18,6 +24,7 @@
     NSTimer                     *musicTimer;
     NSTimer                     *labelTimer;
     UIView                      *waveView;
+    id<MusicDelegate>           delegate;
 }
 
 @property (nonatomic, retain) NSMutableArray            *musicArray;   //音乐数据源数组
@@ -27,6 +34,7 @@
 @property (nonatomic, retain) NSTimer                   *musicTimer;   //获取音乐声音大小的定时器
 @property (nonatomic, retain) NSTimer                   *labelTimer;   //计算播放时间
 @property (nonatomic, retain) UIView                    *waveView;     //显示音量大小的动态View
+@property (nonatomic, retain) id<MusicDelegate>         delegate;
 
 @property (weak, nonatomic) IBOutlet UITableView *musicListView;
 @property (weak, nonatomic) IBOutlet UISlider *timeSlider;

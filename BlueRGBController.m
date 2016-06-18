@@ -36,7 +36,9 @@
 @synthesize touchTimer;
 @synthesize ipodMusicArray;
 @synthesize mview;
-
+@synthesize BLE_DeviceArray;
+@synthesize deviceTable;
+@synthesize selectDeviceIndex;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -51,6 +53,7 @@
     [super viewDidLoad];
     
     self.title = @"Bule";
+    self.selectDeviceIndex = -1;
     // Do any additional setup after loading the view from its nib.
     self.speedValue = 100;
     self.lightValue = 100;
@@ -59,10 +62,14 @@
     self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
     [self.touchTimer fire];
     
-    UIBarButtonItem	*leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"fastSpeed.png"]
+    UIBarButtonItem	*leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navigatorBackImg.png"]
                                                                style:UIBarButtonItemStyleBordered
                                                               target:self
                                                               action:@selector(goBack)];
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"切换" style:UIBarButtonItemStyleDone target:self action:@selector(initDeviceTable)];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
 //    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
 //    [button setBackgroundColor:[UIColor greenColor]];
 //    [button setImage:[UIImage imageNamed:@"fastSpeed.png"] forState:UIControlStateNormal];
@@ -80,6 +87,7 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
     self.dataArray = [[NSMutableArray alloc] init];
+    self.BLE_DeviceArray = [[NSMutableArray alloc] init];
     self.centralManager = [[CBCentralManager alloc]
                            initWithDelegate:self queue:dispatch_get_main_queue()];
     self.modeArray = [[NSMutableArray alloc] initWithObjects:
@@ -130,7 +138,13 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     NSLog(@"CBCentralManager             = %@",central);
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"搜索链接设备中..."];
     [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
+    [self performSelector:@selector(dissMissHUD) withObject:nil afterDelay:2.0];
+}
+
+- (void)dissMissHUD{
+    [[AwiseGlobal sharedInstance] disMissHUD];
 }
 
 #pragma mark ----------------------------------------------- 自定义返回按钮事件
@@ -156,6 +170,7 @@
 - (void)removeMview{
     [self.view addSubview:mview];
     [mview removeFromSuperview];
+    mview.delegate = nil;
     mview = nil;
 }
 
@@ -168,14 +183,19 @@
     NSLog(@"CBPeripheral        = %@",peripheral);
     NSLog(@"advertisementData   = %@",advertisementData);
     NSLog(@"RSSI RSSI           = %@",RSSI);
+
     
 //    if([peripheral.name  isEqualToString:BLE_SERVICE_NAME])
     if([advertisementData[@"kCBAdvDataLocalName"]  isEqualToString:BLE_SERVICE_NAME])
     {
-        self.connectPeripheral = peripheral;
-        self.connectPeripheral.delegate = self;
-        [self.centralManager connectPeripheral:peripheral
+        if(self.connectPeripheral == nil){
+            self.connectPeripheral = peripheral;
+            self.connectPeripheral.delegate = self;
+            [self.centralManager connectPeripheral:peripheral
                                        options:nil];
+        }
+        self.selectDeviceIndex = 0;
+        [self.BLE_DeviceArray addObject:peripheral];
     }
 }
 
@@ -214,6 +234,15 @@
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"FFFA"]]) {
             self.character = characteristic;
             [self.connectPeripheral setNotifyValue:YES forCharacteristic:characteristic];
+            [[AwiseGlobal sharedInstance] disMissHUD];
+            if(self.deviceTable != nil){
+                [UIView beginAnimations:@"animation" context:nil];
+                //动画时长
+                [UIView setAnimationDuration:0.2];
+                self.deviceTable.alpha = 0.0;
+                //动画结束
+                [UIView commitAnimations];
+            }
         }
     }
 }
@@ -304,8 +333,8 @@
     self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
 //速度值滑条
     self.modeSlider = [[ASValueTrackingSlider alloc] init];
-    self.modeSlider.minimumValue = 0;
-    self.modeSlider.maximumValue = 20;
+    self.modeSlider.minimumValue = 10;
+    self.modeSlider.maximumValue = 30;
     self.modeSlider.popUpViewCornerRadius = 12.0;
     [self.modeSlider setMaxFractionDigitsDisplayed:0];
     self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
@@ -327,6 +356,17 @@
     [self.backScrollView bringSubviewToFront:self.modeSlider];
     [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+}
+
+#pragma mark ----------------------------------- 发送音乐播放时的值
+- (void)sendMusicVoiceData:(int)value{
+    Byte by[4];
+    by[0] = 2;
+    by[1] = self.modeValue;
+    by[2] = value;
+    by[3] = self.speedValue;
+    NSData *da = [[NSData alloc] initWithBytes:by length:4];
+    [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
 }
 
 #pragma mark ----------------------------------- 关闭
@@ -360,6 +400,7 @@
 - (void)showMusicView{
     NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"MusicView" owner:nil options:nil];
     mview = [nibView objectAtIndex:0];
+    mview.delegate = self;
     mview.frame = self.view.frame;
     mview.alpha = 0.0;
     mview.musicArray = self.ipodMusicArray;
@@ -428,8 +469,9 @@
 
 #pragma mark ----------------------------------- 模式速度改变
 - (void)modeSliderValueChange:(UISlider *)slider{
-    self.speedValue = (int)slider.value;
+    self.speedValue = 30-(int)slider.value;
     [self sendModeData];
+    NSLog(@"速度值 == %d",self.speedValue);
 }
 
 #pragma mark ----------------------------------- 多少组
@@ -519,6 +561,109 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+/***********************************************************************/
+/***************************搜索到的设备列表*******************************/
+/***********************************************************************/
+#pragma mark ----------------------------------------------- 显示设备列表，切换设备
+- (void)initDeviceTable{
+    if(self.deviceTable == nil){
+        self.deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 58, SCREEN_WIDHT, SCREEN_HEIGHT-58-44)];
+        self.deviceTable.delegate   = self;
+        self.deviceTable.dataSource = self;
+        self.deviceTable.alpha = 0.0;
+        [UIView beginAnimations:@"animation" context:nil];
+        //动画时长
+        [UIView setAnimationDuration:0.2];
+        self.deviceTable.alpha = 1.0;
+        //动画结束
+        [UIView commitAnimations];
+        [self.view addSubview:self.deviceTable];
+    }else{
+        if(self.deviceTable.alpha == 0.0){
+            [UIView beginAnimations:@"animation" context:nil];
+            //动画时长
+            [UIView setAnimationDuration:0.2];
+            self.deviceTable.alpha = 1.0;
+            //动画结束
+            [UIView commitAnimations];
+        }else{
+            [UIView beginAnimations:@"animation" context:nil];
+            //动画时长
+            [UIView setAnimationDuration:0.2];
+            self.deviceTable.alpha = 0.0;
+            //动画结束
+            [UIView commitAnimations];
+        }
+    }
+}
+
+#pragma mark ------------------------------------------------ 返回分组数
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+#pragma mark ------------------------------------------------ 返回每组行数
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.BLE_DeviceArray.count;
+}
+
+#pragma mark ------------------------------------------------ 行高
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 70.;
+}
+
+#pragma mark ------------------------------------------------ 点击行
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.selectDeviceIndex == indexPath.row)
+        return ;
+    self.selectDeviceIndex = (int)indexPath.row;
+    CBPeripheral *heral = [self.BLE_DeviceArray objectAtIndex:indexPath.row];
+    self.connectPeripheral = heral;
+    self.connectPeripheral.delegate = self;
+    [self.centralManager connectPeripheral:heral
+                                   options:nil];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"链接设备中..."];
+    [self.deviceTable reloadData];
+}
+
+#pragma mark ------------------------------------------------ 返回每行的单元格
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIdentifier = @"tableCell";
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell){
+        cell = [[UITableViewCell alloc] init];
+    }
+    if(self.selectDeviceIndex == indexPath.row){
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else{
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    cell.imageView.image=[UIImage imageNamed:@"aboutUs.png"];
+    CGSize itemSize = CGSizeMake(40, 40);
+    UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+    CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+    [cell.imageView.image drawInRect:imageRect];
+    cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    CBPeripheral *heral = [self.BLE_DeviceArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = heral.name;
+    return cell;
+}
+
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]){
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]){
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]){
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 @end

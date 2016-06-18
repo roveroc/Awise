@@ -15,6 +15,7 @@
 @synthesize labelTimer;
 @synthesize musicCurrentIndex;
 @synthesize waveView;
+@synthesize delegate;
 
 - (void)drawRect:(CGRect)rect {
     self.musicListView.delegate   = self;
@@ -24,7 +25,7 @@
     self.music_PlayPauseBtn.enabled = NO;
     self.preBtn.enabled  = NO;
     self.nextBtn.enabled = NO;
-    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.05
+    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.08
                                                        target:self
                                                      selector:@selector(getPowerValue)
                                                      userInfo:nil
@@ -70,6 +71,10 @@
         currentTimeStr = [NSString stringWithFormat:@"0%d:0%d",min_1,sen_1];
     }
     self.time1Label.text = currentTimeStr;
+    
+    self.timeSlider.minimumValue = 0.0;
+    self.timeSlider.maximumValue = self.mPlayer.duration;
+    self.timeSlider.value = self.mPlayer.currentTime;
 }
 
 #pragma mark ------------------------------------------------ 返回分组数
@@ -203,13 +208,11 @@
         //    float value1 = [self.mPlayer averagePowerForChannel:0];
         //    NSLog(@"value1 == %f",value1);
         float value2 = [self.mPlayer averagePowerForChannel:1];
-        NSLog(@"value2 == %f",self.mPlayer.currentTime);
-        int height = (int)(10 * (30-fabsf(value2)));
-        //    float value3 = [self.mPlayer peakPowerForChannel:0];
-        //    NSLog(@"value3 == %f",value3);
-        //    float value4 = [self.mPlayer peakPowerForChannel:1];
-        //    NSLog(@"value4 == %f",value4);
-       self.waveView.frame = CGRectMake(0, self.musicListView.frame.origin.x+self.musicListView.frame.size.height+50, height, 20);
+        float height = (float)(10 * (30-fabsf(value2)));
+        self.waveView.frame = CGRectMake(0, self.musicListView.frame.origin.x+self.musicListView.frame.size.height+50, height, 20);
+        int value = 100-(int)((100*(fabsf(value2)))/30.);
+        NSLog(@"value4 == %d",value);
+        [self.delegate sendMusicVoiceData:value];
     }
 }
 
