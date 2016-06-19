@@ -185,8 +185,9 @@
     self.slider1      = [self customSlider:self.slider1     rect:CGRectMake(30, y-5, SCREEN_WIDHT-90-60, 30)       tag:1];
     self.value_label1 = [self customLabel:self.value_label1 rect:CGRectMake(SCREEN_WIDHT-55-60, y, 40, 20)         text:@"100%"];
     self.swi1         = [self customDVSwtich:self.swi1      rect:CGRectMake(SCREEN_WIDHT-80, y-2, 70, 24)];
+    __block TC420_EditTimerController* weakSelf = self;
     [self.swi1 setPressedHandler:^(NSUInteger index) {
-        NSLog(@"switch 111 to index: %lu", (unsigned long)index);
+        [weakSelf.currentFrameArray replaceObjectAtIndex:6 withObject:[NSString stringWithFormat:@"%d",(int)index]];
     }];
     
     self.label2       = [self customLabel:self.label2       rect:CGRectMake(10, y+temp, 20, 20) text:@"B:"];
@@ -194,7 +195,7 @@
     self.value_label2 = [self customLabel:self.value_label2 rect:CGRectMake(SCREEN_WIDHT-55-60, y+temp, 40, 20)    text:@"100%"];
     self.swi2         = [self customDVSwtich:self.swi2      rect:CGRectMake(SCREEN_WIDHT-80, y-2+temp, 70, 24)];
     [self.swi2 setPressedHandler:^(NSUInteger index) {
-        NSLog(@"switch 222 to index: %lu", (unsigned long)index);
+        [weakSelf.currentFrameArray replaceObjectAtIndex:7 withObject:[NSString stringWithFormat:@"%d",(int)index]];
     }];
     
     self.label3       = [self customLabel:self.label3       rect:CGRectMake(10, y+temp*2, 20, 20) text:@"C:"];
@@ -202,7 +203,7 @@
     self.value_label3 = [self customLabel:self.value_label3 rect:CGRectMake(SCREEN_WIDHT-55-60, y+temp*2, 40, 20)   text:@"100%"];
     self.swi3         = [self customDVSwtich:self.swi3      rect:CGRectMake(SCREEN_WIDHT-80, y-2+temp*2, 70, 24)];
     [self.swi3 setPressedHandler:^(NSUInteger index) {
-        NSLog(@"switch 333 to index: %lu", (unsigned long)index);
+        [weakSelf.currentFrameArray replaceObjectAtIndex:8 withObject:[NSString stringWithFormat:@"%d",(int)index]];
     }];
     
     self.label4       = [self customLabel:self.label4       rect:CGRectMake(10, y+temp*3, 20, 20) text:@"D:"];
@@ -210,7 +211,7 @@
     self.value_label4 = [self customLabel:self.value_label4 rect:CGRectMake(SCREEN_WIDHT-55-60, y+temp*3, 40, 20)   text:@"100%"];
     self.swi4         = [self customDVSwtich:self.swi4      rect:CGRectMake(SCREEN_WIDHT-80, y-2+temp*3, 70, 24)];
     [self.swi4 setPressedHandler:^(NSUInteger index) {
-        NSLog(@"switch 444 to index: %lu", (unsigned long)index);
+        [weakSelf.currentFrameArray replaceObjectAtIndex:9 withObject:[NSString stringWithFormat:@"%d",(int)index]];
     }];
     
     self.label5       = [self customLabel:self.label5       rect:CGRectMake(10, y+temp*4, 20, 20) text:@"E:"];
@@ -218,8 +219,16 @@
     self.value_label5 = [self customLabel:self.value_label5 rect:CGRectMake(SCREEN_WIDHT-55-60, y+temp*4, 40, 20)   text:@"100%"];
     self.swi5         = [self customDVSwtich:self.swi5      rect:CGRectMake(SCREEN_WIDHT-80, y-2+temp*4, 70, 24)];
     [self.swi5 setPressedHandler:^(NSUInteger index) {
-        NSLog(@"switch 555 to index: %lu", (unsigned long)index);
+        [weakSelf.currentFrameArray replaceObjectAtIndex:10 withObject:[NSString stringWithFormat:@"%d",(int)index]];
     }];
+    
+    UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    dBtn.layer.cornerRadius = 5;
+    dBtn.layer.masksToBounds = true;
+    [dBtn setBackgroundColor:[UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.]];
+    [dBtn addTarget:self action:@selector(deleteCurrentFrame) forControlEvents:UIControlEventTouchUpInside];
+    [dBtn setTitle:@"删除当前时间点" forState:UIControlStateNormal];
+    dBtn.frame = CGRectMake(10, self.swi5.frame.origin.y+46, SCREEN_WIDHT-20, 40);
     
     [self.view addSubview:self.sliderScroll];
     [self.sliderScroll addSubview:self.label1];
@@ -247,7 +256,7 @@
     [self.sliderScroll addSubview:self.value_label5];
     [self.sliderScroll addSubview:self.swi5];
     
-    
+    [self.sliderScroll addSubview:dBtn];
     
     self.preBtn.layer.cornerRadius = 5;
     self.preBtn.layer.masksToBounds = true;
@@ -285,19 +294,25 @@
         self.value_label3.text = [NSString stringWithFormat:@"%@%%",tempArr[3]];
         self.value_label4.text = [NSString stringWithFormat:@"%@%%",tempArr[4]];
         self.value_label5.text = [NSString stringWithFormat:@"%@%%",tempArr[5]];
-        [self.swi1 selectIndex:[tempArr[5] intValue] animated:NO];
-        [self.swi2 selectIndex:[tempArr[6] intValue] animated:NO];
-        [self.swi3 selectIndex:[tempArr[7] intValue] animated:NO];
-        [self.swi4 selectIndex:[tempArr[8] intValue] animated:NO];
-        [self.swi5 selectIndex:[tempArr[9] intValue] animated:NO];
+        [self.swi1 selectIndex:[tempArr[6] intValue] animated:NO];
+        [self.swi2 selectIndex:[tempArr[7] intValue] animated:NO];
+        [self.swi3 selectIndex:[tempArr[8] intValue] animated:NO];
+        [self.swi4 selectIndex:[tempArr[9] intValue] animated:NO];
+        [self.swi5 selectIndex:[tempArr[10] intValue] animated:NO];
     }
     self.title = [NSString stringWithFormat:@"(%d/%d)",currentIndex+1,self.totalIndex];
     
     self.lView = [[lineView alloc] init];
     self.lView.delegate = self;
+    self.lView.activeIndex = self.currentIndex+1;
     self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
     [self.lView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.lView];
+}
+
+#pragma mark ----------------------------------------- 删除当前帧
+- (void)deleteCurrentFrame{
+    
 }
 
 #pragma mark ----------------------------------------- 刷新lineview
@@ -307,6 +322,7 @@
         self.lView.delegate = nil;
         self.lView = [[lineView alloc] init];
         self.lView.delegate = self;
+        self.lView.activeIndex = self.currentIndex+1;
         self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
         [self.lView setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview:self.lView];
@@ -358,6 +374,8 @@
     self.currentIndex --;
     self.title = [NSString stringWithFormat:@"(%d/%d)",self.currentIndex+1,totalIndex];
     self.currentFrameArray = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:self.currentIndex];
+    [self reloadLineview];
+    [self layoutFrameData];
 }
 
 #pragma mark ----------------------------------------- 后一帧 （点击时，如果小于48帧，则相当于插入帧）
@@ -367,9 +385,13 @@
         return;
     }
     if(self.currentIndex+1 == self.totalIndex){
-        int tValue = (currentIndex+2)*30;
-        if(tValue == 30)
-            tValue = 60;
+        NSMutableArray *temp = [self.timerInfoArray objectAtIndex:self.currentIndex];
+        NSString *preTime = [temp objectAtIndex:0];
+        int old_tv = [[preTime componentsSeparatedByString:@":"][0] intValue]*60 +
+                     [[preTime componentsSeparatedByString:@":"][1] intValue];
+        int tValue = old_tv + 20;  //在当前的基础上加10分钟
+        if(tValue > 24*60)
+            tValue = 24*60;
         int hour = tValue/60;
         int minute = tValue%60;
         NSString *timeStr = [NSString stringWithFormat:@"%d:%d",hour,minute];
@@ -388,7 +410,6 @@
         NSString *s5 = [NSString stringWithFormat:@"%d",(int)self.swi5.selectedIndex];
         NSMutableArray *tempArr = [[NSMutableArray alloc] initWithObjects:timeStr,v1,v2,v3,v4,v5,s1,s2,s3,s4,s5, nil];
         [self.timerInfoArray addObject:tempArr];
-        [self reloadLineview];
         self.totalIndex ++;
         self.currentIndex ++;
         self.title = [NSString stringWithFormat:@"(%d/%d)",self.currentIndex+1,totalIndex];
@@ -398,6 +419,8 @@
         self.title = [NSString stringWithFormat:@"(%d/%d)",self.currentIndex+1,totalIndex];
         self.currentFrameArray = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:self.currentIndex];
     }
+    [self layoutFrameData];
+    [self reloadLineview];
 }
 
 #pragma mark ----------------------------------------- 点击LineView快速点位
@@ -407,6 +430,7 @@
     self.title = [NSString stringWithFormat:@"(%d/%d)",self.currentIndex+1,totalIndex];
     self.currentFrameArray = [self.timerInfoArray objectAtIndex:self.currentIndex];
     [self layoutFrameData];
+    [self reloadLineview];
 }
 
 
@@ -416,10 +440,10 @@
     int tv = [[time componentsSeparatedByString:@":"][0] intValue]*60*60 + [[time componentsSeparatedByString:@":"][1] intValue]*60;
     [self.datePicker setCountDownDuration:tv];
     self.slider1.value = [[self.currentFrameArray objectAtIndex:1] intValue];
-    self.slider1.value = [[self.currentFrameArray objectAtIndex:2] intValue];
-    self.slider1.value = [[self.currentFrameArray objectAtIndex:3] intValue];
-    self.slider1.value = [[self.currentFrameArray objectAtIndex:4] intValue];
-    self.slider1.value = [[self.currentFrameArray objectAtIndex:5] intValue];
+    self.slider2.value = [[self.currentFrameArray objectAtIndex:2] intValue];
+    self.slider3.value = [[self.currentFrameArray objectAtIndex:3] intValue];
+    self.slider4.value = [[self.currentFrameArray objectAtIndex:4] intValue];
+    self.slider5.value = [[self.currentFrameArray objectAtIndex:5] intValue];
     self.value_label1.text = [NSString stringWithFormat:@"%@%%",[self.currentFrameArray objectAtIndex:1]];
     self.value_label2.text = [NSString stringWithFormat:@"%@%%",[self.currentFrameArray objectAtIndex:2]];
     self.value_label3.text = [NSString stringWithFormat:@"%@%%",[self.currentFrameArray objectAtIndex:3]];
