@@ -93,6 +93,7 @@
 
 #pragma mark ------------------------------------------------ 点击行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];

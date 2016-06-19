@@ -85,11 +85,11 @@
             float y = self.frame.size.height - self.frame.size.height/100.*[[tempArr objectAtIndex:i+1] intValue]+4;
             if(j == self.activeIndex){
                 UIColor *color = [UIColor colorWithRed:1. green:0.1 blue:0.1 alpha:1];
-                [self drawCrile:x y:y radius:4 color:color context:currentContext];
+                [self drawCrile:x y:y radius:3 color:color context:currentContext];
             }
             else{
                 UIColor *color = [UIColor colorWithRed:0.1 green:1.0 blue:0.1 alpha:1];
-                [self drawCrile:x y:y radius:4 color:color context:currentContext];
+                [self drawCrile:x y:y radius:3 color:color context:currentContext];
             }
             [tempArray addObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
         }
@@ -122,7 +122,9 @@
             CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
             NSLog(@"两点间的距离为 = %f",distance);
             if(distance < 20){
-//                [self.delegate lineViewPointSelected:(j+1)];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(lineViewPointSelected:)] ){
+                    [self.delegate lineViewPointSelected:(j+1)];
+                }
                 NSLog(@"相当于选中的列数为 = %d",j+1);
                 goto gotoLabel;
             }

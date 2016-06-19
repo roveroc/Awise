@@ -155,6 +155,7 @@
 		97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C5BD1D1D0A936000D4D6C4 /* TC_MainController.m */; };
 		97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C5BD1E1D0A936000D4D6C4 /* TC_MainController.xib */; };
 		97C86C7D1D0FC0D200B4521B /* lightFishTimerImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 97C86C7C1D0FC0D200B4521B /* lightFishTimerImg.png */; };
+		97CAEB931D167071006A802A /* DVSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CAEB921D167071006A802A /* DVSwitch.m */; };
 		97CD48A71D0BF61600A4C87F /* LightCloudyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CD48A51D0BF61600A4C87F /* LightCloudyController.m */; };
 		97CD48A81D0BF61600A4C87F /* LightCloudyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CD48A61D0BF61600A4C87F /* LightCloudyController.xib */; };
 		97CD48AC1D0BF63100A4C87F /* CustomModeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CD48AA1D0BF63100A4C87F /* CustomModeController.m */; };
@@ -385,6 +386,8 @@
 		97C86C751D0FB95C00B4521B /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QRCodeReaderViewController.m; path = Pods/QRCodeReaderViewController/QRCodeReaderViewController/QRCodeReaderViewController.m; sourceTree = "<group>"; };
 		97C86C761D0FB95C00B4521B /* QRToggleTorchButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QRToggleTorchButton.m; path = Pods/QRCodeReaderViewController/QRCodeReaderViewController/QRToggleTorchButton.m; sourceTree = "<group>"; };
 		97C86C7C1D0FC0D200B4521B /* lightFishTimerImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightFishTimerImg.png; sourceTree = "<group>"; };
+		97CAEB911D167071006A802A /* DVSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVSwitch.h; sourceTree = "<group>"; };
+		97CAEB921D167071006A802A /* DVSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DVSwitch.m; sourceTree = "<group>"; };
 		97CD48A41D0BF61600A4C87F /* LightCloudyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightCloudyController.h; sourceTree = "<group>"; };
 		97CD48A51D0BF61600A4C87F /* LightCloudyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightCloudyController.m; sourceTree = "<group>"; };
 		97CD48A61D0BF61600A4C87F /* LightCloudyController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightCloudyController.xib; sourceTree = "<group>"; };
@@ -566,6 +569,7 @@
 		9735C0471CC78825000B0727 /* OtherFrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				97CAEB901D16704C006A802A /* DVSwitch */,
 				976521131CDC2F2600EEEE01 /* DrawLine */,
 				972287361CF54D810001225F /* D3ViewAnimation */,
 				9775751E1CF190FB00D34D45 /* PopSlider */,
@@ -1109,6 +1113,15 @@
 			name = MainController;
 			sourceTree = "<group>";
 		};
+		97CAEB901D16704C006A802A /* DVSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				97CAEB911D167071006A802A /* DVSwitch.h */,
+				97CAEB921D167071006A802A /* DVSwitch.m */,
+			);
+			name = DVSwitch;
+			sourceTree = "<group>";
+		};
 		97CD48A21D0BF4E000A4C87F /* Light&CloudyController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1427,7 @@
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
 				976522191CE076A700EEEE01 /* HSV.c in Sources */,
 				9735C0841CC8A08B000B0727 /* RoverSqlite.m in Sources */,
+				97CAEB931D167071006A802A /* DVSwitch.m in Sources */,
 				97128FD61CEEEAE000F58045 /* AboutUsController.m in Sources */,
 				9735C0391CC7832A000B0727 /* AwiseController.xcdatamodeld in Sources */,
 				9735C06E1CC78FF8000B0727 /* RoverARP.m in Sources */,

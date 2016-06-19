@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "lineView.h"
+#import "DVSwitch.h"
 
-@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate>{
+@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate,LineViewDelegate>{
     NSMutableArray          *timerInfoArray;
+    NSMutableArray          *currentFrameArray;
     UIScrollView            *sliderScroll;
     
     UILabel                 *label1;
@@ -31,12 +33,19 @@
     UILabel                 *value_label4;
     UILabel                 *value_label5;
     
+    DVSwitch                *swi1;
+    DVSwitch                *swi2;
+    DVSwitch                *swi3;
+    DVSwitch                *swi4;
+    DVSwitch                *swi5;
+    
     lineView                *lView;
     
     int                     currentIndex;
     int                     totalIndex;
 }
-@property (nonatomic, retain) NSMutableArray        *timerInfoArray;      //定时器数据
+@property (nonatomic, retain) NSMutableArray        *timerInfoArray;      //定时器数据,最多48帧
+@property (nonatomic, retain) NSMutableArray        *currentFrameArray;   //当前帧数据
 @property (nonatomic, retain) UIScrollView          *sliderScroll;        //放Slider
 
 @property (nonatomic, retain) UILabel               *label1;
@@ -56,6 +65,12 @@
 @property (nonatomic, retain) UILabel               *value_label3;
 @property (nonatomic, retain) UILabel               *value_label4;
 @property (nonatomic, retain) UILabel               *value_label5;
+
+@property (nonatomic, retain) DVSwitch              *swi1;
+@property (nonatomic, retain) DVSwitch              *swi2;
+@property (nonatomic, retain) DVSwitch              *swi3;
+@property (nonatomic, retain) DVSwitch              *swi4;
+@property (nonatomic, retain) DVSwitch              *swi5;
 
 @property (nonatomic, retain) lineView              *lView;
 

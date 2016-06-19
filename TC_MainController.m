@@ -33,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [[AwiseGlobal sharedInstance] hideTabBar:self];
 }
 
 #pragma mark -------------------------------- 初始化Slider
@@ -149,7 +150,7 @@
     
     int imageViewSize = 80;     //imageview的大小
     int imageGap = SCREEN_WIDHT/3;
-    int image_y  = label_y + sliderWidth + 35;
+    int image_y  = label_y + sliderWidth + 55;
     int image1_x = 0*imageGap + (imageGap/2)-imageViewSize/2;
     int image2_x = 1*imageGap + (imageGap/2)-imageViewSize/2;
     int image3_x = 2*imageGap + (imageGap/2)-imageViewSize/2;
