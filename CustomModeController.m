@@ -131,13 +131,14 @@
     }
     UIImageView *imgview = (UIImageView *)[cell viewWithTag:10];
     UILabel *msgLabel    = (UILabel *)[cell viewWithTag:100];
-    [AwiseGlobal sharedInstance].lineArray = [self.timerData objectAtIndex:2];
-    NSLog(@"row = lineArraylineArraylineArraylineArray %@",[AwiseGlobal sharedInstance].lineArray);
-    if([AwiseGlobal sharedInstance].lineArray != nil && [AwiseGlobal sharedInstance].lineArray.count > 0){
+    NSMutableArray *tempArr = [self.timerData objectAtIndex:indexPath.row];
+    NSLog(@"row = lineArraylineArraylineArraylineArray %@",tempArr);
+    if(tempArr != nil && tempArr.count > 0){
         NSLog(@"row = %ld",(long)indexPath.row);
         imgview.hidden = NO;
         msgLabel.hidden = YES;
         lineView *line = [[lineView alloc] init];
+        line.lineDataArray = tempArr;
         line.userInteractionEnabled = NO;
         if(iPhone4 || iPhone5)
             line.frame = CGRectMake(78, 5, 231, 90);

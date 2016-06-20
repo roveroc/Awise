@@ -84,6 +84,7 @@
     self.nextBtn.layer.masksToBounds = true;
     
     self.lineview = [[lineView alloc] init];
+    self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
     self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
     [self.lineview setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.lineview];
@@ -307,6 +308,7 @@
     if(self.lineview != nil){
         [self.lineview removeFromSuperview];
         self.lineview = [[lineView alloc] init];
+        self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
         self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
         [self.lineview setBackgroundColor:[UIColor clearColor]];
         [self.view addSubview:self.lineview];

@@ -14,6 +14,7 @@
 @synthesize activeIndex;
 @synthesize delegate;
 @synthesize pointArray;
+@synthesize lineDataArray;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -27,12 +28,12 @@
 
 #pragma mark - 按iPhone5来的宽来算，坐标轴总长300，以五分钟一个间隔，即：24*（60/5）= 288
 - (void)roverDraw{
-    NSMutableArray *_arr1 = [[NSMutableArray alloc] initWithArray:(NSArray *)[[AwiseGlobal sharedInstance].lineArray lastObject]];
-    NSMutableArray *_arr2 = [[NSMutableArray alloc] initWithArray:(NSArray *)[[AwiseGlobal sharedInstance].lineArray lastObject]];
+    NSMutableArray *_arr1 = [[NSMutableArray alloc] initWithArray:(NSArray *)[self.lineDataArray lastObject]];
+    NSMutableArray *_arr2 = [[NSMutableArray alloc] initWithArray:(NSArray *)[self.lineDataArray lastObject]];
     [_arr1 replaceObjectAtIndex:0 withObject:@"00:00"];
     [_arr2 replaceObjectAtIndex:0 withObject:@"24:00"];
-    [[AwiseGlobal sharedInstance].lineArray insertObject:_arr1 atIndex:0];
-    [[AwiseGlobal sharedInstance].lineArray addObject:_arr2];
+    [self.lineDataArray insertObject:_arr1 atIndex:0];
+    [self.lineDataArray addObject:_arr2];
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     for(int i=0;i<_arr1.count - 1;i++){
@@ -53,8 +54,8 @@
         else if (i == 5)
             CGContextSetRGBStrokeColor(currentContext, 0.3, 0.2, 0.1, 1.);
         
-        for(int j = 0;j<[AwiseGlobal sharedInstance].lineArray.count;j++){
-            NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
+        for(int j = 0;j<self.lineDataArray.count;j++){
+            NSMutableArray *tempArr = [self.lineDataArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];
 //            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
 //                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
@@ -74,8 +75,8 @@
         //画线
         CGContextStrokePath(currentContext);
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        for(int j = 1;j<[AwiseGlobal sharedInstance].lineArray.count-1;j++){
-            NSMutableArray *tempArr = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:j];
+        for(int j = 1;j<self.lineDataArray.count-1;j++){
+            NSMutableArray *tempArr = [self.lineDataArray objectAtIndex:j];
             NSString *timeStr = [tempArr objectAtIndex:0];
 //            int time = [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:0] intValue]*(60/5) +
 //                       [[[timeStr componentsSeparatedByString:@":"] objectAtIndex:1] intValue]/5;
@@ -97,8 +98,8 @@
         }
         [self.pointArray addObject:tempArray];
     }
-    [[AwiseGlobal sharedInstance].lineArray removeObjectAtIndex:0];
-    [[AwiseGlobal sharedInstance].lineArray removeLastObject];
+    [self.lineDataArray removeObjectAtIndex:0];
+    [self.lineDataArray removeLastObject];
 }
 
 //标记一个锚点

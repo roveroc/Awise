@@ -63,17 +63,22 @@
     
     int pre;
     int next;
-    if(self.currentIndex == 0){
-        pre = (int)[AwiseGlobal sharedInstance].lineArray.count -1;
-        next = self.currentIndex + 1;
-    }
-    else if(self.currentIndex == [AwiseGlobal sharedInstance].lineArray.count -1){
-        pre = self.currentIndex - 1;
+    if(self.totalIndex == 1){
+        pre = 0;
         next = 0;
-    }
-    else{
-        pre = self.currentIndex - 1;
-        next = self.currentIndex + 1;
+    }else{
+        if(self.currentIndex == 0){
+            pre = (int)[AwiseGlobal sharedInstance].lineArray.count -1;
+            next = self.currentIndex + 1;
+        }
+        else if(self.currentIndex == [AwiseGlobal sharedInstance].lineArray.count -1){
+            pre = self.currentIndex - 1;
+            next = 0;
+        }
+        else{
+            pre = self.currentIndex - 1;
+            next = self.currentIndex + 1;
+        }
     }
     NSString *tt = [[[AwiseGlobal sharedInstance].lineArray objectAtIndex:pre] objectAtIndex:0];
     NSArray *timeArr = [tt componentsSeparatedByString:@":"];
@@ -310,10 +315,13 @@
     
     self.lView = [[lineView alloc] init];
     self.lView.delegate = self;
+    self.lView.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
     self.lView.activeIndex = self.currentIndex+1;
     self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
     [self.lView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.lView];
+    
+    [self layoutFrameData];
 }
 
 #pragma mark ----------------------------------------- 删除当前帧
@@ -335,6 +343,7 @@
         self.currentFrameArray = [self.timerInfoArray objectAtIndex:self.currentIndex];
         self.title = [NSString stringWithFormat:@"(%d/%d)",currentIndex+1,self.totalIndex];
         [self reloadLineview];
+        [self layoutFrameData];
     }
 }
 
@@ -345,6 +354,7 @@
         self.lView.delegate = nil;
         self.lView = [[lineView alloc] init];
         self.lView.delegate = self;
+        self.lView.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
         self.lView.activeIndex = self.currentIndex+1;
         self.lView.frame = CGRectMake(5, 72, SCREEN_WIDHT-16, 75);
         [self.lView setBackgroundColor:[UIColor clearColor]];
