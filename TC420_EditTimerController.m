@@ -24,6 +24,8 @@
 @synthesize lView;
 @synthesize swi1,swi2,swi3,swi4,swi5;
 @synthesize currentFrameArray;
+@synthesize fileName;
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +40,6 @@
     [self.effect2Label addGestureRecognizer:tap2];
     
     self.currentFrameArray = [[NSMutableArray alloc] init];
-    self.timerInfoArray    = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(saveData)];
@@ -127,7 +128,12 @@
 
 #pragma mark ----------------------------------------- 保存编辑的数据
 - (void)saveData{
-    
+    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:self.fileName];
+    [self.timerInfoArray writeToFile:filePath atomically:YES];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dataSaved)] ){
+        [self.delegate dataSaved];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark ----------------------------------------- 自定义初始化Label
@@ -312,7 +318,24 @@
 
 #pragma mark ----------------------------------------- 删除当前帧
 - (void)deleteCurrentFrame{
-    
+    if(self.timerInfoArray.count > 1){
+        if(self.currentIndex == 0){
+            self.currentIndex = 0;
+            [self.timerInfoArray removeObjectAtIndex:0];
+        }else if(self.currentIndex+1 == self.totalIndex){
+            self.currentIndex = self.totalIndex-2;
+            [self.timerInfoArray removeObjectAtIndex:self.totalIndex-1];
+        }
+        else{
+            [self.timerInfoArray removeObjectAtIndex:self.currentIndex];
+            self.currentIndex--;
+        }
+        
+        self.totalIndex--;
+        self.currentFrameArray = [self.timerInfoArray objectAtIndex:self.currentIndex];
+        self.title = [NSString stringWithFormat:@"(%d/%d)",currentIndex+1,self.totalIndex];
+        [self reloadLineview];
+    }
 }
 
 #pragma mark ----------------------------------------- 刷新lineview

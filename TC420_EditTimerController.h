@@ -10,9 +10,16 @@
 #import "lineView.h"
 #import "DVSwitch.h"
 
-@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate,LineViewDelegate>{
+@protocol TC420EditTimerDelegate <NSObject>
+
+- (void)dataSaved;
+
+@end
+
+@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate,LineViewDelegate,TC420EditTimerDelegate>{
     NSMutableArray          *timerInfoArray;
     NSMutableArray          *currentFrameArray;
+    NSString                *fileName;
     UIScrollView            *sliderScroll;
     
     UILabel                 *label1;
@@ -43,8 +50,11 @@
     
     int                     currentIndex;
     int                     totalIndex;
+    
+    id<TC420EditTimerDelegate>  delegate;
 }
 @property (nonatomic, retain) NSMutableArray        *timerInfoArray;      //定时器数据,最多48帧
+@property (nonatomic, retain) NSString              *fileName;            //定时器数据保存的文件
 @property (nonatomic, retain) NSMutableArray        *currentFrameArray;   //当前帧数据
 @property (nonatomic, retain) UIScrollView          *sliderScroll;        //放Slider
 
@@ -76,6 +86,7 @@
 
 @property (assign)            int                   currentIndex;          //当前帧索引     （峰值=48）
 @property (assign)            int                   totalIndex;            //当前添加的总帧数（峰值=48）
+@property (nonatomic, retain) id<TC420EditTimerDelegate> delegate;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *timeLineImgview;

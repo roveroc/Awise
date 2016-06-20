@@ -24,7 +24,6 @@
 @property (nonatomic, retain)       id<LineViewDelegate> delegate;
 @property (nonatomic, retain)       NSMutableArray       *pointArray;       //得到所有的坐标点集合
 
-
 - (void)roverDraw;
 
 

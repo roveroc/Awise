@@ -11,8 +11,9 @@
 #import "lineView.h"
 #import "CustomModeCell.h"
 #import <UIImageView+Letters.h>
+#import "TC420_EditTimerController.h"
 
-@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
+@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource,TC420EditTimerDelegate>{
     NSMutableArray      *timerData;
     
 }

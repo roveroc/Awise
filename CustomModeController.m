@@ -7,7 +7,6 @@
 //
 
 #import "CustomModeController.h"
-#import "TC420_EditTimerController.h"
 
 @interface CustomModeController ()
 
@@ -23,8 +22,11 @@
     self.modeTableView.delegate   = self;
     self.modeTableView.dataSource = self;
     
-    [AwiseGlobal sharedInstance].singleTouchTimerArray = [[NSMutableArray alloc] init];
-    
+    [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
+    [self getDataFromFile];
+}
+
+- (void)getDataFromFile{
     NSString *path1 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData1.plist"];
     NSString *path2 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData2.plist"];
     NSString *path3 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData3.plist"];
@@ -61,20 +63,23 @@
     if(tempArr7 == nil){
         tempArr7 = [[NSMutableArray alloc] init];
     }
-    
+    if(self.timerData.count > 1){
+        [self.timerData removeAllObjects];
+    }
     self.timerData = [[NSMutableArray alloc] initWithObjects:tempArr1,
-                                                             tempArr2,
-                                                             tempArr3,
-                                                             tempArr4,
-                                                             tempArr5,
-                                                             tempArr6,
-                                                             tempArr7, nil];
-    
-    
-    
+                      tempArr2,
+                      tempArr3,
+                      tempArr4,
+                      tempArr5,
+                      tempArr6,
+                      tempArr7, nil];
 }
 
-
+#pragma mark ------------------------------------------------ 编辑的数据被保存，刷新tableView
+- (void)dataSaved{
+    [self getDataFromFile];
+    [self.modeTableView reloadData];
+}
 
 #pragma mark ------------------------------------------------ 返回分组数
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -91,13 +96,15 @@
     return 125.;
 }
 
-#pragma mark ------------------------------------------------ 点击行
+#pragma mark ------------------------------------------------ 点击行，进入帧编辑界面
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
     editCon.timerInfoArray = [self.timerData objectAtIndex:indexPath.row];
+    editCon.fileName       = [NSString stringWithFormat:@"TC420_timerData%d.plist",(int)indexPath.row+1];
+    editCon.delegate       = self;
     [self.navigationController pushViewController:editCon animated:YES];
 }
 
@@ -124,8 +131,10 @@
     }
     UIImageView *imgview = (UIImageView *)[cell viewWithTag:10];
     UILabel *msgLabel    = (UILabel *)[cell viewWithTag:100];
-    [AwiseGlobal sharedInstance].singleTouchTimerArray = [self.timerData objectAtIndex:indexPath.row];
-    if([AwiseGlobal sharedInstance].singleTouchTimerArray != nil && [AwiseGlobal sharedInstance].singleTouchTimerArray.count > 0){
+    [AwiseGlobal sharedInstance].lineArray = [self.timerData objectAtIndex:2];
+    NSLog(@"row = lineArraylineArraylineArraylineArray %@",[AwiseGlobal sharedInstance].lineArray);
+    if([AwiseGlobal sharedInstance].lineArray != nil && [AwiseGlobal sharedInstance].lineArray.count > 0){
+        NSLog(@"row = %ld",(long)indexPath.row);
         imgview.hidden = NO;
         msgLabel.hidden = YES;
         lineView *line = [[lineView alloc] init];
