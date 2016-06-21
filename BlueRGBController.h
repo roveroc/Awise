@@ -13,6 +13,7 @@
 #import "AwiseGlobal.h"
 #import "ASValueTrackingSlider.h"
 #import "MusicView.h"
+#import "BlueRGBCutomView.h"
 
 @interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource,MusicDelegate>{
     KZColorPicker           *colorPicker;
@@ -56,6 +57,9 @@
     int                     rValue;
     int                     gValue;
     int                     bValue;
+    
+    //custom part
+    BlueRGBCutomView        *cusotmView;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -91,6 +95,8 @@
 @property (assign)            BOOL                  isTouchPicker;           //调光？模式
 @property (assign)            int                   rValue;
 @property (assign)            int                   gValue;
-@property (assign)            int                   bValue;           
+@property (assign)            int                   bValue;
+
+@property (nonatomic, retain) BlueRGBCutomView      *cusotmView;
 
 @end

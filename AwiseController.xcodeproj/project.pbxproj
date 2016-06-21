@@ -164,6 +164,7 @@
 		97D34C591D192A8600A7D285 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6E1D0FB93400B4521B /* EFCircularSlider.m */; };
 		97D34C5A1D192A8600A7D285 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6C1D0FB92200B4521B /* AsyncSocket.m */; };
 		97D34C5B1D192A8600A7D285 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6A1D0FB90B00B4521B /* MBProgressHUD.m */; };
+		97D34C5F1D194F4300A7D285 /* BlueRGBCutomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D34C5E1D194F4300A7D285 /* BlueRGBCutomView.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
 		97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */; };
 		97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */; };
@@ -402,6 +403,8 @@
 		97CD48AE1D0BFC8600A4C87F /* CustomModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModeCell.h; sourceTree = "<group>"; };
 		97CD48AF1D0BFC8600A4C87F /* CustomModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModeCell.m; sourceTree = "<group>"; };
 		97CD48B01D0BFC8600A4C87F /* CustomModeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomModeCell.xib; sourceTree = "<group>"; };
+		97D34C5D1D194F4300A7D285 /* BlueRGBCutomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueRGBCutomView.h; sourceTree = "<group>"; };
+		97D34C5E1D194F4300A7D285 /* BlueRGBCutomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueRGBCutomView.m; sourceTree = "<group>"; };
 		97D9EF281CD448BE0096F517 /* EditSingleTouchSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSingleTouchSceneController.h; sourceTree = "<group>"; };
 		97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSingleTouchSceneController.m; sourceTree = "<group>"; };
 		97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditSingleTouchSceneController.xib; sourceTree = "<group>"; };
@@ -1174,6 +1177,8 @@
 		97D34C5C1D194EBE00A7D285 /* CutomView */ = {
 			isa = PBXGroup;
 			children = (
+				97D34C5D1D194F4300A7D285 /* BlueRGBCutomView.h */,
+				97D34C5E1D194F4300A7D285 /* BlueRGBCutomView.m */,
 			);
 			name = CutomView;
 			sourceTree = "<group>";
@@ -1475,6 +1480,7 @@
 				976522231CE076A700EEEE01 /* UIColor-Expanded.m in Sources */,
 				97C5BD1F1D0A936000D4D6C4 /* TC_MainController.m in Sources */,
 				9765221A1CE076A700EEEE01 /* KZColorCompareView.m in Sources */,
+				97D34C5F1D194F4300A7D285 /* BlueRGBCutomView.m in Sources */,
 				9735C02D1CC7832A000B0727 /* main.m in Sources */,
 				9735C0651CC78FF0000B0727 /* ScanLAN.m in Sources */,
 				9765212E1CDC302200EEEE01 /* DeviceMannagerController.m in Sources */,

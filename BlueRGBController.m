@@ -42,6 +42,7 @@
 @synthesize selectDeviceIndex;
 @synthesize isTouchPicker;
 @synthesize rValue,gValue,bValue;
+@synthesize cusotmView;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -136,6 +137,7 @@
                       @"白 色 呼 吸 渐 变",
                       @"三 色 呼 吸 渐 变",
     nil];
+    [[AwiseGlobal sharedInstance] hideTabBar:self];
 //读取iTunes中的音乐
     [self importMusicFormItunes];
 }
@@ -421,9 +423,13 @@
     }
 }
 
-#pragma mark ----------------------------------- 跳到音乐播放界面
+
+
+#pragma mark ----------------------------------- 跳到自定义颜色界面
 - (void)showCustomView{
-    
+    self.cusotmView = [[BlueRGBCutomView alloc] init];
+    self.cusotmView.frame = self.view.bounds;
+    [self.view addSubview:self.cusotmView];
 }
 
 #pragma mark ----------------------------------- 跳到音乐播放界面
@@ -472,7 +478,7 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"on.png"]
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                         forState:UIControlStateNormal];
         }else{
             self.offFlag = NO;
@@ -483,7 +489,7 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"off.png"]
+            [self.onOffButton setBackgroundImage:[UIImage imageNamed:@"on.png"]
                                         forState:UIControlStateNormal];
         }
     }
