@@ -348,6 +348,7 @@
     }
     if(sFlag == YES)
         b3[12] = 0x01;
+    b3[13] = 0x01;      //让设备运行回到之前的模式
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }

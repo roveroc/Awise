@@ -435,9 +435,18 @@
                 break;
         }
         if(byte[9] == 0x01){        //说明路由器加入失败
-            [[AwiseGlobal sharedInstance] showRemindMsg:@"设置路由模式失败，请确保输入的账号密码正确"
-                                               withTime:1.1];
+            [[AwiseGlobal sharedInstance] showRemindMsg:@"设置路由模式失败，请确保输入的账号密码正确" withTime:1.1];
         }
+        self.pipe1Value = byte[10];     //返回的三个通道值
+        self.pipe2Value = byte[11];
+        self.pipe3Value = byte[12];
+        self.pipe1Slider.value = self.pipe1Value;
+        self.pipe2Slider.value = self.pipe2Value;
+        self.pipe3Slider.value = self.pipe3Value;
+        self.pipe1Label.text = [NSString stringWithFormat:@"%d%%",self.pipe1Value];
+        self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",self.pipe2Value];
+        self.pipe3Label.text = [NSString stringWithFormat:@"%d%%",self.pipe3Value];
+        
         [self getDeviceStatusFinished];
     }
 }

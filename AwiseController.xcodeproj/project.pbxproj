@@ -155,6 +155,15 @@
 		97CD48AD1D0BF63100A4C87F /* CustomModeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CD48AB1D0BF63100A4C87F /* CustomModeController.xib */; };
 		97CD48B11D0BFC8600A4C87F /* CustomModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CD48AF1D0BFC8600A4C87F /* CustomModeCell.m */; };
 		97CD48B21D0BFC8600A4C87F /* CustomModeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CD48B01D0BFC8600A4C87F /* CustomModeCell.xib */; };
+		97D34C531D192A8600A7D285 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C721D0FB95C00B4521B /* QRCameraSwitchButton.m */; };
+		97D34C541D192A8600A7D285 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C731D0FB95C00B4521B /* QRCodeReader.m */; };
+		97D34C551D192A8600A7D285 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C741D0FB95C00B4521B /* QRCodeReaderView.m */; };
+		97D34C561D192A8600A7D285 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C751D0FB95C00B4521B /* QRCodeReaderViewController.m */; };
+		97D34C571D192A8600A7D285 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C761D0FB95C00B4521B /* QRToggleTorchButton.m */; };
+		97D34C581D192A8600A7D285 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C701D0FB94300B4521B /* UIImageView+Letters.m */; };
+		97D34C591D192A8600A7D285 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6E1D0FB93400B4521B /* EFCircularSlider.m */; };
+		97D34C5A1D192A8600A7D285 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6C1D0FB92200B4521B /* AsyncSocket.m */; };
+		97D34C5B1D192A8600A7D285 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6A1D0FB90B00B4521B /* MBProgressHUD.m */; };
 		97D9EF2B1CD448BE0096F517 /* EditSingleTouchSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF291CD448BE0096F517 /* EditSingleTouchSceneController.m */; };
 		97D9EF2C1CD448BE0096F517 /* EditSingleTouchSceneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */; };
 		97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D9EF2E1CD466FE0096F517 /* AwiseUserDefault.m */; };
@@ -929,6 +938,7 @@
 		976521871CE035E000EEEE01 /* BlueRGB */ = {
 			isa = PBXGroup;
 			children = (
+				97D34C5C1D194EBE00A7D285 /* CutomView */,
 				976F5E911D082162003FDF43 /* MusicView */,
 				976522241CE0793400EEEE01 /* BlueRGBController.h */,
 				976522251CE0793400EEEE01 /* BlueRGBController.m */,
@@ -1159,6 +1169,13 @@
 				97CD48B01D0BFC8600A4C87F /* CustomModeCell.xib */,
 			);
 			name = CustomModeCell;
+			sourceTree = "<group>";
+		};
+		97D34C5C1D194EBE00A7D285 /* CutomView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CutomView;
 			sourceTree = "<group>";
 		};
 		97D9EF271CD448930096F517 /* EditScene */ = {
@@ -1421,6 +1438,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97D34C531D192A8600A7D285 /* QRCameraSwitchButton.m in Sources */,
+				97D34C541D192A8600A7D285 /* QRCodeReader.m in Sources */,
+				97D34C551D192A8600A7D285 /* QRCodeReaderView.m in Sources */,
+				97D34C561D192A8600A7D285 /* QRCodeReaderViewController.m in Sources */,
+				97D34C571D192A8600A7D285 /* QRToggleTorchButton.m in Sources */,
+				97D34C581D192A8600A7D285 /* UIImageView+Letters.m in Sources */,
+				97D34C591D192A8600A7D285 /* EFCircularSlider.m in Sources */,
+				97D34C5A1D192A8600A7D285 /* AsyncSocket.m in Sources */,
+				97D34C5B1D192A8600A7D285 /* MBProgressHUD.m in Sources */,
 				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
 				976521021CDB51A900EEEE01 /* LightFishController.m in Sources */,
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,

@@ -63,14 +63,7 @@
 //    self.navigationItem.leftBarButtonItem = leftItem;
     
     self.navigationItem.title = self.navTitle;
-    
-    self.lineview = [[lineView alloc] init];
-    self.lineview.activeIndex = -1;
-    self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
-    self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
-    [self.lineview setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:self.lineview];
-    
+
     CGRect rect;
     UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     dBtn.layer.cornerRadius = 5;
@@ -135,6 +128,14 @@
     self.oldArray = [[NSMutableArray alloc] initWithContentsOfFile:[self getPlistPath]];
     
     self.dataArr = [[NSMutableArray alloc] init];
+    
+    self.lineview = [[lineView alloc] init];
+    self.lineview.activeIndex = -1;
+    self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
+    self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
+    [self.lineview setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.lineview];
+
 }
 
 #pragma mark ---------------------------------------- 下载数据到设备

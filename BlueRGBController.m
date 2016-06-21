@@ -29,6 +29,7 @@
 @synthesize onOffButton;
 @synthesize PlayPauseButton;
 @synthesize musicButton;
+@synthesize customButton;
 @synthesize offFlag;
 @synthesize palyFlag;
 @synthesize backScrollView;
@@ -297,18 +298,27 @@
     self.onOffButton      = [UIButton buttonWithType:UIButtonTypeCustom];
     self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
     self.musicButton      = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.customButton     = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.onOffButton     setBackgroundImage:[UIImage imageNamed:@"off.png"]
                                 forState:UIControlStateNormal];
     [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                 forState:UIControlStateNormal];
-    [self.musicButton     setBackgroundImage:[UIImage imageNamed:@"play.png"]
-                                    forState:UIControlStateNormal];
-//    [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
 //    if(iPhone6)
     {
         self.PlayPauseButton.frame = CGRectMake(10, 78, 60, 60);
         self.onOffButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
         self.musicButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 265, 60, 60);
+        self.customButton.frame    = CGRectMake(10, 265, 60, 60);
+        self.musicButton.layer.cornerRadius = self.musicButton.frame.size.width/2;
+        self.musicButton.layer.masksToBounds = true;
+        self.customButton.layer.cornerRadius = self.customButton.frame.size.width/2;
+        self.customButton.layer.masksToBounds = true;
+        self.musicButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+        self.customButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+        [self.musicButton setTitle:@"音乐" forState:UIControlStateNormal];
+        [self.customButton setTitle:@"自定义" forState:UIControlStateNormal];
+        self.musicButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        self.customButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
     }
     [self.PlayPauseButton addTarget:self
                        action:@selector(PlayPauseMode)
@@ -319,9 +329,13 @@
     [self.musicButton addTarget:self
                          action:@selector(showMusicView)
                forControlEvents:UIControlEventTouchUpInside];
+    [self.customButton addTarget:self
+                         action:@selector(showCustomView)
+               forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:self.onOffButton];
     [self.backScrollView addSubview:self.PlayPauseButton];
     [self.backScrollView addSubview:self.musicButton];
+    [self.backScrollView addSubview:self.customButton];
     
 //亮度值滑条
     self.lightSlider = [[ASValueTrackingSlider alloc] init];
@@ -336,8 +350,8 @@
     self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
 //速度值滑条
     self.modeSlider = [[ASValueTrackingSlider alloc] init];
-    self.modeSlider.minimumValue = 10;
-    self.modeSlider.maximumValue = 30;
+    self.modeSlider.minimumValue = 1;
+    self.modeSlider.maximumValue = 20;
     self.modeSlider.popUpViewCornerRadius = 12.0;
     [self.modeSlider setMaxFractionDigitsDisplayed:0];
     self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
@@ -390,7 +404,8 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.PlayPauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+            [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
+                                            forState:UIControlStateNormal];
         }else{
             self.palyFlag = NO;
             Byte by[4];
@@ -400,9 +415,15 @@
             by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
-            [self.PlayPauseButton setTitle:@"播放" forState:UIControlStateNormal];
+            [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"pause.png"]
+                                            forState:UIControlStateNormal];
         }
     }
+}
+
+#pragma mark ----------------------------------- 跳到音乐播放界面
+- (void)showCustomView{
+    
 }
 
 #pragma mark ----------------------------------- 跳到音乐播放界面
@@ -481,7 +502,7 @@
 - (void)modeSliderValueChange:(UISlider *)slider{
     if(self.touchFlag == YES){
         self.touchFlag = NO;
-        self.speedValue = 30-(int)slider.value;
+        self.speedValue = (int)slider.value*10;
         [self sendModeData];
     }
 }

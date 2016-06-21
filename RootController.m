@@ -162,8 +162,6 @@
         
         BlueRGBController *blueCon = [[BlueRGBController alloc] init];
         [self.navigationController pushViewController:blueCon animated:YES];
-        
-        
     }else if ([deviceType isEqualToString:@"Awise_WIFI_Touch"]){
         SingleTouchController *lightCon = [[SingleTouchController alloc] init];
         lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar

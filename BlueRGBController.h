@@ -42,6 +42,7 @@
     UIButton                *onOffButton;
     UIButton                *PlayPauseButton;
     UIButton                *musicButton;
+    UIButton                *customButton;
     BOOL                    offFlag;
     BOOL                    palyFlag;
     
@@ -77,6 +78,7 @@
 @property (nonatomic, retain) UIButton              *onOffButton;            //开关
 @property (nonatomic, retain) UIButton              *PlayPauseButton;        //播放、暂停
 @property (nonatomic, retain) UIButton              *musicButton;            //调到音乐播放界面
+@property (nonatomic, retain) UIButton              *customButton;           //自定义
 
 @property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
 
