@@ -44,24 +44,38 @@
     NSMutableArray *tempArr7 = [[NSMutableArray alloc] initWithContentsOfFile:path7];
     if(tempArr1 == nil){
         tempArr1 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr1 removeObjectAtIndex:0];
     }
     if(tempArr2 == nil){
         tempArr2 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr2 removeObjectAtIndex:0];
     }
     if(tempArr3 == nil){
         tempArr3 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr3 removeObjectAtIndex:0];
     }
     if(tempArr4 == nil){
         tempArr4 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr4 removeObjectAtIndex:0];
     }
     if(tempArr5 == nil){
         tempArr5 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr5 removeObjectAtIndex:0];
     }
     if(tempArr6 == nil){
         tempArr6 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr6 removeObjectAtIndex:0];
     }
     if(tempArr7 == nil){
         tempArr7 = [[NSMutableArray alloc] init];
+    }else{
+        [tempArr7 removeObjectAtIndex:0];
     }
     if(self.timerData.count > 1){
         [self.timerData removeAllObjects];
@@ -93,7 +107,7 @@
 
 #pragma mark ------------------------------------------------ 行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 125.;
+    return 160.;
 }
 
 #pragma mark ------------------------------------------------ 点击行，进入帧编辑界面
@@ -102,8 +116,8 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
-    editCon.timerInfoArray = [self.timerData objectAtIndex:indexPath.row];
     editCon.fileName       = [NSString stringWithFormat:@"TC420_timerData%d.plist",(int)indexPath.row+1];
+    editCon.timerInfoArray = [[NSMutableArray alloc] initWithContentsOfFile:editCon.fileName];
     editCon.delegate       = self;
     [self.navigationController pushViewController:editCon animated:YES];
 }

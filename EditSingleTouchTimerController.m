@@ -170,7 +170,7 @@
         }
     }
     else{
-        [self changeArrayValue:btn.tag-1 button:btn];
+        [self changeArrayValue:(int)btn.tag-1 button:btn];
         if([weekArray containsObject:@"0"]){
             UIButton *temp = (UIButton *)[self.view viewWithTag:8];
             [temp setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];

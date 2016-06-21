@@ -16,6 +16,7 @@
 
 @implementation TC420_EditTimerController
 @synthesize timerInfoArray;
+@synthesize timerWeekArray;
 @synthesize label1,label2,label3,label4,label5;
 @synthesize slider1,slider2,slider3,slider4,slider5;
 @synthesize value_label1,value_label2,value_label3,value_label4,value_label5;
@@ -26,6 +27,8 @@
 @synthesize currentFrameArray;
 @synthesize fileName;
 @synthesize delegate;
+@synthesize saveView;
+@synthesize saveViewBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -131,14 +134,61 @@
     }
 }
 
-#pragma mark ----------------------------------------- 保存编辑的数据
-- (void)saveData{
+
+#pragma mark ----------------------------------------- 取消保存
+- (void)cancelSave{
+    self.saveView.delegate = nil;
+    [UIView beginAnimations:@"animation" context:nil];
+    [UIView setAnimationDuration:0.3];
+    self.saveView.alpha = 0.0;
+    [UIView commitAnimations];
+    [self.saveView removeFromSuperview];
+    [self.saveViewBack removeFromSuperview];
+}
+
+#pragma mark ----------------------------------------- 确定保存
+- (void)okSave:(NSMutableArray *)arr{
+    self.saveView.delegate = nil;
+    [self.saveView removeFromSuperview];
+    [self.saveViewBack removeFromSuperview];
     NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:self.fileName];
+    [self.timerInfoArray insertObject:arr atIndex:0];
     [self.timerInfoArray writeToFile:filePath atomically:YES];
     if (self.delegate && [self.delegate respondsToSelector:@selector(dataSaved)] ){
         [self.delegate dataSaved];
     }
     [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+#pragma mark ----------------------------------------- 保存编辑的数据
+- (void)saveData{
+    if(self.saveView != nil){
+        self.saveView.delegate = nil;
+        [self.saveView removeFromSuperview];
+        [self.saveViewBack removeFromSuperview];
+    }
+    self.saveViewBack = [[UIView alloc] initWithFrame:self.view.frame];
+    self.saveViewBack.alpha = 0.55;
+    self.saveViewBack.backgroundColor = [UIColor darkTextColor];
+    [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:self.saveViewBack];
+    NSArray *nibView =  [[NSBundle mainBundle] loadNibNamed:@"SaveDataView" owner:nil options:nil];
+    self.saveView = [nibView objectAtIndex:0];
+    self.saveView.delegate = self;
+    [self.saveView loadWeekData:self.timerWeekArray];
+    self.saveView.center = self.view.center;
+    self.saveView.layer.cornerRadius = 5;
+    self.saveView.layer.masksToBounds = true;
+    self.saveView.layer.borderWidth = 1.5f;
+    self.saveView.layer.borderColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.].CGColor;
+
+    [self.view addSubview:self.saveView];
+    self.saveView.alpha = 0.0;
+    [UIView beginAnimations:@"animation" context:nil];
+    [UIView setAnimationDuration:0.3];
+    self.saveView.alpha = 1.0;
+    [UIView commitAnimations];
+    [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:self.saveView];
 }
 
 #pragma mark ----------------------------------------- 自定义初始化Label
@@ -277,6 +327,8 @@
     //添加时间曲线时间轴
     [AwiseGlobal sharedInstance].lineArray = [[NSMutableArray alloc] init];
     if(self.timerInfoArray.count > 0){
+        self.timerWeekArray = [[NSMutableArray alloc] initWithArray:(NSArray *)[self.timerInfoArray objectAtIndex:0]];
+        [self.timerInfoArray removeObjectAtIndex:0];
         [AwiseGlobal sharedInstance].lineArray = self.timerInfoArray;
         self.totalIndex   = (int)[AwiseGlobal sharedInstance].lineArray.count;
         self.currentIndex = 0;
@@ -291,7 +343,10 @@
         int tv = [[timeStr componentsSeparatedByString:@":"][0] intValue]*60*60 +
                  [[timeStr componentsSeparatedByString:@":"][1] intValue]*60;
         [self.datePicker setCountDownDuration:tv];
+        self.timerWeekArray = [[NSMutableArray alloc] initWithObjects:@"1",@"1",@"1",
+        @"1",@"1",@"1",@"1",@"1",nil];
         NSMutableArray *tempArr = [[NSMutableArray alloc] initWithObjects:timeStr,@"10",@"20",@"30",@"40",@"50",@"1",@"0",@"1",@"0",@"1", nil];
+        self.timerInfoArray = [[NSMutableArray alloc] init];
         [self.timerInfoArray addObject:tempArr];
         [AwiseGlobal sharedInstance].lineArray = self.timerInfoArray;
         self.currentFrameArray = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:0];

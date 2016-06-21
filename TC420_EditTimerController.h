@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "lineView.h"
 #import "DVSwitch.h"
+#import "SaveDataView.h"
 
 @protocol TC420EditTimerDelegate <NSObject>
 
@@ -16,8 +17,9 @@
 
 @end
 
-@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate,LineViewDelegate,TC420EditTimerDelegate>{
-    NSMutableArray          *timerInfoArray;
+@interface TC420_EditTimerController : UIViewController<UIGestureRecognizerDelegate,LineViewDelegate,TC420EditTimerDelegate,SaveDataDelegate>{
+    NSMutableArray          *timerInfoArray;        //定时器的每帧的数据
+    NSMutableArray          *timerWeekArray;        //定时器在哪些天运行
     NSMutableArray          *currentFrameArray;
     NSString                *fileName;
     UIScrollView            *sliderScroll;
@@ -52,8 +54,12 @@
     int                     totalIndex;
     
     id<TC420EditTimerDelegate>  delegate;
+    
+    SaveDataView            *saveView;
+    UIView                  *saveViewBack;
 }
 @property (nonatomic, retain) NSMutableArray        *timerInfoArray;      //定时器数据,最多48帧
+@property (nonatomic, retain) NSMutableArray        *timerWeekArray;
 @property (nonatomic, retain) NSString              *fileName;            //定时器数据保存的文件
 @property (nonatomic, retain) NSMutableArray        *currentFrameArray;   //当前帧数据
 @property (nonatomic, retain) UIScrollView          *sliderScroll;        //放Slider
@@ -87,6 +93,8 @@
 @property (assign)            int                   currentIndex;          //当前帧索引     （峰值=48）
 @property (assign)            int                   totalIndex;            //当前添加的总帧数（峰值=48）
 @property (nonatomic, retain) id<TC420EditTimerDelegate> delegate;
+@property (nonatomic, retain) SaveDataView          *saveView;             //点击保存时的弹出框
+@property (nonatomic, retain) UIView                *saveViewBack;         //弹出框的灰色背景
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *timeLineImgview;
