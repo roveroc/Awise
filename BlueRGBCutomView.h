@@ -43,6 +43,8 @@
     id<CustomRGBDelegate>   delegate;
     
     UIScrollView            *backScrollView;
+    
+    BOOL                    isTouchSlider;
 }
 @property (nonatomic, retain) KZColorPicker           *colorPicker;
 @property (nonatomic, retain) UILabel                 *R_lbale;
@@ -65,6 +67,7 @@
 @property (assign)            int                     editIndex;        //当前正在编辑的UIbutton序号
 @property (nonatomic, retain) NSMutableArray          *sceneArray;      //自定义的场景值
 @property (nonatomic, retain) id<CustomRGBDelegate>   delegate;
-@property (nonatomic, retain) UIScrollView          *backScrollView;         //用来适配不同布局
+@property (nonatomic, retain) UIScrollView            *backScrollView;         //用来适配不同布局
+@property (assign)            BOOL                    isTouchSlider;           //是否在触动滑条
 
 @end

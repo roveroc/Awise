@@ -632,7 +632,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 #pragma mark ----------------------------------------------- 显示设备列表，切换设备
 - (void)initDeviceTable{
     if(self.deviceTable == nil){
-        self.deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 58, SCREEN_WIDHT, SCREEN_HEIGHT-58-44)];
+        self.deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 58, SCREEN_WIDHT, SCREEN_HEIGHT-58)];
         self.deviceTable.delegate   = self;
         self.deviceTable.dataSource = self;
         self.deviceTable.alpha = 0.0;
@@ -731,26 +731,35 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 
 #pragma mark ------------------------------------------------ 自定义模式的两个代理
 - (void)rgbColorChange:(int)r g:(int)g b:(int)b{
+    if(self.touchFlag == NO)
+        return;
+    self.touchFlag = NO;
+    NSLog(@"r === %d,g === %d b === %d",r,g,b);
     if(self.character != nil){
         Byte by[4];
         by[0] = 1;
-        by[1] = self.rValue;
-        by[2] = self.gValue;
-        by[3] = self.bValue;
+        by[1] = r;
+        by[2] = g;
+        by[3] = b;
         NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
     }
 }
 
 - (void)customSceneValue:(int)r g:(int)g b:(int)b{
+    if(self.touchFlag == NO)
+        return;
+    self.touchFlag = NO;
     if(self.character != nil){
         Byte by[4];
         by[0] = 1;
-        by[1] = self.rValue;
-        by[2] = self.gValue;
-        by[3] = self.bValue;
+        by[1] = r;
+        by[2] = g;
+        by[3] = b;
         NSData *da = [[NSData alloc] initWithBytes:by length:4];
-        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        });
     }
 }
 

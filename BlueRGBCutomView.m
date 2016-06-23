@@ -31,6 +31,7 @@
         return;
     self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
     self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667);
+    self.backScrollView.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.backScrollView];
     
     self.colorPicker = [[KZColorPicker alloc] initWithFrame:self.bounds];
@@ -44,20 +45,23 @@
     [self addGestureRecognizer:tapGesture];
     
     self.editIndex = -1;
+    self.R_value = 100;
+    self.G_value = 100;
+    self.B_value = 100;
     
     int y = 340;
     int temp = 40;
     self.R_lbale       = [self customLabel:self.R_lbale       rect:CGRectMake(10, y, 20, 20) text:@"R:"];
     self.R_slider      = [self customSlider:self.R_slider     rect:CGRectMake(30, y-5, SCREEN_WIDHT-75, 30)       tag:1];
-    self.R_valueLabel = [self customLabel:self.R_valueLabel   rect:CGRectMake(SCREEN_WIDHT-35, y, 40, 20)         text:@"255"];
+    self.R_valueLabel = [self customLabel:self.R_valueLabel   rect:CGRectMake(SCREEN_WIDHT-35, y, 40, 20)         text:@"100"];
     
     self.G_lbale       = [self customLabel:self.G_lbale       rect:CGRectMake(10, y+temp, 20, 20) text:@"G:"];
     self.G_slider = [self customSlider:self.G_slider     rect:CGRectMake(30, y-5+temp, SCREEN_WIDHT-75, 30)  tag:2];
-    self.G_valueLabel = [self customLabel:self.G_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp, 40, 20)    text:@"255"];
+    self.G_valueLabel = [self customLabel:self.G_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp, 40, 20)    text:@"100"];
     
     self.B_lbale       = [self customLabel:self.B_lbale       rect:CGRectMake(10, y+temp*2, 20, 20) text:@"C:"];
     self.B_slider      = [self customSlider:self.B_slider     rect:CGRectMake(30, y-5+temp*2, SCREEN_WIDHT-75, 30) tag:3];
-    self.B_valueLabel = [self customLabel:self.B_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp*2, 40, 20)   text:@"255"];
+    self.B_valueLabel = [self customLabel:self.B_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp*2, 40, 20)   text:@"100"];
     
     self.R_slider.minimumTrackTintColor = [UIColor redColor];
     self.G_slider.minimumTrackTintColor = [UIColor greenColor];
@@ -91,7 +95,7 @@
             int r = [a[0] intValue];
             int g = [a[1] intValue];
             int b = [a[2] intValue];
-            btn.backgroundColor = [UIColor colorWithRed:r/255. green:g/255. blue:b/7255. alpha:1.0];
+            btn.backgroundColor = [UIColor colorWithRed:((255/100.)*r)/255. green:((255/100.)*g)/255. blue:((255/100.)*b)/255. alpha:1.0];
         }
         btn.tag = i+10;
         btn.layer.cornerRadius = 5;
@@ -157,16 +161,16 @@
         [self.delegate customSceneValue:0 g:0 b:0];
     }else{
         [self.delegate customSceneValue:[argbArray[0] intValue] g:[argbArray[1] intValue] b:[argbArray[2] intValue]];
-        [self.colorPicker setSelectedColor:[UIColor colorWithRed:[argbArray[0] intValue]/255.
-                                                           green:[argbArray[1] intValue]/255.
-                                                            blue:[argbArray[2] intValue]/255.
+        [self.colorPicker setSelectedColor:[UIColor colorWithRed:((255/100.)*[argbArray[0] intValue])/255.
+                                                           green:((255/100.)*[argbArray[1] intValue])/255.
+                                                            blue:((255/100.)*[argbArray[2] intValue])/255.
                                                            alpha:1]
                                   animated:YES];
         self.R_value = [argbArray[0] intValue];
         self.R_valueLabel.text = [NSString stringWithFormat:@"%d",[argbArray[0] intValue]];
         self.G_value = [argbArray[1] intValue];
         self.G_valueLabel.text = [NSString stringWithFormat:@"%d",[argbArray[1] intValue]];
-        self.B_value = [argbArray[02] intValue];
+        self.B_value = [argbArray[2] intValue];
         self.B_valueLabel.text = [NSString stringWithFormat:@"%d",[argbArray[2] intValue]];
     }
 }
@@ -243,9 +247,9 @@
 - (UISlider *)customSlider:(UISlider *)slider rect:(CGRect)ret tag:(int)tag{
     slider = [[UISlider alloc] initWithFrame:ret];
     slider.backgroundColor = [UIColor clearColor];
-    slider.maximumValue = 255;
+    slider.maximumValue = 100;
     slider.minimumValue = 0;
-    slider.value = 255;
+    slider.value = 100;
     slider.tag = tag;
     [slider addTarget:self action:@selector(sliderValueChange:) forControlEvents:UIControlEventValueChanged];
     return slider;
@@ -253,6 +257,7 @@
 
 #pragma mark ----------------------------------------- Slider值发生变化
 - (void)sliderValueChange:(UISlider *)slider{
+    self.isTouchSlider = YES;
     int value = (int)slider.value;
     switch (slider.tag) {
         case 1:
@@ -276,16 +281,16 @@
         default:
             break;
     }
-    [self.colorPicker setSelectedColor:[UIColor colorWithRed:self.R_value/255.
-                                                      green:self.G_value/255.
-                                                       blue:self.B_value/255.
+    [self.colorPicker setSelectedColor:[UIColor colorWithRed:((255/100.)*self.R_value)/255.
+                                                      green:((255/100.)*self.G_value)/255.
+                                                       blue:((255/100.)*self.B_value)/255.
                                                       alpha:1]
-                             animated:YES];
+                              animated:YES];
     if(self.editIndex != -1){
         UIButton *btn = (UIButton *)[self viewWithTag:self.editIndex];
-        [btn setBackgroundColor:[UIColor colorWithRed:self.R_value/255.
-                                                green:self.G_value/255.
-                                                 blue:self.B_value/255.
+        [btn setBackgroundColor:[UIColor colorWithRed:((255/100.)*self.R_value)/255.
+                                                green:((255/100.)*self.G_value)/255.
+                                                 blue:((255/100.)*self.B_value)/255.
                                                 alpha:1]];
         int index = (int)btn.tag - 10;
         NSString *rgb = [NSString stringWithFormat:@"%d&%d&%d",self.R_value,self.G_value,self.B_value];
@@ -300,26 +305,33 @@
 - (void)pickerChanged:(KZColorPicker *)cp{
     NSString *RGBValue = [NSString stringWithFormat:@"%@",cp.selectedColor];
     NSArray *arr = [RGBValue componentsSeparatedByString:@" "];
-    self.R_value = 255*[[arr objectAtIndex:1] floatValue];
-    self.G_value = 255*[[arr objectAtIndex:2] floatValue];
-    self.B_value = 255*[[arr objectAtIndex:3] floatValue];
-    self.R_slider.value = R_value;
-    self.G_slider.value = G_value;
-    self.B_slider.value = B_value;
-    self.R_valueLabel.text = [NSString stringWithFormat:@"%d",self.R_value];
-    self.G_valueLabel.text = [NSString stringWithFormat:@"%d",self.G_value];
-    self.B_valueLabel.text = [NSString stringWithFormat:@"%d",self.B_value];
-    
-    if(self.editIndex != -1){
-        UIButton *btn = (UIButton *)[self viewWithTag:self.editIndex];
-        [btn setBackgroundColor:cp.selectedColor];
-        int index = (int)btn.tag - 10;
-        NSString *rgb = [NSString stringWithFormat:@"%d&%d&%d",self.R_value,self.G_value,self.B_value];
-        [self.sceneArray replaceObjectAtIndex:index withObject:rgb];
-        [AwiseUserDefault sharedInstance].blueRGB_scene = [self.sceneArray componentsJoinedByString:@"_"];
+    if(self.isTouchSlider == NO){
+        self.R_value = 100*[[arr objectAtIndex:1] floatValue];
+        self.G_value = 100*[[arr objectAtIndex:2] floatValue];
+        self.B_value = 100*[[arr objectAtIndex:3] floatValue];
+        self.R_slider.value = self.R_value;
+        self.G_slider.value = self.G_value;
+        self.B_slider.value = self.B_value;
+        self.R_valueLabel.text = [NSString stringWithFormat:@"%d",self.R_value];
+        self.G_valueLabel.text = [NSString stringWithFormat:@"%d",self.G_value];
+        self.B_valueLabel.text = [NSString stringWithFormat:@"%d",self.B_value];
+        
+        if(self.editIndex != -1){
+            UIButton *btn = (UIButton *)[self viewWithTag:self.editIndex];
+            [btn setBackgroundColor:[UIColor colorWithRed:((255/100.)*self.R_value)/255.
+                                                    green:((255/100.)*self.G_value)/255.
+                                                     blue:((255/100.)*self.B_value)/255.
+                                                    alpha:1]];
+            NSLog(@"r === %f,g === %f b === %f",((255/100.)*self.R_value)/255.,((255/100.)*self.G_value)/255.,((255/100.)*self.B_value)/255.);
+            int index = (int)btn.tag - 10;
+            NSString *rgb = [NSString stringWithFormat:@"%d&%d&%d",self.R_value,self.G_value,self.B_value];
+            [self.sceneArray replaceObjectAtIndex:index withObject:rgb];
+            [AwiseUserDefault sharedInstance].blueRGB_scene = [self.sceneArray componentsJoinedByString:@"_"];
+        }
+        //delegate
+        [self.delegate rgbColorChange:self.R_value g:self.G_value b:self.B_value];
     }
-    //delegate
-    [self.delegate rgbColorChange:self.R_value g:self.G_value b:self.B_value];
+    self.isTouchSlider = NO;
 }
 
 
