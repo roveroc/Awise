@@ -81,6 +81,10 @@
     [AwiseGlobal sharedInstance].deviceSSIDArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
 /*********************水族灯部分**********************/
+    NSDictionary *buleRGB = [NSDictionary dictionaryWithObjectsAndKeys:@"-1&-1&-1_-1&-1&-1_-1&-1&-1_-1&-1&-1_-1&-1&-1_-1&-1&-1_-1&-1&-1_-1&-1&-1", @"blueRGB_scene",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:buleRGB];
+    
+    
     //监测网络状态
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)

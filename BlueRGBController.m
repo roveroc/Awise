@@ -155,9 +155,9 @@
 
 #pragma mark ----------------------------------------------- 自定义返回按钮事件
 - (void)goBack{
-    if(mview == nil){
+    if(mview == nil && self.cusotmView == nil){
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
+    }else if(self.mview != nil){
         [UIView beginAnimations:@"animation" context:nil];
         //动画时长
         [UIView setAnimationDuration:0.3];
@@ -170,6 +170,17 @@
         }
         self.mview.mPlayer.delegate = nil;
         self.mview.mPlayer = nil;
+        
+    }else if(self.cusotmView != nil){
+        [UIView beginAnimations:@"animation" context:nil];
+        //动画时长
+        [UIView setAnimationDuration:0.3];
+        self.cusotmView.alpha = 0.0;
+        //动画结束
+        [UIView commitAnimations];
+        [self.cusotmView removeFromSuperview];
+        self.cusotmView.delegate = nil;
+        self.cusotmView = nil;
     }
 }
 
@@ -352,8 +363,9 @@
     self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
 //速度值滑条
     self.modeSlider = [[ASValueTrackingSlider alloc] init];
-    self.modeSlider.minimumValue = 1;
+    self.modeSlider.minimumValue = 0;
     self.modeSlider.maximumValue = 20;
+    self.modeSlider.value = 0;
     self.modeSlider.popUpViewCornerRadius = 12.0;
     [self.modeSlider setMaxFractionDigitsDisplayed:0];
     self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
@@ -429,6 +441,7 @@
 - (void)showCustomView{
     self.cusotmView = [[BlueRGBCutomView alloc] init];
     self.cusotmView.frame = self.view.bounds;
+    self.cusotmView.delegate = self;
     [self.view addSubview:self.cusotmView];
 }
 
@@ -508,7 +521,7 @@
 - (void)modeSliderValueChange:(UISlider *)slider{
     if(self.touchFlag == YES){
         self.touchFlag = NO;
-        self.speedValue = (int)slider.value*10;
+        self.speedValue = 20-(int)slider.value;
         [self sendModeData];
     }
 }
@@ -715,5 +728,31 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
 }
+
+#pragma mark ------------------------------------------------ 自定义模式的两个代理
+- (void)rgbColorChange:(int)r g:(int)g b:(int)b{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 1;
+        by[1] = self.rValue;
+        by[2] = self.gValue;
+        by[3] = self.bValue;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+- (void)customSceneValue:(int)r g:(int)g b:(int)b{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 1;
+        by[1] = self.rValue;
+        by[2] = self.gValue;
+        by[3] = self.bValue;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+    }
+}
+
 
 @end

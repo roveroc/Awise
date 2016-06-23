@@ -114,4 +114,17 @@
 }
 /*********************水族灯部分*************************/
 
+
+/*********************蓝牙RGB八个自定义场景的RGB值*************************/
+- (void)setBlueRGB_scene:(NSString *)blueRGB_scene{
+    [[NSUserDefaults standardUserDefaults] setObject:blueRGB_scene forKey:@"blueRGB_scene"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)blueRGB_scene{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"blueRGB_scene"];
+}
+/*********************蓝牙RGB八个自定义场景的RGB值*************************/
+
+
 @end

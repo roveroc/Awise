@@ -30,4 +30,11 @@
 @property (nonatomic, retain) NSString *activeMAC;      //当前受控设备的MAC
 /*********************水族灯部分*************************/
 
+
+
+/*********************蓝牙RGB八个自定义场景的RGB值*************************/
+@property (nonatomic, retain) NSString *blueRGB_scene;
+/*********************蓝牙RGB八个自定义场景的RGB值*************************/
+
+
 @end

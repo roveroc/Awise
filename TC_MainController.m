@@ -30,6 +30,10 @@
 @synthesize lightImgView;
 @synthesize cloudyImgView;
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

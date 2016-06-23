@@ -15,7 +15,7 @@
 #import "MusicView.h"
 #import "BlueRGBCutomView.h"
 
-@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource,MusicDelegate>{
+@interface BlueRGBController : UIViewController<CBCentralManagerDelegate,CBPeripheralDelegate,UIPickerViewDataSource,UIPickerViewDelegate,AVAudioPlayerDelegate,UITableViewDelegate,UITableViewDataSource,MusicDelegate,CustomRGBDelegate>{
     KZColorPicker           *colorPicker;
     UIColor                 *selectedColor;
     CBCentralManager        *centralManager;

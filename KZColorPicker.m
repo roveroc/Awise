@@ -128,7 +128,7 @@
     }	
 	
 	self.selectedColor = [UIColor whiteColor];//[UIColor colorWithRed:0.349 green:0.613 blue:0.378 alpha:1.000];
-    [self fixLocations];
+//    [self fixLocations];
     //by rover
     [self performSelector:@selector(changeValue) withObject:nil afterDelay:0.01];
 }

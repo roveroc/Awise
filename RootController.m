@@ -80,6 +80,8 @@
     if([AwiseGlobal sharedInstance].deviceArray.count == 0){
         self.remindLabel.hidden = NO;
     }
+    NSMutableArray *bleArray = [[NSMutableArray alloc] initWithObjects:@"蓝牙设备",@"BLE",@"BLE",@"BLE",@"BLE",@"Awise_Bule_RGB", nil];
+    [[AwiseGlobal sharedInstance].deviceArray addObject:bleArray];
 }
 
 - (void)updateDeviceLayout{
@@ -155,13 +157,10 @@
     NSMutableArray *deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
     NSString *deviceType = [deviceInfo objectAtIndex:5];
     if([deviceType isEqualToString:@"Awise_WIFI_Fish"]){
-//        LightFishController *lightCon = [[LightFishController alloc] init];
-//        lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
-//        lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
-//        [self.navigationController pushViewController:lightCon animated:YES];
-        
-        BlueRGBController *blueCon = [[BlueRGBController alloc] init];
-        [self.navigationController pushViewController:blueCon animated:YES];
+        LightFishController *lightCon = [[LightFishController alloc] init];
+        lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+        lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
+        [self.navigationController pushViewController:lightCon animated:YES];
     }else if ([deviceType isEqualToString:@"Awise_WIFI_Touch"]){
         SingleTouchController *lightCon = [[SingleTouchController alloc] init];
         lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
@@ -169,7 +168,8 @@
         [self.navigationController pushViewController:lightCon animated:YES];
 
     }else if([deviceType isEqualToString:@"Awise_Bule_RGB"]){
-        
+        BlueRGBController *blueCon = [[BlueRGBController alloc] init];
+        [self.navigationController pushViewController:blueCon animated:YES];
     }
 }
 
