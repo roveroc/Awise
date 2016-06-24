@@ -164,8 +164,8 @@
     [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
     
     if(self.scanTimer == nil){
-//        self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
-//        [self.scanTimer fire];
+        self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
+        [self.scanTimer fire];
     }
 }
 
