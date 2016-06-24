@@ -30,7 +30,7 @@
 }
 
 #pragma mark ------------------------------------------------ 创建表
-#pragma mark ---- 六个字段：name,mac,AP_ip,STA_ip,model,description
+#pragma mark ---- 六个字段：name,mac,AP_ip,port,STA_ip,model,description
 - (BOOL)createTable{
     NSString *deviceTable = @"CREATE TABLE IF NOT EXISTS AwiseDevice(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, mac TEXT, AP_ip TEXT,port TEXT,STA_ip TEXT, model TEXT, description TEXT)";
     char *ERROR;
@@ -42,7 +42,7 @@
     return YES;
 }
 
-#pragma mark ------------------------------------------------ 查询所有设备信息
+#pragma mark ------------------------------------------------ 查询所有设备信息(不包含蓝牙设备)
 - (NSMutableArray *)getAllDeviceInfomation{
     NSMutableArray *infoArray = [[NSMutableArray alloc] init];
     NSString *quary = @"SELECT * FROM AwiseDevice";
@@ -63,12 +63,46 @@
                 NSString *string = [[NSString alloc] initWithUTF8String:colum];
                 [deviceInfo addObject:string];
             }
-            [infoArray addObject:deviceInfo];
+            if(![[deviceInfo objectAtIndex:6] isEqualToString:@"Awise_BLE"]){
+                [infoArray addObject:deviceInfo];
+            }
         }
         sqlite3_finalize(stmt);  
     }
     sqlite3_close(database);
     NSLog(@"数据库中最新设备记录为 == %@",infoArray);
+    return infoArray;
+}
+
+#pragma mark ------------------------------------------------ 查询所有设备信息(不包含蓝牙设备)
+- (NSMutableArray *)getAllDeviceInfomation_BLE{
+    NSMutableArray *infoArray = [[NSMutableArray alloc] init];
+    NSString *quary = @"SELECT * FROM AwiseDevice";
+    sqlite3_stmt *stmt;
+    char **dbResult;
+    char *errmsg;
+    int nRow, nColumn;
+    [self openDataBase];
+    if(sqlite3_get_table(database, [quary UTF8String], &dbResult, &nRow, &nColumn, &errmsg)!=SQLITE_OK){
+        NSLog(@"查询所有设备表出错");
+        return nil;
+    }
+    if (sqlite3_prepare_v2(database, [quary UTF8String], -1, &stmt, nil) == SQLITE_OK) {
+        while (sqlite3_step(stmt)==SQLITE_ROW) {
+            NSMutableArray *deviceInfo = [[NSMutableArray alloc] init];
+            for(int i=1;i<nColumn;i++){
+                char *colum = (char *)sqlite3_column_text(stmt, i);
+                NSString *string = [[NSString alloc] initWithUTF8String:colum];
+                [deviceInfo addObject:string];
+            }
+            if([[deviceInfo objectAtIndex:6] isEqualToString:@"Awise_BLE"]){
+                [infoArray addObject:deviceInfo];
+            }
+        }
+        sqlite3_finalize(stmt);
+    }
+    sqlite3_close(database);
+    NSLog(@"数据库中最新  蓝牙  设备记录为 == %@",infoArray);
     return infoArray;
 }
 

@@ -60,6 +60,14 @@
     
     //custom part
     BlueRGBCutomView        *cusotmView;
+    
+    //scanner timer
+    NSTimer                 *scanTimer;
+    
+    //编辑设备名时用到
+    UIButton                *tempButton;
+    //数据库中的蓝牙设备集合
+    NSMutableArray          *sql_BLEArray;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -98,5 +106,7 @@
 @property (assign)            int                   bValue;
 
 @property (nonatomic, retain) BlueRGBCutomView      *cusotmView;
-
+@property (nonatomic, retain) NSTimer               *scanTimer;
+@property (nonatomic, retain) UIButton              *tempButton;
+@property (nonatomic, retain) NSMutableArray        *sql_BLEArray;
 @end

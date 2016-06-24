@@ -183,6 +183,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 - (void)disMissHUD;
 
 - (void)hideTabBar:(UIViewController *)con;                            //隐藏界面下方的tabbar
+- (void)showTabBar:(UIViewController *)con;                            //显示界面下方的tabbar
 
 - (NSString *)DPLocalizedString:(NSString *)translation_key;           //国际化文字
 

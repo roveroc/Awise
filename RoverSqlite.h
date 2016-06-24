@@ -20,8 +20,11 @@
 //创建或者打开数据库
 - (BOOL)openDataBase;
 
-//查询所有的设备信息
+//查询所有的设备信息（不包括蓝牙设备）
 - (NSMutableArray *)getAllDeviceInfomation;
+
+//查询所有的蓝牙设备
+- (NSMutableArray *)getAllDeviceInfomation_BLE;
 
 //插入一条设备信息
 - (BOOL)insertDeivceInfo:(NSMutableArray *)info;

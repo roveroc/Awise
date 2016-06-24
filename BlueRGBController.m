@@ -7,6 +7,7 @@
 //
 
 #import "BlueRGBController.h"
+#import "RoverSqlite.h"
 
 @interface BlueRGBController ()
 
@@ -43,6 +44,9 @@
 @synthesize isTouchPicker;
 @synthesize rValue,gValue,bValue;
 @synthesize cusotmView;
+@synthesize scanTimer;
+@synthesize tempButton;
+@synthesize sql_BLEArray;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -51,6 +55,7 @@
     }
     [self.touchTimer invalidate];
     self.touchTimer = nil;
+    [[AwiseGlobal sharedInstance] showTabBar:self];
 }
 
 - (void)viewDidLoad {
@@ -72,7 +77,7 @@
                                                               target:self
                                                               action:@selector(goBack)];
     
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"切换" style:UIBarButtonItemStyleDone target:self action:@selector(initDeviceTable)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"设备列表" style:UIBarButtonItemStyleDone target:self action:@selector(initDeviceTable)];
     self.navigationItem.rightBarButtonItem = rightItem;
     
 //    UIButton *button =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -140,17 +145,39 @@
     [[AwiseGlobal sharedInstance] hideTabBar:self];
 //读取iTunes中的音乐
     [self importMusicFormItunes];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    //取数据库中蓝牙设备数据
+    RoverSqlite *sql = [[RoverSqlite alloc] init];
+    self.sql_BLEArray = [[NSMutableArray alloc] init];
+    self.sql_BLEArray = [sql getAllDeviceInfomation_BLE];
+}
+
+- (void)appDidBecomeActive:(NSNotification *)notification {
+    NSLog(@"did become active notification  %f ",SCREEN_HEIGHT);
+    self.backScrollView.frame = CGRectMake(0, -64, SCREEN_WIDHT, SCREEN_HEIGHT+64);
+    self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667+64);
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     NSLog(@"CBCentralManager             = %@",central);
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"搜索链接设备中..."];
     [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
-    [self performSelector:@selector(dissMissHUD) withObject:nil afterDelay:2.0];
+    
+    if(self.scanTimer == nil){
+//        self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
+//        [self.scanTimer fire];
+    }
+}
+
+- (void)scanDevice{
+    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
 }
 
 - (void)dissMissHUD{
     [[AwiseGlobal sharedInstance] disMissHUD];
+    self.selectDeviceIndex = -1;
+    [self.deviceTable reloadData];
+    [[AwiseGlobal sharedInstance] showRemindMsg:@"连接失败" withTime:0.8];
 }
 
 #pragma mark ----------------------------------------------- 自定义返回按钮事件
@@ -205,14 +232,41 @@
 //    if([peripheral.name  isEqualToString:BLE_SERVICE_NAME])
     if([advertisementData[@"kCBAdvDataLocalName"]  isEqualToString:BLE_SERVICE_NAME])
     {
-        if(self.connectPeripheral == nil){
-            self.connectPeripheral = peripheral;
-            self.connectPeripheral.delegate = self;
-            [self.centralManager connectPeripheral:peripheral
-                                       options:nil];
+//        if(self.connectPeripheral == nil){
+//            self.connectPeripheral = peripheral;
+//            self.connectPeripheral.delegate = self;
+//            [self.centralManager connectPeripheral:peripheral
+//                                       options:nil];
+//        }
+//        self.selectDeviceIndex = 0;
+//        [self.BLE_DeviceArray addObject:peripheral];
+        BOOL flag = NO;
+        for(int i=0;i<self.BLE_DeviceArray.count;i++){
+            CBPeripheral *temp = [self.BLE_DeviceArray objectAtIndex:i];
+            if([peripheral.identifier isEqual:temp.identifier]){
+                flag = YES;
+            }
         }
-        self.selectDeviceIndex = 0;
-        [self.BLE_DeviceArray addObject:peripheral];
+        if(flag == NO){
+            [self.BLE_DeviceArray addObject:peripheral];
+            if(self.deviceTable != nil && self.deviceTable.alpha == 1.0){
+                [self.deviceTable reloadData];
+            }
+        }
+        int j=0;
+        for(j=0;j<self.sql_BLEArray.count;j++){
+            NSMutableArray *temp = [self.sql_BLEArray objectAtIndex:j];
+            if([temp[1] isEqualToString:[peripheral.identifier UUIDString]]){
+                j = -1;
+                break;
+            }
+        }
+        if(j == self.sql_BLEArray.count-1 || self.sql_BLEArray.count == 0){
+            NSMutableArray *info = [[NSMutableArray alloc] initWithObjects:BLE_SERVICE_NAME,[peripheral.identifier UUIDString],@"Awise_BLE",@"Awise_BLE",@"Awise_BLE",@"Awise_BLE",@"Awise_BLE", nil];
+            [self.sql_BLEArray addObject:info];
+            RoverSqlite *sql = [[RoverSqlite alloc] init];
+            [sql insertDeivceInfo:info];
+        }
     }
 }
 
@@ -225,6 +279,11 @@
 
 #pragma mark ------------------------------------------------ 设备连接成功后，发现在设备上可用的服务
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dissMissHUD) object:nil];
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showRemindMsg:@"连接成功" withTime:0.8];
+    NSMutableArray *info = [self.sql_BLEArray objectAtIndex:self.selectDeviceIndex];
+    self.title = [info objectAtIndex:0];
     if (error){
         NSLog(@"Discovered services for %@ with error: %@", peripheral.name, [error localizedDescription]);
         return;
@@ -278,16 +337,21 @@
     NSLog(@"设备断开连接");
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+}
+
 #pragma mark ------------------------------------------------ 布局界面
 - (void)viewWillLayoutSubviews{
     if(colorPicker != nil)
         return;
+    
     self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
     self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667);
     [self.view addSubview:self.backScrollView];
     
-    colorPicker = [[KZColorPicker alloc] initWithFrame:self.view.bounds];
-    colorPicker.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    colorPicker = [[KZColorPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
+//    colorPicker.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     colorPicker.selectedColor = self.selectedColor;
     colorPicker.oldColor = self.selectedColor;
     [colorPicker addTarget:self action:@selector(pickerChanged:) forControlEvents:UIControlEventValueChanged];
@@ -302,6 +366,12 @@
     }
     else{
         self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
+    }
+    if(iPhone4 || iPhone5){
+        self.backScrollView.scrollEnabled = YES;
+    }
+    else{
+        self.backScrollView.scrollEnabled = NO;
     }
     [self.backScrollView addSubview:self.modePicker];
 //开关、暂停播放
@@ -387,6 +457,9 @@
     [self.backScrollView bringSubviewToFront:self.modeSlider];
     [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    [self initDeviceTable];
+    
 }
 
 #pragma mark ----------------------------------- 发送音乐播放时的值
@@ -635,13 +708,13 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
         self.deviceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 58, SCREEN_WIDHT, SCREEN_HEIGHT-58)];
         self.deviceTable.delegate   = self;
         self.deviceTable.dataSource = self;
-        self.deviceTable.alpha = 0.0;
-        [UIView beginAnimations:@"animation" context:nil];
-        //动画时长
-        [UIView setAnimationDuration:0.2];
-        self.deviceTable.alpha = 1.0;
-        //动画结束
-        [UIView commitAnimations];
+//        self.deviceTable.alpha = 0.0;
+//        [UIView beginAnimations:@"animation" context:nil];
+//        //动画时长
+//        [UIView setAnimationDuration:0.2];
+//        self.deviceTable.alpha = 1.0;
+//        //动画结束
+//        [UIView commitAnimations];
         [self.view addSubview:self.deviceTable];
     }else{
         if(self.deviceTable.alpha == 0.0){
@@ -651,6 +724,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
             self.deviceTable.alpha = 1.0;
             //动画结束
             [UIView commitAnimations];
+            [self.view bringSubviewToFront:self.deviceTable];
         }else{
             [UIView beginAnimations:@"animation" context:nil];
             //动画时长
@@ -689,6 +763,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
                                    options:nil];
     [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"链接设备中..."];
     [self.deviceTable reloadData];
+    [self performSelector:@selector(dissMissHUD) withObject:nil afterDelay:4.0];
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格
@@ -697,6 +772,16 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell){
         cell = [[UITableViewCell alloc] init];
+        //重命名
+        UIButton *namebtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 20, 90, 30)];
+        [namebtn setTitle:@"重命名" forState:UIControlStateNormal];
+        namebtn.layer.cornerRadius = 5;
+        namebtn.layer.masksToBounds = true;
+        namebtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
+        [namebtn addTarget:self action:@selector(changeDeviceName:) forControlEvents:UIControlEventTouchUpInside];
+        [namebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [namebtn setBackgroundColor:[UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.]];
+        [cell addSubview:namebtn];
     }
     if(self.selectDeviceIndex == indexPath.row){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -711,11 +796,59 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     [cell.imageView.image drawInRect:imageRect];
     cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    CBPeripheral *heral = [self.BLE_DeviceArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = heral.name;
+    NSMutableArray *arr = [self.sql_BLEArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [arr objectAtIndex:0];;
+    
     return cell;
 }
 
+#pragma mark ------------------------------------------------ 重命名设备名字
+- (void)changeDeviceName:(id)sender{
+    UIButton *btn = (UIButton *)sender;
+    UITableViewCell *cell;
+    if( [[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
+        cell = (UITableViewCell *)btn.superview.superview;
+    }
+    else{
+        cell = (UITableViewCell *)btn.superview.superview.superview;
+    }
+    self.tempButton = btn;
+    NSMutableArray *deviceInfo = [self.sql_BLEArray objectAtIndex:cell.tag];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_newName"] delegate:nil cancelButtonTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"cancel"] otherButtonTitles:[[AwiseGlobal sharedInstance] DPLocalizedString:@"ok"], nil];
+    alert.tag = 1;
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *text = [alert textFieldAtIndex:0];
+    text.placeholder = [deviceInfo objectAtIndex:0];
+    alert.delegate = self;
+    [alert show];
+}
+
+#pragma mark --------------------------------- 弹出框代理
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UITableViewCell *cell;
+    if( [[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
+        cell = (UITableViewCell *)self.tempButton.superview.superview;
+    }
+    else{
+        cell = (UITableViewCell *)self.tempButton.superview.superview.superview;
+    }
+    NSMutableArray *deviceInfo = [self.sql_BLEArray objectAtIndex:cell.tag];
+    if(alertView.tag == 1){
+        UITextField *filed = [alertView textFieldAtIndex:0];
+        if(filed.text.length == 0){
+            filed.placeholder = @"不能为空";
+            return;
+        }
+        if(buttonIndex == 1){
+            NSString *mac = [deviceInfo objectAtIndex:1];
+            RoverSqlite *sql = [[RoverSqlite alloc] init];
+            if([sql modifyDeviceName:mac newName:filed.text]){
+                self.sql_BLEArray = [sql getAllDeviceInfomation_BLE];
+                [self.deviceTable reloadData];
+            }
+        }
+    }
+}
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]){

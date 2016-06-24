@@ -109,6 +109,17 @@
         }
         [self.backScrollView addSubview:btn];
         
+        //中间过渡btn
+        UIButton *tempBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        tempBtn.tag = (i+10)*100;
+        tempBtn.backgroundColor = [UIColor clearColor];
+        if(i<4){
+            tempBtn.frame = CGRectMake((i+1)*gap+i*size, 470, size, size);
+        }else{
+            tempBtn.frame = CGRectMake(((i-4)+1)*gap+(i-4)*size, 470+70, size, size);
+        }
+        [self.backScrollView addSubview:tempBtn];
+        
         //在btn上添加删除按钮
         UIButton *delBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [delBtn setBackgroundImage:[UIImage imageNamed:@"del.png"] forState:UIControlStateNormal];
@@ -126,18 +137,18 @@
         //长安
         UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(shakeCustomBtn)];
         longGesture.delegate = self;
-        [btn addGestureRecognizer:longGesture];
+        [tempBtn addGestureRecognizer:longGesture];
         //单机
         UITapGestureRecognizer *tapOnce = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(customBtnClick:)];
         UITapGestureRecognizer *tapTwice = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(multipleTap:)];
         tapOnce.numberOfTapsRequired = 1;
         tapOnce.delegate = self;
-        [btn addGestureRecognizer:tapOnce];
+        [tempBtn addGestureRecognizer:tapOnce];
         [tapOnce requireGestureRecognizerToFail:tapTwice];
         //双击
         tapTwice.numberOfTapsRequired = 2;
         tapTwice.delegate = self;
-        [btn addGestureRecognizer:tapTwice];
+        [tempBtn addGestureRecognizer:tapTwice];
     }
 }
 
@@ -154,7 +165,7 @@
 
 #pragma mark ----------------------------------------- 单机  单机
 - (void)customBtnClick:(UIGestureRecognizer *)gesture{
-    int tag = (int)gesture.view.tag;
+    int tag = (int)gesture.view.tag/100;
     NSString *rgb = [self.sceneArray objectAtIndex:tag-10];
     NSArray *argbArray = [rgb componentsSeparatedByString:@"&"];
     if([argbArray[0] intValue] == -1){
@@ -177,7 +188,8 @@
 
 #pragma mark ----------------------------------------- 双击  双击
 - (void)multipleTap:(UIGestureRecognizer *)sender{
-    UIButton *btn = (UIButton *)sender.view;
+    UIButton *temp = (UIButton *)sender.view;
+    UIButton *btn = [self viewWithTag:temp.tag/100];
     if(self.editIndex == (int)btn.tag){
         [self.editTimer invalidate];
         self.editTimer = nil;
@@ -217,6 +229,7 @@
         [UIView setAnimationDuration:0.125];
         [UIView setAnimationDelegate:self];
         btn.transform = rightWobble;         // end here & auto-reverse
+        delbtn.transform = rightWobble;
         [UIView commitAnimations];
     }
 }

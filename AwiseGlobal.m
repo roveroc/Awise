@@ -224,6 +224,22 @@
     con.tabBarController.tabBar.hidden = YES;
 }
 
+#pragma mark -------------------------------------------------------- 显示界面下方TabBar
+- (void)showTabBar:(UIViewController *)con{
+    if (con.tabBarController.tabBar.hidden == NO){
+        return;
+    }
+    UIView *contentView;
+    if ([[con.tabBarController.view.subviews objectAtIndex:0] isKindOfClass:[UITabBar class]])
+        
+        contentView = [con.tabBarController.view.subviews objectAtIndex:1];
+    else
+        
+        contentView = [con.tabBarController.view.subviews objectAtIndex:0];
+    contentView.frame = CGRectMake(contentView.bounds.origin.x, contentView.bounds.origin.y,  contentView.bounds.size.width, contentView.bounds.size.height - con.tabBarController.tabBar.frame.size.height);
+    con.tabBarController.tabBar.hidden = NO;
+}
+
 #pragma mark -------------------------------------------------------- 获取当前时间
 - (NSString *)getCurrentTime{
     NSDateFormatter *dateFormatter4 =[[NSDateFormatter alloc] init];
