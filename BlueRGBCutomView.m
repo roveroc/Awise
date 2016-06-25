@@ -165,6 +165,9 @@
 
 #pragma mark ----------------------------------------- 单机  单机
 - (void)customBtnClick:(UIGestureRecognizer *)gesture{
+    [self.editTimer invalidate];
+    self.editTimer = nil;
+    self.editIndex = -1;
     int tag = (int)gesture.view.tag/100;
     NSString *rgb = [self.sceneArray objectAtIndex:tag-10];
     NSArray *argbArray = [rgb componentsSeparatedByString:@"&"];
@@ -211,7 +214,6 @@
 - (void)startEditCustomBtn:(NSTimer *)timer{
     UIButton *btn = [[timer userInfo] objectForKey:@"btn"];
     [btn d3_heartbeat];
-    NSLog(@"tag 双击 双击 == %d",(int)btn.tag);
 }
 
 #pragma mark ----------------------------------------- 抖动UIbutton，开始编辑

@@ -738,6 +738,7 @@
 		9735C0861CC9C134000B0727 /* Device */ = {
 			isa = PBXGroup;
 			children = (
+				97E431481D1E176000EB4FD2 /* LightFish_1.1 */,
 				97C5BD1A1D0A92DF00D4D6C4 /* TC420 */,
 				976521871CE035E000EEEE01 /* BlueRGB */,
 				976520FC1CDB512200EEEE01 /* LightFish */,
@@ -1194,6 +1195,13 @@
 				97D9EF2A1CD448BE0096F517 /* EditSingleTouchSceneController.xib */,
 			);
 			name = EditScene;
+			sourceTree = "<group>";
+		};
+		97E431481D1E176000EB4FD2 /* LightFish_1.1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = LightFish_1.1;
 			sourceTree = "<group>";
 		};
 		97F55A5E1CCB528900E92957 /* EditTimer */ = {

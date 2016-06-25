@@ -68,6 +68,10 @@
     UIButton                *tempButton;
     //数据库中的蓝牙设备集合
     NSMutableArray          *sql_BLEArray;
+    //判断设备是否在线
+    NSMutableArray          *BLE_onLineArray;
+    NSMutableArray          *tempArray;
+    int                     tempCount;
 }
 
 @property (nonatomic, retain) KZColorPicker         *colorPicker;            //颜色选择器
@@ -107,6 +111,9 @@
 
 @property (nonatomic, retain) BlueRGBCutomView      *cusotmView;
 @property (nonatomic, retain) NSTimer               *scanTimer;
-@property (nonatomic, retain) UIButton              *tempButton;
+@property (nonatomic, retain) UITableViewCell       *tempCell;
 @property (nonatomic, retain) NSMutableArray        *sql_BLEArray;
+@property (nonatomic, retain) NSMutableArray        *BLE_onLineArray;
+@property (nonatomic, retain) NSMutableArray        *tempArray;
+@property (assign)            int                   tempCount;
 @end

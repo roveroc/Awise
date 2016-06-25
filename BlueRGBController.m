@@ -45,8 +45,11 @@
 @synthesize rValue,gValue,bValue;
 @synthesize cusotmView;
 @synthesize scanTimer;
-@synthesize tempButton;
+@synthesize tempCell;
 @synthesize sql_BLEArray;
+@synthesize BLE_onLineArray;
+@synthesize tempArray;
+@synthesize tempCount;
 
 #pragma mark ----------------------------------------------- 返回时断开蓝牙连接
 - (void)viewWillDisappear:(BOOL)animated{
@@ -55,6 +58,8 @@
     }
     [self.touchTimer invalidate];
     self.touchTimer = nil;
+    [self.scanTimer invalidate];
+    self.scanTimer = nil;
     [[AwiseGlobal sharedInstance] showTabBar:self];
 }
 
@@ -64,10 +69,11 @@
     self.title = @"Bule";
     self.selectDeviceIndex = -1;
     // Do any additional setup after loading the view from its nib.
-    self.speedValue = 100;
+    self.speedValue = 1;
     self.lightValue = 100;
     self.modeValue  = 10;
     self.modeValue  = 1;
+    self.tempCount = 0;
     //间隔取值
     self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.08 target:self selector:@selector(changeFlag) userInfo:nil repeats:YES];
     [self.touchTimer fire];
@@ -151,6 +157,12 @@
     RoverSqlite *sql = [[RoverSqlite alloc] init];
     self.sql_BLEArray = [[NSMutableArray alloc] init];
     self.sql_BLEArray = [sql getAllDeviceInfomation_BLE];
+    //默认取出来时全部不在线
+    self.BLE_onLineArray = [[NSMutableArray alloc] init];
+    for(int i=0;i<self.sql_BLEArray.count;i++){
+        [self.BLE_onLineArray addObject:@"0"];      //0表示不在线
+    }
+    self.tempArray = [[NSMutableArray alloc] init];
 }
 
 - (void)appDidBecomeActive:(NSNotification *)notification {
@@ -161,16 +173,21 @@
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     NSLog(@"CBCentralManager             = %@",central);
-    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
+//    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
+    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
+
     
     if(self.scanTimer == nil){
-        self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
+        self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
         [self.scanTimer fire];
     }
 }
 
+#pragma mark ---------------------------------- 定时发现周围设备
 - (void)scanDevice{
-    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerRestoredStateScanOptionsKey:@(YES)}];
+    [self.centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO }];
+
+    
 }
 
 - (void)dissMissHUD{
@@ -222,24 +239,32 @@
 - (void)centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
-    
-    NSLog(@"central             = %@",central);
-    NSLog(@"CBPeripheral        = %@",peripheral);
-    NSLog(@"advertisementData   = %@",advertisementData);
-    NSLog(@"RSSI RSSI           = %@",RSSI);
-
-    
-//    if([peripheral.name  isEqualToString:BLE_SERVICE_NAME])
+    NSLog(@" 搜索到的设备 = %@",peripheral);
     if([advertisementData[@"kCBAdvDataLocalName"]  isEqualToString:BLE_SERVICE_NAME])
     {
-//        if(self.connectPeripheral == nil){
-//            self.connectPeripheral = peripheral;
-//            self.connectPeripheral.delegate = self;
-//            [self.centralManager connectPeripheral:peripheral
-//                                       options:nil];
-//        }
-//        self.selectDeviceIndex = 0;
-//        [self.BLE_DeviceArray addObject:peripheral];
+        int k=0;
+        for(k=0;k<self.tempArray.count;k++){
+            NSString *temp = [self.tempArray objectAtIndex:k];
+            if([temp isEqualToString:[peripheral.identifier UUIDString]]){
+                k = -1;
+                break;
+            }
+        }
+        if(k == self.tempArray.count || self.tempArray.count == 0){
+            [self.tempArray addObject:[peripheral.identifier UUIDString]];
+        }
+        //添加默认连接的
+        if(self.connectPeripheral != nil){
+            NSString *s = [self.connectPeripheral.identifier UUIDString];
+            if(![self.tempArray containsObject:s]){
+                [self.tempArray addObject:s];
+            }
+        }
+        
+        NSLog(@"CBPeripheral        = %@",peripheral.identifier);
+        
+        
+        
         BOOL flag = NO;
         for(int i=0;i<self.BLE_DeviceArray.count;i++){
             CBPeripheral *temp = [self.BLE_DeviceArray objectAtIndex:i];
@@ -249,23 +274,55 @@
         }
         if(flag == NO){
             [self.BLE_DeviceArray addObject:peripheral];
-            if(self.deviceTable != nil && self.deviceTable.alpha == 1.0){
-                [self.deviceTable reloadData];
-            }
         }
         int j=0;
         for(j=0;j<self.sql_BLEArray.count;j++){
             NSMutableArray *temp = [self.sql_BLEArray objectAtIndex:j];
             if([temp[1] isEqualToString:[peripheral.identifier UUIDString]]){
+                [self.BLE_onLineArray replaceObjectAtIndex:j withObject:@"1"];
                 j = -1;
                 break;
             }
         }
-        if(j == self.sql_BLEArray.count-1 || self.sql_BLEArray.count == 0){
+        if(j == self.sql_BLEArray.count || self.sql_BLEArray.count == 0){
             NSMutableArray *info = [[NSMutableArray alloc] initWithObjects:BLE_SERVICE_NAME,[peripheral.identifier UUIDString],@"Awise_BLE",@"Awise_BLE",@"Awise_BLE",@"Awise_BLE",@"Awise_BLE", nil];
             [self.sql_BLEArray addObject:info];
+            [self.BLE_onLineArray addObject:@"1"];
             RoverSqlite *sql = [[RoverSqlite alloc] init];
             [sql insertDeivceInfo:info];
+            
+        }
+        
+        //如果连续两次间隔没有扫描到设备，说明不在线
+        self.tempCount++;
+        if(self.tempCount == self.sql_BLEArray.count*2){
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(searchFinish) object:nil];
+            [[AwiseGlobal sharedInstance] disMissHUD];
+            self.tempCount = 0;
+            for(int i=0;i<self.sql_BLEArray.count;i++){
+                NSString *ide = [[self.sql_BLEArray objectAtIndex:i] objectAtIndex:1];
+                
+                NSLog(@"数据库中的记录  的ID    = %@",ide);
+                
+                BOOL flag = NO;
+                for(int n=0;n<self.tempArray.count;n++){
+                    NSString *str = [self.tempArray objectAtIndex:n];
+                    
+                    NSLog(@"最新搜索到  的ID    = %@",str);
+                    
+                    if([ide isEqualToString:str]){
+                        NSLog(@"扫描到匹配  在线！");
+                        flag = YES;
+                        break;
+                    }
+                }
+                if(flag == NO){
+                    NSLog(@"不在线！NO ");
+                    [self.BLE_onLineArray replaceObjectAtIndex:i withObject:@"0"];
+                }
+            }
+            [self.deviceTable reloadData];
+            [self.tempArray removeAllObjects];
         }
     }
 }
@@ -277,13 +334,32 @@
     [peripheral discoverServices:nil];      //可以指定服务号（数组）
 }
 
+#pragma mark ------------------------------------------------ 断开连接
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error{
+    NSLog(@"设备断开连接");
+//    [[AwiseGlobal sharedInstance] showRemindMsg:@"断开连接" withTime:1.0];
+    if(self.selectDeviceIndex > 0){
+        [self.BLE_onLineArray replaceObjectAtIndex:self.selectDeviceIndex withObject:@"0"];
+    }
+    self.selectDeviceIndex = -1;
+    if(self.connectPeripheral != nil){
+        [self.centralManager cancelPeripheralConnection:self.connectPeripheral];
+    }
+    [self.deviceTable reloadData];
+}
+
 #pragma mark ------------------------------------------------ 设备连接成功后，发现在设备上可用的服务
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dissMissHUD) object:nil];
     [[AwiseGlobal sharedInstance] disMissHUD];
     [[AwiseGlobal sharedInstance] showRemindMsg:@"连接成功" withTime:0.8];
-    NSMutableArray *info = [self.sql_BLEArray objectAtIndex:self.selectDeviceIndex];
-    self.title = [info objectAtIndex:0];
+    if([self.scanTimer isValid]){
+        [self.scanTimer invalidate];
+    }
+    if(self.selectDeviceIndex > 0){
+        NSMutableArray *info = [self.sql_BLEArray objectAtIndex:self.selectDeviceIndex];
+        self.title = [info objectAtIndex:0];
+    }
     if (error){
         NSLog(@"Discovered services for %@ with error: %@", peripheral.name, [error localizedDescription]);
         return;
@@ -309,7 +385,8 @@
         //发现特征
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"FFFA"]]) {
             self.character = characteristic;
-            [self.connectPeripheral setNotifyValue:YES forCharacteristic:characteristic];
+            self.connectPeripheral.delegate = self;
+            [self.connectPeripheral setNotifyValue:YES forCharacteristic:self.character];
             [[AwiseGlobal sharedInstance] disMissHUD];
             if(self.deviceTable != nil){
                 [UIView beginAnimations:@"animation" context:nil];
@@ -319,8 +396,22 @@
                 //动画结束
                 [UIView commitAnimations];
             }
+            //读取连接设备的状态值
+            Byte by[4];
+            by[0] = 4;
+            by[1] = 4;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+//            [self performSelector:@selector(readDeviceValue) withObject:nil afterDelay:1.0];
+            break;
         }
     }
+}
+
+- (void)readDeviceValue{
+    [self.connectPeripheral setNotifyValue:YES forCharacteristic:self.character];
 }
 
 #pragma mark ------------------------------------------------ 从连接的设备上收到的数据
@@ -330,11 +421,6 @@
         return;
     }
     NSLog(@"收到的数据----------------------------> %@",characteristic.value);
-}
-
-#pragma mark ------------------------------------------------ 设备断开连接时调用
-- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error{
-    NSLog(@"设备断开连接");
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -417,7 +503,7 @@
                forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:self.onOffButton];
     [self.backScrollView addSubview:self.PlayPauseButton];
-    [self.backScrollView addSubview:self.musicButton];
+//    [self.backScrollView addSubview:self.musicButton];
     [self.backScrollView addSubview:self.customButton];
     
 //亮度值滑条
@@ -459,7 +545,13 @@
     [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
     
     [self initDeviceTable];
-    
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"搜索设备中"];
+    [self performSelector:@selector(searchFinish) withObject:nil afterDelay:5.5];
+}
+
+- (void)searchFinish{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showRemindMsg:@"无设备" withTime:0.8];
 }
 
 #pragma mark ----------------------------------- 发送音乐播放时的值
@@ -648,12 +740,17 @@
             self.gValue = [[arr objectAtIndex:2] floatValue]*100;
             self.bValue = [[arr objectAtIndex:3] floatValue]*100;
             Byte by[4];
-            by[0] = 1;
-            by[1] = self.rValue;
-            by[2] = self.gValue;
-            by[3] = self.bValue;
+//            by[0] = 1;
+//            by[1] = self.rValue;
+//            by[2] = self.gValue;
+//            by[3] = self.bValue;
+            by[0] = 4;
+            by[1] = 4;
+            by[2] = 0;
+            by[3] = 0;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+            [self.connectPeripheral setNotifyValue:YES forCharacteristic:self.character];
         }
     }
 }
@@ -690,7 +787,11 @@
 - (void)peripheral:(CBPeripheral *)peripheral
 didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error {
-    NSLog(@"characteristic  characteristic  = %@",characteristic);
+    NSLog(@"characteristic  characteristic  通知返回的值  = %@",characteristic);
+    if (error) {
+        NSLog(@"Error changing notification state: %@",
+              [error localizedDescription]);
+    }
 }
 
 
@@ -725,6 +826,12 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
             //动画结束
             [UIView commitAnimations];
             [self.view bringSubviewToFront:self.deviceTable];
+            
+            if([self.scanTimer isValid]){
+                [self.scanTimer invalidate];
+            }
+            self.scanTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(scanDevice) userInfo:nil repeats:YES];
+            [self.scanTimer fire];
         }else{
             [UIView beginAnimations:@"animation" context:nil];
             //动画时长
@@ -732,6 +839,9 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
             self.deviceTable.alpha = 0.0;
             //动画结束
             [UIView commitAnimations];
+            if([self.scanTimer isValid]){
+                [self.scanTimer invalidate];
+            }
         }
     }
 }
@@ -743,7 +853,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 
 #pragma mark ------------------------------------------------ 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.BLE_DeviceArray.count;
+    return self.sql_BLEArray.count;
 }
 
 #pragma mark ------------------------------------------------ 行高
@@ -753,17 +863,44 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 
 #pragma mark ------------------------------------------------ 点击行
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.selectDeviceIndex == indexPath.row)
+    if(self.selectDeviceIndex == indexPath.row){
+        [self initDeviceTable];
         return ;
+    }
     self.selectDeviceIndex = (int)indexPath.row;
-    CBPeripheral *heral = [self.BLE_DeviceArray objectAtIndex:indexPath.row];
-    self.connectPeripheral = heral;
-    self.connectPeripheral.delegate = self;
-    [self.centralManager connectPeripheral:heral
+    NSString *uuid = [self.sql_BLEArray objectAtIndex:indexPath.row][1];
+    CBPeripheral *heral;
+    BOOL flag = NO;
+    for(int i=0;i<self.BLE_DeviceArray.count;i++){      //可能导致控制对象不准确
+        heral = [self.BLE_DeviceArray objectAtIndex:i];
+        if([[heral.identifier UUIDString] isEqualToString:uuid]){
+            flag = YES;
+            break;
+        }
+    }
+    if(flag == YES){
+        if(self.connectPeripheral != nil){
+            self.connectPeripheral.delegate = nil;
+            [self.centralManager cancelPeripheralConnection:self.connectPeripheral];
+        }
+        self.connectPeripheral = heral;
+        [self performSelector:@selector(reConnectDevice) withObject:nil afterDelay:0.5];
+        [self performSelector:@selector(dissMissHUD) withObject:nil afterDelay:4.0];
+    }else{
+        if(self.connectPeripheral != nil){
+            [self.centralManager cancelPeripheralConnection:self.connectPeripheral];
+        }
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"设备不在线" withTime:0.8];
+        self.selectDeviceIndex = -1;
+        [self.deviceTable reloadData];
+    }
+}
+
+- (void)reConnectDevice{
+    [self.centralManager connectPeripheral:self.connectPeripheral
                                    options:nil];
     [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"链接设备中..."];
     [self.deviceTable reloadData];
-    [self performSelector:@selector(dissMissHUD) withObject:nil afterDelay:4.0];
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格
@@ -773,7 +910,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     if(!cell){
         cell = [[UITableViewCell alloc] init];
         //重命名
-        UIButton *namebtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 20, 90, 30)];
+        UIButton *namebtn = [[UIButton alloc] initWithFrame:CGRectMake(200, 20, 80, 30)];
         [namebtn setTitle:@"重命名" forState:UIControlStateNormal];
         namebtn.layer.cornerRadius = 5;
         namebtn.layer.masksToBounds = true;
@@ -782,6 +919,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
         [namebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [namebtn setBackgroundColor:[UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.]];
         [cell addSubview:namebtn];
+        
     }
     if(self.selectDeviceIndex == indexPath.row){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -789,7 +927,12 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     else{
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    cell.imageView.image=[UIImage imageNamed:@"aboutUs.png"];
+    if([[self.BLE_onLineArray objectAtIndex:indexPath.row] intValue] == 0){
+        cell.imageView.image=[UIImage imageNamed:@"turnOffLight@3x.png"];
+    }else{
+        cell.imageView.image=[UIImage imageNamed:@"turnOnLight@3x.png"];
+    }
+    cell.tag = indexPath.row;
     CGSize itemSize = CGSizeMake(40, 40);
     UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
     CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
@@ -806,13 +949,13 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 - (void)changeDeviceName:(id)sender{
     UIButton *btn = (UIButton *)sender;
     UITableViewCell *cell;
-    if( [[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
-        cell = (UITableViewCell *)btn.superview.superview;
+    if([[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
+        cell = (UITableViewCell *)btn.superview;
     }
     else{
         cell = (UITableViewCell *)btn.superview.superview.superview;
     }
-    self.tempButton = btn;
+    self.tempCell = cell;
     NSMutableArray *deviceInfo = [self.sql_BLEArray objectAtIndex:cell.tag];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[[AwiseGlobal sharedInstance] DPLocalizedString:@"manager_newName"] delegate:nil cancelButtonTitle:[[AwiseGlobal sharedInstance] DPLocalizedString:@"cancel"] otherButtonTitles:[[AwiseGlobal sharedInstance] DPLocalizedString:@"ok"], nil];
     alert.tag = 1;
@@ -825,14 +968,7 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
 
 #pragma mark --------------------------------- 弹出框代理
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    UITableViewCell *cell;
-    if( [[UIDevice currentDevice].systemVersion doubleValue] > 8.0){
-        cell = (UITableViewCell *)self.tempButton.superview.superview;
-    }
-    else{
-        cell = (UITableViewCell *)self.tempButton.superview.superview.superview;
-    }
-    NSMutableArray *deviceInfo = [self.sql_BLEArray objectAtIndex:cell.tag];
+    NSMutableArray *deviceInfo = [self.sql_BLEArray objectAtIndex:self.tempCell.tag];
     if(alertView.tag == 1){
         UITextField *filed = [alertView textFieldAtIndex:0];
         if(filed.text.length == 0){
