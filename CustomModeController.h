@@ -10,10 +10,12 @@
 #import "AwiseGlobal.h"
 #import "lineView.h"
 #import "CustomModeCell.h"
+#import "TCPCommunication.h"
 #import <UIImageView+Letters.h>
 #import "TC420_EditTimerController.h"
+#import "LightFish11_EditTimerController.h"
 
-@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource,TC420EditTimerDelegate>{
+@interface CustomModeController : UIViewController<UITableViewDelegate,UITableViewDataSource,TC420EditTimerDelegate,LightFish11EditTimerDelegate>{
     NSMutableArray      *timerData;
     
 }

@@ -50,13 +50,61 @@
 #pragma mark ----------------------------------------- 点击选择星期
 - (IBAction)weekBtnClicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
-    int value = [[self.weekArray objectAtIndex:btn.tag-1] intValue];
-    if(value == 1){         //表示选中当天
-        [weekArray replaceObjectAtIndex:btn.tag-1 withObject:@"0"];
-        btn.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
-    }else if(value == 0){   //表示没选中当天
-        [weekArray replaceObjectAtIndex:btn.tag-1 withObject:@"1"];
+//    int value = [[self.weekArray objectAtIndex:btn.tag-1] intValue];
+//    if(value == 1){         //表示选中当天
+//        [weekArray replaceObjectAtIndex:btn.tag-1 withObject:@"0"];
+//        btn.backgroundColor = [UIColor grayColor];
+//    }else if(value == 0){   //表示没选中当天
+//        [weekArray replaceObjectAtIndex:btn.tag-1 withObject:@"1"];
+//        btn.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+//    }
+    
+    if(btn.tag == 8){
+        if([[weekArray objectAtIndex:7] intValue] == 0){
+            for(int i=0;i<weekArray.count;i++){
+                [weekArray replaceObjectAtIndex:i withObject:@"1"];
+                UIButton *temp = (UIButton *)[self viewWithTag:i+1];
+                temp.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+            }
+        }else if([[weekArray objectAtIndex:7] intValue] == 1){
+            for(int i=0;i<weekArray.count;i++){
+                [weekArray replaceObjectAtIndex:i withObject:@"0"];
+                UIButton *temp = (UIButton *)[self viewWithTag:i+1];
+                temp.backgroundColor = [UIColor grayColor];
+            }
+        }
+    }
+    else{
+        [self changeArrayValue:(int)btn.tag-1 button:btn];
+        if([weekArray containsObject:@"0"]){
+            UIButton *temp = (UIButton *)[self viewWithTag:8];
+            temp.backgroundColor = [UIColor grayColor];
+            [weekArray replaceObjectAtIndex:7 withObject:@"0"];
+        }
+        int temp = 0;
+        for(int i=0;i<weekArray.count-1;i++){
+            if([[weekArray objectAtIndex:i] intValue] == 1){
+                temp++;
+            }
+        }
+        if(temp == weekArray.count-1){
+            for(int i=0;i<weekArray.count;i++){
+                [weekArray replaceObjectAtIndex:i withObject:@"1"];
+                UIButton *temp = (UIButton *)[self viewWithTag:i+1];
+                temp.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+            }
+        }
+    }
+}
+
+#pragma mark -------------------------------------------- 改变数组值和改变button的选中状态
+- (void)changeArrayValue:(int)index button:(UIButton *)btn{
+    if([[weekArray objectAtIndex:index] intValue] == 1){
+        [weekArray replaceObjectAtIndex:index withObject:@"0"];
         btn.backgroundColor = [UIColor grayColor];
+    }else if([[weekArray objectAtIndex:index] intValue] == 0){
+        [weekArray replaceObjectAtIndex:index withObject:@"1"];
+        btn.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
     }
 }
 

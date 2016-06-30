@@ -144,7 +144,7 @@
                 <constraint firstItem="LPe-e5-mjS" firstAttribute="leading" secondItem="u9p-8O-qpm" secondAttribute="trailing" constant="8" id="t58-0g-Lje"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1629" y="530"/>
+            <point key="canvasLocation" x="1451" y="544"/>
         </view>
     </objects>
     <resources>

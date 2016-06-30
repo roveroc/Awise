@@ -46,15 +46,6 @@
 		9735C08B1CC9C1A8000B0727 /* SingleTouchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735C0891CC9C1A8000B0727 /* SingleTouchController.m */; };
 		9735C08C1CC9C1A8000B0727 /* SingleTouchController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9735C08A1CC9C1A8000B0727 /* SingleTouchController.xib */; };
 		975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 975030521CCE02E00041861B /* SingleTouchTimer.plist */; };
-		975707B81D1D1FB100B42474 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C721D0FB95C00B4521B /* QRCameraSwitchButton.m */; };
-		975707B91D1D1FB100B42474 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C731D0FB95C00B4521B /* QRCodeReader.m */; };
-		975707BA1D1D1FB100B42474 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C741D0FB95C00B4521B /* QRCodeReaderView.m */; };
-		975707BB1D1D1FB100B42474 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C751D0FB95C00B4521B /* QRCodeReaderViewController.m */; };
-		975707BC1D1D1FB100B42474 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C761D0FB95C00B4521B /* QRToggleTorchButton.m */; };
-		975707BD1D1D1FB100B42474 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C701D0FB94300B4521B /* UIImageView+Letters.m */; };
-		975707BE1D1D1FB100B42474 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6E1D0FB93400B4521B /* EFCircularSlider.m */; };
-		975707BF1D1D1FB100B42474 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6C1D0FB92200B4521B /* AsyncSocket.m */; };
-		975707C01D1D1FB100B42474 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6A1D0FB90B00B4521B /* MBProgressHUD.m */; };
 		97651ECD1CD8500200EEEE01 /* AddDeviceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97651ECB1CD8500200EEEE01 /* AddDeviceController.m */; };
 		97651ECE1CD8500200EEEE01 /* AddDeviceController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97651ECC1CD8500200EEEE01 /* AddDeviceController.xib */; };
 		97651F761CD8B07C00EEEE01 /* 640x960.png in Resources */ = {isa = PBXBuildFile; fileRef = 97651F721CD8B07C00EEEE01 /* 640x960.png */; };
@@ -111,6 +102,13 @@
 		976522281CE0793400EEEE01 /* BlueRGBController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976522261CE0793400EEEE01 /* BlueRGBController.xib */; };
 		976F5E941D08218F003FDF43 /* MusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976F5E931D08218F003FDF43 /* MusicView.m */; };
 		976F5E961D0821A9003FDF43 /* MusicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976F5E951D0821A9003FDF43 /* MusicView.xib */; };
+		9770C8931D25013300BEC758 /* LightFish11_timerData1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C8921D25013300BEC758 /* LightFish11_timerData1.plist */; };
+		9770C8951D25014900BEC758 /* LightFish11_timerData2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C8941D25014900BEC758 /* LightFish11_timerData2.plist */; };
+		9770C8971D25015500BEC758 /* LightFish11_timerData3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C8961D25015500BEC758 /* LightFish11_timerData3.plist */; };
+		9770C8991D25016100BEC758 /* LightFish11_timerData4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C8981D25016100BEC758 /* LightFish11_timerData4.plist */; };
+		9770C89B1D25016E00BEC758 /* LightFish11_timerData5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C89A1D25016E00BEC758 /* LightFish11_timerData5.plist */; };
+		9770C89D1D25017A00BEC758 /* LightFish11_timerData6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C89C1D25017A00BEC758 /* LightFish11_timerData6.plist */; };
+		9770C89F1D25018500BEC758 /* LightFish11_timerData7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9770C89E1D25018500BEC758 /* LightFish11_timerData7.plist */; };
 		977575231CF1911100D34D45 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575201CF1911100D34D45 /* ASValuePopUpView.m */; };
 		977575241CF1911100D34D45 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 977575221CF1911100D34D45 /* ASValueTrackingSlider.m */; };
 		9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 9782ECD11D02735800DA3270 /* edit1Highlight.png */; };
@@ -138,6 +136,17 @@
 		9796DB191D06A130008A65AE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9796DB181D06A130008A65AE /* MediaPlayer.framework */; };
 		97A2AB7E1CD21B6800734E61 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7A1CD21B6800734E61 /* GBPingSummary.m */; };
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
+		97AE06901D23B60400EC8BD6 /* LightFish11_EditTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AE068E1D23B60400EC8BD6 /* LightFish11_EditTimerController.m */; };
+		97AE06911D23B60400EC8BD6 /* LightFish11_EditTimerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AE068F1D23B60400EC8BD6 /* LightFish11_EditTimerController.xib */; };
+		97AE06921D23B6FE00EC8BD6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C721D0FB95C00B4521B /* QRCameraSwitchButton.m */; };
+		97AE06931D23B6FE00EC8BD6 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C731D0FB95C00B4521B /* QRCodeReader.m */; };
+		97AE06941D23B6FE00EC8BD6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C741D0FB95C00B4521B /* QRCodeReaderView.m */; };
+		97AE06951D23B6FE00EC8BD6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C751D0FB95C00B4521B /* QRCodeReaderViewController.m */; };
+		97AE06961D23B6FE00EC8BD6 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C761D0FB95C00B4521B /* QRToggleTorchButton.m */; };
+		97AE06971D23B6FE00EC8BD6 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C701D0FB94300B4521B /* UIImageView+Letters.m */; };
+		97AE06981D23B6FE00EC8BD6 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6E1D0FB93400B4521B /* EFCircularSlider.m */; };
+		97AE06991D23B6FE00EC8BD6 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6C1D0FB92200B4521B /* AsyncSocket.m */; };
+		97AE069A1D23B6FE00EC8BD6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6A1D0FB90B00B4521B /* MBProgressHUD.m */; };
 		97B81EC81D0E849800DD4326 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B81EC71D0E849800DD4326 /* CFNetwork.framework */; };
 		97B9C3A31D0E860F001A565A /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9C39E1D0E860F001A565A /* libCocoaAsyncSocket.a */; };
 		97B9C3A41D0E860F001A565A /* libEFCircularSlider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9C39F1D0E860F001A565A /* libEFCircularSlider.a */; };
@@ -329,6 +338,13 @@
 		976F5E921D08218F003FDF43 /* MusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicView.h; sourceTree = "<group>"; };
 		976F5E931D08218F003FDF43 /* MusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicView.m; sourceTree = "<group>"; };
 		976F5E951D0821A9003FDF43 /* MusicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicView.xib; sourceTree = "<group>"; };
+		9770C8921D25013300BEC758 /* LightFish11_timerData1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData1.plist; sourceTree = "<group>"; };
+		9770C8941D25014900BEC758 /* LightFish11_timerData2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData2.plist; sourceTree = "<group>"; };
+		9770C8961D25015500BEC758 /* LightFish11_timerData3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData3.plist; sourceTree = "<group>"; };
+		9770C8981D25016100BEC758 /* LightFish11_timerData4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData4.plist; sourceTree = "<group>"; };
+		9770C89A1D25016E00BEC758 /* LightFish11_timerData5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData5.plist; sourceTree = "<group>"; };
+		9770C89C1D25017A00BEC758 /* LightFish11_timerData6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData6.plist; sourceTree = "<group>"; };
+		9770C89E1D25018500BEC758 /* LightFish11_timerData7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LightFish11_timerData7.plist; sourceTree = "<group>"; };
 		9775751F1CF1911100D34D45 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
 		977575201CF1911100D34D45 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		977575211CF1911100D34D45 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
@@ -363,6 +379,9 @@
 		97A2AB7B1CD21B6800734E61 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
 		97A2AB7C1CD21B6800734E61 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
 		97A2AB7D1CD21B6800734E61 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
+		97AE068D1D23B60400EC8BD6 /* LightFish11_EditTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightFish11_EditTimerController.h; sourceTree = "<group>"; };
+		97AE068E1D23B60400EC8BD6 /* LightFish11_EditTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightFish11_EditTimerController.m; sourceTree = "<group>"; };
+		97AE068F1D23B60400EC8BD6 /* LightFish11_EditTimerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightFish11_EditTimerController.xib; sourceTree = "<group>"; };
 		97B81EC71D0E849800DD4326 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		97B9C39E1D0E860F001A565A /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaAsyncSocket.a; path = "../../../Library/Developer/Xcode/DerivedData/AwiseController-fdoqyrhnfycfreacroiiemwoheca/Build/Products/Debug-iphoneos/CocoaAsyncSocket/libCocoaAsyncSocket.a"; sourceTree = "<group>"; };
 		97B9C39F1D0E860F001A565A /* libEFCircularSlider.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEFCircularSlider.a; path = "../../../Library/Developer/Xcode/DerivedData/AwiseController-fdoqyrhnfycfreacroiiemwoheca/Build/Products/Debug-iphoneos/EFCircularSlider/libEFCircularSlider.a"; sourceTree = "<group>"; };
@@ -994,6 +1013,20 @@
 			name = MusicView;
 			sourceTree = "<group>";
 		};
+		9770C8911D25010000BEC758 /* ModeData */ = {
+			isa = PBXGroup;
+			children = (
+				9770C8921D25013300BEC758 /* LightFish11_timerData1.plist */,
+				9770C8941D25014900BEC758 /* LightFish11_timerData2.plist */,
+				9770C8961D25015500BEC758 /* LightFish11_timerData3.plist */,
+				9770C8981D25016100BEC758 /* LightFish11_timerData4.plist */,
+				9770C89A1D25016E00BEC758 /* LightFish11_timerData5.plist */,
+				9770C89C1D25017A00BEC758 /* LightFish11_timerData6.plist */,
+				9770C89E1D25018500BEC758 /* LightFish11_timerData7.plist */,
+			);
+			name = ModeData;
+			sourceTree = "<group>";
+		};
 		9775751E1CF190FB00D34D45 /* PopSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1064,6 +1097,16 @@
 				97A2AB7D1CD21B6800734E61 /* GBPing.m */,
 			);
 			name = GBPing;
+			sourceTree = "<group>";
+		};
+		97AE068C1D23B59200EC8BD6 /* EditFish1.1Timer */ = {
+			isa = PBXGroup;
+			children = (
+				97AE068D1D23B60400EC8BD6 /* LightFish11_EditTimerController.h */,
+				97AE068E1D23B60400EC8BD6 /* LightFish11_EditTimerController.m */,
+				97AE068F1D23B60400EC8BD6 /* LightFish11_EditTimerController.xib */,
+			);
+			name = EditFish1.1Timer;
 			sourceTree = "<group>";
 		};
 		97B9C3B81D0E8768001A565A /* ThridFrameWorkFile */ = {
@@ -1200,6 +1243,8 @@
 		97E431481D1E176000EB4FD2 /* LightFish_1.1 */ = {
 			isa = PBXGroup;
 			children = (
+				9770C8911D25010000BEC758 /* ModeData */,
+				97AE068C1D23B59200EC8BD6 /* EditFish1.1Timer */,
 			);
 			name = LightFish_1.1;
 			sourceTree = "<group>";
@@ -1311,6 +1356,10 @@
 				9782ECE31D02739400DA3270 /* pause.png in Resources */,
 				9782ECD31D02735800DA3270 /* edit1Highlight.png in Resources */,
 				97651F7B1CD98B3600EEEE01 /* area_school.png in Resources */,
+				9770C89D1D25017A00BEC758 /* LightFish11_timerData6.plist in Resources */,
+				97AE06911D23B60400EC8BD6 /* LightFish11_EditTimerController.xib in Resources */,
+				9770C8991D25016100BEC758 /* LightFish11_timerData4.plist in Resources */,
+				9770C8951D25014900BEC758 /* LightFish11_timerData2.plist in Resources */,
 				972F72801D000F25008560ED /* MannageCell.xib in Resources */,
 				97B9C3CD1D0E9180001A565A /* TC420_EditTimerController.xib in Resources */,
 				9782ECE01D02739400DA3270 /* lowSpeed.png in Resources */,
@@ -1327,6 +1376,7 @@
 				976521121CDC2F1A00EEEE01 /* EditTimerController.xib in Resources */,
 				976F5E961D0821A9003FDF43 /* MusicView.xib in Resources */,
 				9765212F1CDC302200EEEE01 /* DeviceMannagerController.xib in Resources */,
+				9770C8931D25013300BEC758 /* LightFish11_timerData1.plist in Resources */,
 				9735C03B1CC7832A000B0727 /* Assets.xcassets in Resources */,
 				976521031CDB51A900EEEE01 /* LightFishController.xib in Resources */,
 				9782ECF41D0275AC00DA3270 /* addDevice.png in Resources */,
@@ -1372,7 +1422,9 @@
 				9782ECF01D02752E00DA3270 /* set.png in Resources */,
 				97CD48A81D0BF61600A4C87F /* LightCloudyController.xib in Resources */,
 				97BF2FB51D1292210019E180 /* effect_selected.png in Resources */,
+				9770C89B1D25016E00BEC758 /* LightFish11_timerData5.plist in Resources */,
 				97BF2FB41D1292210019E180 /* effect_disSelected.png in Resources */,
+				9770C8971D25015500BEC758 /* LightFish11_timerData3.plist in Resources */,
 				9765213D1CDC3E3300EEEE01 /* single.png in Resources */,
 				9782ECD41D02735800DA3270 /* editNormal.png in Resources */,
 				976520FA1CD9F10C00EEEE01 /* RouterView.xib in Resources */,
@@ -1381,6 +1433,7 @@
 				9735C0521CC78998000B0727 /* RootController.xib in Resources */,
 				976521471CDC443800EEEE01 /* turnOnLight@3x.png in Resources */,
 				976521441CDC43F100EEEE01 /* turnOffLight@3x.png in Resources */,
+				9770C89F1D25018500BEC758 /* LightFish11_timerData7.plist in Resources */,
 				97B9C3C51D0E907B001A565A /* TC420_timerData6.plist in Resources */,
 				975030531CCE02E00041861B /* SingleTouchTimer.plist in Resources */,
 				97C5BD201D0A936000D4D6C4 /* TC_MainController.xib in Resources */,
@@ -1455,15 +1508,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				975707B81D1D1FB100B42474 /* QRCameraSwitchButton.m in Sources */,
-				975707B91D1D1FB100B42474 /* QRCodeReader.m in Sources */,
-				975707BA1D1D1FB100B42474 /* QRCodeReaderView.m in Sources */,
-				975707BB1D1D1FB100B42474 /* QRCodeReaderViewController.m in Sources */,
-				975707BC1D1D1FB100B42474 /* QRToggleTorchButton.m in Sources */,
-				975707BD1D1D1FB100B42474 /* UIImageView+Letters.m in Sources */,
-				975707BE1D1D1FB100B42474 /* EFCircularSlider.m in Sources */,
-				975707BF1D1D1FB100B42474 /* AsyncSocket.m in Sources */,
-				975707C01D1D1FB100B42474 /* MBProgressHUD.m in Sources */,
+				97AE06921D23B6FE00EC8BD6 /* QRCameraSwitchButton.m in Sources */,
+				97AE06931D23B6FE00EC8BD6 /* QRCodeReader.m in Sources */,
+				97AE06941D23B6FE00EC8BD6 /* QRCodeReaderView.m in Sources */,
+				97AE06951D23B6FE00EC8BD6 /* QRCodeReaderViewController.m in Sources */,
+				97AE06961D23B6FE00EC8BD6 /* QRToggleTorchButton.m in Sources */,
+				97AE06971D23B6FE00EC8BD6 /* UIImageView+Letters.m in Sources */,
+				97AE06981D23B6FE00EC8BD6 /* EFCircularSlider.m in Sources */,
+				97AE06991D23B6FE00EC8BD6 /* AsyncSocket.m in Sources */,
+				97AE069A1D23B6FE00EC8BD6 /* MBProgressHUD.m in Sources */,
 				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
 				976521021CDB51A900EEEE01 /* LightFishController.m in Sources */,
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
@@ -1515,6 +1568,7 @@
 				9765221B1CE076A700EEEE01 /* KZColorPicker.m in Sources */,
 				97D9EF2F1CD466FE0096F517 /* AwiseUserDefault.m in Sources */,
 				97B9C3CC1D0E9180001A565A /* TC420_EditTimerController.m in Sources */,
+				97AE06901D23B60400EC8BD6 /* LightFish11_EditTimerController.m in Sources */,
 				9735C0511CC78998000B0727 /* RootController.m in Sources */,
 				9735C0671CC78FF0000B0727 /* SimplePingHelper.m in Sources */,
 				97930FC71CE5BC7C006601D8 /* Reachability.m in Sources */,

@@ -27,13 +27,31 @@
 }
 
 - (void)getDataFromFile{
-    NSString *path1 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData1.plist"];
-    NSString *path2 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData2.plist"];
-    NSString *path3 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData3.plist"];
-    NSString *path4 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData4.plist"];
-    NSString *path5 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData5.plist"];
-    NSString *path6 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData6.plist"];
-    NSString *path7 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData7.plist"];
+    NSString *path1;
+    NSString *path2;
+    NSString *path3;
+    NSString *path4;
+    NSString *path5;
+    NSString *path6;
+    NSString *path7;
+    [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice_1_1;
+    if([AwiseGlobal sharedInstance].tcpSocket.controlDeviceType == TC420Device){
+        path1 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData1.plist"];
+        path2 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData2.plist"];
+        path3 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData3.plist"];
+        path4 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData4.plist"];
+        path5 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData5.plist"];
+        path6 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData6.plist"];
+        path7 = [[AwiseGlobal sharedInstance] getFilePath:@"TC420_timerData7.plist"];
+    }else if ([AwiseGlobal sharedInstance].tcpSocket.controlDeviceType == LightFishDevice_1_1){
+        path1 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData1.plist"];
+        path2 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData2.plist"];
+        path3 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData3.plist"];
+        path4 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData4.plist"];
+        path5 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData5.plist"];
+        path6 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData6.plist"];
+        path7 = [[AwiseGlobal sharedInstance] getFilePath:@"LightFish11_timerData7.plist"];
+    }
     
     NSMutableArray *tempArr1 = [[NSMutableArray alloc] initWithContentsOfFile:path1];
     NSMutableArray *tempArr2 = [[NSMutableArray alloc] initWithContentsOfFile:path2];
@@ -89,8 +107,14 @@
                       tempArr7, nil];
 }
 
-#pragma mark ------------------------------------------------ 编辑的数据被保存，刷新tableView
+#pragma mark ------------------------------------------------ TC420 编辑的数据被保存，刷新tableView
 - (void)dataSaved{
+    [self getDataFromFile];
+    [self.modeTableView reloadData];
+}
+
+#pragma mark ------------------------------------------------ 水族灯1.1版本 编辑的数据被保存，刷新tableView
+- (void)LightFish11_dataSaved{
     [self getDataFromFile];
     [self.modeTableView reloadData];
 }
@@ -115,11 +139,19 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
-    editCon.fileName       = [NSString stringWithFormat:@"TC420_timerData%d.plist",(int)indexPath.row+1];
-    editCon.timerInfoArray = [[NSMutableArray alloc] initWithContentsOfFile:editCon.fileName];
-    editCon.delegate       = self;
-    [self.navigationController pushViewController:editCon animated:YES];
+//    TC420_EditTimerController *editCon = [[TC420_EditTimerController alloc] init];
+//    editCon.fileName       = [NSString stringWithFormat:@"TC420_timerData%d.plist",(int)indexPath.row+1];
+//    editCon.timerInfoArray = [[NSMutableArray alloc] initWithContentsOfFile:editCon.fileName];
+//    editCon.delegate       = self;
+//    [self.navigationController pushViewController:editCon animated:YES];
+    
+    LightFish11_EditTimerController *com = [[LightFish11_EditTimerController alloc] init];
+    com.fileName       = [NSString stringWithFormat:@"LightFish11_timerData%d.plist",(int)indexPath.row+1];
+    NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:com.fileName];
+    com.timerInfoArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+    com.delegate       = self;
+    [self.navigationController pushViewController:com animated:YES];
+    
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格
@@ -152,6 +184,7 @@
         imgview.hidden = NO;
         msgLabel.hidden = YES;
         lineView *line = [[lineView alloc] init];
+        line.pipeNumber = 5;
         line.lineDataArray = tempArr;
         line.userInteractionEnabled = NO;
         if(iPhone4 || iPhone5)

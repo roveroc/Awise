@@ -15,6 +15,7 @@
 @synthesize delegate;
 @synthesize pointArray;
 @synthesize lineDataArray;
+@synthesize pipeNumber;
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -36,7 +37,8 @@
     [self.lineDataArray addObject:_arr2];
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
-    for(int i=0;i<_arr1.count - 1;i++){
+    //for(int i=0;i<_arr1.count - 1;i++){
+    for(int i=0;i<self.pipeNumber+1;i++){
         //设置连接类型
         CGContextSetLineJoin(currentContext, kCGLineJoinMiter);
         //设置线条宽度

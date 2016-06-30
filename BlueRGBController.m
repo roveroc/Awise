@@ -166,9 +166,12 @@
 }
 
 - (void)appDidBecomeActive:(NSNotification *)notification {
-    NSLog(@"did become active notification  %f ",SCREEN_HEIGHT);
-    self.backScrollView.frame = CGRectMake(0, -64, SCREEN_WIDHT, SCREEN_HEIGHT+64);
-    self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667+64);
+    NSLog(@"did become active notification  %f ",self.backScrollView.frame.origin.x);
+//    if(self.backScrollView.frame.origin.x != 0.0)
+    {
+        self.backScrollView.frame = CGRectMake(0, -64, SCREEN_WIDHT, SCREEN_HEIGHT+64);
+        self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667+64);
+    }
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
@@ -740,14 +743,10 @@
             self.gValue = [[arr objectAtIndex:2] floatValue]*100;
             self.bValue = [[arr objectAtIndex:3] floatValue]*100;
             Byte by[4];
-//            by[0] = 1;
-//            by[1] = self.rValue;
-//            by[2] = self.gValue;
-//            by[3] = self.bValue;
-            by[0] = 4;
-            by[1] = 4;
-            by[2] = 0;
-            by[3] = 0;
+            by[0] = 1;
+            by[1] = self.rValue;
+            by[2] = self.gValue;
+            by[3] = self.bValue;
             NSData *da = [[NSData alloc] initWithBytes:by length:4];
             [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
             [self.connectPeripheral setNotifyValue:YES forCharacteristic:self.character];

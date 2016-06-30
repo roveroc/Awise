@@ -20,11 +20,13 @@
     id<LineViewDelegate>        delegate;
     NSMutableArray              *pointArray;
     NSMutableArray              *lineDataArray;
+    int                         pipeNumber;
 }
 @property (assign)                  int                  activeIndex;       //当前编辑的位置
 @property (nonatomic, retain)       id<LineViewDelegate> delegate;
 @property (nonatomic, retain)       NSMutableArray       *pointArray;       //得到所有的坐标点集合
 @property (nonatomic, retain)       NSMutableArray       *lineDataArray;    //画线的源数据
+@property (assign)                  int                  pipeNumber;        //通道数
 
 - (void)roverDraw;
 

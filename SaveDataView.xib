@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZ8-Js-Vk8">
-                    <rect key="frame" x="21" y="161" width="124" height="30"/>
+                    <rect key="frame" x="21" y="156" width="124" height="35"/>
                     <color key="backgroundColor" red="0.89132612179487181" green="0.0" blue="0.033361483530148159" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="取消">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -22,7 +22,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lP-dY-bVd">
-                    <rect key="frame" x="182" y="161" width="124" height="30"/>
+                    <rect key="frame" x="182" y="156" width="124" height="35"/>
                     <color key="backgroundColor" red="0.35065509171376086" green="0.74435096153846159" blue="0.27464292700991733" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="保存">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -126,7 +126,7 @@
                 <outlet property="okBtn" destination="5lP-dY-bVd" id="nvp-Mn-XkA"/>
                 <outlet property="tilteLabel" destination="y6v-nj-hQq" id="mIp-Qa-xHq"/>
             </connections>
-            <point key="canvasLocation" x="1593.5" y="464"/>
+            <point key="canvasLocation" x="852.5" y="462"/>
         </view>
     </objects>
 </document>

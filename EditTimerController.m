@@ -30,6 +30,7 @@
         if(self.lineview != nil){
             [self.lineview removeFromSuperview];
             self.lineview = [[lineView alloc] init];
+            self.lineview.pipeNumber = 3;
             self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
             self.lineview.frame = CGRectMake(10, 70, SCREEN_WIDHT-20, 100);
             self.lineview.activeIndex = -1;
@@ -131,6 +132,7 @@
     
     self.lineview = [[lineView alloc] init];
     self.lineview.activeIndex = -1;
+    self.lineview.pipeNumber = 3;
     self.lineview.lineDataArray = [AwiseGlobal sharedInstance].lineArray;
     self.lineview.frame = CGRectMake(13, 70, SCREEN_WIDHT-28, 100);
     [self.lineview setBackgroundColor:[UIColor clearColor]];
