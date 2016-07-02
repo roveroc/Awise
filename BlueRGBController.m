@@ -152,7 +152,6 @@
 //读取iTunes中的音乐
     [self importMusicFormItunes];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     //取数据库中蓝牙设备数据
     RoverSqlite *sql = [[RoverSqlite alloc] init];
     self.sql_BLEArray = [[NSMutableArray alloc] init];
@@ -163,16 +162,129 @@
         [self.BLE_onLineArray addObject:@"0"];      //0表示不在线
     }
     self.tempArray = [[NSMutableArray alloc] init];
+    
+    
+    //
+    self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
+    self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667);
+    [self.view addSubview:self.backScrollView];
+    
+    colorPicker = [[KZColorPicker alloc] initWithFrame:CGRectMake(0, -64, SCREEN_WIDHT, SCREEN_HEIGHT)];
+    //    colorPicker.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    colorPicker.selectedColor = self.selectedColor;
+    colorPicker.oldColor = self.selectedColor;
+    [colorPicker addTarget:self action:@selector(pickerChanged:) forControlEvents:UIControlEventValueChanged];
+    //    [self.view addSubview:colorPicker];
+    [self.backScrollView addSubview:colorPicker];
+    
+    self.modePicker = [[UIPickerView alloc] init];
+    self.modePicker.dataSource = self;
+    self.modePicker.delegate = self;
+    if(iPhone6P){
+        self.modePicker.frame = CGRectMake(0, 390-64, SCREEN_WIDHT, 160);
+    }
+    else{
+        self.modePicker.frame = CGRectMake(0, 390-64, SCREEN_WIDHT, 130);
+    }
+    if(iPhone4 || iPhone5){
+        self.backScrollView.scrollEnabled = YES;
+    }
+    else{
+        self.backScrollView.scrollEnabled = NO;
+    }
+    [self.backScrollView addSubview:self.modePicker];
+    //开关、暂停播放
+    self.offFlag = NO;
+    self.palyFlag = NO;
+    
+    self.onOffButton      = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.musicButton      = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.customButton     = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.onOffButton     setBackgroundImage:[UIImage imageNamed:@"off.png"]
+                                    forState:UIControlStateNormal];
+    [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
+                                    forState:UIControlStateNormal];
+    //    if(iPhone6)
+    {
+        self.PlayPauseButton.frame = CGRectMake(10, 78-64, 60, 60);
+        self.onOffButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 78-64, 60, 60);
+        self.musicButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 265-64, 60, 60);
+        self.customButton.frame    = CGRectMake(10, 265-64, 60, 60);
+        self.musicButton.layer.cornerRadius = self.musicButton.frame.size.width/2;
+        self.musicButton.layer.masksToBounds = true;
+        self.customButton.layer.cornerRadius = self.customButton.frame.size.width/2;
+        self.customButton.layer.masksToBounds = true;
+        self.musicButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+        self.customButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
+        [self.musicButton setTitle:@"音乐" forState:UIControlStateNormal];
+        [self.customButton setTitle:@"自定义" forState:UIControlStateNormal];
+        self.musicButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        self.customButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
+    }
+    [self.PlayPauseButton addTarget:self
+                             action:@selector(PlayPauseMode)
+                   forControlEvents:UIControlEventTouchUpInside];
+    [self.onOffButton addTarget:self
+                         action:@selector(onOffLight)
+               forControlEvents:UIControlEventTouchUpInside];
+    [self.musicButton addTarget:self
+                         action:@selector(showMusicView)
+               forControlEvents:UIControlEventTouchUpInside];
+    [self.customButton addTarget:self
+                          action:@selector(showCustomView)
+                forControlEvents:UIControlEventTouchUpInside];
+    [self.backScrollView addSubview:self.onOffButton];
+    [self.backScrollView addSubview:self.PlayPauseButton];
+    //    [self.backScrollView addSubview:self.musicButton];
+    [self.backScrollView addSubview:self.customButton];
+    
+    //亮度值滑条
+    self.lightSlider = [[ASValueTrackingSlider alloc] init];
+    self.lightSlider.minimumValue = 0;
+    self.lightSlider.maximumValue = 100;
+    self.lightSlider.popUpViewCornerRadius = 12.0;
+    [self.lightSlider setMaxFractionDigitsDisplayed:0];
+    self.lightSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
+    self.lightSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
+    self.lightSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
+    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"samllLight.png"];
+    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
+    //速度值滑条
+    self.modeSlider = [[ASValueTrackingSlider alloc] init];
+    self.modeSlider.minimumValue = 0;
+    self.modeSlider.maximumValue = 20;
+    self.modeSlider.value = 0;
+    self.modeSlider.popUpViewCornerRadius = 12.0;
+    [self.modeSlider setMaxFractionDigitsDisplayed:0];
+    self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
+    self.modeSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
+    self.modeSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
+    self.modeSlider.minimumValueImage = [UIImage imageNamed:@"lowSpeed.png"];
+    self.modeSlider.maximumValueImage = [UIImage imageNamed:@"fastSpeed.png"];
+    if(iPhone6P){
+        self.lightSlider.frame = CGRectMake(20, 400+130+30-64, SCREEN_WIDHT-40, 20);
+        self.modeSlider.frame  = CGRectMake(20, 400+130+40+15+30-64, SCREEN_WIDHT-40, 20);
+    }
+    else{
+        self.lightSlider.frame = CGRectMake(20, 400+130-64, SCREEN_WIDHT-40, 20);
+        self.modeSlider.frame  = CGRectMake(20, 400+130+40+5+12-64, SCREEN_WIDHT-40, 20);
+    }
+    [self.backScrollView addSubview:self.lightSlider];
+    [self.backScrollView addSubview:self.modeSlider];
+    [self.backScrollView bringSubviewToFront:self.lightSlider];
+    [self.backScrollView bringSubviewToFront:self.modeSlider];
+    [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
+    
+    [self initDeviceTable];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"搜索设备中"];
+    [self performSelector:@selector(searchFinish) withObject:nil afterDelay:4.5];
+    
+    NSLog(@"width = %f",SCREEN_WIDHT);
 }
 
-- (void)appDidBecomeActive:(NSNotification *)notification {
-    NSLog(@"did become active notification  %f ",self.backScrollView.frame.origin.x);
-//    if(self.backScrollView.frame.origin.x != 0.0)
-    {
-        self.backScrollView.frame = CGRectMake(0, -64, SCREEN_WIDHT, SCREEN_HEIGHT+64);
-        self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667+64);
-    }
-}
+
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central{
     NSLog(@"CBCentralManager             = %@",central);
@@ -432,124 +544,10 @@
 
 #pragma mark ------------------------------------------------ 布局界面
 - (void)viewWillLayoutSubviews{
-    if(colorPicker != nil)
-        return;
+//    if(colorPicker != nil)
+//        return;
     
-    self.backScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
-    self.backScrollView.contentSize = CGSizeMake(SCREEN_WIDHT, 667);
-    [self.view addSubview:self.backScrollView];
     
-    colorPicker = [[KZColorPicker alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDHT, SCREEN_HEIGHT)];
-//    colorPicker.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    colorPicker.selectedColor = self.selectedColor;
-    colorPicker.oldColor = self.selectedColor;
-    [colorPicker addTarget:self action:@selector(pickerChanged:) forControlEvents:UIControlEventValueChanged];
-//    [self.view addSubview:colorPicker];
-    [self.backScrollView addSubview:colorPicker];
-    
-    self.modePicker = [[UIPickerView alloc] init];
-    self.modePicker.dataSource = self;
-    self.modePicker.delegate = self;
-    if(iPhone6P){
-        self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 160);
-    }
-    else{
-        self.modePicker.frame = CGRectMake(0, 390, SCREEN_WIDHT, 130);
-    }
-    if(iPhone4 || iPhone5){
-        self.backScrollView.scrollEnabled = YES;
-    }
-    else{
-        self.backScrollView.scrollEnabled = NO;
-    }
-    [self.backScrollView addSubview:self.modePicker];
-//开关、暂停播放
-    self.offFlag = NO;
-    self.palyFlag = NO;
-    
-    self.onOffButton      = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.PlayPauseButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.musicButton      = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.customButton     = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.onOffButton     setBackgroundImage:[UIImage imageNamed:@"off.png"]
-                                forState:UIControlStateNormal];
-    [self.PlayPauseButton setBackgroundImage:[UIImage imageNamed:@"play.png"]
-                                forState:UIControlStateNormal];
-//    if(iPhone6)
-    {
-        self.PlayPauseButton.frame = CGRectMake(10, 78, 60, 60);
-        self.onOffButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 78, 60, 60);
-        self.musicButton.frame     = CGRectMake(SCREEN_WIDHT-10-60, 265, 60, 60);
-        self.customButton.frame    = CGRectMake(10, 265, 60, 60);
-        self.musicButton.layer.cornerRadius = self.musicButton.frame.size.width/2;
-        self.musicButton.layer.masksToBounds = true;
-        self.customButton.layer.cornerRadius = self.customButton.frame.size.width/2;
-        self.customButton.layer.masksToBounds = true;
-        self.musicButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
-        self.customButton.backgroundColor = [UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.];
-        [self.musicButton setTitle:@"音乐" forState:UIControlStateNormal];
-        [self.customButton setTitle:@"自定义" forState:UIControlStateNormal];
-        self.musicButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
-        self.customButton.titleLabel.font = [UIFont fontWithName:@"Arial" size:15];
-    }
-    [self.PlayPauseButton addTarget:self
-                       action:@selector(PlayPauseMode)
-             forControlEvents:UIControlEventTouchUpInside];
-    [self.onOffButton addTarget:self
-                       action:@selector(onOffLight)
-             forControlEvents:UIControlEventTouchUpInside];
-    [self.musicButton addTarget:self
-                         action:@selector(showMusicView)
-               forControlEvents:UIControlEventTouchUpInside];
-    [self.customButton addTarget:self
-                         action:@selector(showCustomView)
-               forControlEvents:UIControlEventTouchUpInside];
-    [self.backScrollView addSubview:self.onOffButton];
-    [self.backScrollView addSubview:self.PlayPauseButton];
-//    [self.backScrollView addSubview:self.musicButton];
-    [self.backScrollView addSubview:self.customButton];
-    
-//亮度值滑条
-    self.lightSlider = [[ASValueTrackingSlider alloc] init];
-    self.lightSlider.minimumValue = 0;
-    self.lightSlider.maximumValue = 100;
-    self.lightSlider.popUpViewCornerRadius = 12.0;
-    [self.lightSlider setMaxFractionDigitsDisplayed:0];
-    self.lightSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
-    self.lightSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
-    self.lightSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
-    self.lightSlider.minimumValueImage = [UIImage imageNamed:@"samllLight.png"];
-    self.lightSlider.maximumValueImage = [UIImage imageNamed:@"bigLight.png"];
-//速度值滑条
-    self.modeSlider = [[ASValueTrackingSlider alloc] init];
-    self.modeSlider.minimumValue = 0;
-    self.modeSlider.maximumValue = 20;
-    self.modeSlider.value = 0;
-    self.modeSlider.popUpViewCornerRadius = 12.0;
-    [self.modeSlider setMaxFractionDigitsDisplayed:0];
-    self.modeSlider.popUpViewColor = [UIColor colorWithHue:0.55 saturation:0.8 brightness:0.9 alpha:0.7];
-    self.modeSlider.font = [UIFont fontWithName:@"GillSans-Bold" size:22];
-    self.modeSlider.textColor = [UIColor colorWithHue:0.55 saturation:1.0 brightness:0.5 alpha:1];
-    self.modeSlider.minimumValueImage = [UIImage imageNamed:@"lowSpeed.png"];
-    self.modeSlider.maximumValueImage = [UIImage imageNamed:@"fastSpeed.png"];
-    if(iPhone6P){
-        self.lightSlider.frame = CGRectMake(20, 400+130+30, SCREEN_WIDHT-40, 20);
-        self.modeSlider.frame  = CGRectMake(20, 400+130+40+15+30, SCREEN_WIDHT-40, 20);
-    }
-    else{
-        self.lightSlider.frame = CGRectMake(20, 400+130, SCREEN_WIDHT-40, 20);
-        self.modeSlider.frame  = CGRectMake(20, 400+130+40+5, SCREEN_WIDHT-40, 20);
-    }
-    [self.backScrollView addSubview:self.lightSlider];
-    [self.backScrollView addSubview:self.modeSlider];
-    [self.backScrollView bringSubviewToFront:self.lightSlider];
-    [self.backScrollView bringSubviewToFront:self.modeSlider];
-    [self.lightSlider addTarget:self action:@selector(lightSliderValueChange:) forControlEvents:UIControlEventValueChanged];
-    [self.modeSlider addTarget:self action:@selector(modeSliderValueChange:) forControlEvents:UIControlEventValueChanged];
-    
-    [self initDeviceTable];
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:@"搜索设备中"];
-    [self performSelector:@selector(searchFinish) withObject:nil afterDelay:5.5];
 }
 
 - (void)searchFinish{

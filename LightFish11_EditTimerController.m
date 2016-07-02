@@ -218,7 +218,6 @@
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:bb length:len];
     
     
-    
 //    [self.navigationController popViewControllerAnimated:YES];
 }
 
