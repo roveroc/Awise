@@ -26,9 +26,15 @@
     UIButton            *effectBtn2;
     UIButton            *effectBtn3;
     UIButton            *effectBtn4;
-    UILabel             *speedLabel;
+    
+    UILabel             *speedLabel;        //多云闪电调节 速度
     UISlider            *speedSlider;
     UILabel             *speedValueLabel;
+    
+    UILabel             *lightLabel;        //多云闪电调节 亮度
+    UISlider            *lightSlider;
+    UILabel             *lightValueLabel;
+    
     DVSwitch            *effectSwitch;
     int                 selectEffect;
     
@@ -40,6 +46,8 @@
     
     int                 currentIndex;
     int                 totalIndex;
+    
+    int                 timerNumber;            //定时器编号
     
     SaveDataView        *saveView;
     UIView              *saveViewBack;
@@ -74,6 +82,9 @@
 @property (nonatomic, retain) UILabel       *speedLabel;
 @property (nonatomic, retain) UISlider      *speedSlider;
 @property (nonatomic, retain) UILabel       *speedValueLabel;
+@property (nonatomic, retain) UILabel       *lightLabel;
+@property (nonatomic, retain) UISlider      *lightSlider;
+@property (nonatomic, retain) UILabel       *lightValueLabel;
 
 @property (nonatomic, retain) NSMutableArray        *timerInfoArray;
 @property (nonatomic, retain) NSMutableArray        *timerWeekArray;
@@ -82,6 +93,7 @@
 @property (nonatomic, retain) lineView              *lView;
 @property (assign)            int                   currentIndex;
 @property (assign)            int                   totalIndex;
+@property (assign)            int                   timerNumber;
 @property (nonatomic, retain) SaveDataView          *saveView;
 @property (nonatomic, retain) UIView                *saveViewBack;
 

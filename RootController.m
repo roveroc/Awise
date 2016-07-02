@@ -170,6 +170,11 @@
     }else if([deviceType isEqualToString:@"Awise_Bule_RGB"]){
         BlueRGBController *blueCon = [[BlueRGBController alloc] init];
         [self.navigationController pushViewController:blueCon animated:YES];
+    }else if([deviceType isEqualToString:@"Awise_WIFI_Fish1_1"]){
+        TC_MainController *TcCon = [[TC_MainController alloc] init];
+        TcCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+        TcCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
+        [self.navigationController pushViewController:TcCon animated:YES];
     }
 }
 

@@ -150,8 +150,8 @@
     NSString *filePath = [[AwiseGlobal sharedInstance] getFilePath:com.fileName];
     com.timerInfoArray = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
     com.delegate       = self;
+    com.timerNumber    = (int)indexPath.row;
     [self.navigationController pushViewController:com animated:YES];
-    
 }
 
 #pragma mark ------------------------------------------------ 返回每行的单元格

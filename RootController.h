@@ -13,6 +13,7 @@
 #import "AwiseGlobal.h"
 #import "LightFishController.h"
 #import "BlueRGBController.h"
+#import "TC_MainController.h"
 #import <UIImageView+Letters.h>
 #import "D3View.h"
 

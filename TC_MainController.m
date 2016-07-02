@@ -9,7 +9,7 @@
 #import "TC_MainController.h"
 #import "AwiseGlobal.h"
 #import "CustomModeController.h"
-#import "LightFishController.h"
+#import "LightingModeController.h"
 
 @interface TC_MainController ()
 
@@ -29,6 +29,7 @@
 @synthesize effectImgView;
 @synthesize lightImgView;
 @synthesize cloudyImgView;
+@synthesize deviceInfo;
 
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -38,6 +39,90 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[AwiseGlobal sharedInstance] hideTabBar:self];
+    
+    //连接设备部分
+    [AwiseGlobal sharedInstance].delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+    [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+    [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
+    if([AwiseGlobal sharedInstance].cMode == AP){
+        //AP模式下，先检查设备的WIFI连接是否对应
+        NSString *macStr = [[[[AwiseGlobal sharedInstance].wifiSSID componentsSeparatedByString:@"-"] lastObject] lowercaseStringWithLocale:[NSLocale currentLocale]];
+        if([[deviceInfo objectAtIndex:1] rangeOfString:macStr].location != NSNotFound){
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:2];
+            [[AwiseGlobal sharedInstance].tcpSocket
+             connectToDevice:[deviceInfo objectAtIndex:2]
+             port:[deviceInfo objectAtIndex:3]];
+        }else{
+            [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectDeviceFirst"]
+                                               withTime:2.0];
+        }
+    }
+    else if([AwiseGlobal sharedInstance].cMode == STA){
+        if(self.deviceInfo.count > 0){
+            [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connecting"]];
+            //如果是STA模式，首先尝试建立连接看设备在线或IP发生变化
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = [self.deviceInfo objectAtIndex:4];
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[self.deviceInfo objectAtIndex:4] port:[self.deviceInfo objectAtIndex:3]];
+            //连接设备超时
+            [self performSelector:@selector(connectDeviceTimeout) withObject:nil afterDelay:2.0];
+        }
+    }else{
+        [[AwiseGlobal sharedInstance] showRemindMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"noWifi"] withTime:1.2];
+    }
+}
+
+#pragma mark ------------------------------------------------ 连接设备超时 -- 超时
+- (void)connectDeviceTimeout{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectTimeout"]];
+    [[AwiseGlobal sharedInstance] scanNetwork];
+}
+
+#pragma mark ------------------------------------------------ 扫描局域网完成
+- (void)scanNetworkFinish{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    NSLog(@" ------- 扫描到的ARP表 ------- ");
+    NSMutableArray *arpArray = [[AwiseGlobal sharedInstance] getARPTable];
+    NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpArray);
+    NSString *temp = [self.deviceInfo objectAtIndex:1];
+    if([arpArray containsObject:temp]){
+        int index = (int)[arpArray indexOfObject:temp];
+        NSString *newIp = [arpArray objectAtIndex:index+1];
+        NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+        //更新数据库
+        RoverSqlite *sql = [[RoverSqlite alloc] init];
+        if([sql modifyDeviceIP:[self.deviceInfo objectAtIndex:1] newIP:newIp]){
+            [AwiseGlobal sharedInstance].deviceArray = [sql getAllDeviceInfomation];   //获取所有已添加设备信息
+            NSLog(@"更新设备IP成功 ----------%@ ",newIp);
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            if([AwiseGlobal sharedInstance].tcpSocket == nil ||
+               [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType != LightFishDevice_1_1){
+                [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
+                [AwiseGlobal sharedInstance].tcpSocket.delegate = nil;
+            }
+            [AwiseGlobal sharedInstance].tcpSocket = [[TCPCommunication alloc] init];
+            [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
+            [AwiseGlobal sharedInstance].tcpSocket.controlDeviceType = LightFishDevice_1_1;
+            [AwiseGlobal sharedInstance].tcpSocket.devicePort = [deviceInfo objectAtIndex:3];
+            [AwiseGlobal sharedInstance].tcpSocket.deviceIP = newIp;
+            [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:newIp
+                                                               port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
+        }
+    }else{
+        NSLog(@"确保设备正常工作");
+    }
+}
+
+#pragma mark ---------------------------------------------- 连接设备成功
+- (void)TCPSocketConnectSuccess{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
+    //每次软件启动时，自动同步时间至设备
+//    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+    //获取设备状态值
+    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
 }
 
 #pragma mark -------------------------------- 初始化Slider
@@ -78,28 +163,55 @@
     switch (slider.tag) {
         case 1:{
             self.value_label1.text = [NSString stringWithFormat:@"%d%%",value];
+            value1 = value;
         }
             break;
         case 2:{
             self.value_label2.text = [NSString stringWithFormat:@"%d%%",value];
+            value2 = value;
         }
             break;
         case 3:{
             self.value_label3.text = [NSString stringWithFormat:@"%d%%",value];
+            value3 = value;
         }
             break;
         case 4:{
             self.value_label4.text = [NSString stringWithFormat:@"%d%%",value];
+            value4 = value;
         }
             break;
         case 5:{
             self.value_label5.text = [NSString stringWithFormat:@"%d%%",value];
+            value5 = value;
         }
             break;
             
         default:
             break;
     }
+    Byte b1[51];
+    for(int k=0;k<51;k++){
+        b1[k] = 0x00;
+    }
+    b1[0]  = 0x55;
+    b1[1]  = 0xAA;
+    b1[2]  = 0x01;      //总数据包长度，暂时可不填写
+    b1[39] = 0x01;      //0x00表示该数据包发往服务器，0x01局域网发送至设备
+    
+    b1[41] = 0x09;      //指令功能代号
+    b1[42] = 0x00;      //指令长度
+    b1[43] = 0x05;      //指令长度(优先填充)
+    
+    b1[46] = 0x01;      //(手动调光)
+    
+    b1[46] = value1;
+    b1[47] = value2;
+    b1[48] = value3;
+    b1[49] = value4;
+    b1[50] = value5;
+    
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b1 length:51];
 }
 
 #pragma mark -------------------------------- 布局界面
@@ -212,13 +324,14 @@
 
 #pragma mark --------------------------------------- 进入闪电效果
 - (void)enterLightingController{
-    LightFishController *con = [[LightFishController alloc] init];
+    LightingModeController *con = [[LightingModeController alloc] init];
     [self.navigationController pushViewController:con animated:YES];
 }
 
 #pragma mark --------------------------------------- 进入多云效果
 - (void)enterCloudyController{
-    
+    LightingModeController *con = [[LightingModeController alloc] init];
+    [self.navigationController pushViewController:con animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -226,5 +339,86 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark ------------------------------------------------ 发送数据模块
+/******************************************************************/
+/******************************************************************/
+#pragma mark --------------------------------------------- 同步时间
+- (void)syncDeviceTime{
+    NSDateFormatter *dateFormatter1 =[[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"YYYY"];
+    int yearstr = [[dateFormatter1 stringFromDate:[NSDate date]] intValue];
+    Byte bb[3] = {0,0,0};
+    int i = 0;
+    while (yearstr>15) {
+        bb[i] = yearstr%16;
+        yearstr = yearstr/16;
+        i++;
+    }
+    
+    NSDateFormatter *dateFormatter4 =[[NSDateFormatter alloc] init];
+    [dateFormatter4 setDateFormat:@"HH"];
+    int hhstr = [[dateFormatter4 stringFromDate:[NSDate date]] intValue];
+    Byte hhbb = hhstr;
+    
+    NSDateFormatter *dateFormatter5 =[[NSDateFormatter alloc] init];
+    [dateFormatter5 setDateFormat:@"mm"];
+    int mmstr = [[dateFormatter5 stringFromDate:[NSDate date]] intValue];
+    Byte mmbb = mmstr;
+    
+    NSDateFormatter *dateFormatter6 =[[NSDateFormatter alloc] init];
+    [dateFormatter6 setDateFormat:@"ss"];
+    int ssstr = [[dateFormatter6 stringFromDate:[NSDate date]] intValue];
+    Byte ssbb = ssstr;
+    
+    NSLog(@"发送的时间 --- > %d %d %d",hhstr,mmstr,ssstr);
+    
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x02;
+    b3[3] = 0x01;
+    b3[4] = 0x00;
+    
+    b3[5] = hhbb;
+    b3[6] = mmbb;
+    b3[7] = ssbb;
+    
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark ------------------------------------------------ 读取设备状态
+- (void)getDeviceStatus{
+    Byte b1[46];
+    for(int k=0;k<46;k++){
+        b1[k] = 0x00;
+    }
+    b1[0] = 0x55;
+    b1[1] = 0xAA;
+    b1[2] = 0x01;       //总数据包长度，暂时可不填写
+    b1[39] = 0x01;      //0x00表示该数据包发往服务器，0x01局域网发送至设备
+    
+    b1[41] = 0x0a;      //指令功能代号 (去读状态)
+    b1[42] = 0x00;      //指令长度
+    b1[43] = 0x00;      //指令长度(优先填充)
+    
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b1 length:46];
+}
+
+#pragma mark ---------------------------------------------------- 处理水族灯设备返回的数据
+- (void)dataBackFormDevice:(Byte *)byte{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    switch (byte[2]) {
+        case 0x01:
+            
+            break;
+            
+        default:
+            break;
+    }
+}
 
 @end
