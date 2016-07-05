@@ -19,6 +19,7 @@
 @synthesize runingValue;
 @synthesize hud;
 @synthesize speedFlag,speedTimer;
+@synthesize backFlag;
 
 #pragma mark ------------------------------------------------ 界面消失是销毁定时器
 - (void)viewWillDisappear:(BOOL)animated{
@@ -37,6 +38,7 @@
             [AwiseUserDefault sharedInstance].cloudy_switch = [NSString stringWithFormat:@"%d",self.sswitch];
         }
         self.runingValue = 0;
+        self.backFlag = YES;
         [self buildDataStruct:NO];
     }
     [self.speedTimer invalidate];
@@ -127,6 +129,8 @@
         });
     }
     self.percent = (int)self.slider.value;
+    
+    self.backFlag = NO;  //默认不是返回
 }
 
 - (void)SaveDataAndBack{
@@ -348,7 +352,8 @@
     }
     if(sFlag == YES)
         b3[12] = 0x01;
-    b3[13] = 0x01;      //让设备运行回到之前的模式
+    if(self.backFlag == YES)
+        b3[13] = 0x01;      //让设备运行回到之前的模式
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
 }

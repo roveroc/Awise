@@ -20,6 +20,8 @@
     MBProgressHUD       *hud;
     NSTimer             *speedTimer;
     BOOL                speedFlag;
+    
+    BOOL                backFlag;
 }
 @property (assign) int modeFlag;
 @property (assign) int percent;
@@ -31,6 +33,7 @@
 @property (nonatomic, retain) NSTimer       *speedTimer;    //隔一段时间再取滑条数据
 @property (assign)            BOOL          speedFlag;
 @property (nonatomic, retain) MBProgressHUD *hud;
+@property (assign)            BOOL          backFlag;       //返回至为：YES，其他为NO
 
 
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
