@@ -85,8 +85,8 @@
         rect = CGRectMake(0, 230, SCREEN_WIDHT, 320);
         dBtn.frame = CGRectMake(75, 600, 171, 45);
     }
-    [self.view addSubview:dBtn];
-    dBtn.center = CGPointMake(SCREEN_WIDHT/2, dBtn.center.y);
+//    [self.view addSubview:dBtn];
+//    dBtn.center = CGPointMake(SCREEN_WIDHT/2, dBtn.center.y);
     
     timerTable = [[UITableView alloc] initWithFrame:rect style:UITableViewStylePlain];
     timerTable.delegate = self;

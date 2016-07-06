@@ -504,15 +504,18 @@
 
 #pragma mark ---------------------------------------------------- 打开或关闭某种模式
 - (IBAction)switchOperate:(id)sender {
-    [[AwiseGlobal sharedInstance] showWaitingView];
     UISwitch *s = (UISwitch *)sender;
     switch (s.tag) {
         case 1:             //定时器1
         {
             if([s isOn]){
-                [self operateTimer:0x01 onoff:0x01];
+//                [self operateTimer:0x01 onoff:0x01];
+                [[AwiseGlobal sharedInstance] showWaitingView];
+                [self openTimer:1];
             }else{
-                [self operateTimer:0x01 onoff:0x00];
+//                [self operateTimer:0x01 onoff:0x00];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"" time:0.5];
+                [self closeTimer];
             }
             [self closeSwitch:@[@2,@3,@4,@5]];
             [AwiseGlobal sharedInstance].mode = Timer1_Model;
@@ -521,9 +524,13 @@
         case 2:             //定时器2
         {
             if([s isOn]){
-                [self operateTimer:0x02 onoff:0x01];
+//                [self operateTimer:0x02 onoff:0x01];
+                [[AwiseGlobal sharedInstance] showWaitingView];
+                [self openTimer:2];
             }else{
-                [self operateTimer:0x02 onoff:0x00];
+//                [self operateTimer:0x02 onoff:0x00];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"" time:0.5];
+                [self closeTimer];
             }
             [self closeSwitch:@[@1,@3,@4,@5]];
             [AwiseGlobal sharedInstance].mode = Timer2_Model;
@@ -532,9 +539,13 @@
         case 3:             //定时器3
         {
             if([s isOn]){
-                [self operateTimer:0x03 onoff:0x01];
+//                [self operateTimer:0x03 onoff:0x01];
+                [[AwiseGlobal sharedInstance] showWaitingView];
+                [self openTimer:3];
             }else{
-                [self operateTimer:0x03 onoff:0x00];
+//                [self operateTimer:0x03 onoff:0x00];
+                [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"" time:0.5];
+                [self closeTimer];
             }
             [self closeSwitch:@[@2,@1,@4,@5]];
             [AwiseGlobal sharedInstance].mode = Timer3_Model;
@@ -564,6 +575,76 @@
             break;
         default:
             break;
+    }
+}
+
+#pragma mark --------------------------- 当关闭某一个定时器是，发送手动调光指令  <最新添加>
+- (void)closeTimer{
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x05;
+    b3[3] = 0x02;
+    b3[4] = 0x00;
+    
+    b3[5] = 0x00;        //由于硬件  将一通道和三通道调换
+    b3[6] = 0x00;
+    b3[7] = 0x00;
+    
+    b3[8] = 0x01;        //这个字节，提供给王龙测试
+    
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+}
+
+#pragma mark --------------------------- 打开某一个定时器时，发送数据   <最新添加>
+- (void)openTimer:(int)timerNum{
+    NSString *fileName;
+    if(timerNum == 1){
+        fileName = @"timerData1.plist";
+    }else if(timerNum == 2){
+        fileName = @"timerData2.plist";
+    }else if(timerNum == 3){
+        fileName = @"timerData3.plist";
+    }
+    NSString *path = [[AwiseGlobal sharedInstance] getFilePath:fileName];
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    if(arr.count > 0){
+        Byte b3[64];
+        for(int k=0;k<64;k++){
+            b3[k] = 0x00;
+        }
+        b3[0] = 0x55;
+        b3[1] = 0xAA;
+        b3[2] = 0x01;
+        b3[3] = timerNum;
+        b3[4] = 0x00;
+        int index = 5;
+        for(int i = 0;i<arr.count;i++){
+            NSMutableArray *temp = [arr objectAtIndex:i];
+            
+            b3[index++] = i+1;
+
+            for(int j=0;j<temp.count;j++){
+                
+                if(j == 0){
+                    NSArray *time = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
+                    b3[index++] = [[time objectAtIndex:0] intValue];
+                    b3[index++] = [[time objectAtIndex:1] intValue];
+                }
+                else{
+                    b3[index++] = [[temp objectAtIndex:j] intValue];
+                }
+                
+            }
+        }
+        b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    }else{
+        [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请先编辑" time:0.5];
     }
 }
 
