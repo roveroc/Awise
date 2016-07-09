@@ -20,6 +20,7 @@
 @synthesize hud;
 @synthesize speedFlag,speedTimer;
 @synthesize backFlag;
+@synthesize delegate;
 
 #pragma mark ------------------------------------------------ 界面消失是销毁定时器
 - (void)viewWillDisappear:(BOOL)animated{
@@ -39,7 +40,7 @@
         }
         self.runingValue = 0;
         self.backFlag = YES;
-        [self buildDataStruct:NO];
+//        [self buildDataStruct:NO];
     }
     [self.speedTimer invalidate];
     self.speedTimer = nil;
@@ -283,6 +284,10 @@
     [self buildDataStruct:NO];
 }
 
+#pragma mark ---------------------------------------------------- 数据返回超时
+- (void)dataBackTimeOut{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+}
 
 #pragma mark - 组织将要发送的数据
 - (void)buildDataStruct:(BOOL)sFlag{  //是否是控制滑条时产生的动作，如果是，则发送0x01,不要返回数据
@@ -316,11 +321,12 @@
         Byte pbb = pValue;
         b3[9] = pbb;
         
-        Byte runbb = self.runingValue;            //立即运行，看效果
-        b3[10] = runbb;
+//        Byte runbb = self.runingValue;            //打开(关闭)
+//        b3[10] = runbb;
         
-        Byte openbb = self.sswitch;     //打开(关闭)
-        b3[11] = openbb;
+//        Byte openbb = self.sswitch;               //立即运行，看效果
+//        b3[11] = openbb;
+        b3[11] = 0x01;
         
     }else if(self.modeFlag == 2){
         b3[3] = 0x01;           //多云
@@ -344,11 +350,13 @@
         Byte pbb = pValue;
         b3[9] = pbb;
         
-        Byte runbb = self.runingValue;            //立即运行，看效果
-        b3[10] = runbb;
+//        Byte runbb = self.runingValue;            //打开(关闭)
+//        b3[10] = runbb;
+//        
+//        Byte openbb = self.sswitch;               //立即运行，看效果
+//        b3[11] = openbb;
+        b3[11] = 0x01;
         
-        Byte openbb = self.sswitch;     //打开(关闭)
-        b3[11] = openbb;
     }
     if(sFlag == YES)
         b3[12] = 0x01;
@@ -361,7 +369,14 @@
 #pragma mark ----------------------------------- 解析从设备的返回值
 - (void)dataBackFormDevice:(Byte *)byte{
     if (byte[2] == 0x05){                           //闪电、多云
-        
+        if(byte[3] == 0x00){
+            //闪电
+            [AwiseGlobal sharedInstance].mode = Lighting_Model;
+        }else if(byte[3] == 0x01){
+            //多云
+            [AwiseGlobal sharedInstance].mode = Cloudy_Model;
+        }
+        [self.delegate lightingStart];
     }else{
         [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.2];
     }

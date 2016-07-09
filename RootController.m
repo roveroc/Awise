@@ -72,6 +72,10 @@
 //    [self.deviceImage2 addGestureRecognizer:tap2];
 //    [self.deviceImage3 addGestureRecognizer:tap3];
     
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+
+    
 //监听是否需要重新布局界面
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateDeviceLayout) name:@"NeedLayoutDevice"
@@ -171,10 +175,17 @@
         BlueRGBController *blueCon = [[BlueRGBController alloc] init];
         [self.navigationController pushViewController:blueCon animated:YES];
     }else if([deviceType isEqualToString:@"Awise_WIFI_Fish1_1"]){
-        TC_MainController *TcCon = [[TC_MainController alloc] init];
-        TcCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
-        TcCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
-        [self.navigationController pushViewController:TcCon animated:YES];
+//        TC_MainController *TcCon = [[TC_MainController alloc] init];
+//        TcCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+//        TcCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
+//        [self.navigationController pushViewController:TcCon animated:YES];
+        
+        
+        LightFishController *lightCon = [[LightFishController alloc] init];
+        lightCon.hidesBottomBarWhenPushed = YES;        //隐藏tabbar
+        lightCon.deviceInfo = [[AwiseGlobal sharedInstance].deviceArray objectAtIndex:tag-1];
+        [self.navigationController pushViewController:lightCon animated:YES];
+        
     }
 }
 

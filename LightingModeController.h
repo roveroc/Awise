@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 
-@interface LightingModeController : UIViewController<TCPSocketDelegate>{
+@protocol LightingStartDelegate <NSObject>
+
+- (void)lightingStart;
+
+@end
+
+@interface LightingModeController : UIViewController<TCPSocketDelegate,LightingStartDelegate>{
     int                 modeFlag;   //1:闪电模式  2:多云模式
     int                 percent;
     NSString            *sTime;
@@ -22,6 +28,8 @@
     BOOL                speedFlag;
     
     BOOL                backFlag;
+    
+    id<LightingStartDelegate>   delegate;
 }
 @property (assign) int modeFlag;
 @property (assign) int percent;
@@ -34,6 +42,7 @@
 @property (assign)            BOOL          speedFlag;
 @property (nonatomic, retain) MBProgressHUD *hud;
 @property (assign)            BOOL          backFlag;       //返回至为：YES，其他为NO
+@property (nonatomic, retain) id<LightingStartDelegate>     delegate;
 
 
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;

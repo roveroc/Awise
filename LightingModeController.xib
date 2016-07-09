@@ -102,32 +102,28 @@
                         <action selector="startBtnClicked:" destination="-1" eventType="touchUpInside" id="mBH-p3-Qze"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0by-I9-kZ6">
-                    <rect key="frame" x="38" y="358" width="100" height="40"/>
-                    <color key="backgroundColor" red="0.45422360317092242" green="0.7421875" blue="0.31959703695799496" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0g-db-Wcv">
+                    <rect key="frame" x="110" y="343" width="100" height="40"/>
+                    <color key="backgroundColor" red="0.39215686274509803" green="0.70588235294117652" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="3Qx-bq-gbP"/>
-                        <constraint firstAttribute="height" constant="40" id="Ev3-vb-J6D"/>
+                        <constraint firstAttribute="height" constant="40" id="esQ-te-7ug"/>
+                        <constraint firstAttribute="width" constant="100" id="f8n-ZF-MFY"/>
                     </constraints>
+                    <state key="normal" title="Start">
+                        <color key="titleColor" red="0.18418684554973819" green="0.18418684554973819" blue="0.18418684554973819" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="downloadBtnClicked:" destination="-1" eventType="touchUpInside" id="pjv-bE-UAr"/>
+                    </connections>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0by-I9-kZ6">
+                    <rect key="frame" x="62" y="415" width="100" height="40"/>
+                    <color key="backgroundColor" red="0.45422360317092242" green="0.7421875" blue="0.31959703695799496" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="Preview">
                         <color key="titleColor" red="0.14074770942408377" green="0.14074770942408377" blue="0.14074770942408377" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="previewBtnClicked:" destination="-1" eventType="touchUpInside" id="kvo-1W-7VR"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0g-db-Wcv">
-                    <rect key="frame" x="182" y="358" width="100" height="40"/>
-                    <color key="backgroundColor" red="0.39215686274509803" green="0.70588235294117652" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="100" id="Myp-Zc-vYn"/>
-                        <constraint firstAttribute="height" constant="40" id="fbz-Xg-5wK"/>
-                    </constraints>
-                    <state key="normal" title="DownLoad">
-                        <color key="titleColor" red="0.18418684554973819" green="0.18418684554973819" blue="0.18418684554973819" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="downloadBtnClicked:" destination="-1" eventType="touchUpInside" id="pjv-bE-UAr"/>
                     </connections>
                 </button>
             </subviews>
@@ -137,15 +133,14 @@
                 <constraint firstItem="uN7-63-zxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0dl-qr-jNO"/>
                 <constraint firstItem="cR3-P0-6LD" firstAttribute="leading" secondItem="oSv-8f-VBw" secondAttribute="trailing" constant="7" id="2UD-JU-kAd"/>
                 <constraint firstItem="NhV-bh-pyv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="2i6-PF-aRC"/>
-                <constraint firstItem="b0g-db-Wcv" firstAttribute="top" secondItem="oSv-8f-VBw" secondAttribute="bottom" constant="49" id="2uk-j7-l9k"/>
                 <constraint firstItem="EYm-HH-SNt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="78" id="4Tg-Uq-KC1"/>
                 <constraint firstItem="oSv-8f-VBw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="540-8Q-71k"/>
                 <constraint firstAttribute="bottom" secondItem="uN7-63-zxG" secondAttribute="bottom" id="5v4-ft-LBK"/>
-                <constraint firstAttribute="trailing" secondItem="b0g-db-Wcv" secondAttribute="trailing" constant="38" id="8NM-FD-pb5"/>
+                <constraint firstItem="b0g-db-Wcv" firstAttribute="centerX" secondItem="uN7-63-zxG" secondAttribute="centerX" id="8nN-P3-Kgk"/>
                 <constraint firstAttribute="trailing" secondItem="uN7-63-zxG" secondAttribute="trailing" id="DNI-i0-Kcc"/>
-                <constraint firstItem="0by-I9-kZ6" firstAttribute="top" secondItem="oSv-8f-VBw" secondAttribute="bottom" constant="49" id="EP2-77-HDB"/>
                 <constraint firstItem="oSv-8f-VBw" firstAttribute="top" secondItem="EYm-HH-SNt" secondAttribute="bottom" constant="39" id="LF8-Ac-VpC"/>
                 <constraint firstItem="5Pl-c1-5Se" firstAttribute="top" secondItem="EYm-HH-SNt" secondAttribute="bottom" constant="19" id="M4Y-dP-Ca0"/>
+                <constraint firstItem="b0g-db-Wcv" firstAttribute="top" secondItem="oSv-8f-VBw" secondAttribute="bottom" constant="34" id="OCz-Va-FXG"/>
                 <constraint firstAttribute="trailing" secondItem="5Pl-c1-5Se" secondAttribute="trailing" constant="50" id="OS5-90-eBW"/>
                 <constraint firstItem="dkv-d6-Pgg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="PG8-t5-wBc"/>
                 <constraint firstItem="uN7-63-zxG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Q3K-1O-d9Z"/>
@@ -158,12 +153,11 @@
                 <constraint firstItem="Dip-lK-onK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="pea-zr-MWW"/>
                 <constraint firstAttribute="trailing" secondItem="uN7-63-zxG" secondAttribute="trailing" id="qXi-f5-Y3Z"/>
                 <constraint firstItem="uN7-63-zxG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="r3l-fR-Pib"/>
-                <constraint firstItem="0by-I9-kZ6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="vKn-nV-VhE"/>
                 <constraint firstItem="cR3-P0-6LD" firstAttribute="top" secondItem="EYm-HH-SNt" secondAttribute="bottom" constant="43" id="wlb-Vm-Lun"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="383" y="231"/>
+            <point key="canvasLocation" x="354" y="212"/>
         </view>
     </objects>
 </document>

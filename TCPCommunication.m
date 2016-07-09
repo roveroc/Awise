@@ -59,8 +59,9 @@
     [socket readDataWithTimeout:-1 tag:0];
     [socket writeData:da withTimeout:-1 tag:0];
     self.responeFlag = NO;
-    if(data[2] == 0x05 && data[3] == 0x02){
+    if((data[2] == 0x05 && data[3] == 0x02) || (data[2] == 0x05 && data[12] == 0x01)){
         //词条指令为水族灯调光指令，不需要判断数据返回
+        //多云闪电是调速度
     }else{
         [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:4.0];
     }
@@ -74,7 +75,8 @@
         }
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"操作可能失败了";
+//        hud.labelText = @"操作可能失败了";
+        hud.detailsLabelText = @"操作可能失败了";
         [hud hide:YES afterDelay:0.8];
         [[[UIApplication sharedApplication] keyWindow] addSubview:hud];
     }
@@ -111,6 +113,7 @@
 #pragma mark ---------------------------------------------------- 发送数据完成功后调用该函数
 -(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag{
     NSLog(@"didWriteDataWithTag tag:%ld",tag);
+    [self.delegate TCPSocketConnectFailed];
 }
 
 

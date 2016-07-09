@@ -7,11 +7,6 @@
 //
 
 #import "LightFishController.h"
-#import "EditTimerController.h"
-#import "ManualController.h"
-#import "LightingModeController.h"
-#import "DeviceMannagerController.h"
-#import "MannagerController.h"
 
 
 @interface LightFishController ()
@@ -27,6 +22,7 @@
 @synthesize deviceInfo;
 @synthesize sql;
 @synthesize sliderTimer,sliderFlag;
+@synthesize scannCount;
 
 
 - (void)showTabBar{
@@ -45,6 +41,30 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
+//更新界面的开关状态：定时器
+- (void)timerStart{
+    if([AwiseGlobal sharedInstance].mode == Timer1_Model){
+        [self closeSwitch:@[@2,@3,@4,@5]];
+        [self.timer1Switch setOn:YES animated:NO];
+    }else if([AwiseGlobal sharedInstance].mode == Timer2_Model){
+        [self closeSwitch:@[@1,@3,@4,@5]];
+        [self.timer2Switch setOn:YES animated:NO];
+    }else if([AwiseGlobal sharedInstance].mode == Timer3_Model){
+        [self closeSwitch:@[@2,@1,@4,@5]];
+        [self.timer3Switch setOn:YES animated:NO];
+    }
+}
+
+//更新界面的开关状态： 多云和闪电
+- (void)lightingStart{
+    if([AwiseGlobal sharedInstance].mode == Lighting_Model){
+        [self closeSwitch:@[@2,@3,@1,@5]];
+        [self.timer4Switch setOn:YES animated:NO];
+    }else if([AwiseGlobal sharedInstance].mode == Cloudy_Model){
+        [self closeSwitch:@[@1,@3,@4,@2]];
+        [self.timer5Switch setOn:YES animated:NO];
+    }
+}
 
 #pragma mark ------------------------------------------------ 重新启动定时器,并断开连接
 - (void)viewWillAppear:(BOOL)animated{
@@ -193,10 +213,11 @@
 - (void)connectDeviceTimeout{
     [[AwiseGlobal sharedInstance] disMissHUD];
     [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"connectTimeout"]];
+    scannCount = 0;
     [[AwiseGlobal sharedInstance] scanNetwork];
 }
 
-#pragma mark ------------------------------------------------ Ping IP 地址的回调
+#pragma mark ---------------- Ping IP 地址的回调 <暂时没有用到，用的是上一个 connectDeviceTimeout>
 - (void)ipIsOnline:(BOOL)result{
     if([AwiseGlobal sharedInstance].cMode == AP){
         if(result == YES){
@@ -232,7 +253,7 @@
             [[AwiseGlobal sharedInstance].tcpSocket connectToDevice:[AwiseGlobal sharedInstance].tcpSocket.deviceIP
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
-        else{                              //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
+        else{       //Ping不通，说明设备IP发生了变化，需重新扫描局域网，匹配设备IP
             [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"searchDevice"]];
             [[AwiseGlobal sharedInstance] scanNetwork];
         }
@@ -241,7 +262,9 @@
 
 #pragma mark ------------------------------------------------ 扫描局域网完成
 - (void)scanNetworkFinish{
-    [[AwiseGlobal sharedInstance] disMissHUD];
+    if(scannCount == 2){
+        [[AwiseGlobal sharedInstance] disMissHUD];
+    }
     NSLog(@" ------- 扫描到的ARP表 ------- ");
     NSMutableArray *arpArray = [[AwiseGlobal sharedInstance] getARPTable];
     NSLog(@"设备IP发生了变化了，需重新获取IP，扫描到的ARP表 -------%@ ",arpArray);
@@ -270,19 +293,39 @@
                                                                port:[AwiseGlobal sharedInstance].tcpSocket.devicePort];
         }
     }else{
-        NSLog(@"确保设备正常工作");
+        NSLog(@"在局域网内没有发现设备 --> 确保设备正常工作");
+        if(scannCount == 2){
+            NSString *msg = [NSString stringWithFormat:@"在%@局域网内没有找到设备，请确保设备正常工作",[AwiseGlobal sharedInstance].wifiSSID];
+            [[AwiseGlobal sharedInstance] showRemindMsg:msg withTime:0.8];
+            [self performSelector:@selector(backToHome) withObject:nil afterDelay:0.8];
+        }else{
+            scannCount++;
+            [[AwiseGlobal sharedInstance] scanNetwork];
+        }
     }
 }
 
-#pragma mark ---------------------------------------------- 连接设备成功
+#pragma mark ---------------------------------------------- 连接设备 -> 失败
+- (void)TCPSocketConnectFailed{
+    [[AwiseGlobal sharedInstance] showRemindMsg:@"连接设备失败" withTime:0.6];
+    [self performSelector:@selector(backToHome) withObject:nil afterDelay:0.6];
+}
+
+//各种情况，没有连接上设备则返回
+- (void)backToHome{
+    [[AwiseGlobal sharedInstance] disMissHUD];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark ---------------------------------------------- 连接设备 -> 成功
 - (void)TCPSocketConnectSuccess{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
     [[AwiseGlobal sharedInstance] disMissHUD];
-    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
-    //每次软件启动时，自动同步时间至设备
-    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
-    //获取设备状态值
-    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
+//    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
+//    //每次软件启动时，自动同步时间至设备
+//    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+//    //获取设备状态值
+//    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
 }
 
 
@@ -629,7 +672,6 @@
             b3[index++] = i+1;
 
             for(int j=0;j<temp.count;j++){
-                
                 if(j == 0){
                     NSArray *time = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
                     b3[index++] = [[time objectAtIndex:0] intValue];
@@ -638,7 +680,6 @@
                 else{
                     b3[index++] = [[temp objectAtIndex:j] intValue];
                 }
-                
             }
         }
         b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
@@ -743,7 +784,7 @@
 #pragma mark ---------------------------------------------------- 三通道亮度值改变
 - (IBAction)pipeSliderValueChange:(id)sender {
     if(self.sliderFlag == NO)
-//        return;
+        return;
     self.sliderFlag = YES;
     [self closeSwitch:@[@1,@2,@3,@4,@5,@6]];
     UISlider *slider = (UISlider *)sender;
@@ -805,6 +846,7 @@
     switch (btn.tag) {
         case 11:{                       //定时器一
             EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.delegate = self;
             editCon.navTitle = @"Edit Timer1";
             editCon.fileName = @"timerData1.plist";
             [AwiseGlobal sharedInstance].timerNumber = 1;
@@ -813,6 +855,7 @@
             break;
         case 12:{                         //定时器二
             EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.delegate = self;
             editCon.navTitle = @"Edit Timer2";
             editCon.fileName = @"timerData2.plist";
             [AwiseGlobal sharedInstance].timerNumber = 2;
@@ -821,6 +864,7 @@
             break;
         case 13:{                         //定时器三
             EditTimerController *editCon = [[EditTimerController alloc] init];
+            editCon.delegate = self;
             editCon.navTitle = @"Edit Timer3";
             editCon.fileName = @"timerData3.plist";
             [AwiseGlobal sharedInstance].timerNumber = 3;
@@ -829,12 +873,14 @@
             break;
         case 14:{                         //闪电
             LightingModeController *light = [[LightingModeController alloc] init];
+            light.delegate = self;
             light.modeFlag = 1;
             [self.navigationController pushViewController:light animated:YES];
         }
             break;
         case 15:{                         //多云
             LightingModeController *light = [[LightingModeController alloc] init];
+            light.delegate = self;
             light.modeFlag = 2;
             [self.navigationController pushViewController:light animated:YES];
         }

@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AwiseGlobal.h"
 #import "RoverSqlite.h"
+#import "EditTimerController.h"
+#import "ManualController.h"
+#import "LightingModeController.h"
+#import "DeviceMannagerController.h"
+#import "MannagerController.h"
 
-@interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate>{
+@interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate,TimerStartDelegate,LightingStartDelegate>{
     int                     pipe1Value;
     int                     pipe2Value;
     int                     pipe3Value;
@@ -20,6 +25,9 @@
     RoverSqlite             *sql;
     NSTimer                 *sliderTimer;
     BOOL                    sliderFlag;
+    
+//用来控制扫码次数，在局域网内第一次没有发现设备，则在进行一次扫码
+    int                     scannCount;
 }
 @property (assign)            int                   pipe1Value;           //三个通道值
 @property (assign)            int                   pipe2Value;
@@ -30,6 +38,9 @@
 @property (nonatomic, retain) RoverSqlite           *sql;                 //操作数据库的对象
 @property (nonatomic, retain) NSTimer               *sliderTimer;         //滑动条取值定时器
 @property (assign)            BOOL                  sliderFlag;           //滑动条取值标识
+@property (assign)            int                   scannCount;
+
+
 
 - (IBAction)switchBtnClicked:(id)sender;
 
