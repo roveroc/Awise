@@ -118,8 +118,8 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (NSString *)oldData{
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"oldData"];
+- (NSData *)oldData{
+    return [[NSUserDefaults standardUserDefaults] dataForKey:@"oldData"];
 }
 /*********************水族灯部分*************************/
 

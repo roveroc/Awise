@@ -123,7 +123,9 @@
 //        [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
 //        self.reConnectCount ++;
 //    }
-    [self.delegate TCPSocketConnectFailed];
+    if([self.delegate respondsToSelector:@selector(TCPSocketConnectFailed)]){
+        [self.delegate TCPSocketConnectFailed];
+    }
 }
 
 -(void)onSocket:(AsyncSocket *) sock willDisconnectWithError:(NSError *)err{

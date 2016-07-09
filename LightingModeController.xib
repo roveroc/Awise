@@ -78,8 +78,8 @@
                         <action selector="endBtnClicked:" destination="-1" eventType="touchUpInside" id="ypG-O3-YY8"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="强" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pl-c1-5Se">
-                    <rect key="frame" x="220" y="259" width="50" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="强" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pl-c1-5Se">
+                    <rect key="frame" x="200" y="259" width="70" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="fnf-H2-zcF"/>
                         <constraint firstAttribute="height" constant="21" id="pxc-4u-2Ms"/>

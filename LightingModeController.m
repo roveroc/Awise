@@ -20,6 +20,7 @@
 @synthesize hud;
 @synthesize speedFlag,speedTimer;
 @synthesize backFlag;
+@synthesize delegate;
 
 #pragma mark ------------------------------------------------ 界面消失是销毁定时器
 - (void)viewWillDisappear:(BOOL)animated{
@@ -36,10 +37,17 @@
             [AwiseUserDefault sharedInstance].cloudy_sTime = self.sTime;
             [AwiseUserDefault sharedInstance].cloudy_eTime = self.eTime;
             [AwiseUserDefault sharedInstance].cloudy_switch = [NSString stringWithFormat:@"%d",self.sswitch];
-        }
-        self.runingValue = 0;
+        }    
         self.backFlag = YES;
-        [self buildDataStruct:NO];
+        //更新界面UI状态
+        [self.delegate lightingStart];
+        //如果是预览模式，返回的时候回到之前的状态
+        if(self.runingValue == 1){
+            if([AwiseUserDefault sharedInstance].oldData.length > 60){
+                Byte *b3 = (Byte *)[[AwiseUserDefault sharedInstance].oldData bytes];
+                [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+            }
+        }
     }
     [self.speedTimer invalidate];
     self.speedTimer = nil;
@@ -84,7 +92,7 @@
     if(self.modeFlag == 1){  //闪电
         self.navigationItem.title = @"Lighting";
         self.weakLabel.text = @"Dark";
-        self.strongLabel.text = @"Brighten";
+        self.strongLabel.text = @"Light";
         
         self.slider.value =  (int)([[AwiseUserDefault sharedInstance].light_precent intValue]);
         self.valueLabel.text = [NSString stringWithFormat:@"%d%%",(int)self.slider.value];
@@ -210,6 +218,7 @@
 #pragma mark ------------------------------------------ 预览当前效果
 - (IBAction)previewBtnClicked:(id)sender {
     self.runingValue = 1;
+    self.sswitch = 0;
     [[AwiseGlobal sharedInstance] showWaitingView];
     [self buildDataStruct:NO];
 }
@@ -217,7 +226,8 @@
 
 #pragma mark - 下载设置数据
 - (IBAction)downloadBtnClicked:(id)sender {
-    self.sswitch = 0;
+    self.sswitch = 1;
+    self.runingValue = 0;
     [[AwiseGlobal sharedInstance] showWaitingView];
     [self buildDataStruct:NO];
 }
@@ -362,7 +372,17 @@
 #pragma mark ----------------------------------- 解析从设备的返回值
 - (void)dataBackFormDevice:(Byte *)byte{
     if (byte[2] == 0x05){                           //闪电、多云
-        
+        if(byte[3] == 0x00){
+            //闪电
+            if(self.sswitch == 1){
+                [AwiseGlobal sharedInstance].mode = Lighting_Model;
+            }
+        }else if(byte[3] == 0x01){
+            //多云
+            if(self.sswitch == 1){
+                [AwiseGlobal sharedInstance].mode = Cloudy_Model;
+            }
+        }
     }else{
         [[AwiseGlobal sharedInstance] showRemindMsg:@"操作好像失败了" withTime:1.2];
     }

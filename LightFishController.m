@@ -448,6 +448,7 @@
                 [self closeSwitch:@[@1,@2,@3,@5,@6]];
                 UISwitch *temp = (UISwitch *)[self.view viewWithTag:4];
                 [temp setOn:YES animated:YES];
+                [AwiseUserDefault sharedInstance].oldData = [self buildLightData:1 onOff:0x01];
             }
                 break;
             case 0x03:{
@@ -455,6 +456,7 @@
                 [self closeSwitch:@[@1,@2,@3,@4,@6]];
                 UISwitch *temp = (UISwitch *)[self.view viewWithTag:5];
                 [temp setOn:YES animated:YES];
+                [AwiseUserDefault sharedInstance].oldData = [self buildLightData:2 onOff:0x01];
             }
                 break;
             case 0x04:{
@@ -462,6 +464,7 @@
                 [self closeSwitch:@[@2,@3,@4,@5,@6]];
                 UISwitch *temp = (UISwitch *)[self.view viewWithTag:1];
                 [temp setOn:YES animated:YES];
+                [AwiseUserDefault sharedInstance].oldData = [self buildTimerData:1];
             }
                 break;
             case 0x05:{
@@ -469,6 +472,7 @@
                 [self closeSwitch:@[@1,@3,@4,@5,@6]];
                 UISwitch *temp = (UISwitch *)[self.view viewWithTag:2];
                 [temp setOn:YES animated:YES];
+                [AwiseUserDefault sharedInstance].oldData = [self buildTimerData:2];
             }
                 break;
             case 0x06:{
@@ -476,6 +480,7 @@
                 [self closeSwitch:@[@1,@2,@4,@5,@6]];
                 UISwitch *temp = (UISwitch *)[self.view viewWithTag:3];
                 [temp setOn:YES animated:YES];
+                [AwiseUserDefault sharedInstance].oldData = [self buildTimerData:3];
             }
                 break;
             default:
@@ -493,7 +498,25 @@
         self.pipe1Label.text = [NSString stringWithFormat:@"%d%%",self.pipe1Value];
         self.pipe2Label.text = [NSString stringWithFormat:@"%d%%",self.pipe2Value];
         self.pipe3Label.text = [NSString stringWithFormat:@"%d%%",self.pipe3Value];
-        
+        if([AwiseGlobal sharedInstance].mode == Manual_Model){
+            Byte b3[64];
+            for(int k=0;k<64;k++){
+                b3[k] = 0x00;
+            }
+            b3[0] = 0x55;
+            b3[1] = 0xAA;
+            b3[2] = 0x05;
+            b3[3] = 0x02;
+            b3[4] = 0x00;
+            
+            b3[5] = (int)self.pipe1Value;        //由于硬件  将一通道和三通道调换
+            b3[6] = (int)self.pipe2Value;
+            b3[7] = (int)self.pipe3Value;
+            
+            b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+            NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
+            [AwiseUserDefault sharedInstance].oldData = data;
+        }
         [self getDeviceStatusFinished];
     }
 }
@@ -548,6 +571,8 @@
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
     
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
 }
 
 #pragma mark ---------------------------------------------------- 打开或关闭某种模式
@@ -653,10 +678,13 @@
     self.pipe1Label.text = @"0";
     self.pipe2Label.text = @"0";
     self.pipe3Label.text = @"0";
+    
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
 }
 
-#pragma mark --------------------------- 打开某一个定时器时，发送数据   <最新添加>
-- (void)openTimer:(int)timerNum{
+#pragma mark +++++++++++++++++++++++++++++ 组装定时器数据
+- (NSData *)buildTimerData:(int)timerNum{
     NSString *fileName;
     if(timerNum == 1){
         fileName = @"timerData1.plist";
@@ -667,8 +695,8 @@
     }
     NSString *path = [[AwiseGlobal sharedInstance] getFilePath:fileName];
     NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    Byte b3[64];
     if(arr.count > 0){
-        Byte b3[64];
         for(int k=0;k<64;k++){
             b3[k] = 0x00;
         }
@@ -682,7 +710,7 @@
             NSMutableArray *temp = [arr objectAtIndex:i];
             
             b3[index++] = i+1;
-
+            
             for(int j=0;j<temp.count;j++){
                 if(j == 0){
                     NSArray *time = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
@@ -695,37 +723,14 @@
             }
         }
         b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
-    }else{
-        [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请先编辑" time:0.5];
     }
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
+    return adata;
 }
 
-#pragma mark - 关闭某些开关
-- (void)closeSwitch:(NSArray *)tagArr{
-    for(int i=0;i<tagArr.count;i++){
-        UISwitch *temp = (UISwitch *)[self.view viewWithTag:[tagArr[i] intValue]];
-        [temp setOn:NO animated:YES];
-    }
-}
-
-#pragma mark ------------------------------------------ 操作定时器1、2、3
-- (void)operateTimer:(Byte)tnumber onoff:(Byte)vaule{
-    Byte b3[64];
-    for(int k=0;k<64;k++){
-        b3[k] = 0x00;
-    }
-    b3[0] = 0x55;
-    b3[1] = 0xAA;
-    b3[2] = 0x08;
-    b3[3] = tnumber;
-    b3[5] = vaule;
-    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
-}
-
-#pragma mark ------------------------------------------ 操作定多云闪电
-- (void)lightingClouldMode:(int)flag onOff:(Byte)vaule{
+#pragma mark +++++++++++++++++++++++++++++ 组装多云闪电数据
+- (NSData *)buildLightData:(int)flag onOff:(Byte)vaule{
     Byte b3[64];
     for(int k=0;k<64;k++){
         b3[k] = 0x00;
@@ -790,7 +795,67 @@
         b3[11] = openbb;
     }
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
+    return adata;
+}
+
+#pragma mark --------------------------- 打开某一个定时器时，发送数据   <最新添加>
+- (void)openTimer:(int)timerNum{
+    NSString *fileName;
+    if(timerNum == 1){
+        fileName = @"timerData1.plist";
+    }else if(timerNum == 2){
+        fileName = @"timerData2.plist";
+    }else if(timerNum == 3){
+        fileName = @"timerData3.plist";
+    }
+    NSString *path = [[AwiseGlobal sharedInstance] getFilePath:fileName];
+    NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    if(arr.count > 0){
+        NSData *data = [self buildTimerData:timerNum];
+        Byte *b3 = (Byte *)[data bytes];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    }else{
+        [[AwiseGlobal sharedInstance] disMissHUD];
+        [[AwiseGlobal sharedInstance] showWaitingViewWithTime:@"请先编辑" time:0.5];
+    }
+}
+
+#pragma mark - 关闭某些开关
+- (void)closeSwitch:(NSArray *)tagArr{
+    for(int i=0;i<tagArr.count;i++){
+        UISwitch *temp = (UISwitch *)[self.view viewWithTag:[tagArr[i] intValue]];
+        [temp setOn:NO animated:YES];
+    }
+}
+
+#pragma mark ------------------------------------------ 操作定时器1、2、3
+- (void)operateTimer:(Byte)tnumber onoff:(Byte)vaule{
+    Byte b3[64];
+    for(int k=0;k<64;k++){
+        b3[k] = 0x00;
+    }
+    b3[0] = 0x55;
+    b3[1] = 0xAA;
+    b3[2] = 0x08;
+    b3[3] = tnumber;
+    b3[5] = vaule;
+    b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
+}
+
+
+
+#pragma mark ------------------------------------------ 操作定多云闪电
+- (void)lightingClouldMode:(int)flag onOff:(Byte)vaule{
+    NSData *data = [self buildLightData:flag onOff:vaule];
+    Byte *b3 = (Byte *)[data bytes];
+    [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    NSData *adata = [[NSData alloc] initWithBytes:b3 length:64];
+    [AwiseUserDefault sharedInstance].oldData = adata;
 }
 
 #pragma mark ---------------------------------------------------- 三通道亮度值改变
@@ -846,6 +911,7 @@
 - (void)timerSendData{
     if(self.dataArray.count > 0){
         NSData *data = [self.dataArray objectAtIndex:0];
+        [AwiseUserDefault sharedInstance].oldData = data;
         Byte *by = (Byte *)[data bytes];
         [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:by length:64];
         [self.dataArray removeObjectAtIndex:0];
@@ -886,12 +952,14 @@
         case 14:{                         //闪电
             LightingModeController *light = [[LightingModeController alloc] init];
             light.modeFlag = 1;
+            light.delegate = self;
             [self.navigationController pushViewController:light animated:YES];
         }
             break;
         case 15:{                         //多云
             LightingModeController *light = [[LightingModeController alloc] init];
             light.modeFlag = 2;
+            light.delegate = self;
             [self.navigationController pushViewController:light animated:YES];
         }
             break;

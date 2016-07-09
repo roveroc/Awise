@@ -77,6 +77,9 @@
     NSDictionary *defaultValues3_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"cloudy_switch",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues3_1];
     
+    NSDictionary *oldData = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"oldData",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:oldData];
+    
     [AwiseGlobal sharedInstance].enterBackgroundFlag = NO;
     [AwiseGlobal sharedInstance].deviceSSIDArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
