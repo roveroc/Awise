@@ -112,6 +112,15 @@
 - (NSString *)activeMAC{
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"activeMAC"];
 }
+
+- (void)setOldData:(NSData *)oldData{
+    [[NSUserDefaults standardUserDefaults] setObject:oldData forKey:@"oldData"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)oldData{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"oldData"];
+}
 /*********************水族灯部分*************************/
 
 

@@ -63,6 +63,13 @@ typedef enum{
 /*******水族等部分********/
 
 
+//当套接字断开时，记录其断开原因
+typedef enum{
+    Manual_Broken = 0,       //手动断开  <正常>
+    Other_Broken
+}BreakMode;
+
+
 typedef enum {                          //设备控制方式  <AP：点对点模式> <STA：路由模式>
     AP =0,
     STA,
@@ -88,6 +95,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
     NSMutableArray              *deviceArray;
     ControlMode                 cMode;
     GBPing                      *gbPing;
+    BreakMode                   breakMode;          //socket断开方式
     
 /*******水族等部分********/
     NSString       *wifiSSID;
@@ -130,6 +138,7 @@ typedef enum {                          //设备控制方式  <AP：点对点模
 @property (nonatomic, retain) NSMutableArray            *deviceArray;                   //所有已添加的设备
 @property (assign)            ControlMode               cMode;                          //用来区分当前的控制模式
 @property (nonatomic, retain) GBPing                    *gbPing;
+@property (assign)            BreakMode                 breakMode;
 
 
 /*******水族等部分********/

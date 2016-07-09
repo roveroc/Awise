@@ -145,9 +145,7 @@
 #pragma mark ---------------------------------------- 下载数据到设备
 - (void)downDataToDevice{
     [[AwiseGlobal sharedInstance] showWaitingView];
-    NSString *path = [[AwiseGlobal sharedInstance] getFilePath:fileName];
-    NSMutableArray *arr = [[NSMutableArray alloc] initWithContentsOfFile:path];
-    if(arr.count > 0){
+    if([AwiseGlobal sharedInstance].lineArray.count > 0){
         Byte b3[64];
         for(int k=0;k<64;k++){
             b3[k] = 0x00;
@@ -158,8 +156,8 @@
         b3[3] = [AwiseGlobal sharedInstance].timerNumber;
         b3[4] = 0x00;
         int index = 5;
-        for(int i = 0;i<arr.count;i++){
-            NSMutableArray *temp = [arr objectAtIndex:i];
+        for(int i = 0;i<[AwiseGlobal sharedInstance].lineArray.count;i++){
+            NSMutableArray *temp = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:i];
             
             b3[index++] = i+1;
             
@@ -176,6 +174,13 @@
         }
         b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
         [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    }
+    if([AwiseGlobal sharedInstance].timerNumber == 1){
+        [AwiseGlobal sharedInstance].mode = Timer1_Model;
+    }else if([AwiseGlobal sharedInstance].timerNumber == 2){
+        [AwiseGlobal sharedInstance].mode = Timer2_Model;
+    }else if([AwiseGlobal sharedInstance].timerNumber == 3){
+        [AwiseGlobal sharedInstance].mode = Timer3_Model;
     }
 }
 

@@ -28,6 +28,9 @@
 @property (nonatomic, retain) NSString *cloudy_switch;
 
 @property (nonatomic, retain) NSString *activeMAC;      //当前受控设备的MAC
+
+
+@property (nonatomic, retain) NSData   *oldData;        //保存上一条指令
 /*********************水族灯部分*************************/
 
 

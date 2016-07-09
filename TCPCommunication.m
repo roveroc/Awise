@@ -67,7 +67,7 @@
     }
 }
 
-#pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
+#pragma mark ------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
 - (void)isDeviceRespone{
     if(self.responeFlag == NO){
         if([self.delegate respondsToSelector:@selector(dataBackTimeOut)]){
@@ -113,7 +113,6 @@
 #pragma mark ---------------------------------------------------- 发送数据完成功后调用该函数
 -(void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag{
     NSLog(@"didWriteDataWithTag tag:%ld",tag);
-    [self.delegate TCPSocketConnectFailed];
 }
 
 
@@ -124,6 +123,7 @@
 //        [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
 //        self.reConnectCount ++;
 //    }
+    [self.delegate TCPSocketConnectFailed];
 }
 
 -(void)onSocket:(AsyncSocket *) sock willDisconnectWithError:(NSError *)err{

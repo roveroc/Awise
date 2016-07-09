@@ -91,6 +91,7 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
+        [AwiseGlobal sharedInstance].breakMode = Manual_Broken;
         [[AwiseGlobal sharedInstance].tcpSocket breakConnect:[AwiseGlobal sharedInstance].tcpSocket.socket];
     }
 }
@@ -307,12 +308,15 @@
 
 #pragma mark ---------------------------------------------- 连接设备 -> 失败
 - (void)TCPSocketConnectFailed{
-    [[AwiseGlobal sharedInstance] showRemindMsg:@"连接设备失败" withTime:0.6];
-    [self performSelector:@selector(backToHome) withObject:nil afterDelay:0.6];
+    if([AwiseGlobal sharedInstance].breakMode == Other_Broken){
+        [[AwiseGlobal sharedInstance] showRemindMsg:@"连接设备失败" withTime:0.6];
+        [self performSelector:@selector(backToHome) withObject:nil afterDelay:0.6];
+    }
 }
 
 //各种情况，没有连接上设备则返回
 - (void)backToHome{
+    [AwiseGlobal sharedInstance].breakMode = Other_Broken;
     [[AwiseGlobal sharedInstance] disMissHUD];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -321,11 +325,11 @@
 - (void)TCPSocketConnectSuccess{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(connectDeviceTimeout) object:nil];
     [[AwiseGlobal sharedInstance] disMissHUD];
-//    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
-//    //每次软件启动时，自动同步时间至设备
-//    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
-//    //获取设备状态值
-//    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
+    [[AwiseGlobal sharedInstance] showWaitingViewWithMsg:[[AwiseGlobal sharedInstance] DPLocalizedString:@"updateStatusMsg"]];
+    //每次软件启动时，自动同步时间至设备
+    [self performSelector:@selector(syncDeviceTime) withObject:nil afterDelay:0.2];
+    //获取设备状态值
+    [self performSelector:@selector(getDeviceStatus) withObject:nil afterDelay:0.8];
 }
 
 
@@ -543,6 +547,7 @@
     
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    
 }
 
 #pragma mark ---------------------------------------------------- 打开或关闭某种模式
@@ -641,6 +646,13 @@
     
     b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
     [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
+    
+    self.pipe1Slider.value = 0;
+    self.pipe2Slider.value = 0;
+    self.pipe3Slider.value = 0;
+    self.pipe1Label.text = @"0";
+    self.pipe2Label.text = @"0";
+    self.pipe3Label.text = @"0";
 }
 
 #pragma mark --------------------------- 打开某一个定时器时，发送数据   <最新添加>
@@ -873,14 +885,12 @@
             break;
         case 14:{                         //闪电
             LightingModeController *light = [[LightingModeController alloc] init];
-            light.delegate = self;
             light.modeFlag = 1;
             [self.navigationController pushViewController:light animated:YES];
         }
             break;
         case 15:{                         //多云
             LightingModeController *light = [[LightingModeController alloc] init];
-            light.delegate = self;
             light.modeFlag = 2;
             [self.navigationController pushViewController:light animated:YES];
         }

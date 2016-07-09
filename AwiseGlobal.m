@@ -18,6 +18,7 @@
 @synthesize deviceArray;
 @synthesize cMode;
 @synthesize gbPing;
+@synthesize breakMode;
 
 /*******水族等部分********/
 @synthesize wifiSSID;

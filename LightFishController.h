@@ -15,7 +15,7 @@
 #import "DeviceMannagerController.h"
 #import "MannagerController.h"
 
-@interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate,TimerStartDelegate,LightingStartDelegate>{
+@interface LightFishController : UIViewController<TCPSocketDelegate,PingDelegate,TimerStartDelegate>{
     int                     pipe1Value;
     int                     pipe2Value;
     int                     pipe3Value;
