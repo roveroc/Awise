@@ -13,6 +13,8 @@
 @protocol MusicDelegate <NSObject>
 
 - (void)sendMusicVoiceData:(int)value;
+- (void)beginPlay;
+- (void)stopPaly;
 
 @end
 
@@ -25,6 +27,10 @@
     NSTimer                     *labelTimer;
     UIView                      *waveView;
     id<MusicDelegate>           delegate;
+    
+    
+    
+    int     timeValue;
 }
 
 @property (nonatomic, retain) NSMutableArray            *musicArray;   //音乐数据源数组
@@ -35,6 +41,10 @@
 @property (nonatomic, retain) NSTimer                   *labelTimer;   //计算播放时间
 @property (nonatomic, retain) UIView                    *waveView;     //显示音量大小的动态View
 @property (nonatomic, retain) id<MusicDelegate>         delegate;
+
+
+
+@property (assign)            int                       timeValue;
 
 @property (weak, nonatomic) IBOutlet UITableView *musicListView;
 @property (weak, nonatomic) IBOutlet UISlider *timeSlider;
@@ -50,6 +60,8 @@
 - (IBAction)nextBtnClicked:(id)sender;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *timeBtn;
+- (IBAction)timeBtnClick:(id)sender;
 
 
 

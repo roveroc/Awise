@@ -16,6 +16,7 @@
 @synthesize musicCurrentIndex;
 @synthesize waveView;
 @synthesize delegate;
+@synthesize timeValue;
 
 - (void)drawRect:(CGRect)rect {
     self.musicListView.delegate   = self;
@@ -25,7 +26,10 @@
     self.music_PlayPauseBtn.enabled = NO;
     self.preBtn.enabled  = NO;
     self.nextBtn.enabled = NO;
-    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.03
+    self.timeValue = 10;
+    NSLog(@"%f",self.timeValue/1000.);
+    [self.timeBtn setTitle:@"10ms" forState:UIControlStateNormal];
+    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:0.06
                                                        target:self
                                                      selector:@selector(getPowerValue)
                                                      userInfo:nil
@@ -103,6 +107,7 @@
             [self.mPlayer pause];
             [self.music_PlayPauseBtn setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                                forState:UIControlStateNormal];
+            [self.delegate stopPaly];
         }
         else{
             [self.mPlayer stop];
@@ -112,16 +117,19 @@
             self.mPlayer.delegate = self;
             [self.mPlayer prepareToPlay];
             [self.mPlayer play];
+            [self.delegate beginPlay];
             self.musicCurrentIndex = (int)indexPath.row;
             [self.music_PlayPauseBtn setBackgroundImage:[UIImage imageNamed:@"pause.png"]
                                                forState:UIControlStateNormal];
         }
     }else{
         if(self.musicCurrentIndex == (int)indexPath.row){
+            [self.delegate beginPlay];
             [self.mPlayer play];
             [self.music_PlayPauseBtn setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                                forState:UIControlStateNormal];
         }else{
+            [self.delegate beginPlay];
             [self.mPlayer stop];
             self.mPlayer = nil;
             self.mPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
@@ -222,10 +230,12 @@
         [self.mPlayer pause];
         [self.music_PlayPauseBtn setBackgroundImage:[UIImage imageNamed:@"play.png"]
                                            forState:UIControlStateNormal];
+        [self.delegate stopPaly];
     }else{
         [self.mPlayer play];
         [self.music_PlayPauseBtn setBackgroundImage:[UIImage imageNamed:@"pause.png"]
                                            forState:UIControlStateNormal];
+        [self.delegate beginPlay];
     }
 }
 
@@ -249,6 +259,7 @@
     self.mPlayer.delegate = self;
     [self.mPlayer prepareToPlay];
     [self.mPlayer play];
+    [self.delegate beginPlay];
     [self.musicListView reloadData];
 }
 
@@ -272,6 +283,7 @@
     self.mPlayer.delegate = self;
     [self.mPlayer prepareToPlay];
     [self.mPlayer play];
+    [self.delegate beginPlay];
     [self.musicListView reloadData];
 }
 
@@ -299,9 +311,24 @@
     self.mPlayer.delegate = self;
     [self.mPlayer prepareToPlay];
     [self.mPlayer play];
+    [self.delegate beginPlay];
     [self.musicListView reloadData];
 }
 
 
 
+- (IBAction)timeBtnClick:(id)sender {
+//    self.timeValue+=10;
+//    if(self.timeValue >100)
+//        self.timeValue = 10;
+//    [self.timeBtn setTitle:[NSString stringWithFormat:@"%dms",self.timeValue] forState:UIControlStateNormal];
+//    
+//    [self.musicTimer invalidate];
+//    self.musicTimer = [NSTimer scheduledTimerWithTimeInterval:self.timeValue/1000.
+//                                                       target:self
+//                                                     selector:@selector(getPowerValue)
+//                                                     userInfo:nil
+//                                                      repeats:YES];
+//    [self.musicTimer fire];
+}
 @end

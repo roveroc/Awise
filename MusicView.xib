@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -81,6 +81,14 @@
                         <action selector="nextBtnClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="e5u-Go-FDg"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yTY-UA-FQa">
+                    <rect key="frame" x="68" y="337" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.22319514447664268" green="0.75567035303150543" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="timeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="e0i-qw-nQg"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -110,9 +118,10 @@
                 <outlet property="preBtn" destination="U8I-bk-YkB" id="6Hx-V2-yQ8"/>
                 <outlet property="time1Label" destination="pQF-F7-dXn" id="vyq-y3-FCM"/>
                 <outlet property="time2Label" destination="Ki1-dG-Ujz" id="iYS-QW-E49"/>
+                <outlet property="timeBtn" destination="yTY-UA-FQa" id="m1L-T5-cuL"/>
                 <outlet property="timeSlider" destination="KG3-ij-mlu" id="0Ze-7L-u1j"/>
             </connections>
-            <point key="canvasLocation" x="1196" y="492"/>
+            <point key="canvasLocation" x="935" y="289"/>
         </view>
     </objects>
     <resources>

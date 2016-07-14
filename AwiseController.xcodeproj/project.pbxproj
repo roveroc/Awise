@@ -138,15 +138,6 @@
 		97A2AB7F1CD21B6800734E61 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A2AB7D1CD21B6800734E61 /* GBPing.m */; };
 		97AE06901D23B60400EC8BD6 /* LightFish11_EditTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AE068E1D23B60400EC8BD6 /* LightFish11_EditTimerController.m */; };
 		97AE06911D23B60400EC8BD6 /* LightFish11_EditTimerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AE068F1D23B60400EC8BD6 /* LightFish11_EditTimerController.xib */; };
-		97AE06921D23B6FE00EC8BD6 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C721D0FB95C00B4521B /* QRCameraSwitchButton.m */; };
-		97AE06931D23B6FE00EC8BD6 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C731D0FB95C00B4521B /* QRCodeReader.m */; };
-		97AE06941D23B6FE00EC8BD6 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C741D0FB95C00B4521B /* QRCodeReaderView.m */; };
-		97AE06951D23B6FE00EC8BD6 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C751D0FB95C00B4521B /* QRCodeReaderViewController.m */; };
-		97AE06961D23B6FE00EC8BD6 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C761D0FB95C00B4521B /* QRToggleTorchButton.m */; };
-		97AE06971D23B6FE00EC8BD6 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C701D0FB94300B4521B /* UIImageView+Letters.m */; };
-		97AE06981D23B6FE00EC8BD6 /* EFCircularSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6E1D0FB93400B4521B /* EFCircularSlider.m */; };
-		97AE06991D23B6FE00EC8BD6 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6C1D0FB92200B4521B /* AsyncSocket.m */; };
-		97AE069A1D23B6FE00EC8BD6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C86C6A1D0FB90B00B4521B /* MBProgressHUD.m */; };
 		97B81EC81D0E849800DD4326 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B81EC71D0E849800DD4326 /* CFNetwork.framework */; };
 		97B9C3A31D0E860F001A565A /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9C39E1D0E860F001A565A /* libCocoaAsyncSocket.a */; };
 		97B9C3A41D0E860F001A565A /* libEFCircularSlider.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9C39F1D0E860F001A565A /* libEFCircularSlider.a */; };
@@ -1323,6 +1314,7 @@
 				TargetAttributes = {
 					9735C0271CC7832A000B0727 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = VX56C9T2H5;
 					};
 				};
 			};
@@ -1508,15 +1500,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97AE06921D23B6FE00EC8BD6 /* QRCameraSwitchButton.m in Sources */,
-				97AE06931D23B6FE00EC8BD6 /* QRCodeReader.m in Sources */,
-				97AE06941D23B6FE00EC8BD6 /* QRCodeReaderView.m in Sources */,
-				97AE06951D23B6FE00EC8BD6 /* QRCodeReaderViewController.m in Sources */,
-				97AE06961D23B6FE00EC8BD6 /* QRToggleTorchButton.m in Sources */,
-				97AE06971D23B6FE00EC8BD6 /* UIImageView+Letters.m in Sources */,
-				97AE06981D23B6FE00EC8BD6 /* EFCircularSlider.m in Sources */,
-				97AE06991D23B6FE00EC8BD6 /* AsyncSocket.m in Sources */,
-				97AE069A1D23B6FE00EC8BD6 /* MBProgressHUD.m in Sources */,
 				97F55A6B1CCB5AD900E92957 /* SingleTouchScene.m in Sources */,
 				976521021CDB51A900EEEE01 /* LightFishController.m in Sources */,
 				976521111CDC2F1A00EEEE01 /* EditTimerController.m in Sources */,
@@ -1690,12 +1673,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: WeiZhong Zheng (P8Q933R2RK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.Awisecao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1705,12 +1690,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: WeiZhong Zheng (P8Q933R2RK)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AwiseController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlblios.Awisecao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

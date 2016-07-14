@@ -236,7 +236,7 @@
                 forControlEvents:UIControlEventTouchUpInside];
     [self.backScrollView addSubview:self.onOffButton];
     [self.backScrollView addSubview:self.PlayPauseButton];
-    //    [self.backScrollView addSubview:self.musicButton];
+    [self.backScrollView addSubview:self.musicButton];
     [self.backScrollView addSubview:self.customButton];
     
     //亮度值滑条
@@ -330,6 +330,15 @@
         self.mview.mPlayer.delegate = nil;
         self.mview.mPlayer = nil;
         
+        if(self.character != nil){
+            Byte by[4];
+            by[0] = 3;
+            by[1] = 3;
+            by[2] = 0;
+            by[3] = 0;
+            NSData *da = [[NSData alloc] initWithBytes:by length:4];
+            [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+        }
     }else if(self.cusotmView != nil){
         [UIView beginAnimations:@"animation" context:nil];
         //动画时长
@@ -1029,5 +1038,31 @@ didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
     }
 }
 
+
+#pragma mark ++++++++++++++++ 音乐播放暂停开始代理
+- (void)stopPaly{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 3;
+        by[1] = 3;
+        by[2] = 0;
+        by[3] = 0;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+
+- (void)beginPlay{
+    if(self.character != nil){
+        Byte by[4];
+        by[0] = 3;
+        by[1] = 2;
+        by[2] = 0;
+        by[3] = 0;
+        NSData *da = [[NSData alloc] initWithBytes:by length:4];
+        [self.connectPeripheral writeValue:da forCharacteristic:self.character type:CBCharacteristicWriteWithResponse];
+    }
+}
 
 @end

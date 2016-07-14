@@ -59,7 +59,7 @@
     self.G_slider = [self customSlider:self.G_slider     rect:CGRectMake(30, y-5+temp, SCREEN_WIDHT-75, 30)  tag:2];
     self.G_valueLabel = [self customLabel:self.G_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp, 40, 20)    text:@"100"];
     
-    self.B_lbale       = [self customLabel:self.B_lbale       rect:CGRectMake(10, y+temp*2, 20, 20) text:@"C:"];
+    self.B_lbale       = [self customLabel:self.B_lbale       rect:CGRectMake(10, y+temp*2, 20, 20) text:@"B:"];
     self.B_slider      = [self customSlider:self.B_slider     rect:CGRectMake(30, y-5+temp*2, SCREEN_WIDHT-75, 30) tag:3];
     self.B_valueLabel = [self customLabel:self.B_valueLabel rect:CGRectMake(SCREEN_WIDHT-35, y+temp*2, 40, 20)   text:@"100"];
     
