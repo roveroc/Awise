@@ -18,6 +18,7 @@
 @synthesize deviceArray;
 @synthesize cMode;
 @synthesize gbPing;
+@synthesize breakMode;
 
 /*******水族等部分********/
 @synthesize wifiSSID;
@@ -101,7 +102,8 @@
 - (void)showWaitingViewWithTime:(NSString *)msg time:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
-    self.hud.labelText = msg;
+//    self.hud.labelText = msg;
+    self.hud.detailsLabelText = msg;
     if(time > HudDismissTime){
         [self.hud hide:YES afterDelay:time];
 //        if(time > 5){
@@ -122,7 +124,8 @@
 - (void)showRemindMsg:(NSString *)msg withTime:(float)time{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.mode = MBProgressHUDModeText;
-    self.hud.labelText = msg;
+//    self.hud.labelText = msg;
+    self.hud.detailsLabelText = msg;
     if(time > HudDismissTime)
         [self.hud hide:YES afterDelay:time];
     else
@@ -145,7 +148,8 @@
 - (void)showWaitingViewWithMsg:(NSString *)msg{
     self.hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
     self.hud.dimBackground = YES;
-    self.hud.labelText = msg;
+//    self.hud.labelText = msg;
+    self.hud.detailsLabelText = msg;
 //    if(time > HudDismissTime)
 //        [self.hud hide:YES afterDelay:time];
 //    else

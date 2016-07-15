@@ -315,7 +315,8 @@
         
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.hud.mode = MBProgressHUDModeText;
-        self.hud.labelText = @"Please switch router search device";
+//        self.hud.labelText = @"Please switch router search device";
+        self.hud.detailsLabelText = @"Please switch router search device";
         [self.hud hide:YES afterDelay:DISMISS_TIME];
         
         [[AwiseGlobal sharedInstance].deviceSSIDArray removeAllObjects];

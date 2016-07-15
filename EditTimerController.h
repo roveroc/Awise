@@ -10,7 +10,13 @@
 #import "AwiseGlobal.h"
 #import "lineView.h"
 
-@interface EditTimerController : UIViewController<UITableViewDelegate,UITableViewDataSource,TCPSocketDelegate>{
+@protocol TimerStartDelegate <NSObject>
+
+- (void)timerStart;
+
+@end
+
+@interface EditTimerController : UIViewController<UITableViewDelegate,UITableViewDataSource,TCPSocketDelegate,TimerStartDelegate>{
     NSString        *navTitle;
     NSString        *fileName;
     UITableView     *timerTable;
@@ -20,6 +26,8 @@
     
     NSMutableArray  *dataArr;
     MBProgressHUD   *hud;
+    
+    id<TimerStartDelegate> delegate;    //如果在此见面开启定时器，返回时需刷新界面
 }
 @property (nonatomic, retain) NSString          *navTitle;
 @property (nonatomic, retain) UITableView       *timerTable;
@@ -29,6 +37,7 @@
 @property (nonatomic, retain) lineView          *lineview;
 @property (nonatomic, retain) NSMutableArray    *dataArr;
 @property (nonatomic, retain) MBProgressHUD     *hud;
+@property (nonatomic, retain) id<TimerStartDelegate>    delegate;
 
 
 - (IBAction)addRow:(id)sender;

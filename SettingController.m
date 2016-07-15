@@ -40,7 +40,8 @@
         self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         self.hud.mode = MBProgressHUDModeText;
         [self.view addSubview:self.hud];
-        self.hud.labelText = @"Failed";
+//        self.hud.labelText = @"Failed";
+        self.hud.detailsLabelText = @"Failed";
         [self.hud hide:YES afterDelay:DISMISS_TIME];
     }
 }

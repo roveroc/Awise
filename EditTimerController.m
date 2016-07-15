@@ -22,6 +22,7 @@
 @synthesize lineview;
 @synthesize fileName;
 @synthesize dataArr;
+@synthesize delegate;
 
 - (void)viewWillAppear:(BOOL)animated{
     [AwiseGlobal sharedInstance].tcpSocket.delegate = self;
@@ -46,6 +47,7 @@
         // back button was pressed.  We know this is true because self is no longer
         // in the navigation stack.
         [self backFun];
+        [self.delegate timerStart];   //返回时更新界面
     }
 }
 
@@ -72,7 +74,7 @@
 //    [dBtn setBackgroundImage:[UIImage imageNamed:@"btnBackimg.png"] forState:UIControlStateNormal];
     [dBtn setBackgroundColor:[UIColor colorWithRed:0x71/255. green:0xc6/255. blue:0x71/255. alpha:1.]];
     [dBtn addTarget:self action:@selector(downDataToDevice) forControlEvents:UIControlEventTouchUpInside];
-    [dBtn setTitle:@"DownLoad" forState:UIControlStateNormal];
+    [dBtn setTitle:@"Start" forState:UIControlStateNormal];
     if(iPhone4){
         rect = CGRectMake(0, 230, 300, 160);
         dBtn.frame = CGRectMake(75, 408, 171, 45);
@@ -143,15 +145,8 @@
 #pragma mark ---------------------------------------- 下载数据到设备
 - (void)downDataToDevice{
     [[AwiseGlobal sharedInstance] showWaitingView];
-    NSLog(@"下载数据到设备 ");
-    if(self.dataArr.count > 0)
-       [self.dataArr removeAllObjects];
-    
-    Byte b3[64];
-    
-    for(int i = 0;i<[AwiseGlobal sharedInstance].lineArray.count;i++){
-        NSMutableArray *temp = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:i];
-        int index = 5;
+    if([AwiseGlobal sharedInstance].lineArray.count > 0){
+        Byte b3[64];
         for(int k=0;k<64;k++){
             b3[k] = 0x00;
         }
@@ -160,38 +155,32 @@
         b3[2] = 0x01;
         b3[3] = [AwiseGlobal sharedInstance].timerNumber;
         b3[4] = 0x00;
-        if(i==0)
-            b3[index++] = 0x01;
-        else if(i==1)
-            b3[index++] = 0x02;
-        else if(i==2)
-            b3[index++] = 0x03;
-        else if(i==3)
-            b3[index++] = 0x04;
-        else if(i==4)
-            b3[index++] = 0x05;
-        else if(i==5)
-            b3[index++] = 0x06;
-        for(int j=0;j<temp.count;j++){
+        int index = 5;
+        for(int i = 0;i<[AwiseGlobal sharedInstance].lineArray.count;i++){
+            NSMutableArray *temp = [[AwiseGlobal sharedInstance].lineArray objectAtIndex:i];
             
-            if(j == 0){
-                NSArray *time = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
-                b3[index++] = [[time objectAtIndex:0] intValue];
-                b3[index++] = [[time objectAtIndex:1] intValue];
-            }
-            else{
-                b3[index++] = [[temp objectAtIndex:j] intValue];
-            }
+            b3[index++] = i+1;
             
+            for(int j=0;j<temp.count;j++){
+                if(j == 0){
+                    NSArray *time = [[temp objectAtIndex:0] componentsSeparatedByString:@":"];
+                    b3[index++] = [[time objectAtIndex:0] intValue];
+                    b3[index++] = [[time objectAtIndex:1] intValue];
+                }
+                else{
+                    b3[index++] = [[temp objectAtIndex:j] intValue];
+                }
+            }
         }
         b3[63] = [[AwiseGlobal sharedInstance] getChecksum:b3];
-        NSData *data = [[NSData alloc] initWithBytes:b3 length:64];
-        [self.dataArr addObject:data];
+        [[AwiseGlobal sharedInstance].tcpSocket sendMeesageToDevice:b3 length:64];
     }
-    
-    for(int i=0;i<self.dataArr.count;i++){
-        NSData *dd = [self.dataArr objectAtIndex:i];
-        [self performSelector:@selector(sendTimerData:) withObject:dd afterDelay:i*0.5];
+    if([AwiseGlobal sharedInstance].timerNumber == 1){
+        [AwiseGlobal sharedInstance].mode = Timer1_Model;
+    }else if([AwiseGlobal sharedInstance].timerNumber == 2){
+        [AwiseGlobal sharedInstance].mode = Timer2_Model;
+    }else if([AwiseGlobal sharedInstance].timerNumber == 3){
+        [AwiseGlobal sharedInstance].mode = Timer3_Model;
     }
 }
 

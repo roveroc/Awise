@@ -59,14 +59,15 @@
     [socket readDataWithTimeout:-1 tag:0];
     [socket writeData:da withTimeout:-1 tag:0];
     self.responeFlag = NO;
-    if(data[2] == 0x05 && data[3] == 0x02){
+    if((data[2] == 0x05 && data[3] == 0x02) || (data[2] == 0x05 && data[12] == 0x01)){
         //词条指令为水族灯调光指令，不需要判断数据返回
+        //多云闪电是调速度
     }else{
         [self performSelector:@selector(isDeviceRespone) withObject:nil afterDelay:4.0];
     }
 }
 
-#pragma mark ---------------------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
+#pragma mark ------------------------------------- 如果设备在指定时间内没有回复数据，则算没有成功
 - (void)isDeviceRespone{
     if(self.responeFlag == NO){
         if([self.delegate respondsToSelector:@selector(dataBackTimeOut)]){
@@ -74,7 +75,8 @@
         }
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"操作可能失败了";
+//        hud.labelText = @"操作可能失败了";
+        hud.detailsLabelText = @"操作可能失败了";
         [hud hide:YES afterDelay:0.8];
         [[[UIApplication sharedApplication] keyWindow] addSubview:hud];
     }
@@ -121,6 +123,9 @@
 //        [socket connectToHost:deviceIP onPort:[devicePort intValue] error:nil];
 //        self.reConnectCount ++;
 //    }
+    if([self.delegate respondsToSelector:@selector(TCPSocketConnectFailed)]){
+        [self.delegate TCPSocketConnectFailed];
+    }
 }
 
 -(void)onSocket:(AsyncSocket *) sock willDisconnectWithError:(NSError *)err{

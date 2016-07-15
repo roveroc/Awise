@@ -155,7 +155,8 @@
     if(![[AwiseGlobal sharedInstance].tcpSocket.socket isConnected]){
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication] keyWindow] animated:YES];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请确保设备在正常工作";
+//        hud.labelText = @"请确保设备在正常工作";
+        hud.detailsLabelText = @"请确保设备在正常工作";
         [hud hide:YES afterDelay:0.8];
         [[[UIApplication sharedApplication] keyWindow] addSubview:hud];
     }

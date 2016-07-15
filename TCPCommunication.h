@@ -19,7 +19,7 @@
 - (void)TCPSocketBroken;                    //设备断开连接
 - (void)dataBackFormDevice:(Byte *)byte;    //发送数据到控制器
 - (void)dataBackTimeOut;                    //数据返回超时
-
+- (void)TCPSocketConnectFailed;             //设备连接失败
 @end
 
 

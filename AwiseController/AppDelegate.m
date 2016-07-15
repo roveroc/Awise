@@ -77,6 +77,9 @@
     NSDictionary *defaultValues3_1 = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"cloudy_switch",nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultValues3_1];
     
+    NSDictionary *oldData = [NSDictionary dictionaryWithObjectsAndKeys:@"0", @"oldData",nil];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:oldData];
+    
     [AwiseGlobal sharedInstance].enterBackgroundFlag = NO;
     [AwiseGlobal sharedInstance].deviceSSIDArray = [[NSMutableArray alloc] init];
     [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
@@ -113,7 +116,17 @@
             break;
         case ReachableViaWiFi:
             NSLog(@"====当前网络状态为Wifi=======");
-            //其他处理
+            [AwiseGlobal sharedInstance].wifiSSID = [[AwiseGlobal sharedInstance] currentWifiSSID];
+            if([[AwiseGlobal sharedInstance].wifiSSID rangeOfString:WIFISSID].location != NSNotFound){
+                [AwiseGlobal sharedInstance].cMode = AP;
+                [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
+                NSLog(@" -- 手机连接的WIFI为 ----- %@ ---- 手机IP =  %@ 点对点AP模式",[AwiseGlobal sharedInstance].wifiSSID,[AwiseGlobal sharedInstance].IphoneIP);
+            }
+            else{
+                [AwiseGlobal sharedInstance].cMode = STA;
+                [AwiseGlobal sharedInstance].IphoneIP = [[AwiseGlobal sharedInstance] getiPhoneIP];
+                NSLog(@" -- 手机连接的WIFI为 ----- %@ ---- 手机IP =  %@ 点对点STA模式",[AwiseGlobal sharedInstance].wifiSSID,[AwiseGlobal sharedInstance].IphoneIP);
+            }
             break;
         case ReachableViaWWAN:
             [AwiseGlobal sharedInstance].cMode = Other;

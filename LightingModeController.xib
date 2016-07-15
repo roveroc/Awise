@@ -78,8 +78,8 @@
                         <action selector="endBtnClicked:" destination="-1" eventType="touchUpInside" id="ypG-O3-YY8"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="强" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pl-c1-5Se">
-                    <rect key="frame" x="220" y="259" width="50" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="强" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pl-c1-5Se">
+                    <rect key="frame" x="200" y="259" width="70" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="fnf-H2-zcF"/>
                         <constraint firstAttribute="height" constant="21" id="pxc-4u-2Ms"/>
@@ -123,7 +123,7 @@
                         <constraint firstAttribute="width" constant="100" id="Myp-Zc-vYn"/>
                         <constraint firstAttribute="height" constant="40" id="fbz-Xg-5wK"/>
                     </constraints>
-                    <state key="normal" title="DownLoad">
+                    <state key="normal" title="Start">
                         <color key="titleColor" red="0.18418684554973819" green="0.18418684554973819" blue="0.18418684554973819" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
