@@ -38,7 +38,8 @@
     
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     //for(int i=0;i<_arr1.count - 1;i++){
-    for(int i=0;i<self.pipeNumber+1;i++){
+//    for(int i=0;i<self.pipeNumber+1;i++){
+    for(int i=0;i<self.pipeNumber;i++){
         //设置连接类型
         CGContextSetLineJoin(currentContext, kCGLineJoinMiter);
         //设置线条宽度
